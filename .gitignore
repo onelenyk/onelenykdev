@@ -1,0 +1,55 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+/build/3c6e5cf9bd2369c57f1061727dea4d2d.cache.dill.track.dill
+/build/4f2a58af27abc49ecf55570043bbf938.cache.dill.track.dill
+/build/02937c812a0f2091606219ae0b6b7efc.cache.dill.track.dill
+/build/225a8c8a7ed1097aff942637eb31fa37/_composite.stamp
+/build/c91cf747aeec407f5049ae21c76ef551/_composite.stamp
+/build/225a8c8a7ed1097aff942637eb31fa37/gen_dart_plugin_registrant.stamp
+/build/c91cf747aeec407f5049ae21c76ef551/gen_dart_plugin_registrant.stamp
+/build/225a8c8a7ed1097aff942637eb31fa37/gen_localizations.stamp
+/build/c91cf747aeec407f5049ae21c76ef551/gen_localizations.stamp
+/build/last_build_run.json
+/build/
+/.firebase/
