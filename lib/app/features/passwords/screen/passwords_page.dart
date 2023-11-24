@@ -383,7 +383,7 @@ class SortButton extends StatelessWidget {
           SizedBox(
             width: 2,
           ),
-          SvgPicture.asset('svgs/arrowUpDown.svg',
+          SvgPicture.asset('assets/svgs/arrowUpDown.svg',
               width: 14,
               height: 14,
               colorFilter:

@@ -1,6 +1,6 @@
-# onelenykco
+# onelenykdev
 
-The onelenykco project site
+The onelenykdev project site
 
 ## Getting Started
 

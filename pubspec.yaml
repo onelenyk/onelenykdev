@@ -3,7 +3,7 @@ description: onelenyk studio
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.0-Apple+0
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -14,7 +14,10 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   dhttpd: ^4.0.1
-  firebase_core: ^2.16.0
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.14.1
+  google_sign_in: ^6.1.6
+  cloud_firestore: ^4.13.2
   flutter_bloc: ^8.1.3
   get_it: ^7.6.4
   auto_route: ^7.8.4
@@ -29,6 +32,22 @@ dependencies:
   http: ^1.1.0
   cached_network_image: ^3.3.0
   google_fonts: ^6.1.0
+  flutter_staggered_grid_view: ^0.7.0
+  flutter_markdown: ^0.6.18+2
+  markdown_widget: ^2.3.1
+  equatable: ^2.0.5
+  timeago: ^3.6.0
+  lottie: ^2.7.0
+  flutter_quill: ^8.1.1
+  dotted_border: ^2.1.0
+  intl: ^0.18.1
+  glowy_borders: ^1.0.2
+  flutter_to_pdf: ^0.1.1
+  file_saver: ^0.2.9
+  screenshot: ^2.1.0
+  pdf: ^3.10.7
+  package_info_plus: ^5.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -42,11 +61,13 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/animation/
+    - assets/fire.json
+    - assets/resume.pdf
   fonts:
     - family: Bandana
       fonts:
         - asset: assets/fonts/bandana.ttf
-
 
 flutter_web_plugins:
   sdk: flutter

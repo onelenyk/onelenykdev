@@ -16,6 +16,6 @@ MyPasswordsState _$MyPasswordsStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$MyPasswordsStateToJson(MyPasswordsState instance) =>
     <String, dynamic>{
-      'passwords': instance.passwords,
+      'passwords': instance.passwords.map((e) => e.toJson()).toList(),
       'searchQuery': instance.searchQuery,
     };
