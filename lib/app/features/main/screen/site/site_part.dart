@@ -84,19 +84,6 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                 width: 350,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      style: GoogleFonts.robotoMono(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal),
-                      "current version: $appVersion"),
-                )),
-            SizedBox(height: 8,),
-
-            InfoBlock(
-                width: 350,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -138,6 +125,19 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                       ),
                     ],
                   ),
+                )),
+            SizedBox(height: 8,),
+
+            InfoBlock(
+                width: 350,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      style: GoogleFonts.robotoMono(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal),
+                      "current version: $appVersion"),
                 )),
             SizedBox(
               height: 8,
