@@ -47,6 +47,7 @@ dependencies:
   screenshot: ^2.1.0
   pdf: ^3.10.7
   package_info_plus: ^5.0.1
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
     - assets/animation/
     - assets/fire.json
     - assets/resume.pdf
+    - assets/.env
   fonts:
     - family: Bandana
       fonts:

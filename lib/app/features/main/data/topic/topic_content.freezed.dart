@@ -124,7 +124,7 @@ class _$TopicDataItemImpl implements _TopicDataItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TopicDataItemImpl &&
@@ -286,7 +286,7 @@ class _$TopicContentImpl extends _TopicContent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TopicContentImpl &&

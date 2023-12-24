@@ -53,3 +53,4 @@ app.*.map.json
 /build/last_build_run.json
 /build/
 /.firebase/
+/assets/.env

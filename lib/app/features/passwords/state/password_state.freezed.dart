@@ -125,7 +125,7 @@ class _$MyPasswordsStateImpl extends _MyPasswordsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MyPasswordsStateImpl &&
