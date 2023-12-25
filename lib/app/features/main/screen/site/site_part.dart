@@ -68,20 +68,19 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
           children: [
             InfoBlock(
                 width: 350,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      style: GoogleFonts.robotoMono(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal),
-                      "the site story"),
-                )),
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                    style: GoogleFonts.robotoMono(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal),
+                    "the site story")),
             SizedBox(
               height: 8,
             ),
             InfoBlock(
               width: 350,
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -102,7 +101,9 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                     constraints: BoxConstraints(maxHeight: 500),
                     child: commits.isNotEmpty
                         ? SingleChildScrollView(
-                          child: Column(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: commits.map((item) {
                                 return Column(
@@ -119,11 +120,14 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                                             fontSize: 14,
                                             color: Colors.grey.shade800,
                                             fontWeight: FontWeight.normal)),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
                                   ],
                                 );
                               }).toList(),
                             ),
-                        )
+                          )
                         : Center(child: CircularProgressIndicator()),
                   )
                 ],
@@ -134,15 +138,13 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
             ),
             InfoBlock(
                 width: 350,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      style: GoogleFonts.robotoMono(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.normal),
-                      "current version: $appVersion"),
-                )),
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                    style: GoogleFonts.robotoMono(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal),
+                    "current version: $appVersion")),
             SizedBox(
               height: 8,
             ),
