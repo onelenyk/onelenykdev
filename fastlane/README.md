@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane web deploy
 ```
 
-Deploy new version
+Deploy new version build
 
 ### web deployCurrent
 
@@ -29,7 +29,15 @@ Deploy new version
 [bundle exec] fastlane web deployCurrent
 ```
 
-Update current version
+Update current version build
+
+### web deployCurrentToDemo
+
+```sh
+[bundle exec] fastlane web deployCurrentToDemo
+```
+
+Deploy current version build to Demo with a random channel
 
 ### web printCurrent
 
