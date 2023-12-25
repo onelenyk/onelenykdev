@@ -103,14 +103,15 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                         itemCount: commits.length ?? 0,
                         itemBuilder: (context, index) {
                           var item = commits[index];
-                          return Row(
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(item.commit.message,
                                   style: GoogleFonts.robotoMono(
                                       fontSize: 14,
                                       color: Colors.white,
                                       fontWeight: FontWeight.normal)),
-                              Spacer(),
                               Text(item.commit.committer.formatedDate,
                                   style: GoogleFonts.robotoMono(
                                       fontSize: 14,
