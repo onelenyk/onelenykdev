@@ -97,7 +97,8 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                         ],
                       ),
                       SizedBox(height: 8,),
-                      ListView.separated(
+
+                      commits.isNotEmpty ? ListView.separated(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: commits.length ?? 0,
@@ -123,7 +124,7 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                         separatorBuilder: (context, index) {
                           return const SizedBox(height: 8);
                         },
-                      ),
+                      ) : Center(child: CircularProgressIndicator())
                     ],
                   ),
                 )),
