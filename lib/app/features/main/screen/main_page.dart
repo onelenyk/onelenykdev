@@ -271,79 +271,55 @@ class _MainScreen extends State<MainScreen> {
                     children: [
                       Container(
                         height: firstChildHeight,
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            border: Border.all(
-                              color: Colors.white24,
-                              style: BorderStyle.solid,
-                              width: 1.0,
-                            )),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                  alignment: Alignment.topLeft,
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Text(
-                                    "topics 💬",
-                                    style: GoogleFonts.robotoMono(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900),
-                                  )
-                              ),
-                              //  projectsButton(state: state),
-                              Column(
-                                children: topics.map((item) {
-                                  var date = timeago.format(item.date!);
-                                  var itemIndex = topics.indexOf(item);
-                                  var nextIndex = itemIndex > 1 ? itemIndex - 1 : itemIndex;
-                                  var nextDate = timeago.format(topics[nextIndex].date!);
+                        padding: EdgeInsets.all(8),
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: Colors.white24,
+                                style: BorderStyle.solid,
+                                width: 1.0,
+                              )),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Container(
+                                    alignment: Alignment.topLeft,
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      "topics 💬",
+                                      style: GoogleFonts.robotoMono(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900),
+                                    )
+                                ),
+                                //  projectsButton(state: state),
+                                Column(
+                                  children: topics.map((item) {
+                                    var date = timeago.format(item.date!);
+                                    var itemIndex = topics.indexOf(item);
+                                    var nextIndex = itemIndex > 1 ? itemIndex - 1 : itemIndex;
+                                    var nextDate = timeago.format(topics[nextIndex].date!);
 
-                                  bool showDateHeader = itemIndex == 0 || date != nextDate;
+                                    bool showDateHeader = itemIndex == 0 || date != nextDate;
 
-                                  var onTap = () {
-                                    cubit.selectTopic(topic: item);
-                                  };
+                                    var onTap = () {
+                                      cubit.selectTopic(topic: item);
+                                    };
 
-                                  return listItem(item = item, showDateHeader = showDateHeader, onTap = onTap);
-                                }).toList(),
-                              )
-                                  /*                          ListView.separated(
-                                itemCount: topics.length,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  var item = topics[index];
-
-                                  var date = timeago.format(topics[index].date!);
-                                  var nextIndex = index > 1 ? index - 1 : index;
-                                  var nextDate =
-                                      timeago.format(topics[nextIndex].date!);
-
-                                  bool showDateHeader =
-                                      index == 0 || date != nextDate;
-
-                                  var onTap = () {
-                                    cubit.selectTopic(topic: item);
-                                  };
-
-                                  return listItem(
-                                      item = item,
-                                      showDateHeader = showDateHeader,
-                                      onTap = onTap);
-                                },
-                                separatorBuilder: (context, index) {
-                                  return SizedBox(height: 8);
-                                },
-                              ),*/
-                            ],
+                                    return listItem(item = item, showDateHeader = showDateHeader, onTap = onTap);
+                                  }).toList(),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                      //Spacer(),
                       Padding(
-                        padding: const EdgeInsets.only(top:8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+
                         child: Container(
                           //    height: secondChildHeight,
                           padding: EdgeInsets.all(12),
