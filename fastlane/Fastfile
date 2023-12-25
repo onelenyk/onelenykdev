@@ -16,7 +16,7 @@
 default_platform(:web)
 
 platform :web do
-  desc "Deploy new version"
+  desc "Deploy new version build"
   lane :deploy do
     # add actions here: https://docs.fastlane.tools/actions
       sh("fruit_version_build.sh")
@@ -25,7 +25,7 @@ platform :web do
       sh("firebase deploy")
   end
 
-  desc "Update current version"
+  desc "Update current version build"
   lane :deployCurrent do
       # add actions here: https://docs.fastlane.tools/actions
       sh("fruit_version_build.sh")
@@ -33,6 +33,16 @@ platform :web do
       sh("firebase deploy")
   end
 
+
+desc "Deploy current version build to Demo with a random channel"
+lane :deployCurrentToDemo do
+    # Your existing actions
+    sh("./fruit_version_build.sh")
+    sh("flutter build web")
+    # Generate a random channel ID using shell commands
+    channel_id = sh("echo $(date +%s)$(openssl rand -hex 5)").strip
+    sh("firebase hosting:channel:deploy #{channel_id}")
+end
   desc "Print current build version"
   lane :printCurrent do
         # add actions here: https://docs.fastlane.tools/actions
