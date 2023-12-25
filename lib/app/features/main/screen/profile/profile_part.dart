@@ -99,88 +99,94 @@ class ProfilePart extends StatelessWidget {
   }
 
   Widget buildPart1() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildGreeting(),
-        SizedBox(
-          height: 8,
-        ),
-        buildWordMap(),
-        SizedBox(
-          width: 16,
-          height: 16,
-        ),
-        Row(
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: HoverButton(
-                onTap: () {
-                  openLink("https://onelenyk.t.me/");
-                },
-                onDoubleTap: () {},
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Lottie.asset(
-                    //   'assets/fire.json',
-                    //   width: 36,
-                    //   height: 36,
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "telegram",
-                        style: GoogleFonts.robotoMono(
-                            fontSize: 18, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            buildGreeting(),
+            SizedBox(
+              height: 8,
             ),
+            buildWordMap(),
             SizedBox(
               width: 16,
               height: 16,
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: HoverButton(
-                onTap: () {
-                  openLink("https://www.linkedin.com/in/onelenyk/");
-                },
-                onDoubleTap: () {},
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Lottie.asset(
-                    //   'assets/fire.json',
-                    //   width: 36,
-                    //   height: 36,
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "linkedin",
-                        style: GoogleFonts.robotoMono(
-                            fontSize: 18, color: Colors.white),
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[900],
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: HoverButton(
+                    onTap: () {
+                      openLink("https://onelenyk.t.me/");
+                    },
+                    onDoubleTap: () {},
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Lottie.asset(
+                        //   'assets/fire.json',
+                        //   width: 36,
+                        //   height: 36,
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "telegram",
+                            style: GoogleFonts.robotoMono(
+                                fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                SizedBox(
+                  width: 16,
+                  height: 16,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[900],
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: HoverButton(
+                    onTap: () {
+                      openLink("https://www.linkedin.com/in/onelenyk/");
+                    },
+                    onDoubleTap: () {},
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Lottie.asset(
+                        //   'assets/fire.json',
+                        //   width: 36,
+                        //   height: 36,
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "linkedin",
+                            style: GoogleFonts.robotoMono(
+                                fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 
