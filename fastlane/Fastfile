@@ -19,8 +19,8 @@ platform :web do
   desc "Deploy new version build"
   lane :deploy do
     # add actions here: https://docs.fastlane.tools/actions
-      sh("fruit_version_build.sh")
-      sh("fruit_version_release.sh")
+      sh("./fruit_version_build.sh")
+      sh("./fruit_version_release.sh")
       sh("flutter build web")
       sh("firebase deploy")
   end
@@ -28,8 +28,8 @@ platform :web do
   desc "Update current version build"
   lane :deployCurrent do
       # add actions here: https://docs.fastlane.tools/actions
-      sh("fruit_version_build.sh")
-      sh("flutter build web")
+      sh("./fruit_version_build.sh")
+      sh("./flutter build web")
       sh("firebase deploy")
   end
 
