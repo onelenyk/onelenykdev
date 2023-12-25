@@ -81,55 +81,57 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
               height: 8,
             ),
             InfoBlock(
-                width: 350,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+              width: 350,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text("Latest commits",
-                              style: GoogleFonts.robotoMono(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      SizedBox(height: 8,),
-
-                      commits.isNotEmpty ? ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: commits.length ?? 0,
-                        itemBuilder: (context, index) {
-                          var item = commits[index];
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(item.commit.message,
-                                  style: GoogleFonts.robotoMono(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal)),
-                              Text(item.commit.committer.formatedDate,
-                                  style: GoogleFonts.robotoMono(
-                                      fontSize: 14,
-                                      color: Colors.grey.shade800,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(height: 8);
-                        },
-                      ) : Center(child: CircularProgressIndicator())
+                      Text("Latest commits",
+                          style: GoogleFonts.robotoMono(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
-                )),
-            SizedBox(height: 8,),
-
+                  SizedBox(
+                    height: 8,
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: 500),
+                    child: commits.isNotEmpty
+                        ? SingleChildScrollView(
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: commits.map((item) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(item.commit.message,
+                                        style: GoogleFonts.robotoMono(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal)),
+                                    Text(item.commit.committer.formatedDate,
+                                        style: GoogleFonts.robotoMono(
+                                            fontSize: 14,
+                                            color: Colors.grey.shade800,
+                                            fontWeight: FontWeight.normal)),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
+                        )
+                        : Center(child: CircularProgressIndicator()),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
             InfoBlock(
                 width: 350,
                 child: Padding(
