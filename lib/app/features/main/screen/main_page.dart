@@ -254,7 +254,6 @@ class _MainScreen extends State<MainScreen> {
         flex: 15,
         child: Container(
           color: Colors.black,
-          padding: EdgeInsets.all(16),
           child: LayoutBuilder(builder: (context, constraints) {
             double totalHeight = constraints.maxHeight;
 
