@@ -330,15 +330,13 @@ class _MainScreen extends State<MainScreen> {
                                 style: BorderStyle.solid,
                                 width: 1.0,
                               )),
-                          child: SingleChildScrollView(
-                            child: collaboration(state: state),
-                          ),
+                          child: collaboration(state: state),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top:8.0),
+                        padding: const EdgeInsets.all(8.0),
+
                         child: Container(
-                                            //    height: secondChildHeight,
                           padding: EdgeInsets.all(12),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.0),
@@ -347,14 +345,12 @@ class _MainScreen extends State<MainScreen> {
                                 style: BorderStyle.solid,
                                 width: 1.0,
                               )),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                bottomCareer(state: state),
-                                SizedBox(height: 8),
-                                bottomProfile(state: state),
-                              ],
-                            ),
+                          child: Column(
+                            children: [
+                              bottomCareer(state: state),
+                              SizedBox(height: 8),
+                              bottomProfile(state: state),
+                            ],
                           ),
                         ),
                       )
