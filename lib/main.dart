@@ -13,7 +13,7 @@ late final FirebaseAuth firebaseAuth;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
-  environmentInit();
+  await environmentInit();
   firebaseApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

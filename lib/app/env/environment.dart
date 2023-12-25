@@ -5,7 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 // DotEnv another_dotenv = DotEnv()
 
 Future<void> environmentInit() async {
-  await dotenv.load(fileName: ".env");
+  return await dotenv.load(fileName: ".env");
 }
 
 String? getGithubToken() {
