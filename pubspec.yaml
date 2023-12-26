@@ -3,7 +3,7 @@ description: onelenyk studio
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 4.0.0-Date+9
+version: 5.0.0-Elderberry+10
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
