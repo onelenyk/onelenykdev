@@ -126,8 +126,8 @@ class _HireMePageState extends State<HireMePart> {
                 width: 350,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
+                  child: SelectableText.rich(
+                    TextSpan(
                       style: GoogleFonts.robotoMono(
                           fontSize: 16, color: Colors.white),
                       children: <TextSpan>[

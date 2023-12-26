@@ -30,8 +30,8 @@ class ProfilePart extends StatelessWidget {
         InfoBlock(
             child: SizedBox(
           width: 350,
-          child: RichText(
-            text: TextSpan(
+          child: SelectableText.rich(
+             TextSpan(
               style: GoogleFonts.robotoMono(fontSize: 16, color: Colors.white),
               children: <TextSpan>[
                 TextSpan(text: "👋 Hi there!"),
@@ -45,8 +45,8 @@ class ProfilePart extends StatelessWidget {
         InfoBlock(
             child: SizedBox(
           width: 350,
-          child: RichText(
-            text: TextSpan(
+          child: SelectableText.rich(
+            TextSpan(
               style: GoogleFonts.robotoMono(fontSize: 16, color: Colors.white),
               children: const <TextSpan>[
                 TextSpan(text: "👀 My name is "),
@@ -71,8 +71,8 @@ class ProfilePart extends StatelessWidget {
         InfoBlock(
             child: SizedBox(
           width: 350,
-          child: RichText(
-            text: TextSpan(
+          child: SelectableText.rich(
+            TextSpan(
               style: GoogleFonts.robotoMono(fontSize: 16, color: Colors.white),
               children: const <TextSpan>[
                 TextSpan(text: "Current technologies in use:↙️️️↙️️️↙️️"),

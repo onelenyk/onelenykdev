@@ -686,8 +686,8 @@ class _ResumePartState extends State<ResumePart> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RichText(
-                      text: TextSpan(
+                    SelectableText.rich(
+                      TextSpan(
                         style: GoogleFonts.robotoMono(
                             fontSize: 16, color: Colors.white, height: 1.5),
                         children: <TextSpan>[
