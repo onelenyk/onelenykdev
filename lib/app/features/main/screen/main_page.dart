@@ -456,71 +456,73 @@ class _MainScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final cubit = getIt<MainCubit>();
-    return BlocConsumer<MainCubit, MainState>(
-      listener: (context, state) {
-        _scaffoldKey.currentState?.closeDrawer();
-        return;
-      },
-      bloc: cubit, // Provide the cubit
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          key: _scaffoldKey,
-          drawer: Drawer(
-            child: Column(
-              children: [
-                buildLeftPanel(state: state),
-              ],
+    return SelectionArea(
+      child: BlocConsumer<MainCubit, MainState>(
+        listener: (context, state) {
+          _scaffoldKey.currentState?.closeDrawer();
+          return;
+        },
+        bloc: cubit, // Provide the cubit
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            key: _scaffoldKey,
+            drawer: Drawer(
+              child: Column(
+                children: [
+                  buildLeftPanel(state: state),
+                ],
+              ),
             ),
-          ),
-          body: Stack(
-            children: [
-              buildMainPanel(
-                  state: state,
-                  openMenu: () => {
-                        openDrawer(),
-                      }),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: HoverButton(
-                  radius: 12,
-                  color: Colors.transparent,
-                  onTap: () {
-                    openDrawer();
-                  },
-                  onDoubleTap: () {},
-                  child: Icon(
-                    FontAwesomeIcons.caretRight,
-                    size: 24,
+            body: Stack(
+              children: [
+                buildMainPanel(
+                    state: state,
+                    openMenu: () => {
+                          openDrawer(),
+                        }),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: HoverButton(
+                    radius: 12,
+                    color: Colors.transparent,
+                    onTap: () {
+                      openDrawer();
+                    },
+                    onDoubleTap: () {},
+                    child: Icon(
+                      FontAwesomeIcons.caretRight,
+                      size: 24,
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      HoverButton(
-                        onTap: openDrawer,
-                        onDoubleTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            state.selectedTopic?.content?.title ?? "",
-                            style: GoogleFonts.robotoMono(
-                                fontSize: 12, color: Colors.white),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        HoverButton(
+                          onTap: openDrawer,
+                          onDoubleTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              state.selectedTopic?.content?.title ?? "",
+                              style: GoogleFonts.robotoMono(
+                                  fontSize: 12, color: Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
