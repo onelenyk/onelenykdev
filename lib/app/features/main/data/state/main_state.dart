@@ -14,6 +14,7 @@ class MainState with _$MainState {
     required TopicItem? projectsTopic,
     required TopicItem? resumeTopic,
     required TopicItem? hireMeTopic,
+    required bool isMenuOpened
   }) = _MainState;
 
   List<TopicItem> get sortedTopics {

@@ -16,13 +16,15 @@ import '../topic/topic_content.dart';
 import '../topic/topic_item.dart';
 
 class MainCubit extends Cubit<MainState> {
-  MainCubit() : super(MainState(
+  MainCubit()
+      : super(MainState(
             topics: [],
             selectedTopic: null,
             profileTopic: null,
             projectsTopic: null,
             resumeTopic: null,
-            hireMeTopic: null)) {
+            hireMeTopic: null,
+            isMenuOpened: true)) {
     initialize();
   }
 
@@ -59,6 +61,10 @@ class MainCubit extends Cubit<MainState> {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> openMenu() async {
+    emit(state.copyWith(isMenuOpened: !state.isMenuOpened));
   }
 }
 

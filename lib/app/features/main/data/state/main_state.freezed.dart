@@ -22,6 +22,7 @@ mixin _$MainState {
   TopicItem? get projectsTopic => throw _privateConstructorUsedError;
   TopicItem? get resumeTopic => throw _privateConstructorUsedError;
   TopicItem? get hireMeTopic => throw _privateConstructorUsedError;
+  bool get isMenuOpened => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainStateCopyWith<MainState> get copyWith =>
@@ -39,7 +40,8 @@ abstract class $MainStateCopyWith<$Res> {
       TopicItem? profileTopic,
       TopicItem? projectsTopic,
       TopicItem? resumeTopic,
-      TopicItem? hireMeTopic});
+      TopicItem? hireMeTopic,
+      bool isMenuOpened});
 
   $TopicItemCopyWith<$Res>? get selectedTopic;
   $TopicItemCopyWith<$Res>? get profileTopic;
@@ -67,6 +69,7 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
     Object? projectsTopic = freezed,
     Object? resumeTopic = freezed,
     Object? hireMeTopic = freezed,
+    Object? isMenuOpened = null,
   }) {
     return _then(_value.copyWith(
       topics: null == topics
@@ -93,6 +96,10 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
           ? _value.hireMeTopic
           : hireMeTopic // ignore: cast_nullable_to_non_nullable
               as TopicItem?,
+      isMenuOpened: null == isMenuOpened
+          ? _value.isMenuOpened
+          : isMenuOpened // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -171,7 +178,8 @@ abstract class _$$MainStateImplCopyWith<$Res>
       TopicItem? profileTopic,
       TopicItem? projectsTopic,
       TopicItem? resumeTopic,
-      TopicItem? hireMeTopic});
+      TopicItem? hireMeTopic,
+      bool isMenuOpened});
 
   @override
   $TopicItemCopyWith<$Res>? get selectedTopic;
@@ -202,6 +210,7 @@ class __$$MainStateImplCopyWithImpl<$Res>
     Object? projectsTopic = freezed,
     Object? resumeTopic = freezed,
     Object? hireMeTopic = freezed,
+    Object? isMenuOpened = null,
   }) {
     return _then(_$MainStateImpl(
       topics: null == topics
@@ -228,6 +237,10 @@ class __$$MainStateImplCopyWithImpl<$Res>
           ? _value.hireMeTopic
           : hireMeTopic // ignore: cast_nullable_to_non_nullable
               as TopicItem?,
+      isMenuOpened: null == isMenuOpened
+          ? _value.isMenuOpened
+          : isMenuOpened // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -241,7 +254,8 @@ class _$MainStateImpl extends _MainState {
       required this.profileTopic,
       required this.projectsTopic,
       required this.resumeTopic,
-      required this.hireMeTopic})
+      required this.hireMeTopic,
+      required this.isMenuOpened})
       : _topics = topics,
         super._();
 
@@ -263,10 +277,12 @@ class _$MainStateImpl extends _MainState {
   final TopicItem? resumeTopic;
   @override
   final TopicItem? hireMeTopic;
+  @override
+  final bool isMenuOpened;
 
   @override
   String toString() {
-    return 'MainState(topics: $topics, selectedTopic: $selectedTopic, profileTopic: $profileTopic, projectsTopic: $projectsTopic, resumeTopic: $resumeTopic, hireMeTopic: $hireMeTopic)';
+    return 'MainState(topics: $topics, selectedTopic: $selectedTopic, profileTopic: $profileTopic, projectsTopic: $projectsTopic, resumeTopic: $resumeTopic, hireMeTopic: $hireMeTopic, isMenuOpened: $isMenuOpened)';
   }
 
   @override
@@ -284,7 +300,9 @@ class _$MainStateImpl extends _MainState {
             (identical(other.resumeTopic, resumeTopic) ||
                 other.resumeTopic == resumeTopic) &&
             (identical(other.hireMeTopic, hireMeTopic) ||
-                other.hireMeTopic == hireMeTopic));
+                other.hireMeTopic == hireMeTopic) &&
+            (identical(other.isMenuOpened, isMenuOpened) ||
+                other.isMenuOpened == isMenuOpened));
   }
 
   @override
@@ -295,7 +313,8 @@ class _$MainStateImpl extends _MainState {
       profileTopic,
       projectsTopic,
       resumeTopic,
-      hireMeTopic);
+      hireMeTopic,
+      isMenuOpened);
 
   @JsonKey(ignore: true)
   @override
@@ -311,7 +330,8 @@ abstract class _MainState extends MainState {
       required final TopicItem? profileTopic,
       required final TopicItem? projectsTopic,
       required final TopicItem? resumeTopic,
-      required final TopicItem? hireMeTopic}) = _$MainStateImpl;
+      required final TopicItem? hireMeTopic,
+      required final bool isMenuOpened}) = _$MainStateImpl;
   _MainState._() : super._();
 
   @override
@@ -326,6 +346,8 @@ abstract class _MainState extends MainState {
   TopicItem? get resumeTopic;
   @override
   TopicItem? get hireMeTopic;
+  @override
+  bool get isMenuOpened;
   @override
   @JsonKey(ignore: true)
   _$$MainStateImplCopyWith<_$MainStateImpl> get copyWith =>
