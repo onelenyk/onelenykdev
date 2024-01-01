@@ -209,8 +209,6 @@ class ProfilePart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-// Printing the size to the console
-    // print("SCREEN SIZES Width: ${screenSize.width}, Height: ${screenSize.height}");
 
     return Container(
       height: screenSize.height,

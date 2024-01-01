@@ -161,7 +161,6 @@ class _ResumePartState extends State<ResumePart> {
 */
 
   Widget buildPartColumn(ResumeState state) {
-    var screenSize = MediaQuery.of(context).size;
 
     return InfoBlock(
       child: Center(
@@ -198,6 +197,55 @@ class _ResumePartState extends State<ResumePart> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildPartRow(ResumeState state) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          child: Screenshot(
+            controller: screenshotController,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF343540),
+                  borderRadius: BorderRadius.circular(0.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildPart1(state),
+                      const SizedBox(
+                        width: 32,
+                        height: 32,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Flexible(child: buildPart2(state: state)),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 32,
+                        height: 32,
+                      ),
+                      buildPart3(state: state),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -752,55 +800,6 @@ class _ResumePartState extends State<ResumePart> {
     );
   }
 
-  Widget buildPartRow(ResumeState state) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          child: Screenshot(
-            controller: screenshotController,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF343540),
-                  borderRadius: BorderRadius.circular(0.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      buildPart1(state),
-                      const SizedBox(
-                        width: 32,
-                        height: 32,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Flexible(child: buildPart2(state: state)),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 32,
-                        height: 32,
-                      ),
-                      buildPart3(state: state),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   void _doScreenshot() async {
     screenshotController
         .capture(delay: Duration(milliseconds: 10))
@@ -1012,12 +1011,9 @@ class _ResumePartState extends State<ResumePart> {
   }
 
   Widget buildPage(BuildContext context, ResumeState state) {
-    var screenSize = MediaQuery.of(context).size;
 
     if (ResponsiveUtil.isDesktop(context)) {
       return SizedBox(
-        // width: screenSize.width,
-        // height: screenSize.height,
         child: MouseRegion(
           onHover: (PointerEvent details) => _flipImage(details, context),
           child: buildPartRow(state),
@@ -1025,8 +1021,6 @@ class _ResumePartState extends State<ResumePart> {
       );
     } else {
       return SizedBox(
-       /* width: screenSize.width,
-        height: screenSize.height,*/
         child: SingleChildScrollView(
           child: MouseRegion(
               onHover: (PointerEvent details) => _flipImage(details, context),
