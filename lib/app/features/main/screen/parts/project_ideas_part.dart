@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:google_fonts/google_fonts.dart";
 
 class ProjectsIdeasPart extends StatelessWidget {
   const ProjectsIdeasPart({super.key});
@@ -15,7 +14,7 @@ class ProjectsIdeasPart extends StatelessWidget {
     );
 
   Widget buildBody(final BuildContext context) {
-    var items = <String>["test","test2","test3",
+    final items = <String>["test","test2","test3",
       "test3","test4","test45",];
     return SizedBox(
       width: 400,
@@ -29,7 +28,7 @@ class ProjectsIdeasPart extends StatelessWidget {
         ),
         itemCount: items.length,
         itemBuilder: (final context, final index) {
-          var item = items[index];
+          final item = items[index];
 
           return Column(
             children: [

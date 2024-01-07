@@ -1,34 +1,9 @@
 import "dart:async";
 import "dart:convert";
 import "dart:html" as html;
-
-import "dart:io";
-import "dart:math";
 import "dart:typed_data";
 
-import "package:dotted_border/dotted_border.dart";
-import "package:file_saver/file_saver.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_svg/svg.dart";
-import "package:flutter_to_pdf/flutter_to_pdf.dart";
-import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import "package:get_it/get_it.dart";
-import "package:glowy_borders/glowy_borders.dart";
-import "package:google_fonts/google_fonts.dart";
-import "package:intl/intl.dart";
-import 'package:onelenykco/app/common/responsive_util.dart';
-import 'package:onelenykco/app/features/main/data/resume/resume_cubit.dart';
-import 'package:onelenykco/app/features/main/data/resume/resume_state.dart';
-import "package:screenshot/screenshot.dart";
-
-import "../../../../common/hover_button.dart";
-import "../../../../common/info_block.dart";
-import 'package:onelenykco/app/common/ui/expandable_widget.dart';
-import 'package:onelenykco/app/features/main/data/profile/education_item.dart';
-import 'package:onelenykco/app/features/main/data/profile/employment_item.dart';
-
 import "package:pdf/pdf.dart";
 import "package:pdf/widgets.dart" as pw;
 
@@ -51,8 +26,8 @@ class PdfGenerator {
     pdf.addPage(pw.Page(
       pageFormat: PdfPageFormat(image.width!.toDouble(), image.height!.toDouble()),
       build: (final context) {
-        var ht = context.page.pageFormat.availableHeight;
-        var wt = context.page.pageFormat.availableWidth;
+        final ht = context.page.pageFormat.availableHeight;
+        final wt = context.page.pageFormat.availableWidth;
 
         return pw.Container(
           height: ht,

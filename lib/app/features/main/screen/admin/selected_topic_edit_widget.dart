@@ -1,17 +1,15 @@
 import "dart:async";
-import "dart:convert";
 
 import "package:flutter/material.dart";
 import "package:flutter_quill/flutter_quill.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import "../../../../common/hover_button.dart";
-import 'package:onelenykco/app/common/info_block.dart';
-import "../../data/admin/admin_cubit.dart";
-import "../../data/topic/topic_content.dart";
-import "../../data/topic/topic_item.dart";
-import "admin_part.dart";
+import "package:onelenykco/app/common/hover_button.dart";
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
+import "package:onelenykco/app/features/main/data/topic/topic_content.dart";
+import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
 
 // Define the StatefulWidget
 class SelectedTopicEditWidget extends StatefulWidget {
@@ -65,12 +63,12 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
     //   value.document = Document.fromJson(json);
     // });
 
-    var item = topic?.content?.title;
+    final item = topic?.content?.title;
     if (item != null) {
       controllers.putIfAbsent(title, () => TextEditingController(text: item));
     }
 
-    var date = topic?.date;
+    final date = topic?.date;
     if (date != null) {
       controllers.putIfAbsent(dateId, () => TextEditingController(text: date.toIso8601String()));
     }
@@ -82,7 +80,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   void saveTopicDataItems() {
-    var updatedData = topic?.content?.data.map((final item) => item.copyWith(text: controllers[item.date]?.text ?? item.text)).toList();
+    final updatedData = topic?.content?.data.map((final item) => item.copyWith(text: controllers[item.date]?.text ?? item.text)).toList();
 
     if (updatedData != null) {
       print("$updatedData saved");
@@ -95,7 +93,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   void updateTopicDate(final String value) {
-    var parsed = DateTime.parse(value);
+    final parsed = DateTime.parse(value);
     setState(() {
       topic = topic?.copyWith(date: parsed);
     });
@@ -108,7 +106,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   void addTopicDataItem() {
-    var currentTime = DateTime.now().millisecondsSinceEpoch;
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
     setState(() {
       topic = topic?.copyWith(
           content: topic?.content?.copyWith(
@@ -189,7 +187,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
     );
 
   Widget topicPostItemRich(final TopicDataItem item, final bool removable) {
-    var controller = controllersQuill[item.date];
+    final controller = controllersQuill[item.date];
     if (controller == null) return const Text("Null controller");
 
     return InfoBlock(
@@ -283,7 +281,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   Widget topicPostItem(final TopicDataItem item, final bool removable) {
-    var controller = controllers[item.date];
+    final controller = controllers[item.date];
     if (controller == null) return const Text("Null controller");
 
     return InfoBlock(
@@ -359,7 +357,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   Widget topicTitleItem() {
-    var controller = controllers[title];
+    final controller = controllers[title];
     if (controller == null) return Container();
 
     return InfoBlock(
@@ -394,7 +392,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   Widget topicDateItem() {
-    var controller = controllers[dateId];
+    final controller = controllers[dateId];
     if (controller == null) return Container();
 
     return InfoBlock(

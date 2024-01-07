@@ -1,23 +1,12 @@
+import "dart:html" as html;
 import "dart:math";
 
-import "package:dotted_border/dotted_border.dart";
 import "package:flutter/material.dart";
-import "package:flutter_markdown/flutter_markdown.dart";
-import "package:flutter_svg/svg.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:lottie/lottie.dart";
-
-import "dart:math" as math;
-
-import 'package:onelenykco/app/common/text_cloud.dart';
-import "package:url_launcher/url_launcher.dart";
-
-import "dart:html" as html;
-
-import "../../../../common/hover_button.dart";
-import "../../../../common/info_block.dart";
-import "../../data/state/main_cubit.dart";
+import "package:onelenykco/app/common/hover_button.dart";
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/common/text_cloud.dart";
 
 class ProfilePart extends StatelessWidget {
 
@@ -183,7 +172,7 @@ class ProfilePart extends StatelessWidget {
     );
 
   bool randomBoolean() {
-    var random = Random();
+    final random = Random();
     // Generate a random integer and check if it's even or odd
     // If even, return true; if odd, return false
     return random.nextInt(2) == 0;
@@ -195,7 +184,7 @@ class ProfilePart extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
 
     return SizedBox(
       height: screenSize.height,

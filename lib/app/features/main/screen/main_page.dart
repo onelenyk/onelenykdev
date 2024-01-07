@@ -1,31 +1,17 @@
-import "dart:math";
-
 import "package:auto_route/annotations.dart";
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import 'package:onelenykco/app/common/info_block.dart';
-import 'package:onelenykco/app/features/main/data/state/main_cubit.dart';
-import 'package:onelenykco/app/features/main/screen/hireme/hire_me.dart';
-import 'package:onelenykco/app/features/main/screen/parts/project_ideas_part.dart';
-import 'package:onelenykco/app/features/main/screen/profile/profile_part.dart';
-import 'package:onelenykco/app/features/main/screen/resume/resume_part.dart';
-import 'package:onelenykco/app/features/main/screen/site/site_part.dart';
-import 'package:onelenykco/app/features/main/screen/topic/topic_part.dart';
-
-import 'package:onelenykco/app/common/responsive_util.dart';
-import "../data/state/main_state.dart";
-import "../data/state/routes.dart";
-import 'package:onelenykco/app/features/main/data/topic/topic_item.dart';
-import "admin/admin_part.dart";
-import "package:timeago/timeago.dart" as timeago;
-
-import "../../../common/hover_button.dart";
-import "login/login_part.dart";
+import "package:onelenykco/app/common/hover_button.dart";
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/common/responsive_util.dart";
+import "package:onelenykco/app/features/main/data/state/main_cubit.dart";
+import "package:onelenykco/app/features/main/data/state/main_state.dart";
+import "package:onelenykco/app/features/main/data/state/routes.dart";
+import "package:onelenykco/app/features/main/screen/hireme/hire_me.dart";
+import "package:onelenykco/app/features/main/screen/resume/resume_part.dart";
+import "package:onelenykco/app/features/main/screen/site/site_part.dart";
 
 class _MainScreen extends State<MainScreen> {
   final getIt = GetIt.instance;

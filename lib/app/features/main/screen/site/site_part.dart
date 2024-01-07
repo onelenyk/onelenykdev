@@ -1,18 +1,9 @@
-import "dart:convert";
-
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import 'package:onelenykco/app/env/environment.dart';
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/features/github/commit_model.dart";
+import "package:onelenykco/app/features/github/services/github_service.dart";
 import "package:package_info_plus/package_info_plus.dart";
-import "package:timeago/timeago.dart";
-import "package:url_launcher/url_launcher.dart";
-
-import "../../../../common/info_block.dart";
-import "../../../../common/link_utils.dart";
-import "package:http/http.dart";
-
-import "../../../github/commit_model.dart";
-import "../../../github/services/github_service.dart";
 
 class SiteStoryPart extends StatefulWidget {
   const SiteStoryPart({super.key});
@@ -35,7 +26,7 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
 
   Future<void> loadCommits() async {
     try {
-      var commits = await GithubService().loadCommits();
+      final commits = await GithubService().loadCommits();
       setState(() {
         this.commits = commits;
       });

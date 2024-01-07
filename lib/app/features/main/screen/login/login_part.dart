@@ -1,16 +1,13 @@
+import "dart:math" as math;
+
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:get_it/get_it.dart";
-import "package:google_fonts/google_fonts.dart";
-import 'package:onelenykco/app/features/main/data/state/main_cubit.dart';
-
-import "dart:math" as math;
-import "../../../../common/hover_button.dart";
-import "../../../../data/firebase/auth_cubit.dart";
-import "../../../../data/firebase/authentication_state.dart";
+import "package:onelenykco/app/common/hover_button.dart";
+import "package:onelenykco/app/data/firebase/auth_cubit.dart";
+import "package:onelenykco/app/data/firebase/authentication_state.dart";
 
 class LoginPart extends StatelessWidget {
 
@@ -18,7 +15,7 @@ class LoginPart extends StatelessWidget {
   final getIt = GetIt.instance;
 
   String extractTwoSymbols(final String input) {
-    var words = input.split(" ");
+    final words = input.split(" ");
 
     if (words.length >= 2) {
       return words[0][0] + words[1][0];
@@ -195,7 +192,7 @@ class LoginPart extends StatelessWidget {
             ),
           );
         } else if (state is AuthenticationSuccess) {
-          var title = extractTwoSymbols(
+          final title = extractTwoSymbols(
                   state.user?.displayName ?? state.user?.email ?? "",)
               .toUpperCase();
 

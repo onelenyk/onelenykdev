@@ -1,10 +1,8 @@
 import "dart:async";
 
 import "package:firebase_auth/firebase_auth.dart";
-import "package:equatable/equatable.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-
-import "authentication_state.dart";
+import "package:onelenykco/app/data/firebase/authentication_state.dart";
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
 

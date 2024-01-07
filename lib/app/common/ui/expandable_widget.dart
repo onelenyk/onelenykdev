@@ -1,9 +1,8 @@
 import "dart:async";
 
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 
-import "../hover_button.dart";
+import "package:onelenykco/app/common/hover_button.dart";
 
 class ExpandableWidget extends StatefulWidget {
 
@@ -26,13 +25,13 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
   void initState() {
     super.initState();
 
-    var durationMillis = _isHovered ? 600 : 300;
+    final durationMillis = _isHovered ? 600 : 300;
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: durationMillis),
     );
 
-    var endValue = _isHovered ? 0.2 : 1.0;
+    final endValue = _isHovered ? 0.2 : 1.0;
     _sizeAnimation = Tween<double>(begin: 0, end: endValue)
         .animate(_controller);
 
@@ -68,7 +67,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
     setState(() {
       _isHovered = isHovered;
 
-      var durationMillis = _isHovered ? 300 : 300;
+      final durationMillis = _isHovered ? 300 : 300;
       _controller.duration = Duration(milliseconds: durationMillis);
 
       if (_isHovered) {
