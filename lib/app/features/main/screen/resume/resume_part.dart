@@ -1,35 +1,26 @@
 import "dart:async";
-import "dart:html" as html;
-
-import "dart:io";
 import "dart:math";
 
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:dotted_border/dotted_border.dart";
-import "package:file_saver/file_saver.dart";
 import "package:flutter/material.dart";
-import "package:flutter/services.dart";
-import "package:flutter/widgets.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/svg.dart";
-import "package:flutter_to_pdf/flutter_to_pdf.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:get_it/get_it.dart";
 import "package:glowy_borders/glowy_borders.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:intl/intl.dart";
-import 'package:onelenykco/app/common/link_utils.dart';
-import 'package:onelenykco/app/common/responsive_util.dart';
-import 'package:onelenykco/app/features/main/data/resume/resume_cubit.dart';
-import 'package:onelenykco/app/features/main/data/resume/resume_state.dart';
+import "package:onelenykco/app/common/hover_button.dart";
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/common/link_utils.dart";
+import "package:onelenykco/app/common/responsive_util.dart";
+import "package:onelenykco/app/common/ui/expandable_widget.dart";
+import "package:onelenykco/app/features/main/data/profile/education_item.dart";
+import "package:onelenykco/app/features/main/data/profile/employment_item.dart";
+import "package:onelenykco/app/features/main/data/resume/resume_cubit.dart";
+import "package:onelenykco/app/features/main/data/resume/resume_state.dart";
+import "package:onelenykco/app/features/main/screen/resume/pdf_generator.dart";
 import "package:screenshot/screenshot.dart";
-
-import "../../../../common/hover_button.dart";
-import "../../../../common/info_block.dart";
-import "../../../../common/ui/expandable_widget.dart";
-import "../../data/profile/education_item.dart";
-import "../../data/profile/employment_item.dart";
-import "pdf_generator.dart";
 
 class ResumePart extends StatefulWidget {
   ResumePart({super.key});
@@ -61,7 +52,7 @@ class _ResumePartState extends State<ResumePart> {
   }
 
   bool randomBoolean() {
-    var random = Random();
+    final random = Random();
     // Generate a random integer and check if it's even or odd
     // If even, return true; if odd, return false
     return random.nextInt(2) == 0;
@@ -72,8 +63,8 @@ class _ResumePartState extends State<ResumePart> {
       return;
     }
 
-    var localPosition = details.localPosition;
-    var halfWidth = context.size!.width / 3;
+    final localPosition = details.localPosition;
+    final halfWidth = context.size!.width / 3;
 
     setState(() {
       rotationAngle = _calculateRotationAngle(localPosition.dx, halfWidth);
@@ -570,7 +561,7 @@ class _ResumePartState extends State<ResumePart> {
     );
 
   Widget buildPart3({required final ResumeState state}) {
-    var items = <String>[
+    final items = <String>[
       "Kotlin",
       "Java",
       "Android SDK",
@@ -855,9 +846,9 @@ class _ResumePartState extends State<ResumePart> {
             fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold,),);
 
   Widget buildPartEducationExperience({required final EducationItem item}) {
-    var date =
+    final date =
         "(${item.startDate.toDate().year}-${item.endDate?.toDate().year})";
-    var titleAndDate = "${item.role} $date";
+    final titleAndDate = "${item.role} $date";
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(

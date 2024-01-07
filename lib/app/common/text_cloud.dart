@@ -1,5 +1,6 @@
-import "package:flutter/material.dart";
 import "dart:math" as math;
+
+import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
 // Add the WordPositionCalculator class here (from previous example)

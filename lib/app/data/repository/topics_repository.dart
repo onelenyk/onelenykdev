@@ -1,9 +1,8 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:get_it/get_it.dart";
-import "package:http/http.dart";
-import 'package:onelenykco/app/data/services/firestore_service.dart';
-import 'package:onelenykco/app/features/main/data/topic/topic_content.dart';
-import 'package:onelenykco/app/features/main/data/topic/topic_item.dart';
+import "package:onelenykco/app/data/services/firestore_service.dart";
+import "package:onelenykco/app/features/main/data/topic/topic_content.dart";
+import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
 
 
 class TopicsRepository {
@@ -16,7 +15,7 @@ class TopicsRepository {
   late final CollectionReference<TopicItem> _topicsCollection = service.getTopicsList();
 
   Future<TopicItem?> createNewEmptyItem() async {
-    var currentTime = DateTime.now().millisecondsSinceEpoch;
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
     final newTopic = TopicItem(
       id: null, // Firestore will auto-generate this
       date: DateTime.now(), // Placeholder or default value for date
@@ -26,8 +25,8 @@ class TopicsRepository {
     );
 
     // Add a new document with an auto-generated ID
-    var data = await _topicsCollection.add(newTopic);
-    var tempItem = await getItem(data.id);
+    final data = await _topicsCollection.add(newTopic);
+    final tempItem = await getItem(data.id);
     await updateItem(tempItem!);
     return tempItem;
   }
@@ -43,7 +42,7 @@ class TopicsRepository {
   }
   Future<TopicItem?> getItem(final String id) async {
     try {
-      var snapshot = await _topicsCollection.doc(id).get();
+      final snapshot = await _topicsCollection.doc(id).get();
 
       if (snapshot.exists) {
         // Convert the document data to a TopicItem object
@@ -58,7 +57,7 @@ class TopicsRepository {
   }
   Future<List<TopicItem>> getItems() async {
     try {
-      var snapshot = await _topicsCollection.get();
+      final snapshot = await _topicsCollection.get();
       return snapshot.docs
           .map((final doc) => doc.data().copyWith(id: doc.id))
           .toList();
@@ -72,7 +71,7 @@ class TopicsRepository {
         snapshot.docs.map((final doc) => doc.data().copyWith(id: doc.id)).toList(),);
   Future<void> updateItem(final TopicItem item) async {
     try {
-      var result = _topicsCollection.doc(item.id);
+      final result = _topicsCollection.doc(item.id);
       result
           .set(item)
           .then((final _) => print("Success"))

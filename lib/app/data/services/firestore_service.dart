@@ -1,8 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:onelenykco/app/features/main/data/profile/profile_item.dart';
-import 'package:onelenykco/app/features/main/data/topic/topic_content.dart';
+import "package:onelenykco/app/features/main/data/profile/profile_item.dart";
 
-import "../../features/main/data/topic/topic_item.dart";
+import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

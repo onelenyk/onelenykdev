@@ -1,4 +1,4 @@
-import "../topic/topic_item.dart";
+import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
 
 class AdminState {
 

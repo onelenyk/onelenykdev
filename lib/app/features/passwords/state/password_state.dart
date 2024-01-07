@@ -1,6 +1,6 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 
-import "../password.dart";
+import "package:onelenykco/app/features/passwords/password.dart";
 
 part "password_state.freezed.dart";
 part "password_state.g.dart";

@@ -1,10 +1,9 @@
 import "dart:convert";
 
 import "package:bloc/bloc.dart";
-import 'package:onelenykco/app/features/passwords/state/password_state.dart';
 import "package:http/http.dart" as http;
-
-import "../password.dart";
+import "package:onelenykco/app/features/passwords/password.dart";
+import "package:onelenykco/app/features/passwords/state/password_state.dart";
 
 
 class PasswordsCubit extends Cubit<MyPasswordsState> {
@@ -16,8 +15,8 @@ class PasswordsCubit extends Cubit<MyPasswordsState> {
 
   Future<void> initialize() async {
     try {
-      var itemsId = await fetchItemIds();
-      var passwordItems = await fetchItemsDetails(itemsId);
+      final itemsId = await fetchItemIds();
+      final passwordItems = await fetchItemsDetails(itemsId);
 
       emit(state.copyWith(passwords: passwordItems));
     } catch (e) {
@@ -40,7 +39,7 @@ class PasswordsCubit extends Cubit<MyPasswordsState> {
     final items = <PasswordItem>[];
 
     for (final id in itemIds) {
-      var path = Uri.http(baseUrl, "/item/read", {"id": id});
+      final path = Uri.http(baseUrl, "/item/read", {"id": id});
       final response = await http.get(path);
 
       if (response.statusCode == 200) {

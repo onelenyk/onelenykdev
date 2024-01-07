@@ -1,75 +1,11 @@
-import "package:dotted_border/dotted_border.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_fonts/google_fonts.dart";
-import 'package:onelenykco/app/common/hover_button.dart';
-import 'package:onelenykco/app/common/info_block.dart';
-import "package:screenshot/screenshot.dart";
+import "package:onelenykco/app/common/hover_button.dart";
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/common/link_utils.dart";
 import "package:url_launcher/url_launcher.dart";
-/*
-
-class HireMePart extends StatelessWidget {
-  const HireMePart({super.key});
-
-  Widget topicPostItem(String text, VoidCallback onTap) {
-    return Column(
-      children: [
-        Text(
-          text,
-          style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ],
-    );
-  }
-
-  Widget buildBody(BuildContext context) {
-    final List<String> items = [
-      "test",
-      "test2",
-      "test3",
-      "test3",
-      "test4",
-      "test45"
-    ];
-    return SizedBox(
-      width: 400,
-      height: 400,
-      child: GridView.builder(
-        // Define the grid delegate
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, // 3 items per row
-          crossAxisSpacing: 4.0, // Horizontal space between items
-          mainAxisSpacing: 4.0, // Vertical space between items
-        ),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          var item = items[index];
-
-          return Column(
-            children: [
-              Text(item),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: buildBody(context),
-    );
-  }
-}
-*/
-
-import "package:flutter/material.dart";
-import "package:url_launcher/url_launcher.dart";
-
-import "../../../../common/link_utils.dart";
 
 class HireMePart extends StatefulWidget {
   const HireMePart({super.key});
@@ -88,7 +24,7 @@ class _HireMePageState extends State<HireMePart> {
       "Interest in Hiring | onelenyk.dev"; // Hardcoded email subject
 
   Future<void> _sendEmail() async {
-    var emailLaunchUri = Uri(
+    final emailLaunchUri = Uri(
       scheme: "mailto",
       path: _receiverEmail,
       query: encodeQueryParameters(<String, String>{

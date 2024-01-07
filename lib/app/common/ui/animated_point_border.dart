@@ -1,6 +1,6 @@
 import "package:flutter/cupertino.dart";
 
-import "border_paint.dart";
+import "package:onelenykco/app/common/ui/border_paint.dart";
 
 class AnimatedPointBorderContainer extends StatefulWidget {
 
