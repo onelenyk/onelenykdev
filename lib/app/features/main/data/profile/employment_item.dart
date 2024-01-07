@@ -17,8 +17,8 @@ class ExperienceItem with _$ExperienceItem {
     required String name,
     required String id,
     required String role,
-    @TimestampSerializer() required DateTime startDate,
-    @TimestampSerializerNullable() required DateTime? endDate,
+    @TimestampSerializer2() required Timestamp startDate,
+    @NullableTimestampSerializer() required Timestamp? endDate,
     required List<String> description,
   }) = _ExperienceItem;
 

@@ -10,14 +10,16 @@ _$EducationItemImpl _$$EducationItemImplFromJson(Map<String, dynamic> json) =>
     _$EducationItemImpl(
       universityName: json['universityName'] as String,
       role: json['role'] as String,
-      startDate: const TimestampSerializer().fromJson(json['startDate']),
-      endDate: const TimestampSerializerNullable().fromJson(json['endDate']),
+      startDate:
+          const TimestampSerializer2().fromJson(json['startDate'] as int),
+      endDate:
+          const NullableTimestampSerializer().fromJson(json['endDate'] as int?),
     );
 
 Map<String, dynamic> _$$EducationItemImplToJson(_$EducationItemImpl instance) =>
     <String, dynamic>{
       'universityName': instance.universityName,
       'role': instance.role,
-      'startDate': const TimestampSerializer().toJson(instance.startDate),
-      'endDate': const TimestampSerializerNullable().toJson(instance.endDate),
+      'startDate': const TimestampSerializer2().toJson(instance.startDate),
+      'endDate': const NullableTimestampSerializer().toJson(instance.endDate),
     };

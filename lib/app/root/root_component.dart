@@ -19,13 +19,16 @@ class RootComponent extends StatelessWidget {
   final getIt = GetIt.instance;
 
   RootComponent() {
-    getIt.registerSingleton<ProfileRepository>(ProfileRepository());
+  //  getIt.registerSingleton<ProfileRepository>(ProfileRepository());
     getIt.registerSingleton<TopicsRepository>(TopicsRepository());
     getIt.registerSingleton<FirestoreService>(FirestoreService());
+
     getIt.registerSingleton<MainCubit>(MainCubit());
     getIt.registerSingleton<AdminCubit>(AdminCubit());
     getIt.registerSingleton<ResumeCubit>(ResumeCubit());
+
     getIt.registerSingleton<AuthenticationCubit>(AuthenticationCubit(firebaseAuth));
+
   }
 
   ThemeData _buildTheme(brightness) {

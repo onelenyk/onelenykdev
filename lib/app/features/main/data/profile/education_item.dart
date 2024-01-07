@@ -15,8 +15,8 @@ class EducationItem with _$EducationItem {
   factory EducationItem({
     required String universityName,
     required String role,
-    @TimestampSerializer() required DateTime startDate,
-    @TimestampSerializerNullable() required DateTime? endDate,
+    @TimestampSerializer2() required Timestamp startDate,
+    @NullableTimestampSerializer() required Timestamp? endDate,
   }) = _EducationItem;
 
   factory EducationItem.fromJson(Map<String, dynamic> json) => _$EducationItemFromJson(json);

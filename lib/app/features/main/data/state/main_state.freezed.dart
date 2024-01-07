@@ -16,12 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainState {
-  List<TopicItem> get topics => throw _privateConstructorUsedError;
-  TopicItem? get selectedTopic => throw _privateConstructorUsedError;
-  TopicItem? get profileTopic => throw _privateConstructorUsedError;
-  TopicItem? get projectsTopic => throw _privateConstructorUsedError;
-  TopicItem? get resumeTopic => throw _privateConstructorUsedError;
-  TopicItem? get hireMeTopic => throw _privateConstructorUsedError;
+  Routes get activeRoute => throw _privateConstructorUsedError;
   bool get isMenuOpened => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,20 +29,7 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call(
-      {List<TopicItem> topics,
-      TopicItem? selectedTopic,
-      TopicItem? profileTopic,
-      TopicItem? projectsTopic,
-      TopicItem? resumeTopic,
-      TopicItem? hireMeTopic,
-      bool isMenuOpened});
-
-  $TopicItemCopyWith<$Res>? get selectedTopic;
-  $TopicItemCopyWith<$Res>? get profileTopic;
-  $TopicItemCopyWith<$Res>? get projectsTopic;
-  $TopicItemCopyWith<$Res>? get resumeTopic;
-  $TopicItemCopyWith<$Res>? get hireMeTopic;
+  $Res call({Routes activeRoute, bool isMenuOpened});
 }
 
 /// @nodoc
@@ -63,104 +45,19 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? topics = null,
-    Object? selectedTopic = freezed,
-    Object? profileTopic = freezed,
-    Object? projectsTopic = freezed,
-    Object? resumeTopic = freezed,
-    Object? hireMeTopic = freezed,
+    Object? activeRoute = null,
     Object? isMenuOpened = null,
   }) {
     return _then(_value.copyWith(
-      topics: null == topics
-          ? _value.topics
-          : topics // ignore: cast_nullable_to_non_nullable
-              as List<TopicItem>,
-      selectedTopic: freezed == selectedTopic
-          ? _value.selectedTopic
-          : selectedTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      profileTopic: freezed == profileTopic
-          ? _value.profileTopic
-          : profileTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      projectsTopic: freezed == projectsTopic
-          ? _value.projectsTopic
-          : projectsTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      resumeTopic: freezed == resumeTopic
-          ? _value.resumeTopic
-          : resumeTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      hireMeTopic: freezed == hireMeTopic
-          ? _value.hireMeTopic
-          : hireMeTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
+      activeRoute: null == activeRoute
+          ? _value.activeRoute
+          : activeRoute // ignore: cast_nullable_to_non_nullable
+              as Routes,
       isMenuOpened: null == isMenuOpened
           ? _value.isMenuOpened
           : isMenuOpened // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TopicItemCopyWith<$Res>? get selectedTopic {
-    if (_value.selectedTopic == null) {
-      return null;
-    }
-
-    return $TopicItemCopyWith<$Res>(_value.selectedTopic!, (value) {
-      return _then(_value.copyWith(selectedTopic: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TopicItemCopyWith<$Res>? get profileTopic {
-    if (_value.profileTopic == null) {
-      return null;
-    }
-
-    return $TopicItemCopyWith<$Res>(_value.profileTopic!, (value) {
-      return _then(_value.copyWith(profileTopic: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TopicItemCopyWith<$Res>? get projectsTopic {
-    if (_value.projectsTopic == null) {
-      return null;
-    }
-
-    return $TopicItemCopyWith<$Res>(_value.projectsTopic!, (value) {
-      return _then(_value.copyWith(projectsTopic: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TopicItemCopyWith<$Res>? get resumeTopic {
-    if (_value.resumeTopic == null) {
-      return null;
-    }
-
-    return $TopicItemCopyWith<$Res>(_value.resumeTopic!, (value) {
-      return _then(_value.copyWith(resumeTopic: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TopicItemCopyWith<$Res>? get hireMeTopic {
-    if (_value.hireMeTopic == null) {
-      return null;
-    }
-
-    return $TopicItemCopyWith<$Res>(_value.hireMeTopic!, (value) {
-      return _then(_value.copyWith(hireMeTopic: value) as $Val);
-    });
   }
 }
 
@@ -172,25 +69,7 @@ abstract class _$$MainStateImplCopyWith<$Res>
       __$$MainStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<TopicItem> topics,
-      TopicItem? selectedTopic,
-      TopicItem? profileTopic,
-      TopicItem? projectsTopic,
-      TopicItem? resumeTopic,
-      TopicItem? hireMeTopic,
-      bool isMenuOpened});
-
-  @override
-  $TopicItemCopyWith<$Res>? get selectedTopic;
-  @override
-  $TopicItemCopyWith<$Res>? get profileTopic;
-  @override
-  $TopicItemCopyWith<$Res>? get projectsTopic;
-  @override
-  $TopicItemCopyWith<$Res>? get resumeTopic;
-  @override
-  $TopicItemCopyWith<$Res>? get hireMeTopic;
+  $Res call({Routes activeRoute, bool isMenuOpened});
 }
 
 /// @nodoc
@@ -204,39 +83,14 @@ class __$$MainStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? topics = null,
-    Object? selectedTopic = freezed,
-    Object? profileTopic = freezed,
-    Object? projectsTopic = freezed,
-    Object? resumeTopic = freezed,
-    Object? hireMeTopic = freezed,
+    Object? activeRoute = null,
     Object? isMenuOpened = null,
   }) {
     return _then(_$MainStateImpl(
-      topics: null == topics
-          ? _value._topics
-          : topics // ignore: cast_nullable_to_non_nullable
-              as List<TopicItem>,
-      selectedTopic: freezed == selectedTopic
-          ? _value.selectedTopic
-          : selectedTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      profileTopic: freezed == profileTopic
-          ? _value.profileTopic
-          : profileTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      projectsTopic: freezed == projectsTopic
-          ? _value.projectsTopic
-          : projectsTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      resumeTopic: freezed == resumeTopic
-          ? _value.resumeTopic
-          : resumeTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
-      hireMeTopic: freezed == hireMeTopic
-          ? _value.hireMeTopic
-          : hireMeTopic // ignore: cast_nullable_to_non_nullable
-              as TopicItem?,
+      activeRoute: null == activeRoute
+          ? _value.activeRoute
+          : activeRoute // ignore: cast_nullable_to_non_nullable
+              as Routes,
       isMenuOpened: null == isMenuOpened
           ? _value.isMenuOpened
           : isMenuOpened // ignore: cast_nullable_to_non_nullable
@@ -248,41 +102,17 @@ class __$$MainStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MainStateImpl extends _MainState {
-  _$MainStateImpl(
-      {required final List<TopicItem> topics,
-      required this.selectedTopic,
-      required this.profileTopic,
-      required this.projectsTopic,
-      required this.resumeTopic,
-      required this.hireMeTopic,
-      required this.isMenuOpened})
-      : _topics = topics,
-        super._();
-
-  final List<TopicItem> _topics;
-  @override
-  List<TopicItem> get topics {
-    if (_topics is EqualUnmodifiableListView) return _topics;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_topics);
-  }
+  _$MainStateImpl({required this.activeRoute, required this.isMenuOpened})
+      : super._();
 
   @override
-  final TopicItem? selectedTopic;
-  @override
-  final TopicItem? profileTopic;
-  @override
-  final TopicItem? projectsTopic;
-  @override
-  final TopicItem? resumeTopic;
-  @override
-  final TopicItem? hireMeTopic;
+  final Routes activeRoute;
   @override
   final bool isMenuOpened;
 
   @override
   String toString() {
-    return 'MainState(topics: $topics, selectedTopic: $selectedTopic, profileTopic: $profileTopic, projectsTopic: $projectsTopic, resumeTopic: $resumeTopic, hireMeTopic: $hireMeTopic, isMenuOpened: $isMenuOpened)';
+    return 'MainState(activeRoute: $activeRoute, isMenuOpened: $isMenuOpened)';
   }
 
   @override
@@ -290,31 +120,14 @@ class _$MainStateImpl extends _MainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainStateImpl &&
-            const DeepCollectionEquality().equals(other._topics, _topics) &&
-            (identical(other.selectedTopic, selectedTopic) ||
-                other.selectedTopic == selectedTopic) &&
-            (identical(other.profileTopic, profileTopic) ||
-                other.profileTopic == profileTopic) &&
-            (identical(other.projectsTopic, projectsTopic) ||
-                other.projectsTopic == projectsTopic) &&
-            (identical(other.resumeTopic, resumeTopic) ||
-                other.resumeTopic == resumeTopic) &&
-            (identical(other.hireMeTopic, hireMeTopic) ||
-                other.hireMeTopic == hireMeTopic) &&
+            (identical(other.activeRoute, activeRoute) ||
+                other.activeRoute == activeRoute) &&
             (identical(other.isMenuOpened, isMenuOpened) ||
                 other.isMenuOpened == isMenuOpened));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_topics),
-      selectedTopic,
-      profileTopic,
-      projectsTopic,
-      resumeTopic,
-      hireMeTopic,
-      isMenuOpened);
+  int get hashCode => Object.hash(runtimeType, activeRoute, isMenuOpened);
 
   @JsonKey(ignore: true)
   @override
@@ -325,27 +138,12 @@ class _$MainStateImpl extends _MainState {
 
 abstract class _MainState extends MainState {
   factory _MainState(
-      {required final List<TopicItem> topics,
-      required final TopicItem? selectedTopic,
-      required final TopicItem? profileTopic,
-      required final TopicItem? projectsTopic,
-      required final TopicItem? resumeTopic,
-      required final TopicItem? hireMeTopic,
+      {required final Routes activeRoute,
       required final bool isMenuOpened}) = _$MainStateImpl;
   _MainState._() : super._();
 
   @override
-  List<TopicItem> get topics;
-  @override
-  TopicItem? get selectedTopic;
-  @override
-  TopicItem? get profileTopic;
-  @override
-  TopicItem? get projectsTopic;
-  @override
-  TopicItem? get resumeTopic;
-  @override
-  TopicItem? get hireMeTopic;
+  Routes get activeRoute;
   @override
   bool get isMenuOpened;
   @override

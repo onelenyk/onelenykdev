@@ -89,10 +89,10 @@ class LoginPart extends StatelessWidget {
     );
   }
 
-  void navigateToAdmin() {
+/*  void navigateToAdmin() {
     final cubit = getIt<MainCubit>();
     cubit.selectTopic(topic: adminItem);
-  }
+  }*/
 
   Future<void> showLogoutDialog(BuildContext context, User user) async {
     return showDialog<void>(
@@ -124,7 +124,6 @@ class LoginPart extends StatelessWidget {
               child: Text('Admin pannel'),
               onPressed: () {
                 // Implement your log out logic here
-                navigateToAdmin();
                 Navigator.of(dialogContext).pop(); // Dismiss the dialog
 
               },

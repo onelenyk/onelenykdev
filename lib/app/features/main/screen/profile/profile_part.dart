@@ -110,7 +110,7 @@ class ProfilePart extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            buildWordMap(),
+          //  buildWordMap(),
             SizedBox(
               width: 16,
               height: 16,
@@ -199,11 +199,6 @@ class ProfilePart extends StatelessWidget {
 
   void openLink(String url) {
     html.window.open(url, '_blank');
-  }
-
-  void navigateToResume(){
-    final cubit = getIt<MainCubit>();
-    cubit.selectTopic(topic: resumeItem);
   }
 
   @override

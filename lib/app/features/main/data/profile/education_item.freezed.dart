@@ -22,10 +22,10 @@ EducationItem _$EducationItemFromJson(Map<String, dynamic> json) {
 mixin _$EducationItem {
   String get universityName => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
-  @TimestampSerializer()
-  DateTime get startDate => throw _privateConstructorUsedError;
-  @TimestampSerializerNullable()
-  DateTime? get endDate => throw _privateConstructorUsedError;
+  @TimestampSerializer2()
+  Timestamp get startDate => throw _privateConstructorUsedError;
+  @NullableTimestampSerializer()
+  Timestamp? get endDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +42,8 @@ abstract class $EducationItemCopyWith<$Res> {
   $Res call(
       {String universityName,
       String role,
-      @TimestampSerializer() DateTime startDate,
-      @TimestampSerializerNullable() DateTime? endDate});
+      @TimestampSerializer2() Timestamp startDate,
+      @NullableTimestampSerializer() Timestamp? endDate});
 }
 
 /// @nodoc
@@ -76,11 +76,11 @@ class _$EducationItemCopyWithImpl<$Res, $Val extends EducationItem>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as Timestamp,
       endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as Timestamp?,
     ) as $Val);
   }
 }
@@ -96,8 +96,8 @@ abstract class _$$EducationItemImplCopyWith<$Res>
   $Res call(
       {String universityName,
       String role,
-      @TimestampSerializer() DateTime startDate,
-      @TimestampSerializerNullable() DateTime? endDate});
+      @TimestampSerializer2() Timestamp startDate,
+      @NullableTimestampSerializer() Timestamp? endDate});
 }
 
 /// @nodoc
@@ -128,11 +128,11 @@ class __$$EducationItemImplCopyWithImpl<$Res>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as Timestamp,
       endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as Timestamp?,
     ));
   }
 }
@@ -143,8 +143,8 @@ class _$EducationItemImpl extends _EducationItem {
   _$EducationItemImpl(
       {required this.universityName,
       required this.role,
-      @TimestampSerializer() required this.startDate,
-      @TimestampSerializerNullable() required this.endDate})
+      @TimestampSerializer2() required this.startDate,
+      @NullableTimestampSerializer() required this.endDate})
       : super._();
 
   factory _$EducationItemImpl.fromJson(Map<String, dynamic> json) =>
@@ -155,11 +155,11 @@ class _$EducationItemImpl extends _EducationItem {
   @override
   final String role;
   @override
-  @TimestampSerializer()
-  final DateTime startDate;
+  @TimestampSerializer2()
+  final Timestamp startDate;
   @override
-  @TimestampSerializerNullable()
-  final DateTime? endDate;
+  @NullableTimestampSerializer()
+  final Timestamp? endDate;
 
   @override
   String toString() {
@@ -202,8 +202,8 @@ abstract class _EducationItem extends EducationItem {
   factory _EducationItem(
           {required final String universityName,
           required final String role,
-          @TimestampSerializer() required final DateTime startDate,
-          @TimestampSerializerNullable() required final DateTime? endDate}) =
+          @TimestampSerializer2() required final Timestamp startDate,
+          @NullableTimestampSerializer() required final Timestamp? endDate}) =
       _$EducationItemImpl;
   _EducationItem._() : super._();
 
@@ -215,11 +215,11 @@ abstract class _EducationItem extends EducationItem {
   @override
   String get role;
   @override
-  @TimestampSerializer()
-  DateTime get startDate;
+  @TimestampSerializer2()
+  Timestamp get startDate;
   @override
-  @TimestampSerializerNullable()
-  DateTime? get endDate;
+  @NullableTimestampSerializer()
+  Timestamp? get endDate;
   @override
   @JsonKey(ignore: true)
   _$$EducationItemImplCopyWith<_$EducationItemImpl> get copyWith =>

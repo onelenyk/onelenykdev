@@ -28,3 +28,25 @@ class TimestampSerializerNullable implements JsonConverter<DateTime?, dynamic> {
     return Timestamp.fromDate(date);
   }
 }
+
+class TimestampSerializer2 implements JsonConverter<Timestamp, int> {
+  const TimestampSerializer2();
+
+  @override
+  int toJson(Timestamp timestamp) => timestamp.millisecondsSinceEpoch;
+
+  @override
+  Timestamp fromJson(int millis) => Timestamp.fromMillisecondsSinceEpoch(millis);
+}
+
+class NullableTimestampSerializer implements JsonConverter<Timestamp?, int?> {
+  const NullableTimestampSerializer();
+
+  @override
+  int? toJson(Timestamp? timestamp) =>
+      timestamp != null ? timestamp.millisecondsSinceEpoch : null;
+
+  @override
+  Timestamp? fromJson(int? millis) =>
+      millis != null ? Timestamp.fromMillisecondsSinceEpoch(millis) : null;
+}

@@ -4,6 +4,7 @@ import 'dart:html' as html;
 import 'dart:io';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,10 @@ class _ResumePartState extends State<ResumePart> {
   }
 
   void _flipImage(PointerEvent details, BuildContext context) {
+    if (ModalRoute.of(context)?.isCurrent != true) {
+      return;
+    }
+
     var localPosition = details.localPosition;
     var halfWidth = context.size!.width / 3;
 
@@ -161,7 +166,6 @@ class _ResumePartState extends State<ResumePart> {
 */
 
   Widget buildPartColumn(ResumeState state) {
-
     return InfoBlock(
       child: Center(
         child: Container(
@@ -237,7 +241,7 @@ class _ResumePartState extends State<ResumePart> {
                         width: 32,
                         height: 32,
                       ),
-                      buildPart3(state: state),
+                      buildPart3(state: state)
                     ],
                   ),
                 ),
@@ -483,7 +487,8 @@ class _ResumePartState extends State<ResumePart> {
                             child: download
                                 ? HoverButton(
                                     onTap: () {
-                                      downloadPdfFromAssets('assets/resume.pdf');
+                                      downloadPdfFromAssets(
+                                          'assets/resume.pdf');
                                     },
                                     onDoubleTap: () {},
                                     radius: 15,
@@ -560,76 +565,6 @@ class _ResumePartState extends State<ResumePart> {
               ),
             ],
           ),
-
-/*          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              //TODO update list from state
-              buildPartWorkExperience(
-                  item: ExperienceItem(
-                      name: "VanOnGo",
-                      role: "Android Engineer",
-                      startDate:
-                          DateTime.fromMillisecondsSinceEpoch(1680307200000),
-                      endDate: null,
-                      description: [], id: '')),
-              buildPartWorkExperience(
-                  item: ExperienceItem(
-                      name: "ALP.COM",
-                      role: "Android Engineer",
-                      startDate:
-                          DateTime.fromMillisecondsSinceEpoch(1669852800000),
-                      endDate:
-                          DateTime.fromMillisecondsSinceEpoch(1680307199000),
-                      description: [], id: '')),
-              buildPartWorkExperience(
-                  item: ExperienceItem(
-                      name: "Axles",
-                      role: "Android Engineer",
-                      startDate:
-                          DateTime.fromMillisecondsSinceEpoch(1593561600000),
-                      endDate:
-                          DateTime.fromMillisecondsSinceEpoch(1672531199000),
-                      description: [
-                    "1) Led feature development and maintenance at Axles.",
-                    "2) Managed project roadmaps, feature investigations, app releases.",
-                    "3) Supported white-label operations, enhancing app versatility.",
-                    "4) ⚙️ Configured CI/CD environments using various platforms.",
-                    "5) 🛠 Advanced skills in Kotlin, Coroutine Flow, Retrofit, Dagger2, Koin, ExoPlayer; tackled redesigns and Java to Kotlin migrations."
-                  ], id: '')),
-              buildPartWorkExperience(
-                  item: ExperienceItem(
-                      name: "Trexoz",
-                      role: "Mobile Engineer",
-                      startDate:
-                          DateTime.fromMillisecondsSinceEpoch(1569888000000),
-                      endDate:
-                          DateTime.fromMillisecondsSinceEpoch(1596239999000),
-                      description: [
-                    "1) Led dual app development projects at Trexoz.",
-                    "2) Tailored apps to specific client requirements.",
-                    "3) Enhanced UI and backend for Android apps.",
-                    "4) 🏗 Gained skills in app architecture, using LiveData, MVVM, Kotlin, Data Binding.",
-                    "5) 📍 Implemented features with Google Maps and advanced UI components."
-                  ], id: '')),
-              buildPartWorkExperience(
-                  item: ExperienceItem(
-                      name: "Infotechcentre",
-                      role: "Trainee Engineer",
-                      startDate:
-                          DateTime.fromMillisecondsSinceEpoch(1546300800000),
-                      endDate:
-                          DateTime.fromMillisecondsSinceEpoch(1572566399000),
-                      description: [
-                    "1) Developed Android apps using Kotlin and Java.",
-                    "2) Created user-friendly UI for documents and data.",
-                    "3) Integrated apps with IoT, merging software and hardware.",
-                    "4) Built solid foundation in practical software engineering.",
-                    "5) 💡 Used Kotlin, Java, Volley, AsyncTasks, MySQL for expertise."
-                  ], id: '')),
-            ],
-          ),*/
-
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text('Education',
@@ -654,8 +589,8 @@ class _ResumePartState extends State<ResumePart> {
               item: EducationItem(
             universityName: "WUNU, Ukraine",
             role: "Advanced Computer Integrated Technologies",
-            startDate: DateTime.fromMillisecondsSinceEpoch(1472755920000),
-            endDate: DateTime.fromMillisecondsSinceEpoch(1598986320000),
+            startDate: Timestamp.fromMillisecondsSinceEpoch(1472755920000),
+            endDate: Timestamp.fromMillisecondsSinceEpoch(1598986320000),
           )),
         ],
       ),
@@ -868,7 +803,9 @@ class _ResumePartState extends State<ResumePart> {
                     ),
                     Row(
                       children: [
-                        Text(formatDatePeriod(item.startDate, item.endDate),
+                        Text(
+                            formatDatePeriod(item.startDate.toDate(),
+                                item.endDate?.toDate()),
                             style: GoogleFonts.robotoMono(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -927,7 +864,9 @@ class _ResumePartState extends State<ResumePart> {
                 ),
                 Row(
                   children: [
-                    Text(formatDatePeriod(item.startDate, item.endDate),
+                    Text(
+                        formatDatePeriod(
+                            item.startDate.toDate(), item.endDate?.toDate()),
                         style: GoogleFonts.robotoMono(
                             fontSize: 12,
                             color: Colors.white,
@@ -954,7 +893,8 @@ class _ResumePartState extends State<ResumePart> {
   }
 
   Widget buildPartEducationExperience({required EducationItem item}) {
-    var date = "(${item.startDate.year}-${item.endDate?.year})";
+    var date =
+        "(${item.startDate.toDate().year}-${item.endDate?.toDate().year})";
     var titleAndDate = "${item.role} $date";
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -1011,7 +951,6 @@ class _ResumePartState extends State<ResumePart> {
   }
 
   Widget buildPage(BuildContext context, ResumeState state) {
-
     if (ResponsiveUtil.isDesktop(context)) {
       return SizedBox(
         child: MouseRegion(
@@ -1038,7 +977,7 @@ class _ResumePartState extends State<ResumePart> {
       },
       bloc: widget.cubit, // Provide the cubit
       builder: (context, state) {
-        return buildPage(context, state);
+        return Center(child: buildPage(context, state));
         //   return buildPage(context, state);
       },
     );

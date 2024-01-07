@@ -30,6 +30,7 @@ class ProfileItem with _$ProfileItem {
   String get name {
     return "$firstName $lastName";
   }
+
   factory ProfileItem.fromJson(Map<String, dynamic> json) => _$ProfileItemFromJson(json);
   ProfileItem._(); // Private constructor for freezed
 }

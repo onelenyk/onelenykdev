@@ -1,0 +1,88 @@
+{
+  "id": "d9TwID6xyEDXh5fvBQ1G",
+  "title": "Engineer",
+  "role": "Android Engineer",
+  "location": "Ukraine",
+  "firstName": "Nazar",
+  "lastName": "Lenyk",
+  "age": "25",
+  "description": "test",
+  "languages": [
+    "Ukrainian",
+    "English"
+  ],
+  "skills": [
+    "test"
+  ],
+  "experience": [
+    {
+      "name": "VanOnGo",
+      "id": "vanongo",
+      "role": "Android Engineer",
+      "startDate": 1680296400000,
+      "endDate": null,
+      "description": [
+        "1) Supported and maintained two high-load Android applications",
+        "2) Responsible for developing, maintaining features, and bug fixing",
+        "3) Worked extensively with Kotlin, Coroutines, StateFlow, Jetpack Compose, Koin, Decompose, UDF, MVI",
+        "4) Maintaining and developing features for efficient location tracking, for custom user experience (Live Activity analogue",
+        "5) 🏗 Focused on system design and efficient code implementation"
+      ]
+    },
+    {
+      "name": "alp.com",
+      "id": "alpcom",
+      "role": "Android Engineer",
+      "startDate": 1669845600000,
+      "endDate": 1680210000000,
+      "description": [
+        "1) Supported and maintained , multi-module Android applications",
+        "2) Focused on feature development, improvements, and issue resolution",
+        "3) Utilized Kotlin, Coroutine Flow, Jetpack Compose, MVI for app development",
+        "4) 🏗 Specialized in UI design and system architecture"
+      ]
+    },
+    {
+      "name": "Axles",
+      "id": "axles",
+      "role": "Android Engineer",
+      "startDate": 1593723600000,
+      "endDate": 1672437600000,
+      "description": [
+        "1) Creating apps from scratch, maintaining existing, refactoring",
+        "2) Managed projects from different domains, led, investigated, and releases",
+        "3) Involved into 6+ projects, I started 2 of them.",
+        "4) ⚙️ Configured CI/CD environments using various platforms",
+        "5) 🛠 Advanced skills in Kotlin, Coroutine, LiveData, Flow, Room, Retrofit 2, Dagger2, Koin, Camera 2, ExoPlayer; tackled redesigns and migrations"
+      ]
+    },
+    {
+      "name": "Trexoz",
+      "id": "trexoz",
+      "role": "Mobile Engineer",
+      "startDate": 1569877200000,
+      "endDate": 1595970000000,
+      "description": [
+        "1) Led dual app development projects",
+        "2) Tailored apps to specific client requirements",
+        "3) Enhanced UI and backend for apps",
+        "4) 🏗 Gained skills in app architecture with LiveData, MVVM, Kotlin, Data Binding",
+        "5) 📍 Implemented features with Google Maps, WebSockets"
+      ]
+    },
+    {
+      "name": "Infotechcentre",
+      "id": "infotechcentre",
+      "role": "Trainee Engineer",
+      "startDate": 1546293600000,
+      "endDate": 1572472800000,
+      "description": [
+        "1) Developed Android apps using Kotlin and Java",
+        "2) Created user-friendly UI for documents and data",
+        "3) Integrated apps with IoT, merging software and hardware",
+        "4) 🏗 Built a solid foundation in practical software engineering",
+        "5) 🛠 Used Kotlin, Java, Volley, AsyncTasks, MySQL for expertise"
+      ]
+    }
+  ]
+}

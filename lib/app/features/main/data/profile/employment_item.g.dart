@@ -11,8 +11,10 @@ _$ExperienceItemImpl _$$ExperienceItemImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       id: json['id'] as String,
       role: json['role'] as String,
-      startDate: const TimestampSerializer().fromJson(json['startDate']),
-      endDate: const TimestampSerializerNullable().fromJson(json['endDate']),
+      startDate:
+          const TimestampSerializer2().fromJson(json['startDate'] as int),
+      endDate:
+          const NullableTimestampSerializer().fromJson(json['endDate'] as int?),
       description: (json['description'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -24,7 +26,7 @@ Map<String, dynamic> _$$ExperienceItemImplToJson(
       'name': instance.name,
       'id': instance.id,
       'role': instance.role,
-      'startDate': const TimestampSerializer().toJson(instance.startDate),
-      'endDate': const TimestampSerializerNullable().toJson(instance.endDate),
+      'startDate': const TimestampSerializer2().toJson(instance.startDate),
+      'endDate': const NullableTimestampSerializer().toJson(instance.endDate),
       'description': instance.description,
     };
