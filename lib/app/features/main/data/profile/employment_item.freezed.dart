@@ -23,10 +23,10 @@ mixin _$ExperienceItem {
   String get name => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
-  @TimestampSerializer()
-  DateTime get startDate => throw _privateConstructorUsedError;
-  @TimestampSerializerNullable()
-  DateTime? get endDate => throw _privateConstructorUsedError;
+  @TimestampSerializer2()
+  Timestamp get startDate => throw _privateConstructorUsedError;
+  @NullableTimestampSerializer()
+  Timestamp? get endDate => throw _privateConstructorUsedError;
   List<String> get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,8 +45,8 @@ abstract class $ExperienceItemCopyWith<$Res> {
       {String name,
       String id,
       String role,
-      @TimestampSerializer() DateTime startDate,
-      @TimestampSerializerNullable() DateTime? endDate,
+      @TimestampSerializer2() Timestamp startDate,
+      @NullableTimestampSerializer() Timestamp? endDate,
       List<String> description});
 }
 
@@ -86,11 +86,11 @@ class _$ExperienceItemCopyWithImpl<$Res, $Val extends ExperienceItem>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as Timestamp,
       endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as Timestamp?,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -111,8 +111,8 @@ abstract class _$$ExperienceItemImplCopyWith<$Res>
       {String name,
       String id,
       String role,
-      @TimestampSerializer() DateTime startDate,
-      @TimestampSerializerNullable() DateTime? endDate,
+      @TimestampSerializer2() Timestamp startDate,
+      @NullableTimestampSerializer() Timestamp? endDate,
       List<String> description});
 }
 
@@ -150,11 +150,11 @@ class __$$ExperienceItemImplCopyWithImpl<$Res>
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as Timestamp,
       endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as Timestamp?,
       description: null == description
           ? _value._description
           : description // ignore: cast_nullable_to_non_nullable
@@ -170,8 +170,8 @@ class _$ExperienceItemImpl extends _ExperienceItem {
       {required this.name,
       required this.id,
       required this.role,
-      @TimestampSerializer() required this.startDate,
-      @TimestampSerializerNullable() required this.endDate,
+      @TimestampSerializer2() required this.startDate,
+      @NullableTimestampSerializer() required this.endDate,
       required final List<String> description})
       : _description = description,
         super._();
@@ -186,11 +186,11 @@ class _$ExperienceItemImpl extends _ExperienceItem {
   @override
   final String role;
   @override
-  @TimestampSerializer()
-  final DateTime startDate;
+  @TimestampSerializer2()
+  final Timestamp startDate;
   @override
-  @TimestampSerializerNullable()
-  final DateTime? endDate;
+  @NullableTimestampSerializer()
+  final Timestamp? endDate;
   final List<String> _description;
   @override
   List<String> get description {
@@ -244,8 +244,8 @@ abstract class _ExperienceItem extends ExperienceItem {
       {required final String name,
       required final String id,
       required final String role,
-      @TimestampSerializer() required final DateTime startDate,
-      @TimestampSerializerNullable() required final DateTime? endDate,
+      @TimestampSerializer2() required final Timestamp startDate,
+      @NullableTimestampSerializer() required final Timestamp? endDate,
       required final List<String> description}) = _$ExperienceItemImpl;
   _ExperienceItem._() : super._();
 
@@ -259,11 +259,11 @@ abstract class _ExperienceItem extends ExperienceItem {
   @override
   String get role;
   @override
-  @TimestampSerializer()
-  DateTime get startDate;
+  @TimestampSerializer2()
+  Timestamp get startDate;
   @override
-  @TimestampSerializerNullable()
-  DateTime? get endDate;
+  @NullableTimestampSerializer()
+  Timestamp? get endDate;
   @override
   List<String> get description;
   @override
