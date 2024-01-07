@@ -1,26 +1,28 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 import 'package:onelenykco/app/env/environment.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:timeago/timeago.dart';
-import 'package:url_launcher/url_launcher.dart';
+import "package:package_info_plus/package_info_plus.dart";
+import "package:timeago/timeago.dart";
+import "package:url_launcher/url_launcher.dart";
 
-import '../../../../common/info_block.dart';
-import '../../../../common/link_utils.dart';
-import 'package:http/http.dart';
+import "../../../../common/info_block.dart";
+import "../../../../common/link_utils.dart";
+import "package:http/http.dart";
 
-import '../../../github/commit_model.dart';
-import '../../../github/services/github_service.dart';
+import "../../../github/commit_model.dart";
+import "../../../github/services/github_service.dart";
 
 class SiteStoryPart extends StatefulWidget {
+  const SiteStoryPart({super.key});
+
   @override
   _SiteStoryPartState createState() => _SiteStoryPartState();
 }
 
 class _SiteStoryPartState extends State<SiteStoryPart> {
-  String appVersion = 'Unknown';
+  String appVersion = "Unknown";
 
   List<Commit> commits = [];
 
@@ -37,52 +39,49 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
       setState(() {
         this.commits = commits;
       });
-      print("Commits ${commits}");
+      print("Commits $commits");
     } catch (e) {
-      print('Error loading commits: $e');
+      print("Error loading commits: $e");
     }
   }
 
   Future<void> loadVersion() async {
     try {
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      String version = packageInfo.version;
-      String buildNumber = packageInfo.buildNumber;
+      final packageInfo = await PackageInfo.fromPlatform();
+      final version = packageInfo.version;
+      final buildNumber = packageInfo.buildNumber;
 
       setState(() {
         appVersion = "$version+$buildNumber";
       });
     } catch (e) {
-      print('Error loading version: $e');
+      print("Error loading version: $e");
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
+  Widget build(final BuildContext context) => Center(
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             InfoBlock(
                 width: 350,
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16),
                 child: Text(
                     style: GoogleFonts.robotoMono(
                         fontSize: 14,
                         color: Colors.white,
-                        fontWeight: FontWeight.normal),
-                    "the site story")),
-            SizedBox(
+                        fontWeight: FontWeight.normal,),
+                    "the site story",),),
+            const SizedBox(
               height: 8,
             ),
             InfoBlock(
               width: 350,
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
@@ -91,66 +90,61 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
                           style: GoogleFonts.robotoMono(
                               fontSize: 18,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.bold,),),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 500),
+                    constraints: const BoxConstraints(maxHeight: 500),
                     child: commits.isNotEmpty
                         ? SingleChildScrollView(
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
-                              children: commits.map((item) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                              children: commits.map((final item) => Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(item.commit.message,
                                         style: GoogleFonts.robotoMono(
                                             fontSize: 14,
                                             color: Colors.white,
-                                            fontWeight: FontWeight.normal)),
+                                            fontWeight: FontWeight.normal,),),
                                     Text(item.commit.committer.formatedDate,
                                         style: GoogleFonts.robotoMono(
                                             fontSize: 14,
                                             color: Colors.grey.shade800,
-                                            fontWeight: FontWeight.normal)),
-                                    SizedBox(
+                                            fontWeight: FontWeight.normal,),),
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                   ],
-                                );
-                              }).toList(),
+                                ),).toList(),
                             ),
                           )
-                        : Center(child: CircularProgressIndicator()),
-                  )
+                        : const Center(child: CircularProgressIndicator()),
+                  ),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             InfoBlock(
                 width: 350,
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16),
                 child: Text(
                     style: GoogleFonts.robotoMono(
                         fontSize: 14,
                         color: Colors.white,
-                        fontWeight: FontWeight.normal),
-                    "current version: $appVersion")),
-            SizedBox(
+                        fontWeight: FontWeight.normal,),
+                    "current version: $appVersion",),),
+            const SizedBox(
               height: 8,
             ),
           ],
         ),
       ),
     );
-  }
 }

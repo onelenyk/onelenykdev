@@ -1,39 +1,37 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:timeago/timeago.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:timeago/timeago.dart";
 
-part 'commit_model.freezed.dart';
-part 'commit_model.g.dart';
+part "commit_model.freezed.dart";
+part "commit_model.g.dart";
 
 @freezed
 class Commit with _$Commit {
   factory Commit({
-    required String sha,
-    required CommitData commit,
+    required final String sha,
+    required final CommitData commit,
   }) = _Commit;
 
-  factory Commit.fromJson(Map<String, dynamic> json) => _$CommitFromJson(json);
+  factory Commit.fromJson(final Map<String, dynamic> json) => _$CommitFromJson(json);
 }
 
 @freezed
 class CommitData with _$CommitData {
   factory CommitData({
-    required Committer committer,
-    required String message,
+    required final Committer committer,
+    required final String message,
   }) = _CommitData;
 
-  factory CommitData.fromJson(Map<String, dynamic> json) => _$CommitDataFromJson(json);
+  factory CommitData.fromJson(final Map<String, dynamic> json) => _$CommitDataFromJson(json);
 }
 
 @freezed
 class Committer with _$Committer {
   factory Committer({
-    required String date,
+    required final String date,
   }) = _Committer;
 
-  factory Committer.fromJson(Map<String, dynamic> json) => _$CommitterFromJson(json);
+  factory Committer.fromJson(final Map<String, dynamic> json) => _$CommitterFromJson(json);
   const Committer._();
 
-  String get formatedDate {
-    return format(DateTime.parse(date));
-  }
+  String get formatedDate => format(DateTime.parse(date));
 }

@@ -1,20 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import "package:flutter/cupertino.dart";
 
-import 'border_paint.dart';
+import "border_paint.dart";
 
 class AnimatedPointBorderContainer extends StatefulWidget {
+
+  const AnimatedPointBorderContainer({
+    required this.child, super.key,
+    this.borderWidth = 3.0,
+    this.borderRadius = 10.0,
+    this.animationDuration = const Duration(seconds: 10),
+  });
   final Widget child;
   final double borderWidth;
   final double borderRadius;
   final Duration animationDuration;
-
-  AnimatedPointBorderContainer({
-    Key? key,
-    required this.child,
-    this.borderWidth = 3.0,
-    this.borderRadius = 10.0,
-    this.animationDuration = const Duration(seconds: 10),
-  }) : super(key: key);
 
   @override
   _AnimatedPointBorderContainerState createState() =>
@@ -42,19 +41,15 @@ class _AnimatedPointBorderContainerState
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
+  Widget build(final BuildContext context) => AnimatedBuilder(
       animation: _controller,
-      builder: (context, child) {
-        return CustomPaint(
+      builder: (final context, final child) => CustomPaint(
           painter: BorderPainter(
-              _controller.value, widget.borderWidth, widget.borderRadius),
+              _controller.value, widget.borderWidth, widget.borderRadius,),
           child: Container(
             padding: EdgeInsets.all(widget.borderWidth + widget.borderRadius),
             child: widget.child,
           ),
-        );
-      },
+        ),
     );
-  }
 }

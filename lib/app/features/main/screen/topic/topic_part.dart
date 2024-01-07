@@ -1,28 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 
-import '../../../../common/info_block.dart';
-import '../../data/topic/topic_content.dart';
+import "../../../../common/info_block.dart";
+import "../../data/topic/topic_content.dart";
 
 class TopicPart extends StatelessWidget {
+
+  const TopicPart({required this.content, super.key});
   final TopicContent content;
 
-  TopicPart({super.key, required this.content});
-
-  Widget topicPostItem(String text, VoidCallback onTap) {
-    return Wrap(
+  Widget topicPostItem(final String text, final VoidCallback onTap) => Wrap(
       children: [
         Text(
           text,
           style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white,),
         ),
       ],
     );
-  }
 
-  Widget buildBody(BuildContext context) {
-    return Container(
+  Widget buildBody(final BuildContext context) => SizedBox(
       width: 400,
       child: Column(
         children: [
@@ -32,39 +29,33 @@ class TopicPart extends StatelessWidget {
                 Text(
                   content.title ?? "",
                   style: GoogleFonts.robotoMono(
-                      fontSize: 20, color: Colors.white),
-                )
+                      fontSize: 20, color: Colors.white,),
+                ),
               ],
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ListView.separated(
-            scrollDirection: Axis.vertical,
             itemCount: content.data.length,
             shrinkWrap: true,
-            itemBuilder: (context, index) {
-              var item = content.data[index];
+            itemBuilder: (final context, final index) {
+              final item = content.data[index];
               onTap() {
                 //  cubit.selectTopic(topic: item);
               }
               return InfoBlock(
-                  child: topicPostItem(item.text ?? "",onTap));
+                  child: topicPostItem(item.text ?? "",onTap),);
             },
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 8);
-            },
+            separatorBuilder: (final context, final index) => const SizedBox(height: 8),
           ),
         ],
       ),
     );
-  }
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
+  Widget build(final BuildContext context) => Center(
       child: SingleChildScrollView(
         child: buildBody(context),
       ),
     );
-  }
 }

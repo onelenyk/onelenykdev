@@ -1,25 +1,25 @@
-import 'dart:math';
-import 'dart:ui';
+import "dart:math";
+import "dart:ui";
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
 
 class BorderPainter extends CustomPainter {
+
+  BorderPainter(this.progress, this.borderWidth, this.borderRadius);
   final double progress;
   final double borderWidth;
   final double borderRadius;
 
-  BorderPainter(this.progress, this.borderWidth, this.borderRadius);
-
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(final Canvas canvas, final Size size) {
     final paint = Paint()
       ..color = Colors.grey
       ..strokeWidth = borderWidth
       ..style = PaintingStyle.stroke;
 
     final rect = Rect.fromLTWH(borderWidth / 2, borderWidth / 2,
-        size.width - borderWidth, size.height - borderWidth);
+        size.width - borderWidth, size.height - borderWidth,);
     final rrect = RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
     canvas.drawRRect(rrect, paint);
 
@@ -28,12 +28,12 @@ class BorderPainter extends CustomPainter {
       ..strokeWidth = borderWidth
       ..style = PaintingStyle.fill;
 
-    Offset point = _calculatePoint(progress, size, borderRadius, borderWidth);
+    final point = _calculatePoint(progress, size, borderRadius, borderWidth);
     canvas.drawCircle(point, borderWidth / 2, pointPaint);
   }
 
   Offset _calculatePoint(
-      double progress, Size size, double borderRadius, double borderWidth) {
+      final double progress, final Size size, final double borderRadius, final double borderWidth,) {
     final adjustedWidth = size.width - borderWidth;
     final adjustedHeight = size.height - borderWidth;
     final totalLength =
@@ -48,16 +48,16 @@ class BorderPainter extends CustomPainter {
     // Right upper corner
     else if (position < adjustedWidth + pi / 2 * borderRadius) {
       return Offset(
-          adjustedWidth - borderRadius + borderWidth / 2, borderWidth / 2) +
+          adjustedWidth - borderRadius + borderWidth / 2, borderWidth / 2,) +
           Offset(
               cos(pi / 2 -
                   (position - (adjustedWidth - borderRadius)) /
-                      borderRadius) *
+                      borderRadius,) *
                   borderRadius,
               sin(pi / 2 -
                   (position - (adjustedWidth - borderRadius)) /
-                      borderRadius) *
-                  borderRadius);
+                      borderRadius,) *
+                  borderRadius,);
     }
     // Right edge
     else if (position <
@@ -71,28 +71,28 @@ class BorderPainter extends CustomPainter {
               borderRadius +
               position -
               adjustedWidth -
-              pi / 2 * borderRadius);
+              pi / 2 * borderRadius,);
     }
     // Bottom right corner
     else if (position <
         adjustedWidth + adjustedHeight - borderRadius + pi * borderRadius) {
       return Offset(adjustedWidth - borderRadius + borderWidth / 2,
-          adjustedHeight - borderRadius + borderWidth / 2) +
+          adjustedHeight - borderRadius + borderWidth / 2,) +
           Offset(
               cos(position -
                   adjustedWidth -
                   adjustedHeight +
                   borderRadius -
-                  pi / 2 * borderRadius) /
+                  pi / 2 * borderRadius,) /
                   borderRadius *
                   borderRadius,
               sin(position -
                   adjustedWidth -
                   adjustedHeight +
                   borderRadius -
-                  pi / 2 * borderRadius) /
+                  pi / 2 * borderRadius,) /
                   borderRadius *
-                  borderRadius);
+                  borderRadius,);
     }
     // Bottom edge
     else if (position <
@@ -104,7 +104,7 @@ class BorderPainter extends CustomPainter {
           adjustedWidth -
               (position - adjustedWidth - adjustedHeight + pi * borderRadius) +
               borderWidth / 2,
-          size.height - borderWidth / 2);
+          size.height - borderWidth / 2,);
     }
     // Bottom left corner
     else if (position <
@@ -113,22 +113,22 @@ class BorderPainter extends CustomPainter {
             2 * borderRadius +
             1.5 * pi * borderRadius) {
       return Offset(borderWidth / 2 + borderRadius,
-          adjustedHeight - borderRadius + borderWidth / 2) +
+          adjustedHeight - borderRadius + borderWidth / 2,) +
           Offset(
               cos(1.5 * pi -
                   (position -
                       2 * adjustedWidth -
                       adjustedHeight +
-                      1 * borderRadius)) /
+                      1 * borderRadius),) /
                   borderRadius *
                   borderRadius,
               sin(1.5 * pi -
                   (position -
                       2 * adjustedWidth -
                       adjustedHeight +
-                      1 * borderRadius)) /
+                      1 * borderRadius),) /
                   borderRadius *
-                  borderRadius);
+                  borderRadius,);
     }
     // Left edge
     else if (position <
@@ -141,7 +141,7 @@ class BorderPainter extends CustomPainter {
                   2 * adjustedWidth -
                   2 * adjustedHeight +
                   1.5 * pi * borderRadius) +
-              borderWidth / 2);
+              borderWidth / 2,);
     }
     // Top left corner
     else {
@@ -153,7 +153,7 @@ class BorderPainter extends CustomPainter {
                           (adjustedWidth +
                               adjustedHeight -
                               2 * borderRadius) -
-                      1.5 * pi * borderRadius)) /
+                      1.5 * pi * borderRadius),) /
                   borderRadius *
                   borderRadius,
               sin(2 * pi -
@@ -162,14 +162,14 @@ class BorderPainter extends CustomPainter {
                           (adjustedWidth +
                               adjustedHeight -
                               2 * borderRadius) -
-                      1.5 * pi * borderRadius)) /
+                      1.5 * pi * borderRadius),) /
                   borderRadius *
-                  borderRadius);
+                  borderRadius,);
     }
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant final CustomPainter oldDelegate) {
     return true; // Always repaint for a continuous animation
   }
 }

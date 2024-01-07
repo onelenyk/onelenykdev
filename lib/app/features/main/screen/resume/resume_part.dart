@@ -1,37 +1,39 @@
-import 'dart:async';
-import 'dart:html' as html;
+import "dart:async";
+import "dart:html" as html;
 
-import 'dart:io';
-import 'dart:math';
+import "dart:io";
+import "dart:math";
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:file_saver/file_saver.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_to_pdf/flutter_to_pdf.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
-import 'package:glowy_borders/glowy_borders.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import "package:cloud_firestore/cloud_firestore.dart";
+import "package:dotted_border/dotted_border.dart";
+import "package:file_saver/file_saver.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_svg/svg.dart";
+import "package:flutter_to_pdf/flutter_to_pdf.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:get_it/get_it.dart";
+import "package:glowy_borders/glowy_borders.dart";
+import "package:google_fonts/google_fonts.dart";
+import "package:intl/intl.dart";
 import 'package:onelenykco/app/common/link_utils.dart';
 import 'package:onelenykco/app/common/responsive_util.dart';
 import 'package:onelenykco/app/features/main/data/resume/resume_cubit.dart';
 import 'package:onelenykco/app/features/main/data/resume/resume_state.dart';
-import 'package:screenshot/screenshot.dart';
+import "package:screenshot/screenshot.dart";
 
-import '../../../../common/hover_button.dart';
-import '../../../../common/info_block.dart';
-import '../../../../common/ui/expandable_widget.dart';
-import '../../data/profile/education_item.dart';
-import '../../data/profile/employment_item.dart';
-import 'pdf_generator.dart';
+import "../../../../common/hover_button.dart";
+import "../../../../common/info_block.dart";
+import "../../../../common/ui/expandable_widget.dart";
+import "../../data/profile/education_item.dart";
+import "../../data/profile/employment_item.dart";
+import "pdf_generator.dart";
 
 class ResumePart extends StatefulWidget {
+  ResumePart({super.key});
+
   final getIt = GetIt.instance;
   late final ResumeCubit cubit = getIt.get<ResumeCubit>();
 
@@ -41,19 +43,19 @@ class ResumePart extends StatefulWidget {
 
 class _ResumePartState extends State<ResumePart> {
   bool isFlipped = false;
-  double rotationAngle = 0.0;
+  double rotationAngle = 0;
 
   ScreenshotController screenshotController = ScreenshotController();
 
   //Avatar
-  double _calculateRotationAngle(double mouseX, double halfWidth) {
+  double _calculateRotationAngle(final double mouseX, final double halfWidth) {
     const maxRotation = pi / 8; // Maximum rotation angle (30 degrees)
-    double offset = mouseX - halfWidth;
+    final offset = mouseX - halfWidth;
     return min(
-        max(-maxRotation, offset / halfWidth * maxRotation), maxRotation);
+        max(-maxRotation, offset / halfWidth * maxRotation), maxRotation,);
   }
 
-  bool _shouldFlip(double mouseX, double halfWidth) {
+  bool _shouldFlip(final double mouseX, final double halfWidth) {
     // Decide whether to flip the image based on the mouse position
     return mouseX > halfWidth;
   }
@@ -65,7 +67,7 @@ class _ResumePartState extends State<ResumePart> {
     return random.nextInt(2) == 0;
   }
 
-  void _flipImage(PointerEvent details, BuildContext context) {
+  void _flipImage(final PointerEvent details, final BuildContext context) {
     if (ModalRoute.of(context)?.isCurrent != true) {
       return;
     }
@@ -80,47 +82,41 @@ class _ResumePartState extends State<ResumePart> {
   }
 
   //ui
-  Widget buildAnimatedAvatar() {
-    return InfoBlock(
-      padding: EdgeInsets.only(bottom: 16),
+  Widget buildAnimatedAvatar() => InfoBlock(
+      padding: const EdgeInsets.only(bottom: 16),
       color: Colors.deepOrange.shade300,
       width: double.infinity,
       child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
         //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Transform(
             alignment: Alignment.center,
             transform: Matrix4.identity()
               ..translate(
-                  0.0, 16.0) // Translates the widget by 22 pixels downwards
+                  0.0, 16,) // Translates the widget by 22 pixels downwards
               ..rotateY(isFlipped
                   ? pi
-                  : 0) // Flips the widget horizontally if isFlipped is true
+                  : 0,) // Flips the widget horizontally if isFlipped is true
               ..rotateZ(isFlipped ? rotationAngle : -rotationAngle),
             // Rotates the widget
-            child: Container(
+            child: SizedBox(
                 width: 114,
                 height: 104,
                 child: SvgPicture.asset(
-                  'assets/svgs/head.svg',
-                  fit: BoxFit.contain,
-                )),
+                  "assets/svgs/head.svg",
+                ),),
           ),
           Transform.flip(
             flipX: isFlipped,
             child: SvgPicture.asset(
-              'assets/svgs/body.svg',
+              "assets/svgs/body.svg",
               width: 133,
               height: 130,
-              fit: BoxFit.contain,
             ),
           ),
         ],
       ),
     );
-  }
 
 /*
 
@@ -165,18 +161,15 @@ class _ResumePartState extends State<ResumePart> {
   }
 */
 
-  Widget buildPartColumn(ResumeState state) {
-    return InfoBlock(
+  Widget buildPartColumn(final ResumeState state) => InfoBlock(
       child: Center(
         child: Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
+              borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: Colors.white24,
-                style: BorderStyle.solid,
-                width: 1.0,
-              )),
+              ),),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -187,7 +180,6 @@ class _ResumePartState extends State<ResumePart> {
                 height: 32,
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   buildPart2(state: state),
                 ],
@@ -202,10 +194,8 @@ class _ResumePartState extends State<ResumePart> {
         ),
       ),
     );
-  }
 
-  Widget buildPartRow(ResumeState state) {
-    return Column(
+  Widget buildPartRow(final ResumeState state) => Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -217,13 +207,12 @@ class _ResumePartState extends State<ResumePart> {
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF343540),
-                  borderRadius: BorderRadius.circular(0.0),
+                  borderRadius: BorderRadius.circular(0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildPart1(state),
@@ -232,7 +221,6 @@ class _ResumePartState extends State<ResumePart> {
                         height: 32,
                       ),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Flexible(child: buildPart2(state: state)),
                         ],
@@ -241,7 +229,7 @@ class _ResumePartState extends State<ResumePart> {
                         width: 32,
                         height: 32,
                       ),
-                      buildPart3(state: state)
+                      buildPart3(state: state),
                     ],
                   ),
                 ),
@@ -251,13 +239,11 @@ class _ResumePartState extends State<ResumePart> {
         ),
       ],
     );
-  }
 
-  Widget buildPart1(ResumeState state) {
-    var download = true;
+  Widget buildPart1(final ResumeState state) {
+    const download = true;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         InfoBlock(
           width: 350,
@@ -268,16 +254,15 @@ class _ResumePartState extends State<ResumePart> {
             bottom: 16,
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'onelenyk.dev',
+                "onelenyk.dev",
                 style: GoogleFonts.robotoMono(
                     fontSize: 16,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,),
               ),
             ],
           ),
@@ -289,14 +274,13 @@ class _ResumePartState extends State<ResumePart> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
-                mainAxisSize: MainAxisSize.max,
                 children: [
                   IntrinsicHeight(
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
+                          flex: 2,
                           child: Text(
                             state.profile.name,
                             maxLines: 1,
@@ -304,9 +288,8 @@ class _ResumePartState extends State<ResumePart> {
                             style: GoogleFonts.robotoMono(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,),
                           ),
-                          flex: 2,
                         ),
                         const VerticalDivider(
                           width: 2,
@@ -326,7 +309,7 @@ class _ResumePartState extends State<ResumePart> {
                             style: GoogleFonts.robotoMono(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,),
                           ),
                         ),
                       ],
@@ -334,7 +317,6 @@ class _ResumePartState extends State<ResumePart> {
                   ),
                   IntrinsicHeight(
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
@@ -343,7 +325,7 @@ class _ResumePartState extends State<ResumePart> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.robotoMono(
-                                fontSize: 14, color: Colors.white),
+                                fontSize: 14, color: Colors.white,),
                           ),
                         ),
                         const VerticalDivider(
@@ -360,7 +342,7 @@ class _ResumePartState extends State<ResumePart> {
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.end,
                             style: GoogleFonts.robotoMono(
-                                fontSize: 14, color: Colors.white),
+                                fontSize: 14, color: Colors.white,),
                           ),
                         ),
                       ],
@@ -368,7 +350,7 @@ class _ResumePartState extends State<ResumePart> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               const Divider(
@@ -379,7 +361,7 @@ class _ResumePartState extends State<ResumePart> {
               const SizedBox(
                 height: 16,
               ),
-              buildAnimatedAvatar()
+              buildAnimatedAvatar(),
             ],
           ),
         ),
@@ -389,30 +371,27 @@ class _ResumePartState extends State<ResumePart> {
             child: DottedBorder(
               color: Colors.white,
               borderType: BorderType.RRect,
-              radius: Radius.circular(12),
-              padding: EdgeInsets.all(8),
+              radius: const Radius.circular(12),
+              padding: const EdgeInsets.all(8),
               strokeWidth: 1.5,
-              dashPattern: [8, 6],
+              dashPattern: const [8, 6],
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text('Contact me on:',
+                      Text("Contact me on:",
                           style: GoogleFonts.robotoMono(
                               fontSize: 16,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(
+                              fontWeight: FontWeight.bold,),),
+                      const SizedBox(
                         width: 8,
                         height: 8,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           HoverButton(
                             onTap: () {
@@ -425,15 +404,15 @@ class _ResumePartState extends State<ResumePart> {
                                 height: 30,
                                 alignment: Alignment.center,
                                 child: SvgPicture.asset(
-                                  'assets/svgs/tg.svg',
+                                  "assets/svgs/tg.svg",
                                   fit: BoxFit.cover,
                                   colorFilter: const ColorFilter.mode(
-                                      Colors.white, BlendMode.srcIn),
+                                      Colors.white, BlendMode.srcIn,),
                                   width: 16,
                                   height: 16,
-                                )),
+                                ),),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                             height: 8,
                           ),
@@ -443,30 +422,30 @@ class _ResumePartState extends State<ResumePart> {
                             },
                             onDoubleTap: () {},
                             radius: 15,
-                            child: Container(
+                            child: const SizedBox(
                                 width: 30,
                                 height: 30,
                                 child: Icon(FontAwesomeIcons.linkedinIn,
-                                    color: Colors.white, size: 20)),
+                                    color: Colors.white, size: 20,),),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                             height: 8,
                           ),
                           HoverButton(
                             onTap: () {
                               openLink(
-                                  "https://www.instagram.com/makemegreatagain.pleasure/");
+                                  "https://www.instagram.com/makemegreatagain.pleasure/",);
                             },
                             onDoubleTap: () {},
                             radius: 15,
-                            child: Container(
+                            child: const SizedBox(
                                 width: 30,
                                 height: 30,
                                 child: Icon(FontAwesomeIcons.instagram,
-                                    color: Colors.white, size: 20)),
+                                    color: Colors.white, size: 20,),),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                             height: 8,
                           ),
@@ -476,54 +455,51 @@ class _ResumePartState extends State<ResumePart> {
                             },
                             onDoubleTap: () {},
                             radius: 15,
-                            child: Container(
+                            child: const SizedBox(
                                 width: 30,
                                 height: 30,
                                 child: Icon(FontAwesomeIcons.githubAlt,
-                                    color: Colors.white, size: 20)),
+                                    color: Colors.white, size: 20,),),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Container(
                             child: download
                                 ? HoverButton(
                                     onTap: () {
                                       downloadPdfFromAssets(
-                                          'assets/resume.pdf');
+                                          "assets/resume.pdf",);
                                     },
                                     onDoubleTap: () {},
                                     radius: 15,
-                                    child: Container(
+                                    child: const SizedBox(
                                         width: 30,
                                         height: 30,
                                         child: Icon(FontAwesomeIcons.download,
-                                            color: Colors.white, size: 16)),
+                                            color: Colors.white, size: 16,),),
                                   )
                                 : HoverButton(
-                                    onTap: () {
-                                      _doScreenshot();
-                                    },
+                                    onTap: _doScreenshot,
                                     onDoubleTap: () {},
                                     radius: 15,
-                                    child: Container(
+                                    child: const SizedBox(
                                         width: 30,
                                         height: 30,
                                         child: Icon(FontAwesomeIcons.camera,
-                                            color: Colors.white, size: 16)),
+                                            color: Colors.white, size: 16,),),
                                   ),
-                          )
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
-            )),
+            ),),
       ],
     );
   }
 
-  Widget buildPart2({required ResumeState state}) {
-    return InfoBlock(
+  Widget buildPart2({required final ResumeState state}) => InfoBlock(
       padding: const EdgeInsets.all(0),
       width: 350,
       child: ListView(
@@ -533,16 +509,16 @@ class _ResumePartState extends State<ResumePart> {
         shrinkWrap: true,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text('Work Experience',
+            padding: const EdgeInsets.all(16),
+            child: Text("Work Experience",
                 style: GoogleFonts.robotoMono(
                     fontSize: 18,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold)),
+                    fontWeight: FontWeight.bold,),),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: const Divider(
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Divider(
               height: 4,
               thickness: 1,
               color: Colors.white,
@@ -553,35 +529,32 @@ class _ResumePartState extends State<ResumePart> {
             children: [
               ListView.separated(
                 shrinkWrap: true,
-                scrollDirection: Axis.vertical,
                 itemCount: state.profile.experience.length ?? 0,
-                itemBuilder: (context, index) {
-                  var item = state.profile.experience[index];
+                itemBuilder: (final context, final index) {
+                  final item = state.profile.experience[index];
                   return buildPartWorkExperience(item: item);
                 },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(height: 8);
-                },
+                separatorBuilder: (final context, final index) => const SizedBox(height: 8),
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text('Education',
+            padding: const EdgeInsets.all(16),
+            child: Text("Education",
                 style: GoogleFonts.robotoMono(
                     fontSize: 18,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold)),
+                    fontWeight: FontWeight.bold,),),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: const Divider(
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Divider(
               height: 4,
               thickness: 1,
               color: Colors.white,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 4,
             height: 12,
           ),
@@ -591,14 +564,13 @@ class _ResumePartState extends State<ResumePart> {
             role: "Advanced Computer Integrated Technologies",
             startDate: Timestamp.fromMillisecondsSinceEpoch(1472755920000),
             endDate: Timestamp.fromMillisecondsSinceEpoch(1598986320000),
-          )),
+          ),),
         ],
       ),
     );
-  }
 
-  Widget buildPart3({required ResumeState state}) {
-    final List<String> items = [
+  Widget buildPart3({required final ResumeState state}) {
+    var items = <String>[
       "Kotlin",
       "Java",
       "Android SDK",
@@ -621,26 +593,24 @@ class _ResumePartState extends State<ResumePart> {
     ];
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         InfoBlock(
           width: 350,
           color: Colors.transparent,
           padding: const EdgeInsets.all(8),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Languages',
+                padding: const EdgeInsets.all(8),
+                child: Text("Languages",
                     style: GoogleFonts.robotoMono(
                         fontSize: 18,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold)),
+                        fontWeight: FontWeight.bold,),),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8),
                 child: Divider(
                   height: 4,
                   thickness: 1,
@@ -648,15 +618,15 @@ class _ResumePartState extends State<ResumePart> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: Wrap(
                   spacing: 8,
                   children: [
-                    buildPartLanguages(item: 'Ukrainian'),
-                    buildPartLanguages(item: 'English'),
+                    buildPartLanguages(item: "Ukrainian"),
+                    buildPartLanguages(item: "English"),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -666,107 +636,101 @@ class _ResumePartState extends State<ResumePart> {
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SelectableText.rich(
                       TextSpan(
                         style: GoogleFonts.robotoMono(
-                            fontSize: 16, color: Colors.white, height: 1.5),
+                            fontSize: 16, color: Colors.white, height: 1.5,),
                         children: <TextSpan>[
-                          TextSpan(text: """I'm Nazar, an """),
+                          const TextSpan(text: """I'm Nazar, an """),
                           TextSpan(
                               text: """Android software engineer """,
                               style: GoogleFonts.robotoMono(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 16,
                                   color: Colors.white,
-                                  height: 1.5)),
-                          TextSpan(
+                                  height: 1.5,),),
+                          const TextSpan(
                             text:
                                 """with over 4 years of experience in diverse sectors like video media production 🎥, utility management 🔧, transport logistics 🚚, and fintech 💰.""",
                           ),
-                          TextSpan(
+                          const TextSpan(
                               text:
-                                  """Skilled in setting up CI/CD systems ⚙️ and adept at identifying, researching, and resolving complex technical issues 🛠️, I ensure optimal functionality."""),
-                          TextSpan(
+                                  """Skilled in setting up CI/CD systems ⚙️ and adept at identifying, researching, and resolving complex technical issues 🛠️, I ensure optimal functionality.""",),
+                          const TextSpan(
                               text:
-                                  """I also excel in professional UI building, crafting precise and user-friendly interfaces 👨‍💻 that enhance the overall app experience 📱."""),
+                                  """I also excel in professional UI building, crafting precise and user-friendly interfaces 👨‍💻 that enhance the overall app experience 📱.""",),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-            )),
+            ),),
         Padding(
           padding: const EdgeInsets.only(top: 16),
           child: InfoBlock(
               width: 350,
               padding: const EdgeInsets.all(16),
-              color: Color(0xff2e2e2e),
+              color: const Color(0xff2e2e2e),
               // color: Colors.deepOrange,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Skills',
+                  Text("Skills",
                       style: GoogleFonts.robotoMono(
                           fontSize: 18,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold)),
-                  SizedBox(
+                          fontWeight: FontWeight.bold,),),
+                  const SizedBox(
                     height: 8,
                     width: 8,
                   ),
                   Wrap(
-                    direction: Axis.horizontal,
                     runSpacing: 5,
                     spacing: 5, // Horizontal direction for Wrap widget
                     children: items
-                        .map((item) => buildPartSkills(
-                            item: item, lastItem: item != items.last))
+                        .map((final item) => buildPartSkills(
+                            item: item, lastItem: item != items.last,),)
                         .toList(), // Creating a text widget for each item
-                  )
+                  ),
                 ],
-              )),
-        )
+              ),),
+        ),
       ],
     );
   }
 
-  void _doScreenshot() async {
+  Future<void> _doScreenshot() async {
     screenshotController
-        .capture(delay: Duration(milliseconds: 10))
-        .then((capturedImage) async {
+        .capture(delay: const Duration(milliseconds: 10))
+        .then((final capturedImage) async {
       PdfGenerator.savePdf(capturedImage!, "resume.pdf");
-      PdfGenerator.showCapturedWidget(context, capturedImage!);
-    }).catchError((onError) {
-      print(onError);
-    });
+      PdfGenerator.showCapturedWidget(context, capturedImage);
+    }).catchError(print);
   }
 
-  Widget buildPartWorkExperience({required ExperienceItem item}) {
+  Widget buildPartWorkExperience({required final ExperienceItem item}) {
     if (item.endDate == null) {
       return Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(2),
         child: AnimatedGradientBorder(
           borderSize: 2,
           glowSize: 1,
-          gradientColors: [
+          gradientColors: const [
             Colors.transparent,
             Colors.transparent,
-            Colors.white
+            Colors.white,
           ],
           animationTime: 4,
-          animationProgress: null,
           stretchAlongAxis: true,
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           child: InfoBlock(
             padding: EdgeInsets.zero,
             child: ExpandableWidget(
               child1: Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: const EdgeInsets.all(6),
                 child: Column(
                   children: [
                     Row(
@@ -775,8 +739,8 @@ class _ResumePartState extends State<ResumePart> {
                             style: GoogleFonts.robotoMono(
                                 fontSize: 18,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w900)),
-                        SizedBox(
+                                fontWeight: FontWeight.w900,),),
+                        const SizedBox(
                           width: 16,
                           height: 16,
                         ),
@@ -785,19 +749,19 @@ class _ResumePartState extends State<ResumePart> {
                             border: Border.all(
                               color: Colors.white,
                             ),
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           child: Text(item.role,
                               style: GoogleFonts.roboto(
                                   fontSize: 14,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.normal)),
+                                  fontWeight: FontWeight.normal,),),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 4,
                       height: 4,
                     ),
@@ -805,18 +769,18 @@ class _ResumePartState extends State<ResumePart> {
                       children: [
                         Text(
                             formatDatePeriod(item.startDate.toDate(),
-                                item.endDate?.toDate()),
+                                item.endDate?.toDate(),),
                             style: GoogleFonts.robotoMono(
                                 fontSize: 12,
                                 color: Colors.white,
-                                fontWeight: FontWeight.normal))
+                                fontWeight: FontWeight.normal,),),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
               child2: Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: const EdgeInsets.all(6),
                 child: buildPartExpandedWorkExperience(item: item),
               ),
             ),
@@ -825,10 +789,10 @@ class _ResumePartState extends State<ResumePart> {
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: ExpandableWidget(
           child1: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
               children: [
                 Row(
@@ -837,8 +801,8 @@ class _ResumePartState extends State<ResumePart> {
                         style: GoogleFonts.robotoMono(
                             fontSize: 18,
                             color: Colors.white,
-                            fontWeight: FontWeight.w900)),
-                    SizedBox(
+                            fontWeight: FontWeight.w900,),),
+                    const SizedBox(
                       width: 16,
                       height: 16,
                     ),
@@ -847,18 +811,18 @@ class _ResumePartState extends State<ResumePart> {
                         border: Border.all(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                       child: Text(item.role,
                           style: GoogleFonts.roboto(
                               fontSize: 14,
                               color: Colors.white,
-                              fontWeight: FontWeight.normal)),
+                              fontWeight: FontWeight.normal,),),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                   height: 4,
                 ),
@@ -866,18 +830,18 @@ class _ResumePartState extends State<ResumePart> {
                   children: [
                     Text(
                         formatDatePeriod(
-                            item.startDate.toDate(), item.endDate?.toDate()),
+                            item.startDate.toDate(), item.endDate?.toDate(),),
                         style: GoogleFonts.robotoMono(
                             fontSize: 12,
                             color: Colors.white,
-                            fontWeight: FontWeight.normal))
+                            fontWeight: FontWeight.normal,),),
                   ],
-                )
+                ),
               ],
             ),
           ),
           child2: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: buildPartExpandedWorkExperience(item: item),
           ),
         ),
@@ -885,19 +849,17 @@ class _ResumePartState extends State<ResumePart> {
     }
   }
 
-  Widget buildPartExpandedWorkExperience({required ExperienceItem item}) {
-    return Text(item.description.join(",\n"),
+  Widget buildPartExpandedWorkExperience({required final ExperienceItem item}) => Text(item.description.join(",\n"),
         //  maxLines: 6,
         style: GoogleFonts.roboto(
-            fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold));
-  }
+            fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold,),);
 
-  Widget buildPartEducationExperience({required EducationItem item}) {
+  Widget buildPartEducationExperience({required final EducationItem item}) {
     var date =
         "(${item.startDate.toDate().year}-${item.endDate?.toDate().year})";
     var titleAndDate = "${item.role} $date";
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Row(
@@ -906,10 +868,10 @@ class _ResumePartState extends State<ResumePart> {
                   style: GoogleFonts.robotoMono(
                       fontSize: 18,
                       color: Colors.white,
-                      fontWeight: FontWeight.w900)),
+                      fontWeight: FontWeight.w900,),),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: 4,
             height: 4,
           ),
@@ -919,42 +881,38 @@ class _ResumePartState extends State<ResumePart> {
                   style: GoogleFonts.robotoMono(
                       fontSize: 12,
                       color: Colors.white,
-                      fontWeight: FontWeight.normal))
+                      fontWeight: FontWeight.normal,),),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget buildPartLanguages({required String item}) {
-    return Container(
+  Widget buildPartLanguages({required final String item}) => Container(
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.white,
         ),
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       child: Text(item,
           style: GoogleFonts.roboto(
               fontSize: 14,
               color: Colors.white,
-              fontWeight: FontWeight.normal)),
+              fontWeight: FontWeight.normal,),),
     );
-  }
 
-  Widget buildPartSkills({required String item, required bool lastItem}) {
-    return Text("${item}${lastItem ? "," : "."}",
+  Widget buildPartSkills({required final String item, required final bool lastItem}) => Text("$item${lastItem ? "," : "."}",
         style: GoogleFonts.roboto(
-            fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold));
-  }
+            fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold,),);
 
-  Widget buildPage(BuildContext context, ResumeState state) {
+  Widget buildPage(final BuildContext context, final ResumeState state) {
     if (ResponsiveUtil.isDesktop(context)) {
       return SizedBox(
         child: MouseRegion(
-          onHover: (PointerEvent details) => _flipImage(details, context),
+          onHover: (final details) => _flipImage(details, context),
           child: buildPartRow(state),
         ),
       );
@@ -962,37 +920,35 @@ class _ResumePartState extends State<ResumePart> {
       return SizedBox(
         child: SingleChildScrollView(
           child: MouseRegion(
-              onHover: (PointerEvent details) => _flipImage(details, context),
-              child: buildPartColumn(state)),
+              onHover: (final details) => _flipImage(details, context),
+              child: buildPartColumn(state),),
         ),
       );
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<ResumeCubit, ResumeState>(
-      listener: (context, state) {
+  Widget build(final BuildContext context) => BlocConsumer<ResumeCubit, ResumeState>(
+      listener: (final context, final state) {
         return;
       },
       bloc: widget.cubit, // Provide the cubit
-      builder: (context, state) {
+      builder: (final context, final state) {
         return Center(child: buildPage(context, state));
         //   return buildPage(context, state);
       },
     );
-  }
 }
 
-String formatDatePeriod(DateTime startDate,
-    [DateTime? endDate, bool addSpentYears = true]) {
-  String formatDate(DateTime date) => '${_monthName(date.month)} ${date.year}';
-  String startFormatted = formatDate(startDate);
-  String endFormatted = endDate == null ? 'Present' : formatDate(endDate);
+String formatDatePeriod(final DateTime startDate,
+    [DateTime? endDate, final bool addSpentYears = true,]) {
+  String formatDate(final DateTime date) => "${_monthName(date.month)} ${date.year}";
+  final startFormatted = formatDate(startDate);
+  final endFormatted = endDate == null ? "Present" : formatDate(endDate);
 
   endDate = endDate ?? DateTime.now();
-  int yearsDifference = endDate.year - startDate.year;
-  int monthsDifference = endDate.month - startDate.month;
+  var yearsDifference = endDate.year - startDate.year;
+  var monthsDifference = endDate.month - startDate.month;
 
   // Adjust years and months difference
   if (endDate.month < startDate.month ||
@@ -1005,32 +961,32 @@ String formatDatePeriod(DateTime startDate,
     monthsDifference++;
   }
 
-  String years = '';
-  String months = '';
+  var years = "";
+  var months = "";
 
   // Append the number of years and months
   if (addSpentYears) {
-    years = yearsDifference > 0 ? '${yearsDifference}y,' : '';
-    months = monthsDifference > 0 ? '${monthsDifference}m' : '';
+    years = yearsDifference > 0 ? "${yearsDifference}y," : "";
+    months = monthsDifference > 0 ? "${monthsDifference}m" : "";
   }
 
   return "$startFormatted - $endFormatted ($years$months)";
 }
 
-String _monthName(int month) {
+String _monthName(final int month) {
   const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   return months[month - 1];
 }

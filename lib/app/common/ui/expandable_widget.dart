@@ -1,16 +1,15 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
 
-import '../hover_button.dart';
+import "../hover_button.dart";
 
 class ExpandableWidget extends StatefulWidget {
+
+  const ExpandableWidget({required this.child1, required this.child2, super.key});
   final Widget child1;
   final Widget child2;
-
-  const ExpandableWidget({Key? key, required this.child1, required this.child2})
-      : super(key: key);
 
   @override
   _ExpandableWidgetState createState() => _ExpandableWidgetState();
@@ -34,7 +33,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
     );
 
     var endValue = _isHovered ? 0.2 : 1.0;
-    _sizeAnimation = Tween<double>(begin: 0.0, end: endValue)
+    _sizeAnimation = Tween<double>(begin: 0, end: endValue)
         .animate(_controller);
 
   }
@@ -58,14 +57,14 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
 
   Timer? _debounce;
 
-  void toggleHover(bool isHovered) {
+  void toggleHover(final bool isHovered) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(Duration(milliseconds: _isHovered ? 500 : 1000), () {
       _toggleHover(isHovered);
     });
   }
 
-  void _toggleHover(bool isHovered) {
+  void _toggleHover(final bool isHovered) {
     setState(() {
       _isHovered = isHovered;
 
@@ -87,14 +86,11 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return HoverButton(
+  Widget build(final BuildContext context) => HoverButton(
       color: _isHovered ? Colors.grey : Colors.transparent,
-      onTap: () {
-        _toggleExpand();
-      },
+      onTap: _toggleExpand,
       onDoubleTap: () {},
-      onHover: (bool isHovered) {
+      onHover: (final isHovered) {
         toggleHover(isHovered);
       },
       child: Column(
@@ -107,5 +103,4 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
         ],
       ),
     );
-  }
 }

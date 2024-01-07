@@ -1,30 +1,29 @@
-import 'dart:async';
-import 'dart:convert';
+import "dart:async";
+import "dart:convert";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
-import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
+import "package:flutter/material.dart";
+import "package:flutter_quill/flutter_quill.dart";
+import "package:get_it/get_it.dart";
+import "package:google_fonts/google_fonts.dart";
 
-import '../../../../common/hover_button.dart';
-import '../../../../common/info_block.dart';
-import '../../data/admin/admin_cubit.dart';
-import '../../data/topic/topic_content.dart';
-import '../../data/topic/topic_item.dart';
-import 'admin_part.dart';
+import "../../../../common/hover_button.dart";
+import 'package:onelenykco/app/common/info_block.dart';
+import "../../data/admin/admin_cubit.dart";
+import "../../data/topic/topic_content.dart";
+import "../../data/topic/topic_item.dart";
+import "admin_part.dart";
 
 // Define the StatefulWidget
 class SelectedTopicEditWidget extends StatefulWidget {
+
+  SelectedTopicEditWidget(
+      {required this.selectedTopic, required this.onSaveClicked, super.key,});
   final TopicItem selectedTopic;
   final getIt = GetIt.instance;
 
   late final AdminCubit cubit = getIt.get<AdminCubit>();
 
   final Function(TopicItem) onSaveClicked;
-
-  SelectedTopicEditWidget(
-      {Key? key, required this.selectedTopic, required this.onSaveClicked})
-      : super(key: key);
 
   @override
   _SelectedTopicEditWidgetState createState() =>
@@ -51,9 +50,9 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   void updateControllers() {
-    topic?.content?.data.forEach((item) {
+    topic?.content?.data.forEach((final item) {
       controllers.putIfAbsent(
-          item.date, () => TextEditingController(text: item.text));
+          item.date, () => TextEditingController(text: item.text),);
     });
 
     // topic?.content?.data.forEach((item) {
@@ -77,17 +76,13 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
     }
   }
 
-  void onTextChange(String value, int date) {
+  void onTextChange(final String value, final int date) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      saveTopicDataItems();
-    });
+    _debounce = Timer(const Duration(milliseconds: 500), saveTopicDataItems);
   }
 
   void saveTopicDataItems() {
-    var updatedData = topic?.content?.data.map((item) {
-      return item.copyWith(text: controllers[item.date]?.text ?? item.text);
-    }).toList();
+    var updatedData = topic?.content?.data.map((final item) => item.copyWith(text: controllers[item.date]?.text ?? item.text)).toList();
 
     if (updatedData != null) {
       print("$updatedData saved");
@@ -99,14 +94,14 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
     }
   }
 
-  void updateTopicDate(String value) {
+  void updateTopicDate(final String value) {
     var parsed = DateTime.parse(value);
     setState(() {
       topic = topic?.copyWith(date: parsed);
     });
   }
 
-  void updateTopicTitle(String value) {
+  void updateTopicTitle(final String value) {
     setState(() {
       topic = topic?.copyWith(content: topic?.content?.copyWith(title: value));
     });
@@ -119,13 +114,13 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
           content: topic?.content?.copyWith(
         data: List.from(topic?.content?.data ?? [])
           ..add(TopicDataItem(date: currentTime, text: "")),
-      ));
+      ),);
       updateControllers();
     });
   }
 
-  void removeTopicDataItem(TopicDataItem itemToRemove) {
-    if ((topic?.content?.data?.length ?? 0) > 1) {
+  void removeTopicDataItem(final TopicDataItem itemToRemove) {
+    if ((topic?.content?.data.length ?? 0) > 1) {
       setState(() {
         topic = topic?.copyWith(
           content: topic?.content?.copyWith(
@@ -137,8 +132,7 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(final BuildContext context) => SizedBox(
       width: 600,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -146,8 +140,8 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Wrap(
-            spacing: 4.0,
-            runSpacing: 4.0,
+            spacing: 4,
+            runSpacing: 4,
             children: [topicTitleItem(), topicDateItem()],
           ),
           const SizedBox(
@@ -157,50 +151,46 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
             width: 600,
             child: ListView.separated(
               shrinkWrap: true,
-              scrollDirection: Axis.vertical,
               itemCount: topic?.content?.data.length ?? 0,
-              itemBuilder: (context, index) {
-                var item = topic?.content?.data[index];
-                if (item == null) return Text("null");
-                var removable = topic?.content?.data.length != 1 && index != 1;
+              itemBuilder: (final context, final index) {
+                final item = topic?.content?.data[index];
+                if (item == null) return const Text("null");
+                final removable = topic?.content?.data.length != 1 && index != 1;
                 return topicPostItem(item, removable);
               },
-              separatorBuilder: (context, index) {
-                return const SizedBox(height: 8);
-              },
+              separatorBuilder: (final context, final index) => const SizedBox(height: 8),
             ),
           ),
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: const EdgeInsets.only(top: 8),
                 child: HoverButton(
                   onTap: () {
                     widget.onSaveClicked(topic!);
                   },
                   onDoubleTap: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       "save",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.yellow.shade200,
-                          fontSize: 16),
+                          fontSize: 16,),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
-  }
 
-  Widget topicPostItemRich(TopicDataItem item, bool removable) {
+  Widget topicPostItemRich(final TopicDataItem item, final bool removable) {
     var controller = controllersQuill[item.date];
-    if (controller == null) return Text("Null controller");
+    if (controller == null) return const Text("Null controller");
 
     return InfoBlock(
       color: Colors.yellow.shade200.withAlpha(30),
@@ -227,8 +217,8 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
             child: QuillProvider(
               configurations: QuillConfigurations(
                 controller: controller,
-                sharedConfigurations: QuillSharedConfigurations(
-                  locale: Locale('ua'),
+                sharedConfigurations: const QuillSharedConfigurations(
+                  locale: Locale("ua"),
                 ),
               ),
               child: Column(
@@ -236,22 +226,19 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
                   const QuillToolbar(),
                   Expanded(
                     child: QuillEditor.basic(
-                      configurations: QuillEditorConfigurations(
-                        readOnly: false,
-                      ),
+                      
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 4,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 8),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HoverButton(
@@ -260,32 +247,30 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
                   },
                   onDoubleTap: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       "remove",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent.shade200,
-                          fontSize: 16),
+                          fontSize: 16,),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 HoverButton(
-                  onTap: () {
-                    addTopicDataItem();
-                  },
+                  onTap: addTopicDataItem,
                   onDoubleTap: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       "add new line",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.yellow.shade200,
-                          fontSize: 16),
+                          fontSize: 16,),
                     ),
                   ),
                 ),
@@ -297,9 +282,9 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
     );
   }
 
-  Widget topicPostItem(TopicDataItem item, bool removable) {
+  Widget topicPostItem(final TopicDataItem item, final bool removable) {
     var controller = controllers[item.date];
-    if (controller == null) return Text("Null controller");
+    if (controller == null) return const Text("Null controller");
 
     return InfoBlock(
       color: Colors.yellow.shade200.withAlpha(30),
@@ -317,20 +302,19 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
                     GoogleFonts.robotoMono(fontSize: 12, color: Colors.white),
               ),
               controller: controller,
-              onChanged: (value) => onTextChange(value, item.date),
+              onChanged: (final value) => onTextChange(value, item.date),
               style: GoogleFonts.robotoMono(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green),
+                  color: Colors.green,),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 4,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 8),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HoverButton(
@@ -339,32 +323,30 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
                   },
                   onDoubleTap: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       "remove",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent.shade200,
-                          fontSize: 16),
+                          fontSize: 16,),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 HoverButton(
-                  onTap: () {
-                    addTopicDataItem();
-                  },
+                  onTap: addTopicDataItem,
                   onDoubleTap: () {},
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       "add new line",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.yellow.shade200,
-                          fontSize: 16),
+                          fontSize: 16,),
                     ),
                   ),
                 ),
@@ -387,7 +369,6 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Wrap(
-                direction: Axis.horizontal,
                 alignment: WrapAlignment.center,
                 children: [
                   IntrinsicWidth(
@@ -396,19 +377,19 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
                         decoration: InputDecoration(
                           labelText: "title",
                           labelStyle: GoogleFonts.robotoMono(
-                              fontSize: 12, color: Colors.white),
+                              fontSize: 12, color: Colors.white,),
                         ),
                         controller: controller,
-                        onChanged: (value) => updateTopicTitle(value),
+                        onChanged: updateTopicTitle,
                         style: GoogleFonts.robotoMono(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.green),
+                            color: Colors.green,),
                       ),
                     ),
-                  )
-                ])
-          ]),
+                  ),
+                ],),
+          ],),
     );
   }
 
@@ -423,7 +404,6 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Wrap(
-                direction: Axis.horizontal,
                 alignment: WrapAlignment.center,
                 children: [
                   IntrinsicWidth(
@@ -432,27 +412,31 @@ class _SelectedTopicEditWidgetState extends State<SelectedTopicEditWidget> {
                         decoration: InputDecoration(
                           labelText: "date",
                           labelStyle: GoogleFonts.robotoMono(
-                              fontSize: 12, color: Colors.white),
+                              fontSize: 12, color: Colors.white,),
                         ),
                         controller: controller,
-                        onChanged: (value) => updateTopicDate(value),
+                        onChanged: updateTopicDate,
                         style: GoogleFonts.robotoMono(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.green),
+                            color: Colors.green,),
                       ),
                     ),
-                  )
-                ])
-          ]),
+                  ),
+                ],),
+          ],),
     );
   }
 
   @override
   void dispose() {
     // Dispose controllers when the widget is disposed
-    controllers.values.forEach((controller) => controller.dispose());
-    controllersQuill.values.forEach((controller) => controller.dispose());
+    for (final controller in controllers.values) {
+      controller.dispose();
+    }
+    for (final controller in controllersQuill.values) {
+      controller.dispose();
+    }
     super.dispose();
   }
 }

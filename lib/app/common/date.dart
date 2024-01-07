@@ -1,8 +1,8 @@
 class DateUtil {
-  DateTime date;
-  DateTime now = DateTime.now();
 
   DateUtil(this.date);
+  DateTime date;
+  DateTime now = DateTime.now();
 
   List<String> weekDays = [
     "Sunday",
@@ -14,7 +14,7 @@ class DateUtil {
     "Saturday",
   ];
 
-  String getTime([bool showWeek = true]) {
+  String getTime([final bool showWeek = true]) {
     if (showWeek && date.isBefore(DateTime(now.year, now.month, now.day))) {
       return getWeek();
     }
@@ -22,7 +22,5 @@ class DateUtil {
     return "${date.hour < 10 ? '0' : ''}${date.hour}:${date.minute < 10 ? '0' : ''}${date.minute}";
   }
 
-  String getWeek() {
-    return weekDays[date.weekday].toString().substring(0, 3);
-  }
+  String getWeek() => weekDays[date.weekday].substring(0, 3);
 }

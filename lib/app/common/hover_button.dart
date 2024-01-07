@@ -1,6 +1,13 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class HoverButton extends StatefulWidget {
+
+  const HoverButton({
+    required this.child, required this.onTap, required this.onDoubleTap, super.key,
+    this.hoverColor = Colors.grey,
+    this.color = Colors.black,
+    this.radius = 12,
+    this.onHover,});
   final Widget child;
 
   final Color hoverColor;
@@ -10,16 +17,6 @@ class HoverButton extends StatefulWidget {
   final Function? onHover;
   final VoidCallback onDoubleTap;
 
-  const HoverButton({
-    Key? key,
-    required this.child,
-    required this.onTap,
-    required this.onDoubleTap,
-    this.hoverColor = Colors.grey,
-    this.color = Colors.black,
-    this.radius = 12,
-    this.onHover}) : super(key: key);
-
   @override
   _HoverButtonState createState() => _HoverButtonState();
 }
@@ -28,15 +25,14 @@ class _HoverButtonState extends State<HoverButton> {
   bool _isHovering = false;
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
+  Widget build(final BuildContext context) => AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: _isHovering ? widget.hoverColor : widget.color,
         borderRadius: BorderRadius.circular(widget.radius),
       ),
       child: InkWell(
-        onHover: (value) {
+        onHover: (final value) {
           if(widget.onHover != null){
             widget.onHover!(value);
           }
@@ -50,5 +46,4 @@ class _HoverButtonState extends State<HoverButton> {
         child: widget.child,
       ),
     );
-  }
 }

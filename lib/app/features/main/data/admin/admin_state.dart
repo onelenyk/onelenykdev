@@ -1,13 +1,12 @@
-import '../topic/topic_item.dart';
+import "../topic/topic_item.dart";
 
 class AdminState {
+
+  AdminState({required this.topics, this.selectedTopic});
   final List<TopicItem> topics;
   final TopicItem? selectedTopic;
 
-  AdminState({required this.topics, this.selectedTopic});
-
-  List<TopicItem> get sortedTopics {
-    return List.from(topics)..sort((a, b) {
+  List<TopicItem> get sortedTopics => List.from(topics)..sort((final a, final b) {
       // Handling null dates
       if (a.date == null || b.date == null) {
         return 0;
@@ -15,15 +14,12 @@ class AdminState {
         return a.date!.compareTo(b.date!);
       }
     });
-  }
 
   AdminState copyWith({
-    List<TopicItem>? topics,
-    TopicItem? selectedTopic,
-  }) {
-    return AdminState(
+    final List<TopicItem>? topics,
+    final TopicItem? selectedTopic,
+  }) => AdminState(
       topics: topics ?? this.topics,
       selectedTopic: selectedTopic ?? this.selectedTopic,
     );
-  }
 }

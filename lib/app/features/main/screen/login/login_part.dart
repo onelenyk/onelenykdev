@@ -1,24 +1,24 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:get_it/get_it.dart";
+import "package:google_fonts/google_fonts.dart";
 import 'package:onelenykco/app/features/main/data/state/main_cubit.dart';
 
-import 'dart:math' as math;
-import '../../../../common/hover_button.dart';
-import '../../../../data/firebase/auth_cubit.dart';
-import '../../../../data/firebase/authentication_state.dart';
+import "dart:math" as math;
+import "../../../../common/hover_button.dart";
+import "../../../../data/firebase/auth_cubit.dart";
+import "../../../../data/firebase/authentication_state.dart";
 
 class LoginPart extends StatelessWidget {
-  final getIt = GetIt.instance;
 
   LoginPart({super.key});
+  final getIt = GetIt.instance;
 
-  String extractTwoSymbols(String input) {
-    var words = input.split(' ');
+  String extractTwoSymbols(final String input) {
+    var words = input.split(" ");
 
     if (words.length >= 2) {
       return words[0][0] + words[1][0];
@@ -27,39 +27,37 @@ class LoginPart extends StatelessWidget {
           ? input[0] + input[input.length - 1]
           : input[0] * 2;
     } else {
-      return '';
+      return "";
     }
   }
 
-  Future<void> showLoginDialog(BuildContext context) async {
+  Future<void> showLoginDialog(final BuildContext context) async {
     final authCubit = getIt<AuthenticationCubit>();
 
-    String email = '';
-    String password = '';
+    var email = "";
+    var password = "";
 
     return showDialog<void>(
       context: context,
-      barrierDismissible: true, // user must tap button to close the dialog
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text('Login'),
+      builder: (final dialogContext) => AlertDialog(
+          title: const Text("Login"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 TextField(
-                  onChanged: (value) {
+                  onChanged: (final value) {
                     email = value;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Email",
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 TextField(
-                  onChanged: (value) {
+                  onChanged: (final value) {
                     password = value;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Password",
                   ),
                   obscureText: true,
@@ -69,23 +67,22 @@ class LoginPart extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text("Cancel"),
               onPressed: () {
                 Navigator.of(dialogContext).pop(); // Dismiss the dialog
               },
             ),
             TextButton(
-              child: Text('Login'),
+              child: const Text("Login"),
               onPressed: () {
                 // Implement your login logic here
                 authCubit.signInWithEmailAndPassword(email, password);
-                print('Email: $email, Password: $password');
+                print("Email: $email, Password: $password");
                 Navigator.of(dialogContext).pop(); // Dismiss the dialog
               },
             ),
           ],
-        );
-      },
+        ),
     );
   }
 
@@ -94,25 +91,22 @@ class LoginPart extends StatelessWidget {
     cubit.selectTopic(topic: adminItem);
   }*/
 
-  Future<void> showLogoutDialog(BuildContext context, User user) async {
-    return showDialog<void>(
+  Future<void> showLogoutDialog(final BuildContext context, final User user) async => showDialog<void>(
       context: context,
-      barrierDismissible: true, // user must tap button to close the dialog
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text('Logged In'),
+      builder: (final dialogContext) => AlertDialog(
+          title: const Text("Logged In"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('You are already logged in.'),
-                Text('Email: ${user.email}'),
+                const Text("You are already logged in."),
+                Text("Email: ${user.email}"),
                 Text('Name: ${user.displayName ?? 'N/A'}'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Log Out'),
+              child: const Text("Log Out"),
               onPressed: () {
                 // Implement your log out logic here
                 final authCubit = getIt<AuthenticationCubit>();
@@ -121,7 +115,7 @@ class LoginPart extends StatelessWidget {
               },
             ),
             TextButton(
-              child: Text('Admin pannel'),
+              child: const Text("Admin pannel"),
               onPressed: () {
                 // Implement your log out logic here
                 Navigator.of(dialogContext).pop(); // Dismiss the dialog
@@ -129,18 +123,16 @@ class LoginPart extends StatelessWidget {
               },
             ),
           ],
-        );
-      },
+        ),
     );
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final authCubit = getIt<AuthenticationCubit>();
 
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       bloc: authCubit,
-      listener: (context, state) {
+      listener: (final context, final state) {
         if (state is AuthenticationSuccess) {
           print("AuthenticationSuccess ${state.user}");
           // Navigate to home screen
@@ -148,20 +140,20 @@ class LoginPart extends StatelessWidget {
           print("AuthenticationFailure ${state.error}");
         }
       },
-      builder: (context, state) {
+      builder: (final context, final state) {
         if (state is AuthenticationLoading) {
           return HoverButton(
             onTap: () {},
             onDoubleTap: () {},
             hoverColor: Colors.yellow.shade200,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
+            child: const Padding(
+              padding: EdgeInsets.all(4),
               child: SizedBox(
                 width: 20,
                 height: 20,
                 child: Center(
                   child: CircularProgressIndicator(
-                    strokeWidth: 2.0,
+                    strokeWidth: 2,
 
                     color: Colors.white,
                   ),
@@ -176,9 +168,9 @@ class LoginPart extends StatelessWidget {
             },
             onDoubleTap: () {},
             hoverColor: Colors.grey.shade400,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Icon(
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(
                 FontAwesomeIcons.arrowRightToBracket,
                 color: Colors.white,
                 size: 20,
@@ -193,9 +185,9 @@ class LoginPart extends StatelessWidget {
             onDoubleTap: () {},
             hoverColor: Colors.yellow.shade200,
 
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Icon(
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(
                 Icons.cancel,
                 color: Colors.white,
                 size: 20,
@@ -204,7 +196,7 @@ class LoginPart extends StatelessWidget {
           );
         } else if (state is AuthenticationSuccess) {
           var title = extractTwoSymbols(
-                  state.user?.displayName ?? state.user?.email ?? "")
+                  state.user?.displayName ?? state.user?.email ?? "",)
               .toUpperCase();
 
           final random = math.Random();
@@ -220,7 +212,7 @@ class LoginPart extends StatelessWidget {
                 onDoubleTap: () {},
                 hoverColor: Colors.yellow.shade200,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Text(
                     title,
                     style: TextStyle(
@@ -236,14 +228,14 @@ class LoginPart extends StatelessWidget {
             onTap: () {},
             onDoubleTap: () {},
             hoverColor: Colors.black,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
+            child: const Padding(
+              padding: EdgeInsets.all(4),
               child: SizedBox(
                 width: 20,
                 height: 20,
                 child: Center(
                   child: CircularProgressIndicator(
-                    strokeWidth: 2.0,
+                    strokeWidth: 2,
                     color: Colors.white,
                   ),
                 ),

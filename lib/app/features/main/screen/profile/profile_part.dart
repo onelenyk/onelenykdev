@@ -1,31 +1,30 @@
-import 'dart:math';
+import "dart:math";
 
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
+import "package:dotted_border/dotted_border.dart";
+import "package:flutter/material.dart";
+import "package:flutter_markdown/flutter_markdown.dart";
+import "package:flutter_svg/svg.dart";
+import "package:get_it/get_it.dart";
+import "package:google_fonts/google_fonts.dart";
+import "package:lottie/lottie.dart";
 
-import 'dart:math' as math;
+import "dart:math" as math;
 
 import 'package:onelenykco/app/common/text_cloud.dart';
-import 'package:url_launcher/url_launcher.dart';
+import "package:url_launcher/url_launcher.dart";
 
-import 'dart:html' as html;
+import "dart:html" as html;
 
-import '../../../../common/hover_button.dart';
-import '../../../../common/info_block.dart';
-import '../../data/state/main_cubit.dart';
+import "../../../../common/hover_button.dart";
+import "../../../../common/info_block.dart";
+import "../../data/state/main_cubit.dart";
 
 class ProfilePart extends StatelessWidget {
-  final getIt = GetIt.instance;
 
   ProfilePart({super.key});
+  final getIt = GetIt.instance;
 
-  Widget buildGreeting() {
-    return Column(
+  Widget buildGreeting() => Column(
       children: [
         InfoBlock(
             child: SizedBox(
@@ -33,12 +32,12 @@ class ProfilePart extends StatelessWidget {
           child: SelectableText.rich(
              TextSpan(
               style: GoogleFonts.robotoMono(fontSize: 16, color: Colors.white),
-              children: <TextSpan>[
+              children: const <TextSpan>[
                 TextSpan(text: "👋 Hi there!"),
               ],
             ),
           ),
-        )),
+        ),),
         const SizedBox(
           height: 8,
         ),
@@ -64,7 +63,7 @@ class ProfilePart extends StatelessWidget {
               ],
             ),
           ),
-        )),
+        ),),
         const SizedBox(
           height: 8,
         ),
@@ -79,39 +78,33 @@ class ProfilePart extends StatelessWidget {
               ],
             ),
           ),
-        )),
+        ),),
       ],
     );
-  }
 
-  Widget buildWordMap() {
-    return InfoBlock(
+  Widget buildWordMap() => InfoBlock(
       child: Container(
           width: 350,
           height: 300,
           decoration: BoxDecoration(
             color: Colors.black,
-            borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-            border: Border.all(width: 0.0, color: Colors.grey.shade900),
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            border: Border.all(width: 0, color: Colors.grey.shade900),
           ),
-          child: TextCloud()),
+          child: const TextCloud(),),
     );
-  }
 
-  Widget buildPart1() {
-    return Center(
+  Widget buildPart1() => Center(
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           children: [
             buildGreeting(),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
           //  buildWordMap(),
-            SizedBox(
+            const SizedBox(
               width: 16,
               height: 16,
             ),
@@ -121,7 +114,7 @@ class ProfilePart extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[900],
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: HoverButton(
                     onTap: () {
@@ -137,25 +130,25 @@ class ProfilePart extends StatelessWidget {
                         //   height: 36,
                         // ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8),
                           child: Text(
                             "telegram",
                             style: GoogleFonts.robotoMono(
-                                fontSize: 18, color: Colors.white),
+                                fontSize: 18, color: Colors.white,),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                   height: 16,
                 ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[900],
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: HoverButton(
                     onTap: () {
@@ -171,11 +164,11 @@ class ProfilePart extends StatelessWidget {
                         //   height: 36,
                         // ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8),
                           child: Text(
                             "linkedin",
                             style: GoogleFonts.robotoMono(
-                                fontSize: 18, color: Colors.white),
+                                fontSize: 18, color: Colors.white,),
                           ),
                         ),
                       ],
@@ -188,7 +181,6 @@ class ProfilePart extends StatelessWidget {
         ),
       ),
     );
-  }
 
   bool randomBoolean() {
     var random = Random();
@@ -197,15 +189,15 @@ class ProfilePart extends StatelessWidget {
     return random.nextInt(2) == 0;
   }
 
-  void openLink(String url) {
-    html.window.open(url, '_blank');
+  void openLink(final String url) {
+    html.window.open(url, "_blank");
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       height: screenSize.height,
       width: screenSize.width,
       child: buildPart1(),

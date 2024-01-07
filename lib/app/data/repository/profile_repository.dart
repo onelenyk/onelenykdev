@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get_it/get_it.dart';
+import "package:cloud_firestore/cloud_firestore.dart";
+import "package:get_it/get_it.dart";
 import 'package:onelenykco/app/data/services/firestore_service.dart';
 import 'package:onelenykco/app/features/main/data/profile/profile_item.dart';
 
-import '../../features/main/data/profile/employment_item.dart';
+import "../../features/main/data/profile/employment_item.dart";
 
 /*
 class ProfileRepository {

@@ -1,13 +1,13 @@
-import 'dart:math';
+import "dart:math";
 
-import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
+import "package:auto_route/annotations.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:get_it/get_it.dart";
+import "package:google_fonts/google_fonts.dart";
 import 'package:onelenykco/app/common/info_block.dart';
 import 'package:onelenykco/app/features/main/data/state/main_cubit.dart';
 import 'package:onelenykco/app/features/main/screen/hireme/hire_me.dart';
@@ -17,22 +17,22 @@ import 'package:onelenykco/app/features/main/screen/resume/resume_part.dart';
 import 'package:onelenykco/app/features/main/screen/site/site_part.dart';
 import 'package:onelenykco/app/features/main/screen/topic/topic_part.dart';
 
-import '../../../common/responsive_util.dart';
-import '../data/state/main_state.dart';
-import '../data/state/routes.dart';
-import '../data/topic/topic_item.dart';
-import 'admin/admin_part.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:onelenykco/app/common/responsive_util.dart';
+import "../data/state/main_state.dart";
+import "../data/state/routes.dart";
+import 'package:onelenykco/app/features/main/data/topic/topic_item.dart';
+import "admin/admin_part.dart";
+import "package:timeago/timeago.dart" as timeago;
 
-import '../../../common/hover_button.dart';
-import 'login/login_part.dart';
+import "../../../common/hover_button.dart";
+import "login/login_part.dart";
 
 class _MainScreen extends State<MainScreen> {
   final getIt = GetIt.instance;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late final cubit = getIt<MainCubit>();
 
-  Widget bottomCareer({required MainState state}) {
+  Widget bottomCareer({required final MainState state}) {
     final cubit = getIt<MainCubit>();
 
     return Column(
@@ -45,7 +45,7 @@ class _MainScreen extends State<MainScreen> {
           child: Text(
             "career 💼",
             style: GoogleFonts.robotoMono(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900),
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900,),
           ),
         ),
         HoverButton(
@@ -54,32 +54,32 @@ class _MainScreen extends State<MainScreen> {
           },
           onDoubleTap: () {},
           color: Colors.white10,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
               "resume 📓",
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.white,),
             ),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         HoverButton(
           onTap: () {
             cubit.selectTopic(route: Routes.HireMe);
           },
           onDoubleTap: () {},
           color: Colors.white24,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
               "hire me 👀",
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.white,),
             ),
           ),
         ),
@@ -87,7 +87,7 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
-  Widget blog({required MainState state}) {
+  Widget blog({required final MainState state}) {
     final cubit = getIt<MainCubit>();
 
     return Column(
@@ -100,7 +100,7 @@ class _MainScreen extends State<MainScreen> {
           child: Text(
             "blog 📺",
             style: GoogleFonts.robotoMono(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900),
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900,),
           ),
         ),
         HoverButton(
@@ -110,13 +110,13 @@ class _MainScreen extends State<MainScreen> {
           onDoubleTap: () {},
           color: Colors.white24,
           child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
               "check it out 👀",
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.white,),
             ),
           ),
         ),
@@ -124,7 +124,7 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
-  Widget collaboration({required MainState state}) {
+  Widget collaboration({required final MainState state}) {
     final cubit = getIt<MainCubit>();
 
     return Column(
@@ -137,7 +137,7 @@ class _MainScreen extends State<MainScreen> {
           child: Text(
             "collaboration 🌍",
             style: GoogleFonts.robotoMono(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900),
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900,),
           ),
         ),
         HoverButton(
@@ -146,14 +146,14 @@ class _MainScreen extends State<MainScreen> {
           },
           onDoubleTap: () {},
           color: Colors.white24,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
               "create together",
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.white,),
             ),
           ),
         ),
@@ -161,33 +161,31 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
-  Future<void> showLoginDialog(BuildContext context) async {
-    String email = '';
-    String password = '';
+  Future<void> showLoginDialog(final BuildContext context) async {
+    var email = "";
+    var password = "";
 
     return showDialog<void>(
       context: context,
-      barrierDismissible: true, // user must tap button to close the dialog
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text('Login'),
+      builder: (final dialogContext) => AlertDialog(
+          title: const Text("Login"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 TextField(
-                  onChanged: (value) {
+                  onChanged: (final value) {
                     email = value;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Email",
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
                 TextField(
-                  onChanged: (value) {
+                  onChanged: (final value) {
                     password = value;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Password",
                   ),
                   obscureText: true,
@@ -197,22 +195,21 @@ class _MainScreen extends State<MainScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text("Cancel"),
               onPressed: () {
                 Navigator.of(dialogContext).pop(); // Dismiss the dialog
               },
             ),
             TextButton(
-              child: Text('Login'),
+              child: const Text("Login"),
               onPressed: () {
                 // Implement your login logic here
-                print('Email: $email, Password: $password');
+                print("Email: $email, Password: $password");
                 Navigator.of(dialogContext).pop(); // Dismiss the dialog
               },
             ),
           ],
-        );
-      },
+        ),
     );
   }
 
@@ -220,27 +217,27 @@ class _MainScreen extends State<MainScreen> {
     cubit.openMenu();
   }
 
-  Widget buildResponsiveBody({required MainState state}) {
+  Widget buildResponsiveBody({required final MainState state}) {
     Widget? content;
 
     switch (state.activeRoute) {
       case Routes.Collab:
-        content = Placeholder();
+        content = const Placeholder();
         break;
       case Routes.Resume:
         content = ResumePart();
         break;
       case Routes.HireMe:
-        content = HireMePart();
+        content = const HireMePart();
         break;
       case Routes.Blog:
-        content = Placeholder();
+        content = const Placeholder();
         break;
       case Routes.AboutSite:
-        content = SiteStoryPart();
+        content = const SiteStoryPart();
         break;
       default:
-        content = Placeholder();
+        content = const Placeholder();
         break;
     }
 /*    if (state.selectedTopic?.id == state.profileTopic?.id) {
@@ -262,7 +259,7 @@ class _MainScreen extends State<MainScreen> {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF343540),
-        borderRadius: BorderRadius.circular(0.0),
+        borderRadius: BorderRadius.circular(0),
       ),
       child: Stack(
         children: [
@@ -272,8 +269,7 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
-  Widget buildMenuHorizontal(MainState state) {
-    return Column(
+  Widget buildMenuHorizontal(final MainState state) => Column(
       children: [
         Expanded(
           child: Column(
@@ -285,28 +281,27 @@ class _MainScreen extends State<MainScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.blueGrey.shade300.withOpacity(0.1),
-                      blurRadius: 4.0,
-                      spreadRadius: 0.0,
+                      blurRadius: 4,
                       offset: const Offset(
-                        0.0,
-                        3.0,
+                        0,
+                        3,
                       ),
                     ),
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: HoverButton(
                     hoverColor: Colors.blueGrey.shade300.withOpacity(1),
                     color: Colors.blueGrey.shade300.withOpacity(0.8),
                     onTap: openMenu,
                     onDoubleTap: () {},
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8),
                       child: Text(
-                        state.activeRoute?.title ?? "",
+                        state.activeRoute.title ?? "",
                         style: GoogleFonts.robotoMono(
-                            fontSize: 12, color: Colors.white),
+                            fontSize: 12, color: Colors.white,),
                       ),
                     ),
                   ),
@@ -326,10 +321,10 @@ class _MainScreen extends State<MainScreen> {
                       ),
                       InfoBlock(
                           color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: blog(state: state)),
+                          child: blog(state: state),),
                       InfoBlock(
                           color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: collaboration(state: state)),
+                          child: collaboration(state: state),),
                     ],
                   ),
                 ),
@@ -339,10 +334,8 @@ class _MainScreen extends State<MainScreen> {
         ),
       ],
     );
-  }
 
-  Widget buildMenuVertical(MainState state) {
-    return Column(
+  Widget buildMenuVertical(final MainState state) => Column(
       children: [
         Expanded(
           child: Column(
@@ -354,28 +347,27 @@ class _MainScreen extends State<MainScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.blueGrey.shade300.withOpacity(0.1),
-                      blurRadius: 4.0,
-                      spreadRadius: 0.0,
+                      blurRadius: 4,
                       offset: const Offset(
-                        0.0,
-                        3.0,
+                        0,
+                        3,
                       ),
                     ),
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: HoverButton(
                     hoverColor: Colors.blueGrey.shade300.withOpacity(1),
                     color: Colors.blueGrey.shade300.withOpacity(0.8),
                     onTap: openMenu,
                     onDoubleTap: () {},
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8),
                       child: Text(
                         state.activeRoute.title ?? "",
                         style: GoogleFonts.robotoMono(
-                            fontSize: 12, color: Colors.white),
+                            fontSize: 12, color: Colors.white,),
                       ),
                     ),
                   ),
@@ -387,22 +379,20 @@ class _MainScreen extends State<MainScreen> {
                   color: Colors.transparent,
                   width: 300,
                   child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InfoBlock(
                         color: Colors.blueGrey.shade300.withOpacity(0.8),
                         child: bottomCareer(state: state),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       InfoBlock(
                           color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: blog(state: state)),
-                      SizedBox(height: 8),
+                          child: blog(state: state),),
+                      const SizedBox(height: 8),
                       InfoBlock(
                           color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: collaboration(state: state)),
+                          child: collaboration(state: state),),
                     ],
                   ),
                 ),
@@ -412,34 +402,29 @@ class _MainScreen extends State<MainScreen> {
         ),
       ],
     );
-  }
 
-  Widget buildDesktop(MainState state) {
-    return Stack(
+  Widget buildDesktop(final MainState state) => Stack(
       children: [
         buildResponsiveBody(state: state),
         buildMenuVertical(state),
       ],
     );
-  }
 
-  Widget buildMobile(MainState state) {
-    return Stack(
+  Widget buildMobile(final MainState state) => Stack(
       children: [buildResponsiveBody(state: state), buildMenuHorizontal(state)],
     );
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final cubit = getIt<MainCubit>();
 
     return BlocConsumer<MainCubit, MainState>(
-      listener: (context, state) {
+      listener: (final context, final state) {
         _scaffoldKey.currentState?.closeDrawer();
         return;
       },
       bloc: cubit, // Provide the cubit
-      builder: (context, state) {
+      builder: (final context, final state) {
         Widget body;
         if (ResponsiveUtil.isDesktop(context)) {
           body = buildDesktop(state);

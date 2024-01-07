@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'password_state.dart';
+part of "password_state.dart";
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MyPasswordsState _$MyPasswordsStateFromJson(Map<String, dynamic> json) =>
+MyPasswordsState _$MyPasswordsStateFromJson(final Map<String, dynamic> json) =>
     MyPasswordsState(
-      passwords: (json['passwords'] as List<dynamic>)
-          .map((e) => PasswordItem.fromJson(e as Map<String, dynamic>))
+      passwords: (json["passwords"] as List<dynamic>)
+          .map((final e) => PasswordItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      searchQuery: json['searchQuery'] as String,
+      searchQuery: json["searchQuery"] as String,
     );
 
-Map<String, dynamic> _$MyPasswordsStateToJson(MyPasswordsState instance) =>
+Map<String, dynamic> _$MyPasswordsStateToJson(final MyPasswordsState instance) =>
     <String, dynamic>{
-      'passwords': instance.passwords.map((e) => e.toJson()).toList(),
-      'searchQuery': instance.searchQuery,
+      "passwords": instance.passwords.map((final e) => e.toJson()).toList(),
+      "searchQuery": instance.searchQuery,
     };

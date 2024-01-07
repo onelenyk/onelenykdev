@@ -1,21 +1,21 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import "package:equatable/equatable.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
-import 'authentication_state.dart';
+import "authentication_state.dart";
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
-  final FirebaseAuth _firebaseAuth;
-  StreamSubscription<User?>? _authStateSubscription;
 
   AuthenticationCubit(this._firebaseAuth) : super(AuthenticationInitial()) {
     init();
   }
+  final FirebaseAuth _firebaseAuth;
+  StreamSubscription<User?>? _authStateSubscription;
 
-  void startPeriodicAction(Duration interval, Function action) {
-    Timer.periodic(interval, (Timer timer) {
+  void startPeriodicAction(final Duration interval, final Function action) {
+    Timer.periodic(interval, (final timer) {
       action();
 
       // If you need to stop the timer under certain conditions,
@@ -29,17 +29,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
     });*/
     _authStateSubscription = _firebaseAuth.authStateChanges().listen(
-      (User? user) {
+      (final user) {
         if (user == null) {
-          print('User is currently signed out!');
+          print("User is currently signed out!");
           emit(AuthenticationInitial());
         } else {
-          print('User is signed in!');
+          print("User is signed in!");
           emit(AuthenticationSuccess(user));
         }
       },
-      onError: (error) {
-        print('Error listening to auth state changes: $error');
+      onError: (final error) {
+        print("Error listening to auth state changes: $error");
         emit(AuthenticationFailure(error.toString()));
       },
     );
@@ -50,10 +50,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(AuthenticationInitial()); // Emitting initial state after sign out
   }
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<void> signInWithEmailAndPassword(final String email, final String password) async {
     try {
       emit(AuthenticationLoading());
-      UserCredential userCredential =
+      final userCredential =
           await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,

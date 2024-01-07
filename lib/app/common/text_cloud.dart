@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
-import 'package:google_fonts/google_fonts.dart';
+import "package:flutter/material.dart";
+import "dart:math" as math;
+import "package:google_fonts/google_fonts.dart";
 
 // Add the WordPositionCalculator class here (from previous example)
 
 class TextCloud extends StatefulWidget {
+  const TextCloud({super.key});
+
   @override
   _TextCloudState createState() => _TextCloudState();
 }
@@ -21,16 +23,14 @@ class _TextCloudState extends State<TextCloud> {
     "Jetpack Compose",
     "Dart",
     "FFmpeg",
-    "ChatGPT"
+    "ChatGPT",
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return FutureBuilder<List<Widget>>(
+  Widget build(final BuildContext context) => LayoutBuilder(
+      builder: (final context, final constraints) => FutureBuilder<List<Widget>>(
           future: _calculatePositions(words, constraints),
-          builder: (context, snapshot) {
+          builder: (final context, final snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Stack(children: snapshot.data ?? []);
             } else {
@@ -38,18 +38,16 @@ class _TextCloudState extends State<TextCloud> {
               return const Center(child: CircularProgressIndicator());
             }
           },
-        );
-      },
+        ),
     );
-  }
 
   Future<List<Widget>> _calculatePositions(
-      List<String> words, BoxConstraints constraints) async {
+      final List<String> words, final BoxConstraints constraints,) async {
     final random = math.Random();
-    List<Rect> placedRects = [];
-    List<Widget> positionedWords = [];
+    final placedRects = <Rect>[];
+    final positionedWords = <Widget>[];
 
-    for (String word in words) {
+    for (final word in words) {
       final fontSize = random.nextInt(15) + 15.0;
       final color = Colors.primaries[random.nextInt(Colors.primaries.length)];
 
@@ -62,9 +60,9 @@ class _TextCloudState extends State<TextCloud> {
         text: TextSpan(text: word, style: textStyle),
         maxLines: 1,
         textDirection: TextDirection.ltr,
-      )..layout(minWidth: 0, maxWidth: double.infinity);
+      )..layout();
 
-      Size textSize = textPainter.size;
+      final textSize = textPainter.size;
       Offset position;
       bool doesOverlap;
       do {
@@ -73,8 +71,8 @@ class _TextCloudState extends State<TextCloud> {
           random.nextDouble() * (constraints.maxHeight - textSize.height),
         );
 
-        Rect textRect = position & textSize;
-        doesOverlap = placedRects.any((rect) => rect.overlaps(textRect));
+        final textRect = position & textSize;
+        doesOverlap = placedRects.any((final rect) => rect.overlaps(textRect));
 
         if (!doesOverlap) {
           placedRects.add(textRect);
@@ -86,12 +84,12 @@ class _TextCloudState extends State<TextCloud> {
           left: position.dx,
           top: position.dy,
           child: Container(
-              padding: EdgeInsets.all(4),
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 color: textStyle.color?.withAlpha(95),
-                borderRadius: BorderRadius.circular(50.0),
+                borderRadius: BorderRadius.circular(50),
               ),
-              child: Text(word, style: textStyle)),
+              child: Text(word, style: textStyle),),
         ),
       );
     }
@@ -101,8 +99,8 @@ class _TextCloudState extends State<TextCloud> {
 }
 
 class WordPosition {
-  final String word;
-  final Offset position;
 
   WordPosition(this.word, this.position);
+  final String word;
+  final Offset position;
 }

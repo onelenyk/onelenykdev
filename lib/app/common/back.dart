@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class BackBtn extends StatelessWidget {
   const BackBtn({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
+  Widget build(final BuildContext context) => IconButton(
       onPressed: () {
         Navigator.maybePop(context);
       },
@@ -15,5 +14,4 @@ class BackBtn extends StatelessWidget {
         Icons.arrow_back_ios,
       ),
     );
-  }
 }

@@ -1,25 +1,25 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:get_it/get_it.dart";
 
-import '../../../../data/repository/topics_repository.dart';
-import '../../../../data/services/firestore_service.dart';
-import '../state/main_cubit.dart';
-import '../topic/topic_item.dart';
-import 'admin_state.dart';
+import "../../../../data/repository/topics_repository.dart";
+import "../../../../data/services/firestore_service.dart";
+import "../state/main_cubit.dart";
+import "../topic/topic_item.dart";
+import "admin_state.dart";
 
 class AdminCubit extends Cubit<AdminState> {
-  final getIt = GetIt.instance;
-  late final TopicsRepository _firestoreService = getIt<TopicsRepository>();
 
   AdminCubit() : super(AdminState(topics: [])) {
     initialize();
   }
+  final getIt = GetIt.instance;
+  late final TopicsRepository _firestoreService = getIt<TopicsRepository>();
 
-  void selectTopic(TopicItem topic) {
+  void selectTopic(final TopicItem topic) {
     emit(state.copyWith(selectedTopic: topic));
   }
 
-  Future<void> updateTopic(TopicItem updatedTopic) async {
+  Future<void> updateTopic(final TopicItem updatedTopic) async {
     try {
       var item = await _firestoreService.updateItem(updatedTopic);
 
@@ -55,7 +55,7 @@ class AdminCubit extends Cubit<AdminState> {
       emit(state.copyWith(
         topics: updatedTopics,
         selectedTopic: newTopic,
-      ));
+      ),);
     } catch (e) {
       print(e);
       // Handle any exceptions
