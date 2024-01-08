@@ -459,11 +459,3 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 }
-
-@RoutePage()
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  _MainScreen createState() => _MainScreen();
-}
