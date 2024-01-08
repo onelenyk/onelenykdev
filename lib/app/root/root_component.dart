@@ -11,19 +11,18 @@ import "package:onelenykco/app/root/app_router.dart";
 import "package:onelenykco/main.dart";
 
 class RootComponent extends StatelessWidget {
-
   RootComponent({super.key}) {
-  //  getIt.registerSingleton<ProfileRepository>(ProfileRepository());
-    getIt..registerSingleton<TopicsRepository>(TopicsRepository())
-    ..registerSingleton<FirestoreService>(FirestoreService())
-
-    ..registerSingleton<MainCubit>(MainCubit())
-    ..registerSingleton<AdminCubit>(AdminCubit())
-    ..registerSingleton<ResumeCubit>(ResumeCubit())
-
-    ..registerSingleton<AuthenticationCubit>(AuthenticationCubit(firebaseAuth));
-
+    //  getIt.registerSingleton<ProfileRepository>(ProfileRepository());
+    getIt
+      ..registerSingleton<TopicsRepository>(TopicsRepository())
+      ..registerSingleton<FirestoreService>(FirestoreService())
+      ..registerSingleton<MainCubit>(MainCubit())
+      ..registerSingleton<AdminCubit>(AdminCubit())
+      ..registerSingleton<ResumeCubit>(ResumeCubit())
+      ..registerSingleton<AuthenticationCubit>(
+          AuthenticationCubit(firebaseAuth));
   }
+
   final _router = AppRouter();
   final getIt = GetIt.instance;
 
@@ -37,9 +36,27 @@ class RootComponent extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => MaterialApp.router(
-      title: "Nazar Lenyk",
-      theme: _buildTheme(Brightness.light),
-      routerConfig: _router.config(),
-      debugShowCheckedModeBanner: false,
-    );
+        title: "Nazar Lenyk",
+        theme: _buildTheme(Brightness.light),
+        routerConfig: _router.config(),
+        debugShowCheckedModeBanner: false,
+     //   routeInformationParser: SubdomainParser(),
+      );
+}
+
+class SubdomainParser extends RouteInformationParser<String> {
+  @override
+  Future<String> parseRouteInformation(
+      RouteInformation routeInformation) async {
+    final uri = Uri.parse(routeInformation.location!);
+    final subdomain = uri.host.split('.')[0];
+    // You can perform additional checks or transformations based on the subdomain
+    return subdomain;
+  }
+
+  @override
+  RouteInformation restoreRouteInformation(String configuration) {
+    // Implement this if you need to restore RouteInformation
+    throw UnimplementedError();
+  }
 }
