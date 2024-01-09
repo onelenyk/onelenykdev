@@ -112,7 +112,7 @@ class _MainScreen extends State<MainScreen> {
         ),
         HoverButton(
           onTap: () {
-            openLink("https://www.blog.onelenyk.dev/");
+            openLink("https://blog.onelenyk.dev/");
            // cubit.selectTopic(route: Routes.Blog);
        /*     final router = AutoRouter.of(context);
             router.navigate(route)*/

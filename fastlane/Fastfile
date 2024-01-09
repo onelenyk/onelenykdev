@@ -29,7 +29,7 @@ platform :web do
   lane :deployCurrent do
       # add actions here: https://docs.fastlane.tools/actions
       sh("./fruit_version_build.sh")
-      sh("./flutter build web")
+      sh("flutter build web")
       sh("firebase deploy")
   end
 
