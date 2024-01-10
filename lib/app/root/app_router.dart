@@ -12,7 +12,7 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(page: MainRoute.page, path: "/",initial: true),
-    AutoRoute(page: BlogRoute.page, path: "/blog",initial: false),
+    AutoRoute(page: BlogRoute.page, path: "/blog"),
  //   RedirectRoute(path: "*", redirectTo: "/"),
   ];
  }

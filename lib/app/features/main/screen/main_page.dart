@@ -14,6 +14,7 @@ import "package:onelenykco/app/features/main/data/state/routes.dart";
 import "package:onelenykco/app/features/main/screen/hireme/hire_me.dart";
 import "package:onelenykco/app/features/main/screen/resume/resume_part.dart";
 import "package:onelenykco/app/features/main/screen/site/site_part.dart";
+import "package:onelenykco/app/root/app_router.dart";
 
 import "../../../common/link_utils.dart";
 
@@ -112,10 +113,8 @@ class _MainScreen extends State<MainScreen> {
         ),
         HoverButton(
           onTap: () {
-            openLink("https://blog.onelenyk.dev/");
-           // cubit.selectTopic(route: Routes.Blog);
-       /*     final router = AutoRouter.of(context);
-            router.navigate(route)*/
+            final router = AutoRouter.of(context);
+            router.navigate(BlogRoute());
           },
           onDoubleTap: () {},
           color: Colors.deepOrange.shade300,
