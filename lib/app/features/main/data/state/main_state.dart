@@ -11,6 +11,9 @@ class MainState with _$MainState {
     required final Routes activeRoute,
 
     required final bool isMenuOpened,
+
+    required final String? emoji,
+    required final String? version,
   }) = _MainState;
 
   MainState._(); // Private constructor for freezed

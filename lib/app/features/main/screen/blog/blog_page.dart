@@ -3,12 +3,14 @@ import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import "package:flutter_markdown/flutter_markdown.dart";
 import "package:flutter_svg/svg.dart";
+import "package:intl/intl.dart";
 
 import 'package:markdown/markdown.dart' as md;
 
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/features/main/screen/blog/post_template.dart";
 
 import "../../../../common/hover_button.dart";
 import "../../../../common/link_utils.dart";
@@ -23,58 +25,7 @@ class BlogScreen extends StatefulWidget {
 
 class _BlogScreenState extends State<BlogScreen> {
   final List<Note> notes = [
-    Note(note: """
-# Flutter Markdown Syntax Showcase
-
-Welcome to the Flutter Markdown Syntax Showcase! In this post, we'll explore different Markdown syntax elements supported by the `flutter_markdown` library.
-
-## Text Formatting
-
-This is a **bold** and *italic* text.
-
-## Lists
-
-- Item 1
-- Item 2
-  1. Subitem A
-  2. Subitem B
-
-## Links
-
-[Visit Google](https://www.google.com)
-
-## Images
-
-![Flutter Logo](https://docs.flutter.dev/assets/images/shared/brand/flutter/logo+text/horizontal/default.png)
-
-## Code Blocks
-
-```dart
-void main() {
-  print("Hello, Flutter!");
-}
-```
-
-## Tables
-
-| Name  | Age | Location |
-|-------|-----|----------|
-| Alice | 25  | New York  |
-| Bob   | 30  | San Francisco |
-
-## Blockquotes
-
-> This is a blockquote.
-
-## Custom Color Syntax
-
-[#ff26ed26](This text is in green color).
-
-## Heading with Custom Color
-
-Feel free to use this post as a reference for your Flutter Markdown projects. Experiment with different syntax elements and enjoy crafting rich and well-formatted content!
-
-""", id: "sample", date: DateTime.now())
+    template
   ];
 
   @override
@@ -142,8 +93,7 @@ Feel free to use this post as a reference for your Flutter Markdown projects. Ex
                         final item = notes[index];
 
                         return MyPostWidget(
-                          notes: item.note,
-                          date: "date",
+                          note: item,
                         );
                       },
                       separatorBuilder: (final context, final index) =>
@@ -159,12 +109,10 @@ Feel free to use this post as a reference for your Flutter Markdown projects. Ex
 class MyPostWidget extends StatefulWidget {
   MyPostWidget({
     super.key,
-    required this.notes,
-    required this.date,
+    required this.note,
   });
 
-  final String notes;
-  final String date;
+  final Note note;
 
   @override
   _MyPostWidgetState createState() => _MyPostWidgetState();
@@ -246,9 +194,9 @@ class _MyPostWidgetState extends State<MyPostWidget> {
   Widget build(BuildContext context) {
     String data;
     if (!showMore) {
-      data = shortenName(widget.notes, nameLimit: 280, addDots: true);
+      data = shortenName(widget.note.note, nameLimit: 280, addDots: true);
     } else {
-      data = widget.notes + """\n[...less](/less)""";
+      data = widget.note.note + """\n[...less](/less)""";
     }
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -297,7 +245,7 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                             ),
                           ),
                           Text(
-                            widget.date,
+                            formatDateTime(widget.note.date),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.robotoMono(
@@ -317,6 +265,8 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                         setState(() {
                           showMore = !showMore;
                         });
+                      } else {
+                        openLink(href ?? "");
                       }
                     },
                     data: data,
@@ -488,4 +438,13 @@ class HexColorBuilder extends MarkdownElementBuilder {
         styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
         data: element.textContent);
   }
+}
+
+
+String formatDateTime(DateTime dateTime) {
+  // Define the desired date format
+  final DateFormat formatter = DateFormat.yMMMMd('en_US');
+
+  // Format the DateTime using the defined format
+  return formatter.format(dateTime);
 }

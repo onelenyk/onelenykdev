@@ -1,4 +1,5 @@
-import "package:auto_route/annotations.dart";
+import "dart:math";
+
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -16,7 +17,6 @@ import "package:onelenykco/app/features/main/screen/resume/resume_part.dart";
 import "package:onelenykco/app/features/main/screen/site/site_part.dart";
 import "package:onelenykco/app/root/app_router.dart";
 
-import "../../../common/link_utils.dart";
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
@@ -25,7 +25,6 @@ class MainScreen extends StatefulWidget {
   @override
   _MainScreen createState() => _MainScreen();
 }
-
 
 class _MainScreen extends State<MainScreen> {
   final getIt = GetIt.instance;
@@ -41,7 +40,7 @@ class _MainScreen extends State<MainScreen> {
       children: [
         Container(
           padding:
-          const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
+              const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
           child: Text(
             "career 💼",
             style: GoogleFonts.robotoMono(
@@ -101,7 +100,7 @@ class _MainScreen extends State<MainScreen> {
       children: [
         Container(
           padding:
-          const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
+              const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
           child: Text(
             "blog 📺",
             style: GoogleFonts.robotoMono(
@@ -135,6 +134,32 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
+  Widget site({required final MainState state}) {
+    final cubit = getIt<MainCubit>();
+
+
+
+    return HoverButton(
+      onTap: () {
+        cubit.selectTopic(route: Routes.AboutSite);
+      },
+      onDoubleTap: () {},
+
+      color: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Text(
+          "${state.version} ${state.emoji}",
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget collaboration({required final MainState state}) {
     final cubit = getIt<MainCubit>();
 
@@ -144,7 +169,7 @@ class _MainScreen extends State<MainScreen> {
       children: [
         Container(
           padding:
-          const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
+              const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
           child: Text(
             "collaboration 🌍",
             style: GoogleFonts.robotoMono(
@@ -270,167 +295,172 @@ class _MainScreen extends State<MainScreen> {
   }
 
   Widget buildMenuHorizontal(final MainState state) => Column(
-    children: [
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blueGrey.shade300.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(
-                      0,
-                      3,
-                    ),
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blueGrey.shade300.withOpacity(0.1),
+                        blurRadius: 4,
+                        offset: const Offset(
+                          0,
+                          3,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: HoverButton(
-                  hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                  color: Colors.blueGrey.shade300.withOpacity(0.8),
-                  onTap: openMenu,
-                  onDoubleTap: () {},
                   child: Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Text(
-                      state.activeRoute.title ?? "",
-                      style: GoogleFonts.robotoMono(
-                        fontSize: 12,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Visibility(
-              visible: state.isMenuOpened,
-              child: InfoBlock(
-                color: Colors.transparent,
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    InfoBlock(
+                    child: HoverButton(
+                      hoverColor: Colors.blueGrey.shade300.withOpacity(1),
                       color: Colors.blueGrey.shade300.withOpacity(0.8),
-                      child: bottomCareer(state: state),
-                    ),
-                    InfoBlock(
-                      color: Colors.deepOrange.shade300.withOpacity(0.8),
-                      child: blog(state: state),
-                    ),
-                    InfoBlock(
-                      color: Colors.blueGrey.shade300.withOpacity(0.8),
-                      child: collaboration(state: state),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-
-  Widget buildMenuVertical(final MainState state) => Column(
-    children: [
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: 8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: HoverButton(
-                    hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                    color: Colors.blueGrey.shade300.withOpacity(0.8),
-                    onTap: openMenu,
-                    onDoubleTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Icon(
-                        FontAwesomeIcons.bars,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: HoverButton(
-                    hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                    color: Colors.blueGrey.shade300.withOpacity(0.8),
-                    onTap: openMenu,
-                    onDoubleTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        state.activeRoute.title ?? "",
-                        style: GoogleFonts.robotoMono(
+                      onTap: openMenu,
+                      onDoubleTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          state.activeRoute.title ?? "",
+                          style: GoogleFonts.robotoMono(
                             fontSize: 12,
                             color: Colors.white,
-                            fontWeight: FontWeight.w900),
+                          ),
+                        ),
                       ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: state.isMenuOpened,
+                  child: InfoBlock(
+                    color: Colors.transparent,
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        InfoBlock(
+                          color: Colors.blueGrey.shade300.withOpacity(0.8),
+                          child: bottomCareer(state: state),
+                        ),
+                        InfoBlock(
+                          color: Colors.deepOrange.shade300.withOpacity(0.8),
+                          child: blog(state: state),
+                        ),
+                        InfoBlock(
+                          color: Colors.blueGrey.shade300.withOpacity(0.8),
+                          child: collaboration(state: state),
+                        ),
+                        InfoBlock(
+                          color: Colors.blueGrey.shade300.withOpacity(0.8),
+                          child: site(state: state),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ],
             ),
-            Visibility(
-              visible: state.isMenuOpened,
-              child: InfoBlock(
-                color: Colors.transparent,
-                width: 300,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InfoBlock(
-                      color: Colors.blueGrey.shade300.withOpacity(0.8),
-                      child: bottomCareer(state: state),
-                    ),
-                    const SizedBox(height: 8),
-                    InfoBlock(
+          ),
+        ],
+      );
 
-                      color: Colors.deepOrange.shade300.withOpacity(0.8),
-                      child: blog(state: state),
+  Widget buildMenuVertical(final MainState state) => Column(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 8,
                     ),
-                    const SizedBox(height: 8),
-                    InfoBlock(
-                      color: Colors.blueGrey.shade300.withOpacity(0.8),
-                      child: collaboration(state: state),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: HoverButton(
+                        hoverColor: Colors.blueGrey.shade300.withOpacity(1),
+                        color: Colors.blueGrey.shade300.withOpacity(0.8),
+                        onTap: openMenu,
+                        onDoubleTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Icon(
+                            FontAwesomeIcons.bars,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: HoverButton(
+                        hoverColor: Colors.blueGrey.shade300.withOpacity(1),
+                        color: Colors.blueGrey.shade300.withOpacity(0.8),
+                        onTap: openMenu,
+                        onDoubleTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            state.activeRoute.title ?? "",
+                            style: GoogleFonts.robotoMono(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
+                Visibility(
+                  visible: state.isMenuOpened,
+                  child: InfoBlock(
+                    color: Colors.transparent,
+                    width: 300,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InfoBlock(
+                          color: Colors.blueGrey.shade300.withOpacity(0.8),
+                          child: bottomCareer(state: state),
+                        ),
+                        const SizedBox(height: 8),
+                        InfoBlock(
+                          color: Colors.deepOrange.shade300.withOpacity(0.8),
+                          child: blog(state: state),
+                        ),
+                        const SizedBox(height: 8),
+                        InfoBlock(
+                          color: Colors.blueGrey.shade300.withOpacity(0.8),
+                          child: collaboration(state: state),
+                        ),
+                        const SizedBox(height: 8),
+                        site(state: state),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   Widget buildDesktop(final MainState state) => Stack(
-    children: [
-      buildResponsiveBody(state: state),
-      buildMenuVertical(state),
-    ],
-  );
+        children: [
+          buildResponsiveBody(state: state),
+          buildMenuVertical(state),
+        ],
+      );
 
   Widget buildMobile(final MainState state) => Stack(
-    children: [buildResponsiveBody(state: state), buildMenuVertical(state)],
-  );
+        children: [buildResponsiveBody(state: state), buildMenuVertical(state)],
+      );
 
   @override
   Widget build(final BuildContext context) {

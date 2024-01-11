@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MainState {
   Routes get activeRoute => throw _privateConstructorUsedError;
   bool get isMenuOpened => throw _privateConstructorUsedError;
+  String? get emoji => throw _privateConstructorUsedError;
+  String? get version => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainStateCopyWith<MainState> get copyWith =>
@@ -29,7 +31,8 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call({Routes activeRoute, bool isMenuOpened});
+  $Res call(
+      {Routes activeRoute, bool isMenuOpened, String? emoji, String? version});
 }
 
 /// @nodoc
@@ -47,6 +50,8 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
   $Res call({
     Object? activeRoute = null,
     Object? isMenuOpened = null,
+    Object? emoji = freezed,
+    Object? version = freezed,
   }) {
     return _then(_value.copyWith(
       activeRoute: null == activeRoute
@@ -57,6 +62,14 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
           ? _value.isMenuOpened
           : isMenuOpened // ignore: cast_nullable_to_non_nullable
               as bool,
+      emoji: freezed == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -69,7 +82,8 @@ abstract class _$$MainStateImplCopyWith<$Res>
       __$$MainStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Routes activeRoute, bool isMenuOpened});
+  $Res call(
+      {Routes activeRoute, bool isMenuOpened, String? emoji, String? version});
 }
 
 /// @nodoc
@@ -85,6 +99,8 @@ class __$$MainStateImplCopyWithImpl<$Res>
   $Res call({
     Object? activeRoute = null,
     Object? isMenuOpened = null,
+    Object? emoji = freezed,
+    Object? version = freezed,
   }) {
     return _then(_$MainStateImpl(
       activeRoute: null == activeRoute
@@ -95,6 +111,14 @@ class __$$MainStateImplCopyWithImpl<$Res>
           ? _value.isMenuOpened
           : isMenuOpened // ignore: cast_nullable_to_non_nullable
               as bool,
+      emoji: freezed == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
+              as String?,
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -102,17 +126,25 @@ class __$$MainStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MainStateImpl extends _MainState {
-  _$MainStateImpl({required this.activeRoute, required this.isMenuOpened})
+  _$MainStateImpl(
+      {required this.activeRoute,
+      required this.isMenuOpened,
+      required this.emoji,
+      required this.version})
       : super._();
 
   @override
   final Routes activeRoute;
   @override
   final bool isMenuOpened;
+  @override
+  final String? emoji;
+  @override
+  final String? version;
 
   @override
   String toString() {
-    return 'MainState(activeRoute: $activeRoute, isMenuOpened: $isMenuOpened)';
+    return 'MainState(activeRoute: $activeRoute, isMenuOpened: $isMenuOpened, emoji: $emoji, version: $version)';
   }
 
   @override
@@ -123,11 +155,14 @@ class _$MainStateImpl extends _MainState {
             (identical(other.activeRoute, activeRoute) ||
                 other.activeRoute == activeRoute) &&
             (identical(other.isMenuOpened, isMenuOpened) ||
-                other.isMenuOpened == isMenuOpened));
+                other.isMenuOpened == isMenuOpened) &&
+            (identical(other.emoji, emoji) || other.emoji == emoji) &&
+            (identical(other.version, version) || other.version == version));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, activeRoute, isMenuOpened);
+  int get hashCode =>
+      Object.hash(runtimeType, activeRoute, isMenuOpened, emoji, version);
 
   @JsonKey(ignore: true)
   @override
@@ -139,13 +174,19 @@ class _$MainStateImpl extends _MainState {
 abstract class _MainState extends MainState {
   factory _MainState(
       {required final Routes activeRoute,
-      required final bool isMenuOpened}) = _$MainStateImpl;
+      required final bool isMenuOpened,
+      required final String? emoji,
+      required final String? version}) = _$MainStateImpl;
   _MainState._() : super._();
 
   @override
   Routes get activeRoute;
   @override
   bool get isMenuOpened;
+  @override
+  String? get emoji;
+  @override
+  String? get version;
   @override
   @JsonKey(ignore: true)
   _$$MainStateImplCopyWith<_$MainStateImpl> get copyWith =>
