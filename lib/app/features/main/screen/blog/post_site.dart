@@ -24,4 +24,4 @@ Flutter isn't just for mobile apps; it's powering my website too! Here's a snaps
 - **Blog:** A corner for sharing insights, stories, and tips from my Android engineering adventures.
 
 I'm thrilled to have you on board this digital journey! Stay tuned for updates, tech talk, and much more.
-""", id: "template", date: DateTime.parse("2024-01-12"));
+""", id: "template", date: DateTime.parse("2024-01-12"),);
