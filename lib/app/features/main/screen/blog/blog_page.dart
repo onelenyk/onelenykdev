@@ -10,6 +10,7 @@ import 'package:markdown/markdown.dart' as md;
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/features/main/screen/blog/post_site.dart";
 import "package:onelenykco/app/features/main/screen/blog/post_template.dart";
 
 import "../../../../common/hover_button.dart";
@@ -25,7 +26,7 @@ class BlogScreen extends StatefulWidget {
 
 class _BlogScreenState extends State<BlogScreen> {
   final List<Note> notes = [
-    template
+    site
   ];
 
   @override
