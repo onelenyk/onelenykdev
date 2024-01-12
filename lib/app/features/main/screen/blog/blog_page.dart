@@ -123,7 +123,7 @@ class _MyPostWidgetState extends State<MyPostWidget> {
     }
 
     // Find the last space within the limit
-    final var lastSpaceIndex = text.lastIndexOf(" ", limit);
+    final lastSpaceIndex = text.lastIndexOf(" ", limit);
 
     // If there is no space within the limit, cut at the limit
     if (lastSpaceIndex == -1) {

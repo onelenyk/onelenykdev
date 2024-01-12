@@ -520,7 +520,7 @@ class _ResumePartState extends State<ResumePart> {
             children: [
               ListView.separated(
                 shrinkWrap: true,
-                itemCount: state.profile.experience.length ?? 0,
+                itemCount: state.profile.experience.length,
                 itemBuilder: (final context, final index) {
                   final item = state.profile.experience[index];
                   return buildPartWorkExperience(item: item);

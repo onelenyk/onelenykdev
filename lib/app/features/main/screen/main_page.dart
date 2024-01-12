@@ -323,7 +323,7 @@ class _MainScreen extends State<MainScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(8),
                         child: Text(
-                          state.activeRoute.title ?? "",
+                          state.activeRoute.title,
                           style: GoogleFonts.robotoMono(
                             fontSize: 12,
                             color: Colors.white,
