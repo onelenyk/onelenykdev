@@ -1,4 +1,3 @@
-import "dart:math";
 
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
@@ -113,7 +112,7 @@ class _MainScreen extends State<MainScreen> {
         HoverButton(
           onTap: () {
             final router = AutoRouter.of(context);
-            router.navigate(BlogRoute());
+            router.navigate(const BlogRoute());
           },
           onDoubleTap: () {},
           color: Colors.deepOrange.shade300,
@@ -147,7 +146,7 @@ class _MainScreen extends State<MainScreen> {
 
       color: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.all(6),
         child: Text(
           "${state.version} ${state.emoji}",
           style: const TextStyle(
@@ -376,18 +375,18 @@ class _MainScreen extends State<MainScreen> {
               children: [
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: HoverButton(
                         hoverColor: Colors.blueGrey.shade300.withOpacity(1),
                         color: Colors.blueGrey.shade300.withOpacity(0.8),
                         onTap: openMenu,
                         onDoubleTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
                           child: Icon(
                             FontAwesomeIcons.bars,
                             color: Colors.white,
@@ -410,7 +409,7 @@ class _MainScreen extends State<MainScreen> {
                             style: GoogleFonts.robotoMono(
                                 fontSize: 12,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w900),
+                                fontWeight: FontWeight.w900,),
                           ),
                         ),
                       ),
