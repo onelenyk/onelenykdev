@@ -30,7 +30,3 @@ Contributions to the OneLenykCo project are welcome! Whether it's bug fixes, fea
 
 ## License 📄
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
----
-
-Happy Coding! 💻🎉nsed under the MIT License - see the LICENSE.md file for details.
