@@ -50,4 +50,4 @@ void main() {
 ## Heading with Custom Color
 
 Feel free to use this post as a reference for your Flutter Markdown projects. Experiment with different syntax elements and enjoy crafting rich and well-formatted content!
-""", id: "template", date: DateTime.parse("2024-01-12"));
+""", id: "template", date: DateTime.parse("2024-01-12"),);

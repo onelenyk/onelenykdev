@@ -924,9 +924,7 @@ class _ResumePartState extends State<ResumePart> {
         return;
       },
       bloc: widget.cubit, // Provide the cubit
-      builder: (final context, final state) {
-        return Center(child: buildPage(context, state));
-      },
+      builder: (final context, final state) => Center(child: buildPage(context, state)),
     );
 }
 

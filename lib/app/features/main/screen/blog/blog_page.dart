@@ -1,20 +1,13 @@
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:flutter_markdown/flutter_markdown.dart";
 import "package:flutter_svg/svg.dart";
-import "package:intl/intl.dart";
-
-import 'package:markdown/markdown.dart' as md;
-
-import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:intl/intl.dart";
+import "package:markdown/markdown.dart" as md;
 import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/common/link_utils.dart";
 import "package:onelenykco/app/features/main/screen/blog/post_site.dart";
-import "package:onelenykco/app/features/main/screen/blog/post_template.dart";
-
-import "../../../../common/hover_button.dart";
-import "../../../../common/link_utils.dart";
 
 @RoutePage()
 class BlogScreen extends StatefulWidget {
@@ -26,7 +19,7 @@ class BlogScreen extends StatefulWidget {
 
 class _BlogScreenState extends State<BlogScreen> {
   final List<Note> notes = [
-    site
+    site,
   ];
 
   @override
@@ -35,11 +28,10 @@ class _BlogScreenState extends State<BlogScreen> {
             color: Colors.grey.shade900,
             child: Center(
               child: Column(
-                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: InfoBlock(
                       color: Colors.deepOrange.shade200.withOpacity(0.4),
                       width: 800,
