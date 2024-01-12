@@ -20,7 +20,7 @@ class RootComponent extends StatelessWidget {
       ..registerSingleton<AdminCubit>(AdminCubit())
       ..registerSingleton<ResumeCubit>(ResumeCubit())
       ..registerSingleton<AuthenticationCubit>(
-          AuthenticationCubit(firebaseAuth));
+          AuthenticationCubit(firebaseAuth),);
   }
 
   final _router = AppRouter();
@@ -47,15 +47,15 @@ class RootComponent extends StatelessWidget {
 class SubdomainParser extends RouteInformationParser<String> {
   @override
   Future<String> parseRouteInformation(
-      RouteInformation routeInformation) async {
-    final uri = Uri.parse(routeInformation.location!);
-    final subdomain = uri.host.split('.')[0];
+      final RouteInformation routeInformation,) async {
+    final uri = Uri.parse(routeInformation.location);
+    final subdomain = uri.host.split(".")[0];
     // You can perform additional checks or transformations based on the subdomain
     return subdomain;
   }
 
   @override
-  RouteInformation restoreRouteInformation(String configuration) {
+  RouteInformation restoreRouteInformation(final String configuration) {
     // Implement this if you need to restore RouteInformation
     throw UnimplementedError();
   }

@@ -49,7 +49,7 @@ class _BlogScreenState extends State<BlogScreen> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                           Column(
@@ -79,7 +79,6 @@ class _BlogScreenState extends State<BlogScreen> {
                     ),
                   ),
                   Expanded(
-                    flex: 1,
                     child: ListView.separated(
                       itemCount: notes.length,
                       itemBuilder: (final context, final index) {
@@ -95,14 +94,13 @@ class _BlogScreenState extends State<BlogScreen> {
                   ),
                 ],
               ),
-            )),
+            ),),
       );
 }
 
 class MyPostWidget extends StatefulWidget {
-  MyPostWidget({
-    super.key,
-    required this.note,
+  const MyPostWidget({
+    required this.note, super.key,
   });
 
   final Note note;
@@ -119,13 +117,13 @@ class _MyPostWidgetState extends State<MyPostWidget> {
     fontWeight: FontWeight.normal,
   );
 
-  String cutText(String text, int limit) {
+  String cutText(final String text, final int limit) {
     if (text.length <= limit) {
       return text; // No need to cut if the text is within the limit
     }
 
     // Find the last space within the limit
-    int lastSpaceIndex = text.lastIndexOf(' ', limit);
+    final var lastSpaceIndex = text.lastIndexOf(" ", limit);
 
     // If there is no space within the limit, cut at the limit
     if (lastSpaceIndex == -1) {
@@ -136,15 +134,15 @@ class _MyPostWidgetState extends State<MyPostWidget> {
     return text.substring(0, lastSpaceIndex);
   }
 
-  String shortenName(String nameRaw,
-      {int nameLimit = 10, bool addDots = false}) {
+  String shortenName(final String nameRaw,
+      {final int nameLimit = 10, final bool addDots = false,}) {
     //* Limiting val should not be gt input length (.substring range issue)
     final max = nameLimit < nameRaw.length ? nameLimit : nameRaw.length;
     //* Get short name
     final name = cutText(nameRaw, max);
     //* Return with '..' if input string was sliced
     if (addDots && nameRaw.length > max) {
-      return name + """\n[...read more](/more)""";
+      return """$name\n[...read more](/more)""";
     } else {
       return name;
     }
@@ -157,15 +155,15 @@ class _MyPostWidgetState extends State<MyPostWidget> {
         p: baseTextStyle,
         code: baseTextStyle.copyWith(
           color: Colors.black,
-          fontFamily: 'monospace', // Replace with a monospace font
+          fontFamily: "monospace", // Replace with a monospace font
           backgroundColor: Colors.grey[200],
         ),
-        h1: baseTextStyle.copyWith(fontSize: 24.0, fontWeight: FontWeight.bold),
-        h2: baseTextStyle.copyWith(fontSize: 22.0, fontWeight: FontWeight.bold),
-        h3: baseTextStyle.copyWith(fontSize: 20.0, fontWeight: FontWeight.bold),
-        h4: baseTextStyle.copyWith(fontSize: 18.0, fontWeight: FontWeight.bold),
-        h5: baseTextStyle.copyWith(fontSize: 16.0, fontWeight: FontWeight.bold),
-        h6: baseTextStyle.copyWith(fontSize: 14.0, fontWeight: FontWeight.bold),
+        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.bold),
+        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
         em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
         strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
         del: baseTextStyle,
@@ -184,19 +182,17 @@ class _MyPostWidgetState extends State<MyPostWidget> {
       );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     String data;
     if (!showMore) {
       data = shortenName(widget.note.note, nameLimit: 280, addDots: true);
     } else {
-      data = widget.note.note + """\n[...less](/less)""";
+      data = """${widget.note.note}\n[...less](/less)""";
     }
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Flexible(
             child: InfoBlock(
@@ -206,9 +202,10 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CircleAvatar(
+                        radius: 26,
+                        backgroundColor: Colors.deepOrange.shade200,
                         child: SizedBox(
                           width: 48,
                           height: 48,
@@ -216,16 +213,12 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                             "assets/svgs/head.svg",
                           ),
                         ),
-                        radius: 26,
-                        backgroundColor: Colors.deepOrange.shade200,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
                             "Nazar Lenyk",
@@ -253,7 +246,7 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                   ),
                   Markdown(
                     styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
-                    onTapLink: (text, href, title) {
+                    onTapLink: (final text, final href, final title) {
                       if (href == "/more" || href == "/less") {
                         setState(() {
                           showMore = !showMore;
@@ -264,7 +257,7 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                     },
                     data: data,
                     shrinkWrap: true,
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     selectable: true,
                     inlineSyntaxes: [HexColorSyntax()],
                     builders: {"hexcolor": HexColorBuilder()},
@@ -280,9 +273,6 @@ class _MyPostWidgetState extends State<MyPostWidget> {
 }
 
 class Note {
-  String note;
-  String id;
-  DateTime date;
 
   // Constructor
   Note({
@@ -290,17 +280,20 @@ class Note {
     required this.id,
     required this.date,
   });
+  String note;
+  String id;
+  DateTime date;
 }
 
 class FontColorSyntax extends md.InlineSyntax {
   FontColorSyntax()
       : super(
-            r'''<span(?:.*?)data-color=['"]rgb *\((?: *([0-9]{1,3}))[, ]+(?: *([0-9]{1,3}))[, ]+(?: *([0-9]{1,3}))[, ]*\)['"](?:.*?)>(.*?)</span>''');
+            r'''<span(?:.*?)data-color=['"]rgb *\((?: *([0-9]{1,3}))[, ]+(?: *([0-9]{1,3}))[, ]+(?: *([0-9]{1,3}))[, ]*\)['"](?:.*?)>(.*?)</span>''',);
 
   @override
-  bool onMatch(md.InlineParser parse, Match match) {
-    md.Element colorTag =
-        md.Element.text('fontcolor', match.group(4) ?? "matched text");
+  bool onMatch(final md.InlineParser parse, final Match match) {
+    final colorTag =
+        md.Element.text("fontcolor", match.group(4) ?? "matched text");
 
     colorTag.attributes["fontColorRed"] = match.group(1) ?? "0";
     colorTag.attributes["fontColorGreen"] = match.group(2) ?? "0";
@@ -312,7 +305,7 @@ class FontColorSyntax extends md.InlineSyntax {
 }
 
 class FontColorBuilder extends MarkdownElementBuilder {
-  int getColor(md.Element el, String color) =>
+  int getColor(final md.Element el, final String color) =>
       int.tryParse(el.attributes["fontColor$color"] ?? "0") ?? 0;
 
   MarkdownStyleSheet getMyMarkdownStyleSheet(final TextStyle baseTextStyle) =>
@@ -322,15 +315,15 @@ class FontColorBuilder extends MarkdownElementBuilder {
         p: baseTextStyle,
         code: baseTextStyle.copyWith(
           color: Colors.black,
-          fontFamily: 'monospace', // Replace with a monospace font
+          fontFamily: "monospace", // Replace with a monospace font
           backgroundColor: Colors.grey[200],
         ),
-        h1: baseTextStyle.copyWith(fontSize: 24.0, fontWeight: FontWeight.bold),
-        h2: baseTextStyle.copyWith(fontSize: 22.0, fontWeight: FontWeight.bold),
-        h3: baseTextStyle.copyWith(fontSize: 20.0, fontWeight: FontWeight.bold),
-        h4: baseTextStyle.copyWith(fontSize: 18.0, fontWeight: FontWeight.bold),
-        h5: baseTextStyle.copyWith(fontSize: 16.0, fontWeight: FontWeight.bold),
-        h6: baseTextStyle.copyWith(fontSize: 14.0, fontWeight: FontWeight.bold),
+        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.bold),
+        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
         em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
         strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
         del: baseTextStyle,
@@ -349,12 +342,12 @@ class FontColorBuilder extends MarkdownElementBuilder {
       );
 
   @override
-  Widget visitElementAfter(element, style) {
+  Widget visitElementAfter(final md.Element element, final TextStyle? style) {
     final red = getColor(element, "Red");
     final green = getColor(element, "Green");
     final blue = getColor(element, "Blue");
 
-    final TextStyle baseTextStyle = GoogleFonts.robotoMono(
+    final baseTextStyle = GoogleFonts.robotoMono(
       color: Color.fromRGBO(red, green, blue, 1),
       fontWeight: FontWeight.normal,
     );
@@ -362,20 +355,20 @@ class FontColorBuilder extends MarkdownElementBuilder {
     return MarkdownBody(
         selectable: true,
         styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
-        data: element.textContent);
+        data: element.textContent,);
   }
 }
 
 class HexColorSyntax extends md.InlineSyntax {
-  HexColorSyntax() : super(r'\[#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})\]\((.*?)\)');
+  HexColorSyntax() : super(r"\[#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})\]\((.*?)\)");
 
   @override
-  bool onMatch(md.InlineParser parser, Match match) {
+  bool onMatch(final md.InlineParser parser, final Match match) {
     final colorCode = match[1]!;
     final textContent = match[2]!;
 
-    md.Element colorTag = md.Element.text('hexcolor', textContent);
-    colorTag.attributes['colorCode'] = colorCode;
+    final colorTag = md.Element.text("hexcolor", textContent);
+    colorTag.attributes["colorCode"] = colorCode;
 
     parser.addNode(colorTag);
     return true;
@@ -390,15 +383,15 @@ class HexColorBuilder extends MarkdownElementBuilder {
         p: baseTextStyle,
         code: baseTextStyle.copyWith(
           color: Colors.black,
-          fontFamily: 'monospace', // Replace with a monospace font
+          fontFamily: "monospace", // Replace with a monospace font
           backgroundColor: Colors.grey[200],
         ),
-        h1: baseTextStyle.copyWith(fontSize: 24.0, fontWeight: FontWeight.bold),
-        h2: baseTextStyle.copyWith(fontSize: 22.0, fontWeight: FontWeight.bold),
-        h3: baseTextStyle.copyWith(fontSize: 20.0, fontWeight: FontWeight.bold),
-        h4: baseTextStyle.copyWith(fontSize: 18.0, fontWeight: FontWeight.bold),
-        h5: baseTextStyle.copyWith(fontSize: 16.0, fontWeight: FontWeight.bold),
-        h6: baseTextStyle.copyWith(fontSize: 14.0, fontWeight: FontWeight.bold),
+        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.bold),
+        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
         em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
         strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
         del: baseTextStyle,
@@ -417,11 +410,11 @@ class HexColorBuilder extends MarkdownElementBuilder {
       );
 
   @override
-  Widget visitElementAfter(element, style) {
-    final colorCode = element.attributes['colorCode'];
+  Widget visitElementAfter(final md.Element element, final TextStyle? style) {
+    final colorCode = element.attributes["colorCode"];
 
     int.parse(colorCode!, radix: 16);
-    final TextStyle baseTextStyle = GoogleFonts.robotoMono(
+    final baseTextStyle = GoogleFonts.robotoMono(
       color: Color(int.parse(colorCode, radix: 16)),
       fontWeight: FontWeight.normal,
     );
@@ -429,14 +422,14 @@ class HexColorBuilder extends MarkdownElementBuilder {
     return MarkdownBody(
         selectable: true,
         styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
-        data: element.textContent);
+        data: element.textContent,);
   }
 }
 
 
-String formatDateTime(DateTime dateTime) {
+String formatDateTime(final DateTime dateTime) {
   // Define the desired date format
-  final DateFormat formatter = DateFormat.yMMMMd('en_US');
+  final formatter = DateFormat.yMMMMd("en_US");
 
   // Format the DateTime using the defined format
   return formatter.format(dateTime);
