@@ -37,6 +37,7 @@ class _BlogScreenState extends State<BlogScreen> {
                       width: 800,
                       padding: const EdgeInsets.all(16),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Text(
@@ -46,7 +47,7 @@ class _BlogScreenState extends State<BlogScreen> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                                                       //     overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           const SizedBox(
@@ -261,6 +262,7 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                     selectable: true,
                     inlineSyntaxes: [HexColorSyntax()],
                     builders: {"hexcolor": HexColorBuilder()},
+                    physics: const NeverScrollableScrollPhysics(),
                   ),
                 ],
               ),
