@@ -1,7 +1,7 @@
 # onelenyk Project 🚀
 
 ## Overview 🌟
-OneLenykCo is an innovative Flutter project designed to provide a robust and scalable platform for various functionalities. Leveraging Firebase's powerful backend services, this project stands out in its integration of Firebase Authentication, Firebase Firestore, and other Firebase services to deliver a seamless user experience.
+onelenykdev is an innovative Flutter project designed to provide a robust and scalable platform for various functionalities. Leveraging Firebase's powerful backend services, this project stands out in its integration of Firebase Authentication, Firebase Firestore, and other Firebase services to deliver a seamless user experience.
 
 ## Features 💡
 - **Firebase Integration**: Utilize Firebase Auth for user authentication and Firestore for real-time data storage and retrieval.
@@ -20,8 +20,8 @@ OneLenykCo is an innovative Flutter project designed to provide a robust and sca
 To get started with the OneLenykCo project, ensure you have Flutter installed and set up on your machine. Clone the repository, install dependencies, and you're ready to go!
 
 ```bash
-git clone https://github.com/your-repository/OneLenykCo.git
-cd OneLenykCo
+git clone https://github.com/your-repository/onelenykdev.git
+cd onelenykdev
 flutter pub get
 flutter run
 ```
@@ -30,7 +30,3 @@ Contributions to the OneLenykCo project are welcome! Whether it's bug fixes, fea
 
 ## License 📄
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
----
-
-Happy Coding! 💻🎉nsed under the MIT License - see the LICENSE.md file for details.
