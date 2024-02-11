@@ -55,3 +55,4 @@ app.*.map.json
 /.firebase/
 /assets/.env
 /dotenv.env
+*report.xml
