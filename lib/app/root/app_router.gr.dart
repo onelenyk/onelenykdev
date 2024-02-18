@@ -24,7 +24,7 @@ abstract class _$AppRouter extends RootStackRouter {
     MainRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MainScreen(),
+        child: MainScreen(),
       );
     },
     MyPasswordsRoute.name: (routeData) {

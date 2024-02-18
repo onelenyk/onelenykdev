@@ -1,4 +1,3 @@
-
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -16,23 +15,44 @@ import "package:onelenykco/app/features/main/screen/resume/resume_part.dart";
 import "package:onelenykco/app/features/main/screen/site/site_part.dart";
 import "package:onelenykco/app/root/app_router.dart";
 
+import "base/responsive_state.dart";
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
+
+  final getIt = GetIt.instance;
+  late final MainCubit cubit = getIt<MainCubit>();
 
   @override
-  _MainScreen createState() => _MainScreen();
+  _MainScreenState createState() => _MainScreenState(cubit);
 }
 
-class _MainScreen extends State<MainScreen> {
-  final getIt = GetIt.instance;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  late final cubit = getIt<MainCubit>();
+class _MainScreenState
+    extends ResponsiveState<MainScreen, MainState, MainCubit> {
+  _MainScreenState(super.cubit);
+
+  @override
+  void onStateChange(
+    final BuildContext context,
+    final MainState state,
+  ) {}
+
+  @override
+  Widget buildDesktopLayout(
+    final BuildContext context,
+    final MainState state,
+  ) =>
+      layout(state);
+
+  @override
+  Widget buildMobileLayout(
+    final BuildContext context,
+    final MainState state,
+  ) =>
+      layout(state);
 
   Widget bottomCareer({required final MainState state}) {
-    final cubit = getIt<MainCubit>();
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,8 +111,6 @@ class _MainScreen extends State<MainScreen> {
   }
 
   Widget blog({required final MainState state}) {
-    final cubit = getIt<MainCubit>();
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,16 +152,11 @@ class _MainScreen extends State<MainScreen> {
   }
 
   Widget site({required final MainState state}) {
-    final cubit = getIt<MainCubit>();
-
-
-
     return HoverButton(
       onTap: () {
         cubit.selectTopic(route: Routes.AboutSite);
       },
       onDoubleTap: () {},
-
       color: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.all(6),
@@ -160,8 +173,6 @@ class _MainScreen extends State<MainScreen> {
   }
 
   Widget collaboration({required final MainState state}) {
-    final cubit = getIt<MainCubit>();
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,62 +211,6 @@ class _MainScreen extends State<MainScreen> {
     );
   }
 
-  Future<void> showLoginDialog(final BuildContext context) async {
-    var email = "";
-    var password = "";
-
-    return showDialog<void>(
-      context: context,
-      builder: (final dialogContext) => AlertDialog(
-        title: const Text("Login"),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              TextField(
-                onChanged: (final value) {
-                  email = value;
-                },
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              TextField(
-                onChanged: (final value) {
-                  password = value;
-                },
-                decoration: const InputDecoration(
-                  hintText: "Password",
-                ),
-                obscureText: true,
-              ),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text("Cancel"),
-            onPressed: () {
-              Navigator.of(dialogContext).pop(); // Dismiss the dialog
-            },
-          ),
-          TextButton(
-            child: const Text("Login"),
-            onPressed: () {
-              // Implement your login logic here
-              print("Email: $email, Password: $password");
-              Navigator.of(dialogContext).pop(); // Dismiss the dialog
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  void openMenu() {
-    cubit.openMenu();
-  }
-
   Widget buildResponsiveBody({required final MainState state}) {
     Widget? content;
 
@@ -275,9 +230,6 @@ class _MainScreen extends State<MainScreen> {
       case Routes.AboutSite:
         content = const SiteStoryPart();
         break;
-      default:
-        content = const Placeholder();
-        break;
     }
 
     return Container(
@@ -285,205 +237,99 @@ class _MainScreen extends State<MainScreen> {
         color: const Color(0xFF343540),
         borderRadius: BorderRadius.circular(0),
       ),
-      child: Stack(
-        children: [
-          content,
-        ],
-      ),
+      child: content,
     );
   }
 
-  Widget buildMenuHorizontal(final MainState state) => Column(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget buildMenuVertical(final MainState state) => SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.blueGrey.shade300.withOpacity(0.1),
-                        blurRadius: 4,
-                        offset: const Offset(
-                          0,
-                          3,
-                        ),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: HoverButton(
-                      hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                      color: Colors.blueGrey.shade300.withOpacity(0.8),
-                      onTap: openMenu,
-                      onDoubleTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Text(
-                          state.activeRoute.title,
-                          style: GoogleFonts.robotoMono(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: HoverButton(
+                    hoverColor: Colors.blueGrey.shade300.withOpacity(1),
+                    color: Colors.blueGrey.shade300.withOpacity(0.8),
+                    onTap: cubit.openMenu,
+                    onDoubleTap: () {},
+                    child: const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Icon(
+                        FontAwesomeIcons.bars,
+                        color: Colors.white,
+                        size: 20,
                       ),
                     ),
                   ),
                 ),
-                Visibility(
-                  visible: state.isMenuOpened,
-                  child: InfoBlock(
-                    color: Colors.transparent,
-                    child: Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        InfoBlock(
-                          color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: bottomCareer(state: state),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: HoverButton(
+                    hoverColor: Colors.blueGrey.shade300.withOpacity(1),
+                    color: Colors.blueGrey.shade300.withOpacity(0.8),
+                    onTap: cubit.openMenu,
+                    onDoubleTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        state.activeRoute.title,
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
                         ),
-                        InfoBlock(
-                          color: Colors.deepOrange.shade300.withOpacity(0.8),
-                          child: blog(state: state),
-                        ),
-                        InfoBlock(
-                          color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: collaboration(state: state),
-                        ),
-                        InfoBlock(
-                          color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: site(state: state),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      );
-
-  Widget buildMenuVertical(final MainState state) => Column(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            Visibility(
+              visible: state.isMenuOpened,
+              child: InfoBlock(
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      width: 8,
+                    InfoBlock(
+                      color: Colors.blueGrey.shade300.withOpacity(0.8),
+                      child: bottomCareer(state: state),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: HoverButton(
-                        hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                        color: Colors.blueGrey.shade300.withOpacity(0.8),
-                        onTap: openMenu,
-                        onDoubleTap: () {},
-                        child: const Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(
-                            FontAwesomeIcons.bars,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
+                    const SizedBox(height: 8),
+                    InfoBlock(
+                      color: Colors.deepOrange.shade300.withOpacity(0.8),
+                      child: blog(state: state),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: HoverButton(
-                        hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                        color: Colors.blueGrey.shade300.withOpacity(0.8),
-                        onTap: openMenu,
-                        onDoubleTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            state.activeRoute.title,
-                            style: GoogleFonts.robotoMono(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900,),
-                          ),
-                        ),
-                      ),
+                    const SizedBox(height: 8),
+                    InfoBlock(
+                      color: Colors.blueGrey.shade300.withOpacity(0.8),
+                      child: collaboration(state: state),
                     ),
+                    const SizedBox(height: 8),
+                    site(state: state),
                   ],
                 ),
-                Visibility(
-                  visible: state.isMenuOpened,
-                  child: InfoBlock(
-                    color: Colors.transparent,
-                    width: 300,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InfoBlock(
-                          color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: bottomCareer(state: state),
-                        ),
-                        const SizedBox(height: 8),
-                        InfoBlock(
-                          color: Colors.deepOrange.shade300.withOpacity(0.8),
-                          child: blog(state: state),
-                        ),
-                        const SizedBox(height: 8),
-                        InfoBlock(
-                          color: Colors.blueGrey.shade300.withOpacity(0.8),
-                          child: collaboration(state: state),
-                        ),
-                        const SizedBox(height: 8),
-                        site(state: state),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
+          ],
+        ),
+      );
+
+  Widget layout(final MainState state) => Scaffold(
+        body: SelectionArea(
+          child: Stack(
+            children: [
+              buildResponsiveBody(state: state),
+              buildMenuVertical(state),
+            ],
           ),
-        ],
+        ),
       );
-
-  Widget buildDesktop(final MainState state) => Stack(
-        children: [
-          buildResponsiveBody(state: state),
-          buildMenuVertical(state),
-        ],
-      );
-
-  Widget buildMobile(final MainState state) => Stack(
-        children: [buildResponsiveBody(state: state), buildMenuVertical(state)],
-      );
-
-  @override
-  Widget build(final BuildContext context) {
-    final cubit = getIt<MainCubit>();
-
-    return BlocConsumer<MainCubit, MainState>(
-      listener: (final context, final state) {
-        _scaffoldKey.currentState?.closeDrawer();
-        return;
-      },
-      bloc: cubit, // Provide the cubit
-      builder: (final context, final state) {
-        Widget body;
-        if (ResponsiveUtil.isDesktop(context)) {
-          body = buildDesktop(state);
-        } else {
-          body = buildMobile(state);
-        }
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          key: _scaffoldKey,
-          body: SelectionArea(child: body),
-        );
-      },
-    );
-  }
 }
