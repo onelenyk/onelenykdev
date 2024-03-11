@@ -255,11 +255,24 @@ class _HireMePageState extends State<HireMePart> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       buildNewContactMe(
-                        telegram: () {},
-                        linkedin: () {},
-                        instagram: () {},
-                        github: () {},
-                        resume: () {},
+                        telegram: () {
+                          openLink("https://onelenyk.t.me/");
+                        },
+                        linkedin: () {
+                          openLink("https://www.linkedin.com/in/onelenyk/");
+                        },
+                        instagram: () => {
+                          openLink(
+                              "https://www.instagram.com/makemegreatagain.pleasure/"),
+                        },
+                        github: () {
+                          openLink("https://github.com/onelenyk/");
+                        },
+                        resume: () {
+                          downloadPdfFromAssets(
+                            "assets/resume.pdf",
+                          );
+                        },
                       ),
                     ],
                   ),
