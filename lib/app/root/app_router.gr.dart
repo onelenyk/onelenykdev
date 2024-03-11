@@ -22,9 +22,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MainRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<MainRouteArgs>(orElse: () => const MainRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: MainScreen(),
+        child: MainScreen(key: args.key),
       );
     },
     MyPasswordsRoute.name: (routeData) {
@@ -52,16 +54,30 @@ class BlogRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MainScreen]
-class MainRoute extends PageRouteInfo<void> {
-  const MainRoute({List<PageRouteInfo>? children})
-      : super(
+class MainRoute extends PageRouteInfo<MainRouteArgs> {
+  MainRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           MainRoute.name,
+          args: MainRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'MainRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MainRouteArgs> page = PageInfo<MainRouteArgs>(name);
+}
+
+class MainRouteArgs {
+  const MainRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MainRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

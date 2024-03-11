@@ -31,6 +31,7 @@ mixin _$ProfileItem {
   List<String> get languages => throw _privateConstructorUsedError;
   List<String> get skills => throw _privateConstructorUsedError;
   List<ExperienceItem> get experience => throw _privateConstructorUsedError;
+  EducationItem get education => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +56,10 @@ abstract class $ProfileItemCopyWith<$Res> {
       String description,
       List<String> languages,
       List<String> skills,
-      List<ExperienceItem> experience});
+      List<ExperienceItem> experience,
+      EducationItem education});
+
+  $EducationItemCopyWith<$Res> get education;
 }
 
 /// @nodoc
@@ -82,6 +86,7 @@ class _$ProfileItemCopyWithImpl<$Res, $Val extends ProfileItem>
     Object? languages = null,
     Object? skills = null,
     Object? experience = null,
+    Object? education = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -128,7 +133,19 @@ class _$ProfileItemCopyWithImpl<$Res, $Val extends ProfileItem>
           ? _value.experience
           : experience // ignore: cast_nullable_to_non_nullable
               as List<ExperienceItem>,
+      education: null == education
+          ? _value.education
+          : education // ignore: cast_nullable_to_non_nullable
+              as EducationItem,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EducationItemCopyWith<$Res> get education {
+    return $EducationItemCopyWith<$Res>(_value.education, (value) {
+      return _then(_value.copyWith(education: value) as $Val);
+    });
   }
 }
 
@@ -151,7 +168,11 @@ abstract class _$$ProfileItemImplCopyWith<$Res>
       String description,
       List<String> languages,
       List<String> skills,
-      List<ExperienceItem> experience});
+      List<ExperienceItem> experience,
+      EducationItem education});
+
+  @override
+  $EducationItemCopyWith<$Res> get education;
 }
 
 /// @nodoc
@@ -176,6 +197,7 @@ class __$$ProfileItemImplCopyWithImpl<$Res>
     Object? languages = null,
     Object? skills = null,
     Object? experience = null,
+    Object? education = null,
   }) {
     return _then(_$ProfileItemImpl(
       id: freezed == id
@@ -222,6 +244,10 @@ class __$$ProfileItemImplCopyWithImpl<$Res>
           ? _value._experience
           : experience // ignore: cast_nullable_to_non_nullable
               as List<ExperienceItem>,
+      education: null == education
+          ? _value.education
+          : education // ignore: cast_nullable_to_non_nullable
+              as EducationItem,
     ));
   }
 }
@@ -240,7 +266,8 @@ class _$ProfileItemImpl extends _ProfileItem {
       required this.description,
       required final List<String> languages,
       required final List<String> skills,
-      required final List<ExperienceItem> experience})
+      required final List<ExperienceItem> experience,
+      required this.education})
       : _languages = languages,
         _skills = skills,
         _experience = experience,
@@ -290,8 +317,11 @@ class _$ProfileItemImpl extends _ProfileItem {
   }
 
   @override
+  final EducationItem education;
+
+  @override
   String toString() {
-    return 'ProfileItem(id: $id, title: $title, role: $role, location: $location, firstName: $firstName, lastName: $lastName, age: $age, description: $description, languages: $languages, skills: $skills, experience: $experience)';
+    return 'ProfileItem(id: $id, title: $title, role: $role, location: $location, firstName: $firstName, lastName: $lastName, age: $age, description: $description, languages: $languages, skills: $skills, experience: $experience, education: $education)';
   }
 
   @override
@@ -315,7 +345,9 @@ class _$ProfileItemImpl extends _ProfileItem {
                 .equals(other._languages, _languages) &&
             const DeepCollectionEquality().equals(other._skills, _skills) &&
             const DeepCollectionEquality()
-                .equals(other._experience, _experience));
+                .equals(other._experience, _experience) &&
+            (identical(other.education, education) ||
+                other.education == education));
   }
 
   @JsonKey(ignore: true)
@@ -332,7 +364,8 @@ class _$ProfileItemImpl extends _ProfileItem {
       description,
       const DeepCollectionEquality().hash(_languages),
       const DeepCollectionEquality().hash(_skills),
-      const DeepCollectionEquality().hash(_experience));
+      const DeepCollectionEquality().hash(_experience),
+      education);
 
   @JsonKey(ignore: true)
   @override
@@ -360,7 +393,8 @@ abstract class _ProfileItem extends ProfileItem {
       required final String description,
       required final List<String> languages,
       required final List<String> skills,
-      required final List<ExperienceItem> experience}) = _$ProfileItemImpl;
+      required final List<ExperienceItem> experience,
+      required final EducationItem education}) = _$ProfileItemImpl;
   _ProfileItem._() : super._();
 
   factory _ProfileItem.fromJson(Map<String, dynamic> json) =
@@ -388,6 +422,8 @@ abstract class _ProfileItem extends ProfileItem {
   List<String> get skills;
   @override
   List<ExperienceItem> get experience;
+  @override
+  EducationItem get education;
   @override
   @JsonKey(ignore: true)
   _$$ProfileItemImplCopyWith<_$ProfileItemImpl> get copyWith =>

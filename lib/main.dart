@@ -11,6 +11,7 @@ import "package:onelenykco/firebase_options.dart";
 late final FirebaseApp firebaseApp;
 ///Public firebase
 late final FirebaseAuth firebaseAuth;
+final bool isProduction = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,4 @@
-import "package:onelenykco/app/features/main/screen/blog/blog_page.dart";
+import "package:onelenykco/app/features/main/data/blog/note.dart";
 
 final Note template = Note(note: """
 # Flutter Markdown Syntax Showcase

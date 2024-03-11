@@ -22,7 +22,7 @@ abstract class ResponsiveState<T extends StatefulWidget, S, C extends Cubit<S>>
   Widget buildMobileLayout(final BuildContext context, final S state);
 
   Widget _buildResponsiveLayout(final BuildContext context, final S state) =>
-      ResponsiveUtil.isDesktop(context)
+      ResponsiveUtil.isDesktopFull(context)
           ? buildDesktopLayout(context, state)
           : buildMobileLayout(context, state);
 }

@@ -10,12 +10,16 @@ import "package:onelenykco/app/common/responsive_util.dart";
 import "package:onelenykco/app/features/main/data/state/main_cubit.dart";
 import "package:onelenykco/app/features/main/data/state/main_state.dart";
 import "package:onelenykco/app/features/main/data/state/routes.dart";
+import "package:onelenykco/app/features/main/screen/collaboration/collaboration.dart";
+import "package:onelenykco/app/features/main/screen/design/design.dart";
 import "package:onelenykco/app/features/main/screen/hireme/hire_me.dart";
 import "package:onelenykco/app/features/main/screen/resume/resume_part.dart";
 import "package:onelenykco/app/features/main/screen/site/site_part.dart";
 import "package:onelenykco/app/root/app_router.dart";
 
+import "../data/blog/note.dart";
 import "base/responsive_state.dart";
+import "blog/blog_page.dart";
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
@@ -52,8 +56,7 @@ class _MainScreenState
   ) =>
       layout(state);
 
-  Widget bottomCareer({required final MainState state}) {
-    return Column(
+  Widget bottomCareer({required final MainState state}) => Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -108,7 +111,6 @@ class _MainScreenState
         ),
       ],
     );
-  }
 
   Widget blog({required final MainState state}) {
     return Column(
@@ -133,8 +135,8 @@ class _MainScreenState
             router.navigate(const BlogRoute());
           },
           onDoubleTap: () {},
-          color: Colors.deepOrange.shade300,
-          hoverColor: Colors.deepOrange.shade200.withOpacity(0.8),
+          color: Colors.deepOrange.shade300.withAlpha(97),
+          hoverColor: Colors.deepOrange.shade200.withAlpha(99),
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
@@ -172,6 +174,27 @@ class _MainScreenState
     );
   }
 
+  Widget design({required final MainState state}) => HoverButton(
+      onTap: () {
+        cubit.selectTopic(route: Routes.Design);
+
+      },
+      onDoubleTap: () {},
+      color: Colors.deepPurple.shade300.withAlpha(97),
+      hoverColor: Colors.deepPurple.shade200.withAlpha(99),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: Text(
+          Routes.Design.title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+
   Widget collaboration({required final MainState state}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -191,7 +214,7 @@ class _MainScreenState
         ),
         HoverButton(
           onTap: () {
-            cubit.selectTopic(route: Routes.HireMe);
+            cubit.selectTopic(route: Routes.Collab);
           },
           onDoubleTap: () {},
           color: Colors.white24,
@@ -211,12 +234,12 @@ class _MainScreenState
     );
   }
 
-  Widget buildResponsiveBody({required final MainState state}) {
+  Widget buildBody({required final MainState state}) {
     Widget? content;
 
     switch (state.activeRoute) {
       case Routes.Collab:
-        content = const Placeholder();
+        content = CollaborationPart();
         break;
       case Routes.Resume:
         content = ResumePart();
@@ -230,6 +253,10 @@ class _MainScreenState
       case Routes.AboutSite:
         content = const SiteStoryPart();
         break;
+      case Routes.Design:
+        content = const DesignPart();
+
+        break;
     }
 
     return Container(
@@ -241,7 +268,8 @@ class _MainScreenState
     );
   }
 
-  Widget buildMenuVertical(final MainState state) => SingleChildScrollView(
+  Widget buildMenu(final MainState state) {
+    return SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,8 +283,8 @@ class _MainScreenState
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: HoverButton(
-                    hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                    color: Colors.blueGrey.shade300.withOpacity(0.8),
+                    hoverColor: Colors.blueGrey.shade300.withAlpha(100),
+                    color: Colors.blueGrey.shade300.withAlpha(90),
                     onTap: cubit.openMenu,
                     onDoubleTap: () {},
                     child: const Padding(
@@ -272,8 +300,8 @@ class _MainScreenState
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: HoverButton(
-                    hoverColor: Colors.blueGrey.shade300.withOpacity(1),
-                    color: Colors.blueGrey.shade300.withOpacity(0.8),
+                    hoverColor: Colors.blueGrey.shade300.withAlpha(100),
+                    color: Colors.blueGrey.shade300.withAlpha(80),
                     onTap: cubit.openMenu,
                     onDoubleTap: () {},
                     child: Padding(
@@ -299,17 +327,17 @@ class _MainScreenState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InfoBlock(
-                      color: Colors.blueGrey.shade300.withOpacity(0.8),
+                      color: Colors.blueGrey.shade300.withAlpha(90),
                       child: bottomCareer(state: state),
                     ),
                     const SizedBox(height: 8),
                     InfoBlock(
-                      color: Colors.deepOrange.shade300.withOpacity(0.8),
+                      color: Colors.deepOrange.shade300.withAlpha(99),
                       child: blog(state: state),
                     ),
                     const SizedBox(height: 8),
                     InfoBlock(
-                      color: Colors.blueGrey.shade300.withOpacity(0.8),
+                      color: Colors.blueGrey.shade300.withAlpha(90),
                       child: collaboration(state: state),
                     ),
                     const SizedBox(height: 8),
@@ -321,13 +349,14 @@ class _MainScreenState
           ],
         ),
       );
+  }
 
   Widget layout(final MainState state) => Scaffold(
         body: SelectionArea(
           child: Stack(
             children: [
-              buildResponsiveBody(state: state),
-              buildMenuVertical(state),
+              buildBody(state: state),
+              buildMenu(state),
             ],
           ),
         ),

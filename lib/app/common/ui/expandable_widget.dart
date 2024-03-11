@@ -5,8 +5,9 @@ import "package:flutter/material.dart";
 import "package:onelenykco/app/common/hover_button.dart";
 
 class ExpandableWidget extends StatefulWidget {
+  const ExpandableWidget(
+      {required this.child1, required this.child2, super.key});
 
-  const ExpandableWidget({required this.child1, required this.child2, super.key});
   final Widget child1;
   final Widget child2;
 
@@ -32,9 +33,8 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
     );
 
     final endValue = _isHovered ? 0.2 : 1.0;
-    _sizeAnimation = Tween<double>(begin: 0, end: endValue)
-        .animate(_controller);
-
+    _sizeAnimation =
+        Tween<double>(begin: 0, end: endValue).animate(_controller);
   }
 
   @override
@@ -86,20 +86,20 @@ class _ExpandableWidgetState extends State<ExpandableWidget>
 
   @override
   Widget build(final BuildContext context) => HoverButton(
-      color: _isHovered ? Colors.grey : Colors.transparent,
-      onTap: _toggleExpand,
-      onDoubleTap: () {},
-      onHover: (final isHovered) {
-        toggleHover(isHovered);
-      },
-      child: Column(
-        children: <Widget>[
-          widget.child1,
-          SizeTransition(
-            sizeFactor: _sizeAnimation,
-            child: widget.child2,
-          ),
-        ],
-      ),
-    );
+        color: _isHovered ? Colors.grey : Colors.transparent,
+        onTap: _toggleExpand,
+        onDoubleTap: () {},
+        onHover: (final isHovered) {
+          toggleHover(isHovered);
+        },
+        child: Column(
+          children: <Widget>[
+            widget.child1,
+            SizeTransition(
+              sizeFactor: _sizeAnimation,
+              child: widget.child2,
+            ),
+          ],
+        ),
+      );
 }

@@ -1,4 +1,5 @@
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:onelenykco/app/features/main/data/profile/education_item.dart";
 import "package:onelenykco/app/features/main/data/profile/employment_item.dart";
 
 part "profile_item.freezed.dart";
@@ -18,6 +19,7 @@ class ProfileItem with _$ProfileItem {
     required final List<String> languages,
     required final List<String> skills,
     required final List<ExperienceItem> experience,
+    required final EducationItem education,
   }) = _ProfileItem;
 
   factory ProfileItem.fromJson(final Map<String, dynamic> json) => _$ProfileItemFromJson(json);

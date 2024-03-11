@@ -10,7 +10,7 @@ import "package:package_info_plus/package_info_plus.dart";
 class MainCubit extends Cubit<MainState> {
   MainCubit()
       : super(
-      MainState(activeRoute: Routes.Resume, isMenuOpened: true, emoji: null, version:"initial"),) {
+      MainState(activeRoute: Routes.Design, isMenuOpened: false, emoji: null, version:"initial"),) {
     loadVersion();
     loadEmoji();
   }
@@ -19,7 +19,7 @@ class MainCubit extends Cubit<MainState> {
   final getIt = GetIt.instance;
 
   void selectTopic({required final Routes route}) {
-    emit(state.copyWith(activeRoute: route));
+    emit(state.copyWith(activeRoute: route, isMenuOpened: false));
   }
 
   Future<void> openMenu() async {

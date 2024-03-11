@@ -23,6 +23,8 @@ _$ProfileItemImpl _$$ProfileItemImplFromJson(Map<String, dynamic> json) =>
       experience: (json['experience'] as List<dynamic>)
           .map((e) => ExperienceItem.fromJson(e as Map<String, dynamic>))
           .toList(),
+      education:
+          EducationItem.fromJson(json['education'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ProfileItemImplToJson(_$ProfileItemImpl instance) =>
@@ -38,4 +40,5 @@ Map<String, dynamic> _$$ProfileItemImplToJson(_$ProfileItemImpl instance) =>
       'languages': instance.languages,
       'skills': instance.skills,
       'experience': instance.experience.map((e) => e.toJson()).toList(),
+      'education': instance.education.toJson(),
     };

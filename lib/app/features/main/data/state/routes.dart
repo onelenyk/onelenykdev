@@ -4,7 +4,8 @@ enum Routes {
   HireMe,
   Collab,
   Blog,
-  AboutSite
+  AboutSite,
+  Design
 }
 
 extension RouteExtension on Routes {
@@ -21,6 +22,9 @@ extension RouteExtension on Routes {
         return "the site story 🚨";
       case Routes.Collab:
         return "collaboration 🌍";
+      case Routes.Design:
+        return "Design develop 👾";
+        break;
     }
   }
 }

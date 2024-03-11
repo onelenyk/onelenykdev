@@ -6,13 +6,31 @@
   "firstName": "Nazar",
   "lastName": "Lenyk",
   "age": "25",
-  "description": "test",
+  "description": "I'm **Nazar**, an ***Android Software Engineer*** \uD83D\uDC68\u200D\uD83D\uDCBB.\n I have over **5 years** \uD83D\uDDD3\uFE0F of experience in creating native applications for Android OS \uD83D\uDCF1.  \nThe experience includes creating applications for such domains as: **video media production** \uD83C\uDFA5, **utility management** \uD83D\uDD27, **transport logistics** \uD83D\uDE9A, and **fintech** \uD83D\uDCB0.  \n\nTechnically, I'm cool with Kotlin and Java projects \uD83D\uDDA5\uFE0F, legacy XML projects \uD83D\uDCC2, or fresh Jetpack Compose \uD83C\uDFA8. I love application architecture \uD83C\uDFD7\uFE0F and implementing interesting features using camera \uD83D\uDCF8, notifications \uD83D\uDD14, services \uD83D\uDCE1, etc APIs \uD83C\uDF10.  \n\n**Current stack**: Kotlin, Services, Jetpack Compose, Decompose, Coroutines, Retrofit, Flow, Koin, Clean Architecture, Ktlint, CI/CD \uD83D\uDEE0\uFE0F.\n",
   "languages": [
     "Ukrainian",
     "English"
   ],
   "skills": [
-    "test"
+    "Kotlin",
+    "Java",
+    "Android SDK",
+    "Android Jetpack",
+    "Jetpack Compose",
+    "Kotlin Coroutines",
+    "Gradle",
+    "Git",
+    "REST API",
+    "CI/CD",
+    "Camera 2",
+    "MV*",
+    "Retrofit 2",
+    "Room",
+    "Flow",
+    "LiveData",
+    "Dagger/Hilt/Koin",
+    "Firebase",
+    "Json"
   ],
   "experience": [
     {
@@ -84,5 +102,11 @@
         "5) 🛠 Used Kotlin, Java, Volley, AsyncTasks, MySQL for expertise"
       ]
     }
-  ]
+  ],
+  "education": {
+    "universityName": "WUNU, Ukraine",
+    "role": "Advanced Computer Integrated Technologies",
+    "startDate": 1472755920000,
+    "endDate": 1598986320000
+  }
 }

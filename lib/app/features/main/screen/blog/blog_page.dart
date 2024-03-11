@@ -7,7 +7,12 @@ import "package:intl/intl.dart";
 import "package:markdown/markdown.dart" as md;
 import "package:onelenykco/app/common/info_block.dart";
 import "package:onelenykco/app/common/link_utils.dart";
+import "package:onelenykco/app/features/main/data/blog/note.dart";
 import "package:onelenykco/app/features/main/screen/blog/post_site.dart";
+import "package:onelenykco/app/features/main/screen/blog/post_template.dart";
+
+import "markdown/hex_color_builder.dart";
+import "markdown/hex_color_syntax.dart";
 
 @RoutePage()
 class BlogScreen extends StatefulWidget {
@@ -20,91 +25,97 @@ class BlogScreen extends StatefulWidget {
 class _BlogScreenState extends State<BlogScreen> {
   final List<Note> notes = [
     site,
+    template
   ];
 
   @override
   Widget build(final BuildContext context) => Scaffold(
         body: Container(
-            color: Colors.grey.shade900,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: InfoBlock(
-                      color: Colors.deepOrange.shade200.withOpacity(0.4),
-                      width: 800,
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "create, explore, expand, conquer",
+          color: Colors.grey.shade900,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: InfoBlock(
+                    color: Colors.deepOrange.shade200.withOpacity(0.4),
+                    width: 800,
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "create, explore, expand, conquer",
+                            style: GoogleFonts.robotoMono(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            //     overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "onelenyk.dev",
                               style: GoogleFonts.robotoMono(
-                                fontSize: 20,
+                                fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
-                                                       //     overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "onelenyk.dev",
-                                style: GoogleFonts.robotoMono(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            Text(
+                              "2024",
+                              style: GoogleFonts.robotoMono(
+                                fontSize: 12,
+                                color: Colors.grey.shade100,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                "2024",
-                                style: GoogleFonts.robotoMono(
-                                  fontSize: 12,
-                                  color: Colors.grey.shade100,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: notes.length,
-                      itemBuilder: (final context, final index) {
-                        final item = notes[index];
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: notes.length,
+                    itemBuilder: (final context, final index) {
+                      final item = notes[index];
 
-                        return MyPostWidget(
-                          note: item,
-                        );
-                      },
-                      separatorBuilder: (final context, final index) =>
-                          const SizedBox(height: 8),
-                    ),
+                      return MyPostWidget(
+                        note: item,
+                      );
+                    },
+                    separatorBuilder: (final context, final index) =>
+                        const SizedBox(height: 8),
                   ),
-                ],
-              ),
-            ),),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
 }
 
 class MyPostWidget extends StatefulWidget {
   const MyPostWidget({
-    required this.note, super.key,
+    required this.note,
+    super.key,
+    this.post = true,
   });
 
   final Note note;
+
+  final bool post;
 
   @override
   _MyPostWidgetState createState() => _MyPostWidgetState();
@@ -135,8 +146,11 @@ class _MyPostWidgetState extends State<MyPostWidget> {
     return text.substring(0, lastSpaceIndex);
   }
 
-  String shortenName(final String nameRaw,
-      {final int nameLimit = 10, final bool addDots = false,}) {
+  String shortenName(
+    final String nameRaw, {
+    final int nameLimit = 10,
+    final bool addDots = false,
+  }) {
     //* Limiting val should not be gt input length (.substring range issue)
     final max = nameLimit < nameRaw.length ? nameLimit : nameRaw.length;
     //* Get short name
@@ -159,12 +173,12 @@ class _MyPostWidgetState extends State<MyPostWidget> {
           fontFamily: "monospace", // Replace with a monospace font
           backgroundColor: Colors.grey[200],
         ),
-        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
-        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.bold),
-        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
-        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.normal),
+        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.normal),
+        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.normal),
+        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.normal),
+        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.normal),
+        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.normal),
         em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
         strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
         del: baseTextStyle,
@@ -182,8 +196,38 @@ class _MyPostWidgetState extends State<MyPostWidget> {
         tableBody: baseTextStyle, // Customize as needed
       );
 
+  String formatDateTime(final DateTime dateTime) {
+    // Define the desired date format
+    final formatter = DateFormat.yMMMMd("en_US");
+
+    // Format the DateTime using the defined format
+    return formatter.format(dateTime);
+  }
+
   @override
   Widget build(final BuildContext context) {
+    if (!widget.post) {
+      return Markdown(
+        styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
+        onTapLink: (final text, final href, final title) {
+          if (href == "/more" || href == "/less") {
+            setState(() {
+              showMore = !showMore;
+            });
+          } else {
+            openLink(href ?? "");
+          }
+        },
+        data: widget.note.note,
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(0),
+        selectable: true,
+        inlineSyntaxes: [HexColorSyntax()],
+        builders: {"hexcolor": HexColorBuilder()},
+        physics: const NeverScrollableScrollPhysics(),
+      );
+    }
+
     String data;
     if (!showMore) {
       data = shortenName(widget.note.note, nameLimit: 280, addDots: true);
@@ -211,7 +255,7 @@ class _MyPostWidgetState extends State<MyPostWidget> {
                           width: 48,
                           height: 48,
                           child: SvgPicture.asset(
-                            "assets/svgs/head.svg",
+                            "assets/svg/head.svg",
                           ),
                         ),
                       ),
@@ -272,167 +316,4 @@ class _MyPostWidgetState extends State<MyPostWidget> {
       ),
     );
   }
-}
-
-class Note {
-
-  // Constructor
-  Note({
-    required this.note,
-    required this.id,
-    required this.date,
-  });
-  String note;
-  String id;
-  DateTime date;
-}
-
-class FontColorSyntax extends md.InlineSyntax {
-  FontColorSyntax()
-      : super(
-            r'''<span(?:.*?)data-color=['"]rgb *\((?: *([0-9]{1,3}))[, ]+(?: *([0-9]{1,3}))[, ]+(?: *([0-9]{1,3}))[, ]*\)['"](?:.*?)>(.*?)</span>''',);
-
-  @override
-  bool onMatch(final md.InlineParser parse, final Match match) {
-    final colorTag =
-        md.Element.text("fontcolor", match.group(4) ?? "matched text");
-
-    colorTag.attributes["fontColorRed"] = match.group(1) ?? "0";
-    colorTag.attributes["fontColorGreen"] = match.group(2) ?? "0";
-    colorTag.attributes["fontColorBlue"] = match.group(3) ?? "0";
-
-    parse.addNode(colorTag);
-    return true;
-  }
-}
-
-class FontColorBuilder extends MarkdownElementBuilder {
-  int getColor(final md.Element el, final String color) =>
-      int.tryParse(el.attributes["fontColor$color"] ?? "0") ?? 0;
-
-  MarkdownStyleSheet getMyMarkdownStyleSheet(final TextStyle baseTextStyle) =>
-      MarkdownStyleSheet(
-        a: baseTextStyle.copyWith(color: Colors.blue),
-        // Customize as needed
-        p: baseTextStyle,
-        code: baseTextStyle.copyWith(
-          color: Colors.black,
-          fontFamily: "monospace", // Replace with a monospace font
-          backgroundColor: Colors.grey[200],
-        ),
-        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
-        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.bold),
-        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
-        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
-        em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
-        strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
-        del: baseTextStyle,
-        // Customize as needed
-        blockquote: baseTextStyle.copyWith(
-          fontStyle: FontStyle.italic,
-          color: Colors.blueGrey,
-        ),
-        img: baseTextStyle,
-        // Customize as needed
-        checkbox: baseTextStyle,
-        // Customize as needed
-        listBullet: baseTextStyle,
-        tableHead: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
-        tableBody: baseTextStyle, // Customize as needed
-      );
-
-  @override
-  Widget visitElementAfter(final md.Element element, final TextStyle? style) {
-    final red = getColor(element, "Red");
-    final green = getColor(element, "Green");
-    final blue = getColor(element, "Blue");
-
-    final baseTextStyle = GoogleFonts.robotoMono(
-      color: Color.fromRGBO(red, green, blue, 1),
-      fontWeight: FontWeight.normal,
-    );
-
-    return MarkdownBody(
-        selectable: true,
-        styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
-        data: element.textContent,);
-  }
-}
-
-class HexColorSyntax extends md.InlineSyntax {
-  HexColorSyntax() : super(r"\[#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})\]\((.*?)\)");
-
-  @override
-  bool onMatch(final md.InlineParser parser, final Match match) {
-    final colorCode = match[1]!;
-    final textContent = match[2]!;
-
-    final colorTag = md.Element.text("hexcolor", textContent);
-    colorTag.attributes["colorCode"] = colorCode;
-
-    parser.addNode(colorTag);
-    return true;
-  }
-}
-
-class HexColorBuilder extends MarkdownElementBuilder {
-  MarkdownStyleSheet getMyMarkdownStyleSheet(final TextStyle baseTextStyle) =>
-      MarkdownStyleSheet(
-        a: baseTextStyle.copyWith(color: Colors.blue),
-        // Customize as needed
-        p: baseTextStyle,
-        code: baseTextStyle.copyWith(
-          color: Colors.black,
-          fontFamily: "monospace", // Replace with a monospace font
-          backgroundColor: Colors.grey[200],
-        ),
-        h1: baseTextStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
-        h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.bold),
-        h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
-        h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
-        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
-        em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
-        strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
-        del: baseTextStyle,
-        // Customize as needed
-        blockquote: baseTextStyle.copyWith(
-          fontStyle: FontStyle.italic,
-          color: Colors.blueGrey,
-        ),
-        img: baseTextStyle,
-        // Customize as needed
-        checkbox: baseTextStyle,
-        // Customize as needed
-        listBullet: baseTextStyle,
-        tableHead: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
-        tableBody: baseTextStyle, // Customize as needed
-      );
-
-  @override
-  Widget visitElementAfter(final md.Element element, final TextStyle? style) {
-    final colorCode = element.attributes["colorCode"];
-
-    int.parse(colorCode!, radix: 16);
-    final baseTextStyle = GoogleFonts.robotoMono(
-      color: Color(int.parse(colorCode, radix: 16)),
-      fontWeight: FontWeight.normal,
-    );
-
-    return MarkdownBody(
-        selectable: true,
-        styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
-        data: element.textContent,);
-  }
-}
-
-
-String formatDateTime(final DateTime dateTime) {
-  // Define the desired date format
-  final formatter = DateFormat.yMMMMd("en_US");
-
-  // Format the DateTime using the defined format
-  return formatter.format(dateTime);
 }
