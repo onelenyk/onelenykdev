@@ -10,7 +10,7 @@ import "package:package_info_plus/package_info_plus.dart";
 class MainCubit extends Cubit<MainState> {
   MainCubit()
       : super(
-      MainState(activeRoute: Routes.Design, isMenuOpened: false, emoji: null, version:"initial"),) {
+      MainState(activeRoute: Routes.Resume, isMenuOpened: false, emoji: null, version:"initial"),) {
     loadVersion();
     loadEmoji();
   }
