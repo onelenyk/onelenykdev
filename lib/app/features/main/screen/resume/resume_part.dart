@@ -46,66 +46,62 @@ class _ResumePartState
   _ResumePartState(super.cubit);
 
   @override
-  void onStateChange(
-    final BuildContext context,
-    final ResumeState state,
-  ) {}
+  void onStateChange(final BuildContext context,
+      final ResumeState state,) {}
 
   @override
-  Widget buildDesktopLayout(
-    final BuildContext context,
-    final ResumeState state,
-  ) =>
+  Widget buildDesktopLayout(final BuildContext context,
+      final ResumeState state,) =>
       desktopLayout(state);
 
   @override
-  Widget buildMobileLayout(
-    final BuildContext context,
-    final ResumeState state,
-  ) =>
+  Widget buildMobileLayout(final BuildContext context,
+      final ResumeState state,) =>
       SingleChildScrollView(
         child: mobileLayout(state),
       );
 
-  Widget mobileLayout(final ResumeState state) => InfoBlock(
-    radius: 0,
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 48),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: Colors.white24,
+  Widget mobileLayout(final ResumeState state) =>
+      InfoBlock(
+        radius: 0,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 48),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.white24,
+                ),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Part1Widget(
+                    state: state,
+                  ),
+                  const SizedBox(
+                    width: 32,
+                    height: 32,
+                  ),
+                  Part2Widget(state: state),
+                  const SizedBox(
+                    width: 32,
+                    height: 32,
+                  ),
+                  Part3Widget(state: state),
+                ],
+              ),
             ),
           ),
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Part1Widget(
-                state: state,
-              ),
-              const SizedBox(
-                width: 32,
-                height: 32,
-              ),
-              Part2Widget(state: state),
-              const SizedBox(
-                width: 32,
-                height: 32,
-              ),
-              Part3Widget(state: state),
-            ],
-          ),
         ),
-      ),
-    ),
-  );
+      );
 
-  Widget desktopLayout(final ResumeState state) => Center(
-    child: Container(
+  Widget desktopLayout(final ResumeState state) =>
+      Center(
+        child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: const Color(0xFF343540),
@@ -134,36 +130,68 @@ class _ResumePartState
             ),
           ),
         ),
-  );
+      );
 }
 
-class Part1Widget extends StatelessWidget {
+class Part1Widget extends StatefulWidget {
   final ResumeState state;
 
   const Part1Widget({Key? key, required this.state}) : super(key: key);
 
-  /*  void _flipImage(final PointerEvent details, final BuildContext context) {
-    if (ModalRoute.of(context)?.isCurrent != true) {
+  @override
+  State<Part1Widget> createState() => _Part1WidgetState();
+}
+
+class _Part1WidgetState extends State<Part1Widget>
+    with SingleTickerProviderStateMixin {
+
+  double rotationAngle = 0;
+
+  bool isFlipped = false;
+
+  double minValue = 0;
+  double maxValue = 100;
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 15),
+      vsync: this,
+    )
+      ..repeat(reverse: true);
+
+    final curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _animation = Tween<double>(begin:minValue, end: maxValue).animate(curve)
+      ..addListener(() {
+        setState(() {
+          _flipImage(context, _animation.value,);
+        });
+      });
+  }
+
+  void _flipImage(final BuildContext context, double position) {
+    if (ModalRoute
+        .of(context)
+        ?.isCurrent != true) {
       return;
     }
 
-    final localPosition = details.localPosition;
-    final halfWidth = context.size!.width / 3;
+    final halfWidth = maxValue / 2;
 
     setState(() {
-      rotationAngle = _calculateRotationAngle(localPosition.dx, halfWidth);
-      isFlipped = _shouldFlip(localPosition.dx, halfWidth);
+      rotationAngle = _calculateRotationAngle(position, halfWidth);
+      isFlipped = _shouldFlip(position, halfWidth);
     });
-  }*/
-
-  /*  Future<void> _doScreenshot() async {
-    await screenshotController
-        .capture(delay: const Duration(milliseconds: 10))
-        .then((final capturedImage) async {
-      PdfGenerator.savePdf(capturedImage!, "resume.pdf");
-      PdfGenerator.showCapturedWidget(context, capturedImage);
-    }).catchError(print);
-  }*/
+  }
 
   double _calculateRotationAngle(final double mouseX, final double halfWidth) {
     const maxRotation = pi / 8; // Maximum rotation angle (30 degrees)
@@ -174,10 +202,7 @@ class Part1Widget extends StatelessWidget {
     );
   }
 
-  bool _shouldFlip(final double mouseX, final double halfWidth) {
-    // Decide whether to flip the image based on the mouse position
-    return mouseX > halfWidth;
-  }
+  bool _shouldFlip(final double mouseX, final double halfWidth) => mouseX > (maxValue / 2);
 
   bool randomBoolean() {
     final random = Random();
@@ -187,8 +212,6 @@ class Part1Widget extends StatelessWidget {
   }
 
   Widget buildAnimatedAvatar() {
-    var isFlipped = false;
-
     return InfoBlock(
       padding: const EdgeInsets.only(bottom: 16),
       color: Colors.deepOrange.shade300,
@@ -204,9 +227,9 @@ class Part1Widget extends StatelessWidget {
                 16,
               ) // Translates the widget by 22 pixels downwards
               ..rotateY(
-                false ? pi : 0,
+                isFlipped ? pi : 0,
               ) // Flips the widget horizontally if isFlipped is true
-              ..rotateZ(isFlipped ? 0 : -0),
+              ..rotateZ(isFlipped ? rotationAngle : -rotationAngle),
             // Rotates the widget
             child: SizedBox(
               width: 114,
@@ -228,6 +251,15 @@ class Part1Widget extends StatelessWidget {
       ),
     );
   }
+
+  /*  Future<void> _doScreenshot() async {
+    await screenshotController
+        .capture(delay: const Duration(milliseconds: 10))
+        .then((final capturedImage) async {
+      PdfGenerator.savePdf(capturedImage!, "resume.pdf");
+      PdfGenerator.showCapturedWidget(context, capturedImage);
+    }).catchError(print);
+  }*/
 
   Widget buildPart1(final ResumeState state) {
     const download = true;
@@ -357,10 +389,11 @@ class Part1Widget extends StatelessWidget {
             linkedin: () {
               openLink("https://www.linkedin.com/in/onelenyk/");
             },
-            instagram: () => {
-                  openLink(
-                      "https://www.instagram.com/makemegreatagain.pleasure/"),
-                },
+            instagram: () =>
+            {
+              openLink(
+                  "https://www.instagram.com/makemegreatagain.pleasure/"),
+            },
             github: () {
               openLink("https://github.com/onelenyk/");
             },
@@ -379,7 +412,7 @@ class Part1Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Your buildPart1 code here, for example:
-    return buildPart1(state);
+    return buildPart1(widget.state);
   }
 }
 
@@ -397,8 +430,7 @@ class _Part2WidgetState extends State<Part2Widget> {
   int _currentPage = 0;
 
   //util
-  String formatDatePeriod(
-    final DateTime startDate, [
+  String formatDatePeriod(final DateTime startDate, [
     DateTime? endDate,
     final bool addSpentYears = true,
   ]) {
@@ -510,7 +542,7 @@ class _Part2WidgetState extends State<Part2Widget> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     child: Text(
                       item.role,
                       style: GoogleFonts.roboto(
@@ -561,7 +593,11 @@ class _Part2WidgetState extends State<Part2Widget> {
 
   Widget buildPartEducationExperience({required final EducationItem item}) {
     final date =
-        "(${item.startDate.toDate().year}-${item.endDate?.toDate().year})";
+        "(${item.startDate
+        .toDate()
+        .year}-${item.endDate
+        ?.toDate()
+        .year})";
     final titleAndDate = "${item.role} $date";
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -600,7 +636,8 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget _buildDivider() => const Padding(
+  Widget _buildDivider() =>
+      const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Divider(
           height: 4,
@@ -611,7 +648,7 @@ class _Part2WidgetState extends State<Part2Widget> {
 
   Widget _buildWorkExperienceList(final ResumeState state) {
     final totalPagesIndex =
-        (state.profile.experience.length / _itemsPerPage).ceil();
+    (state.profile.experience.length / _itemsPerPage).ceil();
     final totalPages = totalPagesIndex - 1;
     final experiences = state.profile.experience;
     final startIndex = _currentPage * _itemsPerPage;
@@ -652,7 +689,8 @@ class _Part2WidgetState extends State<Part2Widget> {
                   },
                   child: buildPartLanguages(
                       item:
-                          "${_currentPage}/${totalPages} ${_currentPage == totalPages ? "next" : "next"}")),
+                      "${_currentPage}/${totalPages} ${_currentPage ==
+                          totalPages ? "next" : "next"}")),
             ),
           ],
         ),
@@ -674,7 +712,8 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget buildPartLanguages({required final String item}) => Container(
+  Widget buildPartLanguages({required final String item}) =>
+      Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,
@@ -713,7 +752,8 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget buildPart2({required final ResumeState state}) => Column(
+  Widget buildPart2({required final ResumeState state}) =>
+      Column(
         children: [
           InfoBlock(
             padding: EdgeInsets.zero,
@@ -833,11 +873,12 @@ class Part3Widget extends StatelessWidget {
                   spacing: 5, // Horizontal direction for Wrap widget
                   children: items
                       .map(
-                        (final item) => buildPartSkills(
+                        (final item) =>
+                        buildPartSkills(
                           item: item,
                           lastItem: item != items.last,
                         ),
-                      )
+                  )
                       .toList(), // Creating a text widget for each item
                 ),
               ],
@@ -868,7 +909,7 @@ class Part3Widget extends StatelessWidget {
                     children: state.profile.languages
                         .map(
                           (final item) => buildPartLanguages(item: item),
-                        )
+                    )
                         .toList(), // Creating a text widget for each item
                   ),
                 ],
@@ -880,7 +921,8 @@ class Part3Widget extends StatelessWidget {
     );
   }
 
-  Widget buildPartLanguages({required final String item}) => Container(
+  Widget buildPartLanguages({required final String item}) =>
+      Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,

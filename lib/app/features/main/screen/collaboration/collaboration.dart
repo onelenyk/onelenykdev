@@ -172,7 +172,11 @@ class _CollaborationPartState
 
   Widget buildLayout(final BuildContext context, ResumeState state) {
     final Note resumeabout = Note(
-      note: " I have experience with a range of technologies including Android, Flutter, Ktor, Telegram bots, FFmpeg, Kotlin, Java, and Gradle. I'm enthusiastic about collaborating and exploring new opportunities. Here are some ways we can work together:",
+      note: """
+I have experience working with a variety of technologies including : native android, flutter(at least web), ktor(http server), telegram bots(using kotlin), ffmpeg (some video/audio experience).\n\n
+I am eager to collaborate and create.\n\n
+Here are some ways we can work together: 
+  """,
       id: "resume",
       date: DateTime.parse("2024-04-10"),
     );

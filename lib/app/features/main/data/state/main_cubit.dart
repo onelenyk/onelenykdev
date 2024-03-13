@@ -12,7 +12,7 @@ class MainCubit extends Cubit<MainState> {
       : super(
       MainState(activeRoute: Routes.Resume, isMenuOpened: false, emoji: null, version:"initial"),) {
     loadVersion();
-    loadEmoji();
+    //loadEmoji();
   }
 
 

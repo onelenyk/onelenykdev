@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/common/ui/powered_flutter.dart";
 import "package:onelenykco/app/features/github/commit_model.dart";
 import "package:onelenykco/app/features/github/services/github_service.dart";
 import "package:package_info_plus/package_info_plus.dart";
@@ -136,6 +137,7 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
               const SizedBox(
                 height: 8,
               ),
+              PoweredByFlutterWidget()
             ],
           ),
         ),
