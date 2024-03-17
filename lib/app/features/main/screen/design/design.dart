@@ -560,7 +560,7 @@ Widget buildNewContactMe({
                         ),
                       )
                     : CircleButton(
-                        onTap: () {},
+                        onTap: screnshoot,
                         size: 30,
                         hoverColor: Colors.grey,
                         rippleColor: Colors.grey,

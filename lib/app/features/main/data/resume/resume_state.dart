@@ -8,6 +8,8 @@ part "resume_state.freezed.dart";
 class ResumeState with _$ResumeState {
   factory ResumeState({
     required final ProfileItem profile,
+    required final bool isScreenshotMode,
+    required final bool doScreenShot,
   }) = _ResumeState;
 
   ResumeState._(); // Private constructor for freezed

@@ -6,6 +6,9 @@ import "package:onelenykco/app/features/github/commit_model.dart";
 import "package:onelenykco/app/features/github/services/github_service.dart";
 import "package:package_info_plus/package_info_plus.dart";
 
+import "../../data/blog/note.dart";
+import "../blog/blog_page.dart";
+
 class SiteStoryPart extends StatefulWidget {
   const SiteStoryPart({super.key});
 
@@ -52,7 +55,17 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
   }
 
   @override
-  Widget build(final BuildContext context) => Center(
+  Widget build(final BuildContext context) {
+    final Note resumeabout = Note(
+      note: """
+I developed this site using Flutter, it's been a really interesting way to learn more about Flutter and Dart, it's cool to have that experience.\n\n
+I'm continuing to develop the site.
+  """,
+      id: "resume",
+      date: DateTime.parse("2024-04-10"),
+    );
+
+    return Center(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 48.0),
@@ -72,6 +85,24 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
               const SizedBox(
                 height: 8,
               ),
+              InfoBlock(
+                width: 350,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: MyPostWidget(
+                        note: resumeabout,
+                        post: false,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+
               InfoBlock(
                 width: 350,
                 padding: const EdgeInsets.all(16),
@@ -143,4 +174,5 @@ class _SiteStoryPartState extends State<SiteStoryPart> {
         ),
       ),
     );
+  }
 }

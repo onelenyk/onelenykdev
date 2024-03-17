@@ -6,7 +6,7 @@
   "firstName": "Nazar",
   "lastName": "Lenyk",
   "age": "25",
-  "description": "I'm **Nazar**, an ***Android Software Engineer*** \uD83D\uDC68\u200D\uD83D\uDCBB.\n I have over **5 years** \uD83D\uDDD3\uFE0F of experience in creating native applications for Android OS \uD83D\uDCF1.  \nThe experience includes creating applications for such domains as: **video media production** \uD83C\uDFA5, **utility management** \uD83D\uDD27, **transport logistics** \uD83D\uDE9A, and **fintech** \uD83D\uDCB0.  \n\nTechnically, I'm cool with Kotlin and Java projects \uD83D\uDDA5\uFE0F, legacy XML projects \uD83D\uDCC2, or fresh Jetpack Compose \uD83C\uDFA8. I love application architecture \uD83C\uDFD7\uFE0F and implementing interesting features using camera \uD83D\uDCF8, notifications \uD83D\uDD14, services \uD83D\uDCE1, etc APIs \uD83C\uDF10.  \n\n**Current stack**: Kotlin, Services, Jetpack Compose, Decompose, Coroutines, Retrofit, Flow, Koin, Clean Architecture, Ktlint, CI/CD \uD83D\uDEE0\uFE0F.\n",
+  "description": "I'm **Nazar**, an ***Android Software Engineer*** 👨‍💻.\n I have over **5 years** 🗓️ of experience in creating native applications for Android OS 📱.  \nThe experience includes creating applications for such domains as: **video media production** 🎥, **utility management** 🔧, **transport logistics** 🚚, and **fintech** 💰.  \n\nTechnically, I'm cool with Kotlin and Java projects 🖥️, legacy XML projects 📂, or fresh Jetpack Compose 🎨. I love application architecture 🏗️ and implementing interesting features using camera 📸, notifications 🔔, services 📡, etc APIs 🌐.  \n\n**Current stack**: Kotlin, Services, Jetpack Compose, Decompose, Coroutines, Retrofit, Flow, Koin, Clean Architecture, Ktlint, CI/CD 🛠️.\n",
   "languages": [
     "Ukrainian",
     "English"
@@ -15,6 +15,7 @@
     "Kotlin",
     "Java",
     "Android SDK",
+    "Androi XML",
     "Android Jetpack",
     "Jetpack Compose",
     "Kotlin Coroutines",
@@ -23,14 +24,17 @@
     "REST API",
     "CI/CD",
     "Camera 2",
-    "MV*",
+    "MVVM",
+    "UDF",
+    "MVI",
+    "Bloc",
     "Retrofit 2",
+    "OkHttp",
     "Room",
-    "Flow",
-    "LiveData",
-    "Dagger/Hilt/Koin",
-    "Firebase",
-    "Json"
+    "Flow/LiveData/SingleLiveEvent/Observer",
+    "Dagger 2/Hilt/Koin",
+    "Firebase Notifications, Auth, Firestore, Distribution",
+    "Json(Gson,Moshi, Serialization)"
   ],
   "experience": [
     {
@@ -42,9 +46,9 @@
       "description": [
         "1) Supported and maintained two high-load Android applications",
         "2) Responsible for developing, maintaining features, and bug fixing",
-        "3) Worked extensively with Kotlin, Coroutines, StateFlow, Jetpack Compose, Koin, Decompose, UDF, MVI",
-        "4) Maintaining and developing features for efficient location tracking, for custom user experience (Live Activity analogue",
-        "5) 🏗 Focused on system design and efficient code implementation"
+        "3) Maintaining and developing features for efficient location tracking, for custom user experience (Live Activity analogue)",
+        "4)  🏗 Focused on system design and efficient code implementation",
+        "5)  🛠 Worked extensively with next Stack: Kotlin, Coroutines, StateFlow, Jetpack Compose, Koin, Decompose, UDF, MVI"
       ]
     },
     {
@@ -54,10 +58,9 @@
       "startDate": 1669845600000,
       "endDate": 1680210000000,
       "description": [
-        "1) Supported and maintained , multi-module Android applications",
-        "2) Focused on feature development, improvements, and issue resolution",
-        "3) Utilized Kotlin, Coroutine Flow, Jetpack Compose, MVI for app development",
-        "4) 🏗 Specialized in UI design and system architecture"
+        "1) Supported and maintained, multi-module Android applications",
+        "2) Focused on feature development, improvements, and issue fixing",
+        "3) 🛠 Stack: Kotlin, Coroutines, Flow, XML, Jetpack Compose, MVI, Charts, Firebase"
       ]
     },
     {
@@ -69,9 +72,8 @@
       "description": [
         "1) Creating apps from scratch, maintaining existing, refactoring",
         "2) Managed projects from different domains, led, investigated, and releases",
-        "3) Involved into 6+ projects, I started 2 of them.",
-        "4) ⚙️ Configured CI/CD environments using various platforms",
-        "5) 🛠 Advanced skills in Kotlin, Coroutine, LiveData, Flow, Room, Retrofit 2, Dagger2, Koin, Camera 2, ExoPlayer; tackled redesigns and migrations"
+        "3) \uD83D\uDCBC Involved into 6+ projects, started 2 of them.",
+        "4) 🛠 Stack: Kotlin, XML, Coroutines, LiveData, Flow, Room, Retrofit 2, Dagger2, Koin, Camera 2, ExoPlayer, MVVM, Services, Github Actions,  Firebase, Fastlane"
       ]
     },
     {
@@ -81,11 +83,10 @@
       "startDate": 1569877200000,
       "endDate": 1595970000000,
       "description": [
-        "1) Led dual app development projects",
-        "2) Tailored apps to specific client requirements",
-        "3) Enhanced UI and backend for apps",
-        "4) 🏗 Gained skills in app architecture with LiveData, MVVM, Kotlin, Data Binding",
-        "5) 📍 Implemented features with Google Maps, WebSockets"
+        "1) Led dual app projects; ensured delivery of high-quality applications on time.",
+        "2) Developed client-specific features from concept to completion.",
+        "3) 🏗 Gained skills in app architecture with LiveData, MVVM, Kotlin,Coroutines, Data Binding, XML",
+        "4) 📍 Implemented features with Google Maps, WebSockets"
       ]
     },
     {
@@ -96,10 +97,10 @@
       "endDate": 1572472800000,
       "description": [
         "1) Developed Android apps using Kotlin and Java",
-        "2) Created user-friendly UI for documents and data",
-        "3) Integrated apps with IoT, merging software and hardware",
+        "2) Created apps for warehouse usage and for corporate document management.",
+        "3) Integrated apps with IoT, Custom view, complex features.",
         "4) 🏗 Built a solid foundation in practical software engineering",
-        "5) 🛠 Used Kotlin, Java, Volley, AsyncTasks, MySQL for expertise"
+        "5) 🛠 Stack:  Kotlin, Java, Retrofit, Volley, AsyncTasks, MySQL, XML, Custom views"
       ]
     }
   ],

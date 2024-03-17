@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000303">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: ./fruit_version_build.sh" time="0.027301">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: flutter build web" time="73.073086">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: firebase deploy" time="50.701166">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
