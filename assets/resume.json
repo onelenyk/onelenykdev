@@ -15,7 +15,7 @@
     "Kotlin",
     "Java",
     "Android SDK",
-    "Androi XML",
+    "Android XML",
     "Android Jetpack",
     "Jetpack Compose",
     "Kotlin Coroutines",
@@ -31,10 +31,10 @@
     "Retrofit 2",
     "OkHttp",
     "Room",
-    "Flow/LiveData/SingleLiveEvent/Observer",
-    "Dagger 2/Hilt/Koin",
-    "Firebase Notifications, Auth, Firestore, Distribution",
-    "Json(Gson,Moshi, Serialization)"
+    "Flow","LiveData","SingleLiveEvent","Observer",
+    "Dagger","Hilt","Koin",
+    "Firebase Notifications","Auth","Firestore","Distribution",
+    "Json"
   ],
   "experience": [
     {

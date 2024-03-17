@@ -5,6 +5,7 @@ import "package:flutter_svg/svg.dart";
 import "package:get_it/get_it.dart";
 import "package:glowy_borders/glowy_borders.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:intl/intl.dart";
 import "package:onelenykco/app/common/info_block.dart";
 import "package:onelenykco/app/common/link_utils.dart";
 import "package:onelenykco/app/common/ui/rounded_container.dart";
@@ -39,10 +40,8 @@ class _ResumePartState
   ScreenshotController screenshotController = ScreenshotController();
 
   @override
-  Future<void> onStateChange(
-    final BuildContext context,
-    final ResumeState state,
-  ) async {
+  Future<void> onStateChange(final BuildContext context,
+      final ResumeState state,) async {
     if (state.doScreenShot) {
       await _doScreenshot();
       cubit.screenShotConsumed();
@@ -50,10 +49,8 @@ class _ResumePartState
   }
 
   @override
-  Widget buildDesktopLayout(
-    final BuildContext context,
-    final ResumeState state,
-  ) {
+  Widget buildDesktopLayout(final BuildContext context,
+      final ResumeState state,) {
     if (state.isScreenshotMode) {
       return desktopScreenShotLayout(state);
     } else {
@@ -62,22 +59,31 @@ class _ResumePartState
   }
 
   @override
-  Widget buildMobileLayout(
-    final BuildContext context,
-    final ResumeState state,
-  ) =>
+  Widget buildMobileLayout(final BuildContext context,
+      final ResumeState state,) =>
       SingleChildScrollView(
         child: mobileLayout(state),
       );
 
-  Future<void> _doScreenshot() async => screenshotController
+  String getCurrentTimeFormatted() {
+    DateTime now = DateTime.now();
+    // Using DateFormat from the intl package to format the date.
+    String formattedDate = DateFormat('dd-MM-yyyy').format(now);
+    return formattedDate;
+  }
+
+  Future<void> _doScreenshot() async =>
+      screenshotController
           .capture(delay: const Duration(milliseconds: 10))
           .then((final capturedImage) async {
-        PdfGenerator.savePdf(capturedImage!, "resume.pdf");
-        PdfGenerator.showCapturedWidget(context, capturedImage);
+        final time = getCurrentTimeFormatted();
+        final name = "lenyk-resume-$time.pdf";
+        await PdfGenerator.savePdf(capturedImage!, name);
+        await PdfGenerator.showCapturedWidget(context, capturedImage);
       }).catchError(print);
 
-  Widget mobileLayout(final ResumeState state) => InfoBlock(
+  Widget mobileLayout(final ResumeState state) =>
+      InfoBlock(
         radius: 0,
         child: Center(
           child: Padding(
@@ -114,7 +120,8 @@ class _ResumePartState
         ),
       );
 
-  Widget desktopLayout(final ResumeState state) => Center(
+  Widget desktopLayout(final ResumeState state) =>
+      Center(
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -155,15 +162,13 @@ class _ResumePartState
     }).catchError(print);
   }*/
 
-  Widget desktopScreenShotLayout(final ResumeState state) => Center(
-        child: Screenshot(
-          controller: screenshotController,
+  Widget desktopScreenShotLayout(final ResumeState state) =>
+      Screenshot(
+        controller: screenshotController,
+        child: Center(
           child: Container(
+            color: const Color(0xFF343540),
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFF343540),
-              borderRadius: BorderRadius.circular(0),
-            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -234,7 +239,8 @@ class _Part1WidgetState extends State<Part1Widget>
     _controller = AnimationController(
       duration: const Duration(seconds: 5),
       vsync: this,
-    )..repeat(reverse: true);
+    )
+      ..repeat(reverse: true);
 
     final curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _animation = Tween<double>(begin: minValue, end: maxValue).animate(curve)
@@ -249,7 +255,9 @@ class _Part1WidgetState extends State<Part1Widget>
   }
 
   void _flipImage(final BuildContext context, final double position) {
-    if (ModalRoute.of(context)?.isCurrent != true) {
+    if (ModalRoute
+        .of(context)
+        ?.isCurrent != true) {
       return;
     }
 
@@ -280,7 +288,8 @@ class _Part1WidgetState extends State<Part1Widget>
     return random.nextInt(2) == 0;
   }
 
-  Widget buildAnimatedAvatar() => InfoBlock(
+  Widget buildAnimatedAvatar() =>
+      InfoBlock(
         padding: const EdgeInsets.only(bottom: 16),
         color: Colors.deepOrange.shade300,
         width: double.infinity,
@@ -319,150 +328,192 @@ class _Part1WidgetState extends State<Part1Widget>
         ),
       );
 
-  Widget buildPart1(final ResumeState state) {
-    return Column(
-      children: [
-        InfoBlock(
-          width: 350,
-          color: Colors.transparent,
-          padding: const EdgeInsets.only(
-            right: 16,
-            left: 16,
-            bottom: 16,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "resume 2.0",
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white70,
-                  fontWeight: FontWeight.bold,
+  Widget buildPart1(final ResumeState state) =>
+      Column(
+        children: [
+          InfoBlock(
+            width: 350,
+            color: Colors.transparent,
+            padding: const EdgeInsets.only(
+              right: 16,
+              left: 16,
+              bottom: 16,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "resume 2.0",
+                  style: GoogleFonts.robotoMono(
+                    fontSize: 14,
+                    color: Colors.white70,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                "onelenyk.dev",
-                style: GoogleFonts.robotoMono(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  "onelenyk.dev",
+                  style: GoogleFonts.robotoMono(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        InfoBlock(
-          width: 350,
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          flex: 2,
-                          child: Text(
-                            state.profile.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.robotoMono(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+          InfoBlock(
+            width: 350,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    IntrinsicHeight(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Text(
+                              state.profile.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.robotoMono(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        const VerticalDivider(
-                          width: 2,
-                          thickness: 1,
-                          indent: 0,
-                          endIndent: 0,
-                          color: Colors.grey,
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: Text(
-                            softWrap: false,
-                            state.profile.role,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.end,
-                            style: GoogleFonts.robotoMono(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                          const VerticalDivider(
+                            width: 2,
+                            thickness: 1,
+                            indent: 0,
+                            endIndent: 0,
+                            color: Colors.grey,
+                          ),
+                          Flexible(
+                            flex: 3,
+                            child: Text(
+                              softWrap: false,
+                              state.profile.role,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.end,
+                              style: GoogleFonts.robotoMono(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                buildAnimatedAvatar(),
+                const SizedBox(
+                  height: 16,
+                ),
+                Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "📍location: ",
+                          style: GoogleFonts.robotoMono(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "${state.profile.location}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Flexible(
-                          child: Text(
-                            "Location: ${state.profile.location}",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.robotoMono(
-                              fontSize: 14,
-                              color: Colors.white,
-                            ),
+                        Text(
+                          "🏳️languages: ",
+                          style: GoogleFonts.robotoMono(
+                            fontSize: 14,
+                            color: Colors.white,
                           ),
+                        ),
+                        Wrap(
+                          spacing: 8,
+                          children: state.profile.languages.map(
+                                (final item) {
+                              final last = state.profile.languages.last == item;
+                              return Text(
+                                item + (last ? "" : ","),
+                                style: GoogleFonts.roboto(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              );
+                            },
+                          ).toList(), // Creating a text widget for each item
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              const Divider(
-                height: 4,
-                thickness: 1,
-                color: Colors.white,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              buildAnimatedAvatar(),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
+          buildNewContactMe(
+              download: !state.isScreenshotMode,
+              telegram: () {
+                openLink("https://onelenyk.t.me/");
+              },
+              linkedin: () {
+                openLink("https://www.linkedin.com/in/onelenyk/");
+              },
+              instagram: () =>
+              {
+                openLink(
+                    "https://www.instagram.com/makemegreatagain.pleasure/"),
+              },
+              github: () {
+                openLink("https://github.com/onelenyk/");
+              },
+              resume: () {
+                downloadPdfFromAssets(
+                  "assets/resume.pdf",
+                );
+              },
+              screnshoot: () {
+                widget.cubit.dispatchScreenShot();
+              })
+        ],
+      );
+
+  Widget buildPartLanguages({required final String item}) =>
+      Text(
+        item,
+        style: GoogleFonts.roboto(
+          fontSize: 14,
+          color: Colors.white,
+          fontWeight: FontWeight.normal,
         ),
-        buildNewContactMe(
-            download: !state.isScreenshotMode,
-            telegram: () {
-              openLink("https://onelenyk.t.me/");
-            },
-            linkedin: () {
-              openLink("https://www.linkedin.com/in/onelenyk/");
-            },
-            instagram: () => {
-                  openLink(
-                      "https://www.instagram.com/makemegreatagain.pleasure/"),
-                },
-            github: () {
-              openLink("https://github.com/onelenyk/");
-            },
-            resume: () {
-              downloadPdfFromAssets(
-                "assets/resume.pdf",
-              );
-            },
-            screnshoot: () {
-              widget.cubit.dispatchScreenShot();
-            })
-      ],
-    );
-  }
+      );
 
   @override
   Widget build(final BuildContext context) {
@@ -484,8 +535,7 @@ class _Part2WidgetState extends State<Part2Widget> {
   int _currentPage = 0;
 
   //util
-  String formatDatePeriod(
-    final DateTime startDate, [
+  String formatDatePeriod(final DateTime startDate, [
     DateTime? endDate,
     final bool addSpentYears = true,
   ]) {
@@ -568,7 +618,7 @@ class _Part2WidgetState extends State<Part2Widget> {
   }
 
   Widget buildPartExpandedWorkExperience(
-          {required final ExperienceItem item}) =>
+      {required final ExperienceItem item}) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -652,7 +702,11 @@ class _Part2WidgetState extends State<Part2Widget> {
 
   Widget buildPartEducationExperience({required final EducationItem item}) {
     final date =
-        "(${item.startDate.toDate().year}-${item.endDate?.toDate().year})";
+        "(${item.startDate
+        .toDate()
+        .year}-${item.endDate
+        ?.toDate()
+        .year})";
     final titleAndDate = "${item.role} $date";
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -691,7 +745,8 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget _buildDivider() => Divider(
+  Widget _buildDivider() =>
+      Divider(
         height: 4,
         thickness: 1,
         color: Colors.white,
@@ -699,7 +754,7 @@ class _Part2WidgetState extends State<Part2Widget> {
 
   Widget _buildDefaultMode(final ResumeState state) {
     final totalPagesIndex =
-        (state.profile.experience.length / _itemsPerPage).ceil();
+    (state.profile.experience.length / _itemsPerPage).ceil();
     final totalPages = totalPagesIndex - 1;
     final experiences = state.profile.experience;
     final startIndex = _currentPage * _itemsPerPage;
@@ -744,13 +799,14 @@ class _Part2WidgetState extends State<Part2Widget> {
                         },
                         child: buildPartLanguages(
                             item:
-                                "${_currentPage}/${totalPages} ${_currentPage == totalPages ? "next" : "next"}")),
+                            "${_currentPage}/${totalPages} ${_currentPage ==
+                                totalPages ? "next" : "next"}")),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: _buildDivider(),
             ),
             ListView.separated(
@@ -764,7 +820,8 @@ class _Part2WidgetState extends State<Part2Widget> {
                 return buildPartWorkExperience(
                     item: item); // Assuming this is defined elsewhere.
               },
-              separatorBuilder: (final _, final __) => const SizedBox(height: 8),
+              separatorBuilder: (final _, final __) =>
+              const SizedBox(height: 8),
             ),
           ],
         ),
@@ -777,13 +834,14 @@ class _Part2WidgetState extends State<Part2Widget> {
         mainAxisSize: MainAxisSize.min, // Use as little space as possible
         crossAxisAlignment: CrossAxisAlignment.start,
         children: experiences
-            .map((final experience) => Container(
+            .map((final experience) =>
+            Container(
                 width: 350, child: buildPartWorkExperience(item: experience)))
             .toList(),
       );
 
-  Widget _buildHorizontalPages(
-      final List<ExperienceItem> experiences, final int itemsPerPage) {
+  Widget _buildHorizontalPages(final List<ExperienceItem> experiences,
+      final int itemsPerPage) {
     // Split the experiences into chunks/pages
     List<List<ExperienceItem>> pages = [];
     for (int i = 0; i < experiences.length; i += itemsPerPage) {
@@ -795,7 +853,7 @@ class _Part2WidgetState extends State<Part2Widget> {
 
     // Building a list of widgets for each page
     List<Widget> pageWidgets =
-        pages.map((final page) => _buildWorkExperienceList(page)).toList();
+    pages.map((final page) => _buildWorkExperienceList(page)).toList();
 
     // Using SingleChildScrollView and Row for horizontal scrolling
     return SingleChildScrollView(
@@ -820,13 +878,14 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget _buildScreenshotMode(final ResumeState state) => Column(
+  Widget _buildScreenshotMode(final ResumeState state) =>
+      Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Text(
               "work experience",
               style: GoogleFonts.robotoMono(
@@ -844,11 +903,13 @@ class _Part2WidgetState extends State<Part2Widget> {
         ],
       );
 
-  Widget _buildWorkExperience(final ResumeState state) => state.isScreenshotMode
-      ? _buildScreenshotMode(state)
-      : _buildDefaultMode(state);
+  Widget _buildWorkExperience(final ResumeState state) =>
+      state.isScreenshotMode
+          ? _buildScreenshotMode(state)
+          : _buildDefaultMode(state);
 
-  Widget buildPartLanguages({required final String item}) => Container(
+  Widget buildPartLanguages({required final String item}) =>
+      Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,
@@ -866,12 +927,13 @@ class _Part2WidgetState extends State<Part2Widget> {
         ),
       );
 
-  Widget _buildEducationExperience(final ResumeState state) => Column(
+  Widget _buildEducationExperience(final ResumeState state) =>
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+            const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
             child: Text(
               "education",
               style: GoogleFonts.robotoMono(
@@ -883,14 +945,15 @@ class _Part2WidgetState extends State<Part2Widget> {
           ),
           Padding(
             padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 0),
+            const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 0),
             child: _buildDivider(),
           ),
           buildPartEducationExperience(item: state.profile.education),
         ],
       );
 
-  Widget buildPart2({required final ResumeState state}) => Column(
+  Widget buildPart2({required final ResumeState state}) =>
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoBlock(
@@ -898,7 +961,7 @@ class _Part2WidgetState extends State<Part2Widget> {
             child: _buildWorkExperience(state),
           ),
           const SizedBox(
-            height: 12,
+            height: 16,
             width: 350,
           ),
           InfoBlock(
@@ -1004,54 +1067,24 @@ class Part3Widget extends StatelessWidget {
                   spacing: 5, // Horizontal direction for Wrap widget
                   children: items
                       .map(
-                        (final item) => buildPartSkills(
+                        (final item) =>
+                        buildPartSkills(
                           item: item,
                           lastItem: item != items.last,
                         ),
-                      )
+                  )
                       .toList(), // Creating a text widget for each item
                 ),
               ],
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: RoundedContainerWidget(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      "languages",
-                      style: GoogleFonts.robotoMono(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Wrap(
-                    spacing: 8,
-                    children: state.profile.languages
-                        .map(
-                          (final item) => buildPartLanguages(item: item),
-                        )
-                        .toList(), // Creating a text widget for each item
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        )
       ],
     );
   }
 
-  Widget buildPartLanguages({required final String item}) => Container(
+  Widget buildPartLanguages({required final String item}) =>
+      Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,
