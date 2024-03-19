@@ -8,7 +8,6 @@ import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:onelenykco/app/common/info_block.dart";
 import "package:onelenykco/app/common/link_utils.dart";
-import "package:onelenykco/app/common/ui/rounded_container.dart";
 import "package:onelenykco/app/features/main/data/blog/note.dart";
 import "package:onelenykco/app/features/main/data/profile/education_item.dart";
 import "package:onelenykco/app/features/main/data/profile/employment_item.dart";
@@ -16,7 +15,6 @@ import "package:onelenykco/app/features/main/data/resume/resume_cubit.dart";
 import "package:onelenykco/app/features/main/data/resume/resume_state.dart";
 import "package:onelenykco/app/features/main/screen/design/design.dart";
 import "package:onelenykco/app/features/main/screen/resume/pdf_generator.dart";
-
 import "package:screenshot/screenshot.dart";
 
 import "../../../../common/ui/powered_flutter.dart";
@@ -40,8 +38,10 @@ class _ResumePartState
   ScreenshotController screenshotController = ScreenshotController();
 
   @override
-  Future<void> onStateChange(final BuildContext context,
-      final ResumeState state,) async {
+  Future<void> onStateChange(
+    final BuildContext context,
+    final ResumeState state,
+  ) async {
     if (state.doScreenShot) {
       await _doScreenshot();
       cubit.screenShotConsumed();
@@ -49,8 +49,10 @@ class _ResumePartState
   }
 
   @override
-  Widget buildDesktopLayout(final BuildContext context,
-      final ResumeState state,) {
+  Widget buildDesktopLayout(
+    final BuildContext context,
+    final ResumeState state,
+  ) {
     if (state.isScreenshotMode) {
       return desktopScreenShotLayout(state);
     } else {
@@ -59,8 +61,10 @@ class _ResumePartState
   }
 
   @override
-  Widget buildMobileLayout(final BuildContext context,
-      final ResumeState state,) =>
+  Widget buildMobileLayout(
+    final BuildContext context,
+    final ResumeState state,
+  ) =>
       SingleChildScrollView(
         child: mobileLayout(state),
       );
@@ -72,8 +76,7 @@ class _ResumePartState
     return formattedDate;
   }
 
-  Future<void> _doScreenshot() async =>
-      screenshotController
+  Future<void> _doScreenshot() async => screenshotController
           .capture(delay: const Duration(milliseconds: 10))
           .then((final capturedImage) async {
         final time = getCurrentTimeFormatted();
@@ -82,46 +85,50 @@ class _ResumePartState
         await PdfGenerator.showCapturedWidget(context, capturedImage);
       }).catchError(print);
 
-  Widget mobileLayout(final ResumeState state) =>
-      InfoBlock(
+  Widget mobileLayout(final ResumeState state) => InfoBlock(
         radius: 0,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 48),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.white24,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.white24,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Part1Widget(
+                        state: state,
+                      ),
+                      const SizedBox(
+                        width: 32,
+                        height: 32,
+                      ),
+                      Part2Widget(state: state),
+                      const SizedBox(
+                        width: 32,
+                        height: 32,
+                      ),
+                      Part3Widget(state: state),
+                    ],
+                  ),
                 ),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Part1Widget(
-                    state: state,
-                  ),
-                  const SizedBox(
-                    width: 32,
-                    height: 32,
-                  ),
-                  Part2Widget(state: state),
-                  const SizedBox(
-                    width: 32,
-                    height: 32,
-                  ),
-                  Part3Widget(state: state),
-                ],
-              ),
+              ],
             ),
           ),
         ),
       );
 
-  Widget desktopLayout(final ResumeState state) =>
-      Center(
+  Widget desktopLayout(final ResumeState state) => Center(
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -130,23 +137,54 @@ class _ResumePartState
           ),
           child: SingleChildScrollView(
             padding: EdgeInsets.zero,
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              direction: Axis.horizontal,
-              runSpacing: 10,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Part1Widget(state: state),
-                const SizedBox(
-                  width: 32,
-                  height: 32,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "last updated: ",
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Text(
+                        "18.03.2024",
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Part2Widget(state: state),
-                const SizedBox(
-                  width: 32,
-                  height: 32,
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  direction: Axis.horizontal,
+                  runSpacing: 10,
+                  children: [
+                    Part1Widget(state: state),
+                    const SizedBox(
+                      width: 32,
+                      height: 32,
+                    ),
+                    Part2Widget(state: state),
+                    const SizedBox(
+                      width: 32,
+                      height: 32,
+                    ),
+                    Part3Widget(state: state),
+                  ],
                 ),
-                Part3Widget(state: state),
               ],
             ),
           ),
@@ -162,8 +200,7 @@ class _ResumePartState
     }).catchError(print);
   }*/
 
-  Widget desktopScreenShotLayout(final ResumeState state) =>
-      Screenshot(
+  Widget desktopScreenShotLayout(final ResumeState state) => Screenshot(
         controller: screenshotController,
         child: Center(
           child: Container(
@@ -172,6 +209,31 @@ class _ResumePartState
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "last updated: ",
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Text(
+                        "18.03.2024",
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SingleChildScrollView(
                   padding: EdgeInsets.zero,
                   child: Wrap(
@@ -239,8 +301,7 @@ class _Part1WidgetState extends State<Part1Widget>
     _controller = AnimationController(
       duration: const Duration(seconds: 5),
       vsync: this,
-    )
-      ..repeat(reverse: true);
+    )..repeat(reverse: true);
 
     final curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _animation = Tween<double>(begin: minValue, end: maxValue).animate(curve)
@@ -255,9 +316,7 @@ class _Part1WidgetState extends State<Part1Widget>
   }
 
   void _flipImage(final BuildContext context, final double position) {
-    if (ModalRoute
-        .of(context)
-        ?.isCurrent != true) {
+    if (ModalRoute.of(context)?.isCurrent != true) {
       return;
     }
 
@@ -288,8 +347,7 @@ class _Part1WidgetState extends State<Part1Widget>
     return random.nextInt(2) == 0;
   }
 
-  Widget buildAnimatedAvatar() =>
-      InfoBlock(
+  Widget buildAnimatedAvatar() => InfoBlock(
         padding: const EdgeInsets.only(bottom: 16),
         color: Colors.deepOrange.shade300,
         width: double.infinity,
@@ -328,8 +386,7 @@ class _Part1WidgetState extends State<Part1Widget>
         ),
       );
 
-  Widget buildPart1(final ResumeState state) =>
-      Column(
+  Widget buildPart1(final ResumeState state) => Column(
         children: [
           InfoBlock(
             width: 350,
@@ -458,7 +515,7 @@ class _Part1WidgetState extends State<Part1Widget>
                         Wrap(
                           spacing: 8,
                           children: state.profile.languages.map(
-                                (final item) {
+                            (final item) {
                               final last = state.profile.languages.last == item;
                               return Text(
                                 item + (last ? "" : ","),
@@ -486,11 +543,10 @@ class _Part1WidgetState extends State<Part1Widget>
               linkedin: () {
                 openLink("https://www.linkedin.com/in/onelenyk/");
               },
-              instagram: () =>
-              {
-                openLink(
-                    "https://www.instagram.com/makemegreatagain.pleasure/"),
-              },
+              instagram: () => {
+                    openLink(
+                        "https://www.instagram.com/makemegreatagain.pleasure/"),
+                  },
               github: () {
                 openLink("https://github.com/onelenyk/");
               },
@@ -501,12 +557,11 @@ class _Part1WidgetState extends State<Part1Widget>
               },
               screnshoot: () {
                 widget.cubit.dispatchScreenShot();
-              })
+              }),
         ],
       );
 
-  Widget buildPartLanguages({required final String item}) =>
-      Text(
+  Widget buildPartLanguages({required final String item}) => Text(
         item,
         style: GoogleFonts.roboto(
           fontSize: 14,
@@ -535,7 +590,8 @@ class _Part2WidgetState extends State<Part2Widget> {
   int _currentPage = 0;
 
   //util
-  String formatDatePeriod(final DateTime startDate, [
+  String formatDatePeriod(
+    final DateTime startDate, [
     DateTime? endDate,
     final bool addSpentYears = true,
   ]) {
@@ -618,7 +674,7 @@ class _Part2WidgetState extends State<Part2Widget> {
   }
 
   Widget buildPartExpandedWorkExperience(
-      {required final ExperienceItem item}) =>
+          {required final ExperienceItem item}) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -702,11 +758,7 @@ class _Part2WidgetState extends State<Part2Widget> {
 
   Widget buildPartEducationExperience({required final EducationItem item}) {
     final date =
-        "(${item.startDate
-        .toDate()
-        .year}-${item.endDate
-        ?.toDate()
-        .year})";
+        "(${item.startDate.toDate().year}-${item.endDate?.toDate().year})";
     final titleAndDate = "${item.role} $date";
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -745,8 +797,7 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget _buildDivider() =>
-      Divider(
+  Widget _buildDivider() => const Divider(
         height: 4,
         thickness: 1,
         color: Colors.white,
@@ -754,7 +805,7 @@ class _Part2WidgetState extends State<Part2Widget> {
 
   Widget _buildDefaultMode(final ResumeState state) {
     final totalPagesIndex =
-    (state.profile.experience.length / _itemsPerPage).ceil();
+        (state.profile.experience.length / _itemsPerPage).ceil();
     final totalPages = totalPagesIndex - 1;
     final experiences = state.profile.experience;
     final startIndex = _currentPage * _itemsPerPage;
@@ -769,12 +820,12 @@ class _Part2WidgetState extends State<Part2Widget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       "work experience",
                       style: GoogleFonts.robotoMono(
@@ -785,7 +836,7 @@ class _Part2WidgetState extends State<Part2Widget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: RectangularButton(
                         hoverColor: Colors.grey,
                         rippleColor: Colors.grey,
@@ -799,14 +850,13 @@ class _Part2WidgetState extends State<Part2Widget> {
                         },
                         child: buildPartLanguages(
                             item:
-                            "${_currentPage}/${totalPages} ${_currentPage ==
-                                totalPages ? "next" : "next"}")),
+                                "${_currentPage}/${totalPages} ${_currentPage == totalPages ? "next" : "next"}")),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _buildDivider(),
             ),
             ListView.separated(
@@ -821,7 +871,7 @@ class _Part2WidgetState extends State<Part2Widget> {
                     item: item); // Assuming this is defined elsewhere.
               },
               separatorBuilder: (final _, final __) =>
-              const SizedBox(height: 8),
+                  const SizedBox(height: 8),
             ),
           ],
         ),
@@ -834,14 +884,13 @@ class _Part2WidgetState extends State<Part2Widget> {
         mainAxisSize: MainAxisSize.min, // Use as little space as possible
         crossAxisAlignment: CrossAxisAlignment.start,
         children: experiences
-            .map((final experience) =>
-            Container(
+            .map((final experience) => Container(
                 width: 350, child: buildPartWorkExperience(item: experience)))
             .toList(),
       );
 
-  Widget _buildHorizontalPages(final List<ExperienceItem> experiences,
-      final int itemsPerPage) {
+  Widget _buildHorizontalPages(
+      final List<ExperienceItem> experiences, final int itemsPerPage) {
     // Split the experiences into chunks/pages
     List<List<ExperienceItem>> pages = [];
     for (int i = 0; i < experiences.length; i += itemsPerPage) {
@@ -853,7 +902,7 @@ class _Part2WidgetState extends State<Part2Widget> {
 
     // Building a list of widgets for each page
     List<Widget> pageWidgets =
-    pages.map((final page) => _buildWorkExperienceList(page)).toList();
+        pages.map((final page) => _buildWorkExperienceList(page)).toList();
 
     // Using SingleChildScrollView and Row for horizontal scrolling
     return SingleChildScrollView(
@@ -878,14 +927,12 @@ class _Part2WidgetState extends State<Part2Widget> {
     );
   }
 
-  Widget _buildScreenshotMode(final ResumeState state) =>
-      Column(
+  Widget _buildScreenshotMode(final ResumeState state) => Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               "work experience",
               style: GoogleFonts.robotoMono(
@@ -903,13 +950,11 @@ class _Part2WidgetState extends State<Part2Widget> {
         ],
       );
 
-  Widget _buildWorkExperience(final ResumeState state) =>
-      state.isScreenshotMode
-          ? _buildScreenshotMode(state)
-          : _buildDefaultMode(state);
+  Widget _buildWorkExperience(final ResumeState state) => state.isScreenshotMode
+      ? _buildScreenshotMode(state)
+      : _buildDefaultMode(state);
 
-  Widget buildPartLanguages({required final String item}) =>
-      Container(
+  Widget buildPartLanguages({required final String item}) => Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,
@@ -927,13 +972,12 @@ class _Part2WidgetState extends State<Part2Widget> {
         ),
       );
 
-  Widget _buildEducationExperience(final ResumeState state) =>
-      Column(
+  Widget _buildEducationExperience(final ResumeState state) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+                const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
             child: Text(
               "education",
               style: GoogleFonts.robotoMono(
@@ -945,15 +989,14 @@ class _Part2WidgetState extends State<Part2Widget> {
           ),
           Padding(
             padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 0),
+                const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 0),
             child: _buildDivider(),
           ),
           buildPartEducationExperience(item: state.profile.education),
         ],
       );
 
-  Widget buildPart2({required final ResumeState state}) =>
-      Column(
+  Widget buildPart2({required final ResumeState state}) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoBlock(
@@ -1014,7 +1057,7 @@ class Part3Widget extends StatelessWidget {
                     height: 8,
                     width: 8,
                   ),
-                  Divider(
+                  const Divider(
                     height: 4,
                     thickness: 1,
                     color: Colors.white,
@@ -1053,7 +1096,7 @@ class Part3Widget extends StatelessWidget {
                   height: 8,
                   width: 8,
                 ),
-                Divider(
+                const Divider(
                   height: 4,
                   thickness: 1,
                   color: Colors.white,
@@ -1067,12 +1110,11 @@ class Part3Widget extends StatelessWidget {
                   spacing: 5, // Horizontal direction for Wrap widget
                   children: items
                       .map(
-                        (final item) =>
-                        buildPartSkills(
+                        (final item) => buildPartSkills(
                           item: item,
                           lastItem: item != items.last,
                         ),
-                  )
+                      )
                       .toList(), // Creating a text widget for each item
                 ),
               ],
@@ -1083,8 +1125,7 @@ class Part3Widget extends StatelessWidget {
     );
   }
 
-  Widget buildPartLanguages({required final String item}) =>
-      Container(
+  Widget buildPartLanguages({required final String item}) => Container(
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.white,
