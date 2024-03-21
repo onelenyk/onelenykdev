@@ -5,6 +5,7 @@ enum Routes {
   Collab,
   Blog,
   AboutSite,
+  Projects,
   Design
 }
 
@@ -24,7 +25,8 @@ extension RouteExtension on Routes {
         return "collaboration 🌍";
       case Routes.Design:
         return "Design develop 👾";
-        break;
+      case Routes.Projects:
+        return "projects 🧊";
     }
   }
 }

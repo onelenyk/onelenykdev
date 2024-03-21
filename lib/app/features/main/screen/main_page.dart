@@ -13,6 +13,7 @@ import "package:onelenykco/app/features/main/data/state/routes.dart";
 import "package:onelenykco/app/features/main/screen/collaboration/collaboration.dart";
 import "package:onelenykco/app/features/main/screen/design/design.dart";
 import "package:onelenykco/app/features/main/screen/hireme/hire_me.dart";
+import "package:onelenykco/app/features/main/screen/projects/projects.dart";
 import "package:onelenykco/app/features/main/screen/resume/resume_part.dart";
 import "package:onelenykco/app/features/main/screen/site/site_part.dart";
 import "package:onelenykco/app/root/app_router.dart";
@@ -137,8 +138,8 @@ class _MainScreenState
             router.navigate(const BlogRoute());
           },
           onDoubleTap: () {},
-          color: Color(0xFFDA7054),
-          hoverColor: Color(0xFFCE7A60),
+          color: Colors.deepOrange.shade300.withOpacity(0.95),
+          hoverColor: Colors.deepOrange.shade200.withOpacity(0.95),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Text(
@@ -193,6 +194,26 @@ class _MainScreenState
           ),
         ),
       );
+
+  Widget projects({required final MainState state}) => HoverButton(
+    onTap: () {
+      cubit.selectTopic(route: Routes.Projects);
+    },
+    onDoubleTap: () {},
+    color: Colors.deepPurple.shade200.withAlpha(99),
+    hoverColor: Colors.deepPurple.shade100.withAlpha(99),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Text(
+        Routes.Projects.title,
+        style: GoogleFonts.robotoMono(
+          fontSize: 14,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  );
 
   Widget collaboration({required final MainState state}) => Column(
       mainAxisSize: MainAxisSize.min,
@@ -253,7 +274,9 @@ class _MainScreenState
         break;
       case Routes.Design:
         content = const DesignPart();
-
+        break;
+      case Routes.Projects:
+        content = ProjectsPart();
         break;
     }
 
@@ -334,11 +357,19 @@ class _MainScreenState
                   ),
                   const SizedBox(height: 8),
                   InfoBlock(
+                    color: Colors.deepPurple.shade300.withOpacity(0.90),
+                    child: projects(state: state),
+                  ),
+                  const SizedBox(height: 8),
+                  InfoBlock(
                     color: Colors.blueGrey.shade300.withOpacity(0.90),
                     child: collaboration(state: state),
                   ),
                   const SizedBox(height: 8),
                   site(state: state),
+                  const SizedBox(height: 8),
+
+                  design(state: state)
                 ],
               ),
             ),
