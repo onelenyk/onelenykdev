@@ -56,3 +56,9 @@ app.*.map.json
 /assets/.env
 /dotenv.env
 /report.xml
+/lib/app/data/firebase/auth/auth_state.freezed.dart
+/lib/app/features/main/screen/personal/personal_cubit.dart
+/lib/app/features/main/screen/personal/personal_state.dart
+/lib/app/features/main/screen/personal/scenario/scenario_state.freezed.dart
+/lib/app/data/user/user_payload.freezed.dart
+/lib/app/data/user/user_payload.g.dart

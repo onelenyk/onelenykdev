@@ -7,8 +7,11 @@ import "package:onelenykco/app/data/services/firestore_service.dart";
 import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
 import "package:onelenykco/app/features/main/data/resume/resume_cubit.dart";
 import "package:onelenykco/app/features/main/data/state/main_cubit.dart";
+import "package:onelenykco/app/features/main/screen/personal/personal_cubit.dart";
 import "package:onelenykco/app/root/app_router.dart";
 import "package:onelenykco/main.dart";
+
+import "../data/repository/user_repository.dart";
 
 class RootComponent extends StatelessWidget {
   RootComponent({super.key}) {
@@ -19,10 +22,11 @@ class RootComponent extends StatelessWidget {
       ..registerSingleton<MainCubit>(MainCubit())
       ..registerSingleton<AdminCubit>(AdminCubit())
       ..registerSingleton<ResumeCubit>(ResumeCubit())
-      ..registerSingleton<AuthenticationCubit>(
-          AuthenticationCubit(firebaseAuth),);
+      ..registerSingleton<AuthenticationCubit>(AuthenticationCubit(firebaseAuth))
+      ..registerSingleton<PersonalCubit>(PersonalCubit())
+      ..registerSingleton<UserRepository>(UserRepository()
+        ,);
   }
-
   final _router = AppRouter();
   final getIt = GetIt.instance;
 

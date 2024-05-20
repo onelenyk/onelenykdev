@@ -29,10 +29,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: MainScreen(key: args.key),
       );
     },
+    MuneraRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MuneraScreen(),
+      );
+    },
     MyPasswordsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const MyPasswordsScreen(),
+      );
+    },
+    PersonalRoute.name: (routeData) {
+      final args = routeData.argsAs<PersonalRouteArgs>(
+          orElse: () => const PersonalRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PersonalScreen(key: args.key),
+      );
+    },
+    PosydyRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PosydyScreen(),
       );
     },
   };
@@ -81,6 +101,20 @@ class MainRouteArgs {
 }
 
 /// generated route for
+/// [MuneraScreen]
+class MuneraRoute extends PageRouteInfo<void> {
+  const MuneraRoute({List<PageRouteInfo>? children})
+      : super(
+          MuneraRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MuneraRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [MyPasswordsScreen]
 class MyPasswordsRoute extends PageRouteInfo<void> {
   const MyPasswordsRoute({List<PageRouteInfo>? children})
@@ -90,6 +124,49 @@ class MyPasswordsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MyPasswordsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PersonalScreen]
+class PersonalRoute extends PageRouteInfo<PersonalRouteArgs> {
+  PersonalRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PersonalRoute.name,
+          args: PersonalRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'PersonalRoute';
+
+  static const PageInfo<PersonalRouteArgs> page =
+      PageInfo<PersonalRouteArgs>(name);
+}
+
+class PersonalRouteArgs {
+  const PersonalRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'PersonalRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [PosydyScreen]
+class PosydyRoute extends PageRouteInfo<void> {
+  const PosydyRoute({List<PageRouteInfo>? children})
+      : super(
+          PosydyRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PosydyRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
