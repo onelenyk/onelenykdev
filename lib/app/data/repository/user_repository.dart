@@ -31,25 +31,16 @@ class UserRepository {
     }
   }
 
-  Future<UserPayload?> findOrCreateUserPayloadByUID(String uid) async {
-    try {
-      final existingUser = await findUserByUID(uid);
-      if (existingUser != null) {
-        return existingUser;
-      } else {
-        final newUser = UserPayload(
-          id: '', // Firestore will auto-generate this
-          uid: uid,
-          lastClickDate: Timestamp.now(),
-        );
 
-        final newDocRef = await _usersCollection.add(newUser);
-        final newUserSnapshot = await newDocRef.get();
-        return UserPayload.fromSnapshot(newUserSnapshot);
-      }
+  Future<void> updateItem(final UserPayload item) async {
+    try {
+      final result = _usersCollection.doc(item.id);
+      result
+          .set(item)
+          .then((final _) => print("Success"))
+          .catchError((final error) => print("Failed: $error"));
     } catch (e) {
-      print("Error finding or creating user by login: $e");
-      return null;
+      print("Error updating item: $e ${item.toJson()}");
     }
   }
 
@@ -57,9 +48,7 @@ class UserRepository {
     try {
       await _usersCollection
           .doc(id)
-          .update(
-          {"lastClickDate": lastClickDate}
-      );
+          .update({"lastClickDate": lastClickDate});
     } catch (e) {
       print("Error updating last click date: $e");
     }

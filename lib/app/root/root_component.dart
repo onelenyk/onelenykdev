@@ -11,6 +11,7 @@ import "package:onelenykco/app/features/main/screen/personal/personal_cubit.dart
 import "package:onelenykco/app/root/app_router.dart";
 import "package:onelenykco/main.dart";
 
+import "../data/repository/user_payload_repository.dart";
 import "../data/repository/user_repository.dart";
 
 class RootComponent extends StatelessWidget {
@@ -24,7 +25,8 @@ class RootComponent extends StatelessWidget {
       ..registerSingleton<ResumeCubit>(ResumeCubit())
       ..registerSingleton<AuthenticationCubit>(AuthenticationCubit(firebaseAuth))
       ..registerSingleton<PersonalCubit>(PersonalCubit())
-      ..registerSingleton<UserRepository>(UserRepository()
+      ..registerSingleton<UserRepository>(UserRepository())
+      ..registerSingleton<UserPayloadRepository>(UserPayloadRepository()
         ,);
   }
   final _router = AppRouter();

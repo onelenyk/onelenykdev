@@ -8,7 +8,7 @@ part of 'topic_content.dart';
 
 _$TopicDataItemImpl _$$TopicDataItemImplFromJson(Map<String, dynamic> json) =>
     _$TopicDataItemImpl(
-      date: json['date'] as int,
+      date: (json['date'] as num).toInt(),
       text: json['text'] as String,
     );
 

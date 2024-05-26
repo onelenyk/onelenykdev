@@ -47,21 +47,21 @@ class LoginPart extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextField(
-              style: GoogleFonts.vt323(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2,
-              ),
+              style: GoogleFonts.robotoMono(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  fontSize: 14),
               onChanged: (final value) {
                 email = value;
               },
               decoration: InputDecoration(
                 hintText: "Email",
-                hintStyle: GoogleFonts.vt323(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.normal,
-                  letterSpacing: 2,
-                ),
+                hintStyle: GoogleFonts.robotoMono(
+                    color: Colors.white70,
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 2,
+                    fontSize: 12),
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white70),
                 ),
@@ -75,9 +75,10 @@ class LoginPart extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextField(
-              style: GoogleFonts.vt323(
+              style: GoogleFonts.robotoMono(
                   color: Colors.red,
                   fontWeight: FontWeight.normal,
+                  fontSize: 14,
                   letterSpacing: 2),
               onChanged: (final value) {
                 password = value;
@@ -85,11 +86,11 @@ class LoginPart extends StatelessWidget {
               cursorColor: Colors.white,
               decoration: InputDecoration(
                 hintText: "Password",
-                hintStyle: GoogleFonts.vt323(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.normal,
-                  letterSpacing: 2,
-                ),
+                hintStyle: GoogleFonts.robotoMono(
+                    color: Colors.white70,
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 2,
+                    fontSize: 12),
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white70),
                 ),
@@ -114,11 +115,11 @@ class LoginPart extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text("Cancel",
-                      style: GoogleFonts.vt323(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                      )),
+                      style: GoogleFonts.robotoMono(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                          fontSize: 12)),
                 ),
               ),
               SizedBox(
@@ -126,7 +127,8 @@ class LoginPart extends StatelessWidget {
               ),
               HoverButton(
                 onTap: () {
-                  authCubit.signInWithEmailAndPassword(email, password);
+                  authCubit.signInOrRegisterWithEmailAndPassword(
+                      email, password);
                   print("Email: $email, Password: $password");
                 },
                 onDoubleTap: () {},
@@ -135,11 +137,11 @@ class LoginPart extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text("Login",
-                      style: GoogleFonts.vt323(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                      )),
+                      style: GoogleFonts.robotoMono(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                          fontSize: 12)),
                 ),
               ),
             ],
@@ -151,99 +153,6 @@ class LoginPart extends StatelessWidget {
       ),
     );
   }
-
-  Future<void> showLoginDialog(final BuildContext context) async {
-    final authCubit = getIt<AuthenticationCubit>();
-
-    var email = "";
-    var password = "";
-
-    return showDialog<void>(
-      context: context,
-      builder: (final dialogContext) => AlertDialog(
-        title: const Text("Login"),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              TextField(
-                onChanged: (final value) {
-                  email = value;
-                },
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              TextField(
-                onChanged: (final value) {
-                  password = value;
-                },
-                decoration: const InputDecoration(
-                  hintText: "Password",
-                ),
-                obscureText: true,
-              ),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text("Cancel"),
-            onPressed: () {
-              Navigator.of(dialogContext).pop(); // Dismiss the dialog
-            },
-          ),
-          TextButton(
-            child: const Text("Login"),
-            onPressed: () {
-              // Implement your login logic here
-              authCubit.signInWithEmailAndPassword(email, password);
-              print("Email: $email, Password: $password");
-              Navigator.of(dialogContext).pop(); // Dismiss the dialog
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> showLogoutDialog(
-          final BuildContext context, final User user) async =>
-      showDialog<void>(
-        context: context,
-        builder: (final dialogContext) => AlertDialog(
-          title: const Text("Logged In"),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                const Text("You are already logged in."),
-                Text("Email: ${user.email}"),
-                Text('Name: ${user.displayName ?? 'N/A'}'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("Log Out"),
-              onPressed: () {
-                // Implement your log out logic here
-                final authCubit = getIt<AuthenticationCubit>();
-                authCubit.signOut();
-                Navigator.of(dialogContext).pop(); // Dismiss the dialog
-              },
-            ),
-            /*   TextButton(
-              child: const Text("Admin pannel"),
-              onPressed: () {
-                // Implement your log out logic here
-                Navigator.of(dialogContext).pop(); // Dismiss the dialog
-              },
-            ),*/
-          ],
-        ),
-      );
-
-  var showLogin = false;
 
   @override
   Widget build(final BuildContext context) {
@@ -257,6 +166,32 @@ class LoginPart extends StatelessWidget {
           // Navigate to home screen
         } else if (state is AuthFailed) {
           print("AuthenticationFailure ${state.error}");
+
+          final snackBar = SnackBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InfoBlock(
+                  width: 350,
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  color: Colors.black26.withAlpha(80),
+                  child: Text(state.error ?? 'Authentication Failed',
+                      style: GoogleFonts.robotoMono(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                          fontSize: 12)),
+                ),
+              ],
+            ),
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
       builder: (final context, final state) {
@@ -268,8 +203,8 @@ class LoginPart extends StatelessWidget {
                 onTap: authCubit.switchLogin,
                 onDoubleTap: () {},
                 hoverColor: Colors.black26,
+                color: Colors.black26,
                 clickable: !state.loginOpened,
-                color: Colors.black.withAlpha(30),
                 child: const Padding(
                   padding: EdgeInsets.all(8),
                   child: Center(
@@ -288,7 +223,7 @@ class LoginPart extends StatelessWidget {
             onTap: authCubit.switchLogin,
             onDoubleTap: () {},
             hoverColor: Colors.black26,
-            color: Colors.black.withAlpha(30),
+            color: Colors.black26,
             child: const Padding(
               padding: EdgeInsets.all(8),
               child: Center(
@@ -316,7 +251,7 @@ class LoginPart extends StatelessWidget {
             },
             onDoubleTap: () {},
             hoverColor: Colors.black26,
-            color: Colors.black.withAlpha(30),
+            color: Colors.black26,
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Center(
@@ -324,7 +259,7 @@ class LoginPart extends StatelessWidget {
                   height: 20,
                   child: Text(
                     "Logout",
-                    style: GoogleFonts.vt323(
+                    style: GoogleFonts.robotoMono(
                         color: color,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 2),
@@ -338,7 +273,7 @@ class LoginPart extends StatelessWidget {
             onTap: () {},
             onDoubleTap: () {},
             hoverColor: Colors.black26,
-            color: Colors.black.withAlpha(30),
+            color: Colors.black26,
             child: const Padding(
               padding: EdgeInsets.all(8),
               child: Center(
@@ -372,11 +307,11 @@ class LoginPart extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 8,
+                    height: 16,
                   ),
                   DividerWidget(),
                   SizedBox(
-                    height: 8,
+                    height: 16,
                   ),
                   loginFormBody(),
                 ],

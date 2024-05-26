@@ -9,12 +9,13 @@ class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   CollectionReference<Map<String, dynamic>> getUsers() =>
-      _firestore.collection("users");
+      _firestore.collection("payloads");
 
   CollectionReference<UserPayload> getUsersList() =>
-      _firestore.collection("users").withConverter<UserPayload>(
-            fromFirestore: (final snapshot, final _) =>
-                UserPayload.fromJson(snapshot.data()!),
+      _firestore.collection("payloads").withConverter<UserPayload>(
+            fromFirestore: (final snapshot, final _) {
+              return UserPayload.fromSnapshot(snapshot);
+            },
             toFirestore: (final model, final _) => model.toJson(),
           );
 
