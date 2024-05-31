@@ -21,6 +21,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BlogScreen(),
       );
     },
+    LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LoginScreen(key: args.key),
+      );
+    },
+    MainMuneraRoute.name: (routeData) {
+      final args = routeData.argsAs<MainMuneraRouteArgs>(
+          orElse: () => const MainMuneraRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MainMuneraScreen(key: args.key),
+      );
+    },
     MainRoute.name: (routeData) {
       final args =
           routeData.argsAs<MainRouteArgs>(orElse: () => const MainRouteArgs());
@@ -30,9 +46,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MuneraRoute.name: (routeData) {
+      final args = routeData.argsAs<MuneraRouteArgs>(
+          orElse: () => const MuneraRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MuneraScreen(),
+        child: MuneraScreen(key: args.key),
       );
     },
     MyPasswordsRoute.name: (routeData) {
@@ -41,18 +59,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MyPasswordsScreen(),
       );
     },
-    PersonalRoute.name: (routeData) {
-      final args = routeData.argsAs<PersonalRouteArgs>(
-          orElse: () => const PersonalRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: PersonalScreen(key: args.key),
-      );
-    },
     PosydyRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const PosydyScreen(),
+      );
+    },
+    SplashRoute.name: (routeData) {
+      final args = routeData.argsAs<SplashRouteArgs>(
+          orElse: () => const SplashRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SplashScreen(key: args.key),
       );
     },
   };
@@ -70,6 +88,63 @@ class BlogRoute extends PageRouteInfo<void> {
   static const String name = 'BlogRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LoginScreen]
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          LoginRoute.name,
+          args: LoginRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const PageInfo<LoginRouteArgs> page = PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [MainMuneraScreen]
+class MainMuneraRoute extends PageRouteInfo<MainMuneraRouteArgs> {
+  MainMuneraRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MainMuneraRoute.name,
+          args: MainMuneraRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'MainMuneraRoute';
+
+  static const PageInfo<MainMuneraRouteArgs> page =
+      PageInfo<MainMuneraRouteArgs>(name);
+}
+
+class MainMuneraRouteArgs {
+  const MainMuneraRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MainMuneraRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -102,16 +177,30 @@ class MainRouteArgs {
 
 /// generated route for
 /// [MuneraScreen]
-class MuneraRoute extends PageRouteInfo<void> {
-  const MuneraRoute({List<PageRouteInfo>? children})
-      : super(
+class MuneraRoute extends PageRouteInfo<MuneraRouteArgs> {
+  MuneraRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           MuneraRoute.name,
+          args: MuneraRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'MuneraRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MuneraRouteArgs> page = PageInfo<MuneraRouteArgs>(name);
+}
+
+class MuneraRouteArgs {
+  const MuneraRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MuneraRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -129,35 +218,6 @@ class MyPasswordsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PersonalScreen]
-class PersonalRoute extends PageRouteInfo<PersonalRouteArgs> {
-  PersonalRoute({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-          PersonalRoute.name,
-          args: PersonalRouteArgs(key: key),
-          initialChildren: children,
-        );
-
-  static const String name = 'PersonalRoute';
-
-  static const PageInfo<PersonalRouteArgs> page =
-      PageInfo<PersonalRouteArgs>(name);
-}
-
-class PersonalRouteArgs {
-  const PersonalRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'PersonalRouteArgs{key: $key}';
-  }
-}
-
-/// generated route for
 /// [PosydyScreen]
 class PosydyRoute extends PageRouteInfo<void> {
   const PosydyRoute({List<PageRouteInfo>? children})
@@ -169,4 +229,32 @@ class PosydyRoute extends PageRouteInfo<void> {
   static const String name = 'PosydyRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SplashScreen]
+class SplashRoute extends PageRouteInfo<SplashRouteArgs> {
+  SplashRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SplashRoute.name,
+          args: SplashRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static const PageInfo<SplashRouteArgs> page = PageInfo<SplashRouteArgs>(name);
+}
+
+class SplashRouteArgs {
+  const SplashRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SplashRouteArgs{key: $key}';
+  }
 }

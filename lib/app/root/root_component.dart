@@ -7,12 +7,12 @@ import "package:onelenykco/app/data/services/firestore_service.dart";
 import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
 import "package:onelenykco/app/features/main/data/resume/resume_cubit.dart";
 import "package:onelenykco/app/features/main/data/state/main_cubit.dart";
-import "package:onelenykco/app/features/main/screen/personal/personal_cubit.dart";
 import "package:onelenykco/app/root/app_router.dart";
 import "package:onelenykco/main.dart";
 
 import "../data/repository/user_payload_repository.dart";
 import "../data/repository/user_repository.dart";
+import "../features/main/screen/munera/personal_cubit.dart";
 
 class RootComponent extends StatelessWidget {
   RootComponent({super.key}) {

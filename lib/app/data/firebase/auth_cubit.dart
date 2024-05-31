@@ -11,12 +11,13 @@ import "auth/auth_state.dart";
 
 class AuthenticationCubit extends Cubit<AuthState> {
   AuthenticationCubit(this._firebaseAuth)
-      : super(const AuthState.authInitial(false)) {
+      : super(AuthState.authInitial(false)) {
     init();
   }
 
   final getIt = GetIt.instance;
-  late final UserPayloadRepository userRepository = getIt<UserPayloadRepository>();
+  late final UserPayloadRepository userRepository =
+      getIt<UserPayloadRepository>();
 
   final FirebaseAuth _firebaseAuth;
   StreamSubscription<User?>? _authStateSubscription;
@@ -39,6 +40,22 @@ class AuthenticationCubit extends Cubit<AuthState> {
     );
   }
 
+  bool isLoggedIn() => _firebaseAuth.currentUser != null;
+
+  Future<void> splash() async {
+    if (state is AuthInitial) {
+      final authState = state as AuthInitial;
+      emit(
+        authState.copyWith(
+          loginOpened: !authState.loginOpened,
+        ),
+      );
+    } else {
+      emit(AuthInitial(true));
+    }
+  }
+
+
   Future<void> switchLogin() async {
     if (state is AuthInitial) {
       final authState = state as AuthInitial;
@@ -54,13 +71,12 @@ class AuthenticationCubit extends Cubit<AuthState> {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
-    emit(const AuthState.authInitial(
-        false)); // Emitting initial state after sign out
+    emit(AuthState.authSignedOut()); // Emitting initial state after sign out
   }
 
   Future<void> signInOrRegisterWithEmailAndPassword(
       final String email, final String password) async {
-    emit(const AuthState.authLoading());
+    emit(AuthState.authLoading());
     try {
       final userCredential = await _attemptSignIn(email, password);
       final userPayload = await userRepository
@@ -128,14 +144,14 @@ class AuthenticationCubit extends Cubit<AuthState> {
   }
 
   Future<UserCredential> _signIn(
-      final String email, final String password) async =>
+          final String email, final String password) async =>
       _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
   Future<UserCredential> _register(
-      final String email, final String password) async =>
+          final String email, final String password) async =>
       _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
