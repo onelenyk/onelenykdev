@@ -1,5 +1,6 @@
 import "dart:math" as math;
 
+import "package:auto_route/auto_route.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -11,8 +12,9 @@ import "package:onelenykco/app/common/hover_button.dart";
 import "package:onelenykco/app/common/info_block.dart";
 import "package:onelenykco/app/data/firebase/auth_cubit.dart";
 import "package:onelenykco/app/data/firebase/authentication_state.dart";
+import "package:onelenykco/app/root/app_router.dart";
 
-import "../../../../data/firebase/auth/auth_state.dart";
+import 'package:onelenykco/app/data/firebase/auth/auth_state.dart';
 
 class LoginPart extends StatelessWidget {
   LoginPart({super.key});
@@ -192,31 +194,29 @@ class LoginPart extends StatelessWidget {
           );
 
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        } else if (state is AuthSignedOut) {
+          context.router.replace(LoginRoute());
         }
       },
       builder: (final context, final state) {
         final Widget content;
         if (state is AuthInitial) {
-          content = Column(
-            children: [
-              HoverButton(
-                onTap: authCubit.switchLogin,
-                onDoubleTap: () {},
-                hoverColor: Colors.black26,
-                color: Colors.black26,
-                clickable: !state.loginOpened,
-                child: const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Center(
-                    child: Icon(
-                      FontAwesomeIcons.arrowRightToBracket,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
+          content = HoverButton(
+            onTap: authCubit.switchLogin,
+            onDoubleTap: () {},
+            hoverColor: Colors.black26,
+            color: Colors.black26,
+            clickable: !state.loginOpened,
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Center(
+                child: Icon(
+                  FontAwesomeIcons.arrowRightToBracket,
+                  color: Colors.white,
+                  size: 20,
                 ),
               ),
-            ],
+            ),
           );
         } else if (state is AuthFailed) {
           content = HoverButton(
@@ -268,22 +268,39 @@ class LoginPart extends StatelessWidget {
               ),
             ),
           );
-        } else {
+        }else if (state is AuthLoading) {
           content = HoverButton(
-            onTap: () {},
+            onTap: authCubit.switchLogin,
             onDoubleTap: () {},
             hoverColor: Colors.black26,
             color: Colors.black26,
             child: const Padding(
               padding: EdgeInsets.all(8),
               child: Center(
-                child: SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: Colors.white,
-                  ),
+                  child: const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )),
+            ),
+          );
+        } else {
+          content = HoverButton(
+            onTap: authCubit.switchLogin,
+            onDoubleTap: () {},
+            hoverColor: Colors.black26,
+            color: Colors.black26,
+            clickable: true,
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Center(
+                child: Icon(
+                  FontAwesomeIcons.arrowRightToBracket,
+                  color: Colors.white,
+                  size: 20,
                 ),
               ),
             ),
