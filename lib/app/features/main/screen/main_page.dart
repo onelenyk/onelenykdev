@@ -116,63 +116,102 @@ class _MainScreenState
       );
 
   Widget blog({required final MainState state}) => Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding:
-              const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
-          child: Text(
-            "blog 📺",
-            style: GoogleFonts.robotoMono(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-        ),
-        HoverButton(
-          onTap: () {
-            final router = AutoRouter.of(context);
-            router.navigate(const BlogRoute());
-          },
-          onDoubleTap: () {},
-          color: Color(0xFFDA7054),
-          hoverColor: Color(0xFFCE7A60),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding:
+                const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
             child: Text(
-              "check it out 👀",
+              "blog 📺",
               style: GoogleFonts.robotoMono(
-                fontSize: 14,
+                fontSize: 18,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
           ),
-        ),
-      ],
-    );
+          HoverButton(
+            onTap: () {
+              final router = AutoRouter.of(context);
+              router.navigate(const BlogRoute());
+            },
+            onDoubleTap: () {},
+            color: Color(0xFFDA7054),
+            hoverColor: Color(0xFFCE7A60),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text(
+                "check it out 👀",
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+
+  Widget munera({required final MainState state}) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding:
+                const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
+            child: Text(
+              "service 📺",
+              style: GoogleFonts.robotoMono(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          HoverButton(
+            onTap: () {
+              final router = AutoRouter.of(context);
+              router.navigate(MuneraRoute());
+            },
+            onDoubleTap: () {},
+            color: Colors.redAccent,
+            hoverColor: Colors.redAccent.shade100,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text(
+                "munera",
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
 
   Widget site({required final MainState state}) => HoverButton(
-      onTap: () {
-        cubit.selectTopic(route: Routes.AboutSite);
-      },
-      onDoubleTap: () {},
-      color: Colors.grey.shade900,
-      hoverColor: Colors.grey.shade500,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        child: Text(
-          "${state.version}",
-          style: GoogleFonts.robotoMono(
-            fontSize: 12,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+        onTap: () {
+          cubit.selectTopic(route: Routes.AboutSite);
+        },
+        onDoubleTap: () {},
+        color: Colors.grey.shade900,
+        hoverColor: Colors.grey.shade500,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          child: Text(
+            "${state.version}",
+            style: GoogleFonts.robotoMono(
+              fontSize: 12,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-    );
+      );
 
   Widget design({required final MainState state}) => HoverButton(
         onTap: () {
@@ -195,42 +234,42 @@ class _MainScreenState
       );
 
   Widget collaboration({required final MainState state}) => Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding:
-              const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
-          child: Text(
-            "collaboration 🌍",
-            style: GoogleFonts.robotoMono(
-              fontSize: 18,
-              color: Colors.white,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-        ),
-        HoverButton(
-          onTap: () {
-            cubit.selectTopic(route: Routes.Collab);
-          },
-          onDoubleTap: () {},
-          color: Colors.blueGrey.shade300,
-          hoverColor: Colors.blueGrey.shade400,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding:
+                const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
             child: Text(
-              "create together",
+              "collaboration 🌍",
               style: GoogleFonts.robotoMono(
-                fontSize: 14,
+                fontSize: 18,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
           ),
-        ),
-      ],
-    );
+          HoverButton(
+            onTap: () {
+              cubit.selectTopic(route: Routes.Collab);
+            },
+            onDoubleTap: () {},
+            color: Colors.blueGrey.shade300,
+            hoverColor: Colors.blueGrey.shade400,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text(
+                "create together",
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
 
   Widget buildBody({required final MainState state}) {
     Widget? content;
@@ -267,85 +306,90 @@ class _MainScreenState
   }
 
   Widget buildMenu(final MainState state) => SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(
-                width: 8,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: HoverButton(
-                  hoverColor: Colors.blueGrey.shade300.withAlpha(100),
-                  color: Colors.blueGrey.shade300.withOpacity(0.95),
-                  onTap: cubit.openMenu,
-                  onDoubleTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Icon(
-                      FontAwesomeIcons.bars,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  width: 8,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: HoverButton(
-                  hoverColor: Colors.blueGrey.shade300.withAlpha(100),
-                  color: Colors.blueGrey.shade300.withOpacity(0.95),
-                  onTap: cubit.openMenu,
-                  onDoubleTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(
-                      state.activeRoute.title,
-                      style: GoogleFonts.robotoMono(
-                        fontSize: 12,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: HoverButton(
+                    hoverColor: Colors.blueGrey.shade300.withAlpha(100),
+                    color: Colors.blueGrey.shade300.withOpacity(0.95),
+                    onTap: cubit.openMenu,
+                    onDoubleTap: () {},
+                    child: const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Icon(
+                        FontAwesomeIcons.bars,
                         color: Colors.white,
-                        fontWeight: FontWeight.w900,
+                        size: 20,
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Visibility(
-            visible: state.isMenuOpened,
-            child: InfoBlock(
-              color: Colors.transparent,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InfoBlock(
-                    color: Colors.blueGrey.shade300.withOpacity(0.90),
-                    child: bottomCareer(state: state),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: HoverButton(
+                    hoverColor: Colors.blueGrey.shade300.withAlpha(100),
+                    color: Colors.blueGrey.shade300.withOpacity(0.95),
+                    onTap: cubit.openMenu,
+                    onDoubleTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        state.activeRoute.title,
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 8),
-                  InfoBlock(
-                    color: Colors.deepOrange.shade300.withOpacity(0.90),
-                    child: blog(state: state),
-                  ),
-                  const SizedBox(height: 8),
-                  InfoBlock(
-                    color: Colors.blueGrey.shade300.withOpacity(0.90),
-                    child: collaboration(state: state),
-                  ),
-                  const SizedBox(height: 8),
-                  site(state: state),
-                ],
+                ),
+              ],
+            ),
+            Visibility(
+              visible: state.isMenuOpened,
+              child: InfoBlock(
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InfoBlock(
+                      color: Colors.blueGrey.shade300.withOpacity(0.90),
+                      child: bottomCareer(state: state),
+                    ),
+                    const SizedBox(height: 8),
+                    InfoBlock(
+                      color: Colors.deepOrange.shade300.withOpacity(0.90),
+                      child: blog(state: state),
+                    ),
+                    const SizedBox(height: 8),
+                    InfoBlock(
+                      color: Colors.redAccent.shade200.withOpacity(0.90),
+                      child: munera(state: state),
+                    ),
+                    const SizedBox(height: 8),
+                    InfoBlock(
+                      color: Colors.blueGrey.shade300.withOpacity(0.90),
+                      child: collaboration(state: state),
+                    ),
+                    const SizedBox(height: 8),
+                    site(state: state),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
 
   Widget layout(final MainState state) => Scaffold(
         body: SelectionArea(
