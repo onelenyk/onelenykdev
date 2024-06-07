@@ -1,8 +1,13 @@
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:get_it/get_it.dart";
+import "package:google_fonts/google_fonts.dart";
+import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/features/main/screen/base/base_screen.dart";
+import "package:onelenykco/app/features/main/screen/base/mobile_frame.dart";
 import "package:onelenykco/app/features/main/screen/munera/personal_cubit.dart";
 import "package:onelenykco/app/features/main/screen/munera/personal_state.dart";
+import "package:onelenykco/app/root/app_router.dart";
 
 import "../base/responsive_state.dart";
 
@@ -17,7 +22,8 @@ class MuneraScreen extends StatefulWidget {
   _MuneraScreenState createState() => _MuneraScreenState(cubit);
 }
 
-class _MuneraScreenState extends ResponsiveState<MuneraScreen, PersonalState, PersonalCubit> {
+class _MuneraScreenState
+    extends ResponsiveState<MuneraScreen, PersonalState, PersonalCubit> {
   _MuneraScreenState(super.cubit);
 
   @override
