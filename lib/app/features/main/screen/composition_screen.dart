@@ -23,19 +23,19 @@ import "base/responsive_state.dart";
 import "blog/blog_page.dart";
 
 @RoutePage()
-class MainScreen extends StatefulWidget {
-  MainScreen({super.key});
+class CompositionScreen extends StatefulWidget {
+  CompositionScreen({super.key});
 
   final getIt = GetIt.instance;
   late final MainCubit cubit = getIt<MainCubit>();
 
   @override
-  _MainScreenState createState() => _MainScreenState(cubit);
+  _CompositionScreenState createState() => _CompositionScreenState(cubit);
 }
 
-class _MainScreenState
-    extends ResponsiveState<MainScreen, MainState, MainCubit> {
-  _MainScreenState(super.cubit);
+class _CompositionScreenState
+    extends ResponsiveState<CompositionScreen, MainState, MainCubit> {
+  _CompositionScreenState(super.cubit);
 
   @override
   void onStateChange(

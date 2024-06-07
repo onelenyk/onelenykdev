@@ -30,20 +30,7 @@ class _MuneraScreenState extends ResponsiveState<MuneraScreen, PersonalState, Pe
           final BuildContext context, final PersonalState state) =>
       layout(state);
 
-  Widget layout(final PersonalState state) => Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF343540),
-            borderRadius: BorderRadius.circular(0),
-          ),
-          child: Center(
-            child: buildBody(state: state),
-          ),
-        ),
-      );
+  Widget layout(final PersonalState state) => buildBody(state: state);
 
-  Widget buildBody({required final PersonalState state}) => const AutoRouter();
+  Widget buildBody({required final PersonalState state}) => BaseScreen(child: const MobileFrame(child: AutoRouter()));
 }
-
-
-

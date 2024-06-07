@@ -15,19 +15,19 @@ import "../personal_state.dart";
 import "../utils/badge_container.dart";
 
 @RoutePage()
-class MainMuneraScreen extends StatefulWidget {
-  MainMuneraScreen({super.key});
+class MainScreen extends StatefulWidget {
+  MainScreen({super.key});
 
   final getIt = GetIt.instance;
   late final PersonalCubit cubit = getIt<PersonalCubit>();
 
   @override
-  _MainMuneraScreenState createState() => _MainMuneraScreenState(cubit);
+  _MainScreenState createState() => _MainScreenState(cubit);
 }
 
-class _MainMuneraScreenState
-    extends ResponsiveState<MainMuneraScreen, PersonalState, PersonalCubit> {
-  _MainMuneraScreenState(super.cubit);
+class _MainScreenState
+    extends ResponsiveState<MainScreen, PersonalState, PersonalCubit> {
+  _MainScreenState(super.cubit);
 
   @override
   Widget buildDesktopLayout(
@@ -65,83 +65,35 @@ class _MainMuneraScreenState
       ),
     ];
 
-    return BaseScreen(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Wrap(
-            children: [
-              Column(
+    return Column(
+      children: [
+        BadgeContainer(
+            badgeText: "1",
+            showBadge: true,
+            child: InfoBlock(
+              width: double.maxFinite,
+              padding: const EdgeInsets.all(8.0),
+              child: buildSelectableText(hello),
+            )),
+        const SizedBox(height: 16),
+        BadgeContainer(
+            badgeText: "2",
+            child: InfoBlock(
+              padding:
+                  const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  buildBadgeContainer(
-                      "0",
-                      InfoBlock(
-                        padding: const EdgeInsets.all(8.0),
-                        width: 350,
-                        child: buildSelectableText([
-                          TextSpan(
-                            text: "munera",
-                            style: GoogleFonts.robotoMono(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                                letterSpacing: 2),
-                          ),
-                        ]),
-                      ),
-                      false),
-                  const SizedBox(height: 24),
-                  buildBadgeContainer(
-                      "1",
-                      InfoBlock(
-                        padding: const EdgeInsets.all(8.0),
-                        width: 350,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            buildSelectableText(hello),
-                            const SizedBox(height: 8),
-                          ],
-                        ),
-                      ),
-                      true),
-                  const SizedBox(height: 16),
-                  buildBadgeContainer(
-                      "2",
-                      InfoBlock(
-                        padding: const EdgeInsets.only(
-                            top: 8, left: 8, right: 8, bottom: 8),
-                        width: 350,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            buildTaskText(),
-                            buildLastTapText(formattedDate),
-                            buildTapButton(state.isLoading),
-                          ],
-                        ),
-                      ),
-                      true),
-                  const SizedBox(height: 16),
-                  buildBadgeContainer(
-                      "4",
-                      InfoBlock(
-                        padding: const EdgeInsets.only(
-                            top: 32, left: 16, right: 16, bottom: 16),
-                        width: 350,
-                        child: LoginPart(),
-                      ),
-                      true),
+                  buildTaskText(),
+                  buildLastTapText(formattedDate),
+                  buildTapButton(state.isLoading),
                 ],
               ),
-              const SizedBox(width: 16),
-              buildTapHistory(taps ?? []),
-            ],
-          ),
-        ],
-      ),
+            ),
+            showBadge: true),
+      ],
     );
   }
 

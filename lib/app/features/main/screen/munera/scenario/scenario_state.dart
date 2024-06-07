@@ -2,7 +2,7 @@ import "package:firebase_auth/firebase_auth.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:onelenykco/app/data/user/user_payload.dart";
 
-part 'scenario_state.freezed.dart';
+part "scenario_state.freezed.dart";
 
 /*
 @freezed
@@ -22,12 +22,12 @@ class ScenarioState with _$ScenarioState {
 
   String getLocalPartOfEmail(final String email) {
     // Check if the email contains '@' symbol
-    if (email.contains('@')) {
+    if (email.contains("@")) {
       // Split the email by '@' and return the first part
-      return email.split('@')[0];
+      return email.split("@")[0];
     } else {
       // If email does not contain '@', return an empty string or handle as needed
-      return '';
+      return "null";
     }
   }
 

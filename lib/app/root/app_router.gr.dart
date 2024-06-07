@@ -21,6 +21,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BlogScreen(),
       );
     },
+    CompositionRoute.name: (routeData) {
+      final args = routeData.argsAs<CompositionRouteArgs>(
+          orElse: () => const CompositionRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CompositionScreen(key: args.key),
+      );
+    },
+    LoginContainerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LoginContainerScreen(),
+      );
+    },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
           orElse: () => const LoginRouteArgs());
@@ -29,12 +43,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginScreen(key: args.key),
       );
     },
-    MainMuneraRoute.name: (routeData) {
-      final args = routeData.argsAs<MainMuneraRouteArgs>(
-          orElse: () => const MainMuneraRouteArgs());
+    MainContainerRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: MainMuneraScreen(key: args.key),
+        child: const MainContainerScreen(),
       );
     },
     MainRoute.name: (routeData) {
