@@ -6,14 +6,12 @@ import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
 
 import "package:onelenykco/app/common/info_block.dart";
+import "package:onelenykco/app/data/firebase/auth/auth_state.dart";
+import "package:onelenykco/app/data/firebase/auth_cubit.dart";
+import "package:onelenykco/app/features/main/screen/base/base_screen.dart";
+import "package:onelenykco/app/features/main/screen/base/responsive_state.dart";
+import "package:onelenykco/app/features/main/screen/munera/personal_cubit.dart";
 import "package:onelenykco/app/root/app_router.dart";
-
-import "../../../../../data/firebase/auth/auth_state.dart";
-import "../../../../../data/firebase/auth_cubit.dart";
-import "../../base/base_screen.dart";
-import "../../base/responsive_state.dart";
-import "../personal_cubit.dart";
-import "../utils/badge_container.dart";
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {
@@ -35,13 +33,13 @@ class _SplashScreenState
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 2), () {
       if (cubit.isLoggedIn()) {
         print("TEST AuthenticationSuccess");
-        context.router.replace(MainMuneraRoute());
+        context.router.push(const MainContainerRoute());
       } else {
         print("TEST AuthenticationFailed");
-        context.router.replace(LoginRoute());
+        context.router.push(LoginRoute());
       }
     });
   }
@@ -62,38 +60,27 @@ class _SplashScreenState
       layout(state);
 
   Widget layout(final AuthState state) => BaseScreen(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-        children: [
-          InfoBlock(
-            padding: const EdgeInsets.all(16.0),
-            width: 350,
-            child: SelectableText.rich(
-              TextSpan(
-                text: "munera",
-                style: GoogleFonts.robotoMono(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.normal,
-                    letterSpacing: 2),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InfoBlock(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  SelectableText.rich(
+                    TextSpan(
+                      text: "hello",
+                      style: GoogleFonts.robotoMono(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
+                          letterSpacing: 2),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          SizedBox(height: 24,),
-          InfoBlock(
-            padding: const EdgeInsets.all(16.0),
-            width: 350,
-            child: SelectableText.rich(
-              TextSpan(
-                text: "hello",
-                style: GoogleFonts.robotoMono(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.normal,
-                    letterSpacing: 2),
-              ),
-            ),
-          ),
-        ],
-      ));
+          ],
+        ),
+      );
 }
