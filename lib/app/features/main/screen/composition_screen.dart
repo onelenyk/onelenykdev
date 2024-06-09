@@ -112,37 +112,19 @@ class _CompositionScreenState
               ),
             ),
           ),
-        ],
-      );
+          const SizedBox(height: 8),
 
-  Widget blog({required final MainState state}) => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding:
-                const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
-            child: Text(
-              "blog 📺",
-              style: GoogleFonts.robotoMono(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
           HoverButton(
             onTap: () {
-              final router = AutoRouter.of(context);
-              router.navigate(const BlogRoute());
+              cubit.selectTopic(route: Routes.Collab);
             },
             onDoubleTap: () {},
-            color: Color(0xFFDA7054),
-            hoverColor: Color(0xFFCE7A60),
+            color: Color(0xFF2983B3),
+            hoverColor: Color(0xFF7FB7D5),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               child: Text(
-                "check it out 👀",
+                "collaboration 🌍",
                 style: GoogleFonts.robotoMono(
                   fontSize: 14,
                   color: Colors.white,
@@ -151,8 +133,93 @@ class _CompositionScreenState
               ),
             ),
           ),
+          const SizedBox(height: 8),
+
+          HoverButton(
+            onTap: () {
+              final router = AutoRouter.of(context);
+              router.navigate(const BlogRoute());
+            },
+            onDoubleTap: () {},
+            color: Color(0xFFDA7054),
+            hoverColor: Color(0xFFF8AF99),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text(
+                "blog",
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
         ],
       );
+
+  Widget projects({required final MainState state}) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        padding:
+        const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
+        child: Text(
+          "projects 🛠️",
+          style: GoogleFonts.robotoMono(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
+      HoverButton(
+        onTap: () {
+          final router = AutoRouter.of(context);
+          router.navigate(ProjectsRoute());
+        },
+        onDoubleTap: () {},
+        color: Colors.yellow.shade600,
+        hoverColor: Colors.yellow.shade400,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          child: Text(
+            "timeline",
+            style: GoogleFonts.robotoMono(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(height: 8),
+      HoverButton(
+        onTap: () {
+          final router = AutoRouter.of(context);
+          router.navigate(MuneraRoute());
+        },
+        onDoubleTap: () {},
+        color: Colors.redAccent,
+        hoverColor: Colors.redAccent.shade100,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          child: Text(
+            "munera",
+            style: GoogleFonts.robotoMono(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
 
   Widget munera({required final MainState state}) => Column(
         mainAxisSize: MainAxisSize.min,
@@ -231,44 +298,6 @@ class _CompositionScreenState
             ),
           ),
         ),
-      );
-
-  Widget collaboration({required final MainState state}) => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding:
-                const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
-            child: Text(
-              "collaboration 🌍",
-              style: GoogleFonts.robotoMono(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-          HoverButton(
-            onTap: () {
-              cubit.selectTopic(route: Routes.Collab);
-            },
-            onDoubleTap: () {},
-            color: Colors.blueGrey.shade300,
-            hoverColor: Colors.blueGrey.shade400,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Text(
-                "create together",
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
       );
 
   Widget buildBody({required final MainState state}) {
@@ -368,18 +397,8 @@ class _CompositionScreenState
                     ),
                     const SizedBox(height: 8),
                     InfoBlock(
-                      color: Colors.deepOrange.shade300.withOpacity(0.90),
-                      child: blog(state: state),
-                    ),
-                    const SizedBox(height: 8),
-                    InfoBlock(
-                      color: Colors.redAccent.shade200.withOpacity(0.90),
-                      child: munera(state: state),
-                    ),
-                    const SizedBox(height: 8),
-                    InfoBlock(
-                      color: Colors.blueGrey.shade300.withOpacity(0.90),
-                      child: collaboration(state: state),
+                      color: Colors.yellow.shade600.withOpacity(0.90),
+                      child: projects(state: state),
                     ),
                     const SizedBox(height: 8),
                     site(state: state),
