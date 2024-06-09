@@ -12,6 +12,8 @@ import "package:onelenykco/app/features/main/screen/munera/munera_screen.dart";
 import "package:onelenykco/app/features/main/screen/posydy/posydy_page.dart";
 import "package:onelenykco/app/features/passwords/screen/passwords_page.dart";
 
+import "../features/main/screen/projects/projects_screen.dart";
+
 part "app_router.gr.dart";
 
 @AutoRouterConfig(replaceInRouteName: "Screen,Route")

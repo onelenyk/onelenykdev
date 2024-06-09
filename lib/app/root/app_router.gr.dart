@@ -85,6 +85,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: ProfileScreen(key: args.key),
       );
     },
+    ProjectsRoute.name: (routeData) {
+      final args = routeData.argsAs<ProjectsRouteArgs>(
+          orElse: () => const ProjectsRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ProjectsScreen(key: args.key),
+      );
+    },
     SplashRoute.name: (routeData) {
       final args = routeData.argsAs<SplashRouteArgs>(
           orElse: () => const SplashRouteArgs());
@@ -305,6 +313,35 @@ class ProfileRouteArgs {
   @override
   String toString() {
     return 'ProfileRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [ProjectsScreen]
+class ProjectsRoute extends PageRouteInfo<ProjectsRouteArgs> {
+  ProjectsRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProjectsRoute.name,
+          args: ProjectsRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProjectsRoute';
+
+  static const PageInfo<ProjectsRouteArgs> page =
+      PageInfo<ProjectsRouteArgs>(name);
+}
+
+class ProjectsRouteArgs {
+  const ProjectsRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ProjectsRouteArgs{key: $key}';
   }
 }
 
