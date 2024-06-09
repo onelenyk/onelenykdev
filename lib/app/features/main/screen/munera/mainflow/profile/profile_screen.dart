@@ -41,14 +41,14 @@ class _ProfileScreenState
       layout(state);
 
   Widget buildSelectableText(final List<TextSpan> hello) => Padding(
-    padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
-    child: SelectableText.rich(
-      TextSpan(
-        style: GoogleFonts.robotoMono(fontSize: 14, color: Colors.white),
-        children: hello,
-      ),
-    ),
-  );
+        padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
+        child: SelectableText.rich(
+          TextSpan(
+            style: GoogleFonts.robotoMono(fontSize: 14, color: Colors.white),
+            children: hello,
+          ),
+        ),
+      );
 
   @override
   Widget buildMobileLayout(final BuildContext context, final AuthState state) =>
@@ -74,16 +74,18 @@ class _ProfileScreenState
       ),
     ];
     return Column(
-        children: [
-          InfoBlock(
-            width: double.maxFinite,
-            padding: const EdgeInsets.all(8.0),
-            child: buildSelectableText(hello),
-          ),
-          const SizedBox(height: 16),
-
-          InfoBlock(child: LoginPart(), padding: EdgeInsets.zero,),
-        ],
-      );
+      children: [
+        InfoBlock(
+          width: double.maxFinite,
+          padding: const EdgeInsets.all(8.0),
+          child: buildSelectableText(hello),
+        ),
+        const SizedBox(height: 16),
+        InfoBlock(
+          child: LoginPart(),
+          padding: EdgeInsets.zero,
+        ),
+      ],
+    );
   }
 }

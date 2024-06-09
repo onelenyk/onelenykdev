@@ -20,6 +20,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: CompositionRoute.page, path: "/", initial: true),
         AutoRoute(page: BlogRoute.page, path: "/blog"),
+        AutoRoute(page: ProjectsRoute.page, path: "/timeline"),
         AutoRoute(page: PosydyRoute.page, path: "/posydy"),
         CustomRoute(
           page: MuneraRoute.page,
