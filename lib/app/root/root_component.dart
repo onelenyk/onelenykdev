@@ -13,6 +13,7 @@ import "package:onelenykco/main.dart";
 import "../data/repository/user_payload_repository.dart";
 import "../data/repository/user_repository.dart";
 import "../features/main/screen/munera/personal_cubit.dart";
+import "../features/main/screen/projects/timeline_cubit.dart";
 
 class RootComponent extends StatelessWidget {
   RootComponent({super.key}) {
@@ -22,6 +23,7 @@ class RootComponent extends StatelessWidget {
       ..registerSingleton<FirestoreService>(FirestoreService())
       ..registerSingleton<MainCubit>(MainCubit())
       ..registerSingleton<AdminCubit>(AdminCubit())
+      ..registerSingleton<TimelineCubit>(TimelineCubit())
       ..registerSingleton<ResumeCubit>(ResumeCubit())
       ..registerSingleton<AuthenticationCubit>(AuthenticationCubit(firebaseAuth))
       ..registerSingleton<PersonalCubit>(PersonalCubit())
