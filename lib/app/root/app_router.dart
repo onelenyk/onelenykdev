@@ -23,6 +23,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: CompositionRoute.page, path: "/", initial: true),
         AutoRoute(page: BlogRoute.page, path: "/blog"),
         AutoRoute(page: ProjectsRoute.page, path: "/timeline"),
+        AutoRoute(page: BandanaRoute.page, path: "/thebandana.co"),
         AutoRoute(page: PosydyRoute.page, path: "/posydy"),
         CustomRoute(
           page: MuneraRoute.page,
