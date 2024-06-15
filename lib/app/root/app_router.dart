@@ -12,7 +12,9 @@ import "package:onelenykco/app/features/main/screen/munera/munera_screen.dart";
 import "package:onelenykco/app/features/main/screen/posydy/posydy_page.dart";
 import "package:onelenykco/app/features/passwords/screen/passwords_page.dart";
 
+import "../features/main/screen/notfound/not_found.dart";
 import "../features/main/screen/projects/projects_screen.dart";
+import "../features/main/screen/thebandanaco/bandana_screen.dart";
 
 part "app_router.gr.dart";
 
