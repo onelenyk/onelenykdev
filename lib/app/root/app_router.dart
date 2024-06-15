@@ -70,5 +70,11 @@ class AppRouter extends _$AppRouter {
             ),
           ],
         ),
+
+        AutoRoute(page: NotFoundRoute.page, path: "/not-found"),
+
+        // Add the fallback route
+        RedirectRoute(path: "*", redirectTo: "/not-found"),
+        // Define the not-found route
       ];
 }

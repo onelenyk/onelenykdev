@@ -15,6 +15,14 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BandanaRoute.name: (routeData) {
+      final args = routeData.argsAs<BandanaRouteArgs>(
+          orElse: () => const BandanaRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: BandanaScreen(key: args.key),
+      );
+    },
     BlogRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -71,6 +79,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MyPasswordsScreen(),
       );
     },
+    NotFoundRoute.name: (routeData) {
+      final args = routeData.argsAs<NotFoundRouteArgs>(
+          orElse: () => const NotFoundRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: NotFoundScreen(key: args.key),
+      );
+    },
     PosydyRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -102,6 +118,35 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [BandanaScreen]
+class BandanaRoute extends PageRouteInfo<BandanaRouteArgs> {
+  BandanaRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BandanaRoute.name,
+          args: BandanaRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'BandanaRoute';
+
+  static const PageInfo<BandanaRouteArgs> page =
+      PageInfo<BandanaRouteArgs>(name);
+}
+
+class BandanaRouteArgs {
+  const BandanaRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'BandanaRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
@@ -271,6 +316,35 @@ class MyPasswordsRoute extends PageRouteInfo<void> {
   static const String name = 'MyPasswordsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NotFoundScreen]
+class NotFoundRoute extends PageRouteInfo<NotFoundRouteArgs> {
+  NotFoundRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NotFoundRoute.name,
+          args: NotFoundRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'NotFoundRoute';
+
+  static const PageInfo<NotFoundRouteArgs> page =
+      PageInfo<NotFoundRouteArgs>(name);
+}
+
+class NotFoundRouteArgs {
+  const NotFoundRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'NotFoundRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
