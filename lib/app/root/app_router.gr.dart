@@ -117,6 +117,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: SplashScreen(key: args.key),
       );
     },
+    TgChannelRoute.name: (routeData) {
+      final args = routeData.argsAs<TgChannelRouteArgs>(
+          orElse: () => const TgChannelRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TgChannelScreen(key: args.key),
+      );
+    },
   };
 }
 
@@ -444,5 +452,34 @@ class SplashRouteArgs {
   @override
   String toString() {
     return 'SplashRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [TgChannelScreen]
+class TgChannelRoute extends PageRouteInfo<TgChannelRouteArgs> {
+  TgChannelRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TgChannelRoute.name,
+          args: TgChannelRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'TgChannelRoute';
+
+  static const PageInfo<TgChannelRouteArgs> page =
+      PageInfo<TgChannelRouteArgs>(name);
+}
+
+class TgChannelRouteArgs {
+  const TgChannelRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'TgChannelRouteArgs{key: $key}';
   }
 }

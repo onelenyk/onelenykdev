@@ -8,6 +8,7 @@ import "package:onelenykco/app/features/main/screen/base/mobile_frame.dart";
 
 import "../base/base_screen.dart";
 import "../base/responsive_state.dart";
+import "../notfound/not_found.dart";
 
 @RoutePage()
 class BandanaScreen extends StatefulWidget {
@@ -43,12 +44,4 @@ class _BandanaScreenState
           ),
         ),
       ));
-}
-
-// Define a NullState that doesn't hold any specific data
-class NullState {}
-
-// Define a NullCubit that doesn't perform any actions
-class NullCubit extends Cubit<NullState> {
-  NullCubit() : super(NullState());
 }

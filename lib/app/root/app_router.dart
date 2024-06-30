@@ -9,12 +9,13 @@ import "package:onelenykco/app/features/main/screen/munera/mainflow/main_contain
 import "package:onelenykco/app/features/main/screen/munera/mainflow/main_screen.dart";
 import "package:onelenykco/app/features/main/screen/munera/mainflow/profile/profile_screen.dart";
 import "package:onelenykco/app/features/main/screen/munera/munera_screen.dart";
+import "package:onelenykco/app/features/main/screen/notfound/not_found.dart";
 import "package:onelenykco/app/features/main/screen/posydy/posydy_page.dart";
+import "package:onelenykco/app/features/main/screen/projects/projects_screen.dart";
+import "package:onelenykco/app/features/main/screen/thebandanaco/bandana_screen.dart";
 import "package:onelenykco/app/features/passwords/screen/passwords_page.dart";
 
-import "../features/main/screen/notfound/not_found.dart";
-import "../features/main/screen/projects/projects_screen.dart";
-import "../features/main/screen/thebandanaco/bandana_screen.dart";
+import "../features/main/screen/tgchannel/tg_channel.dart";
 
 part "app_router.gr.dart";
 
@@ -25,7 +26,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: CompositionRoute.page, path: "/", initial: true),
         AutoRoute(page: BlogRoute.page, path: "/blog"),
         AutoRoute(page: ProjectsRoute.page, path: "/timeline"),
-        AutoRoute(page: BandanaRoute.page, path: "/thebandana.co"),
+    AutoRoute(page: BandanaRoute.page, path: "/thebandana.co"),
+    AutoRoute(page: TgChannelRoute.page, path: "/tg"),
         AutoRoute(page: PosydyRoute.page, path: "/posydy"),
         CustomRoute(
           page: MuneraRoute.page,
