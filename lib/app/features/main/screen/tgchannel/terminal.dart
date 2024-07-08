@@ -338,7 +338,7 @@ class _TerminalEditorState extends State<TerminalEditor> {
                 style: GoogleFonts.robotoMono(
                   fontSize: 24,
                   fontWeight: FontWeight.normal,
-                  color: _currentParams.titleColor,
+                  color: _tempParams.titleColor,
                 ),
               ),
             ),
@@ -346,44 +346,30 @@ class _TerminalEditorState extends State<TerminalEditor> {
         ),
       );
 
-  Widget _buildMarkdownContentText() => Container(
-        color: _currentParams.contentBgColor,
-        child: MarkdownRenderer(
-          data: _currentParams.contentText,
-          baseTextStyle: GoogleFonts.robotoMono(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-            color: _currentParams.contentColor,
-          ),
-        ),
-      );
-
-  Widget _buildContentText() => Container(
-        color: _currentParams.contentBgColor,
-        child: Text(
-          _currentParams.contentText,
-          style: GoogleFonts.robotoMono(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-            color: _currentParams.contentColor,
-          ),
-        ),
-      );
-
   Widget _buildEditableContentText() => Container(
-        color: _currentParams.contentBgColor,
+        color: _tempParams.contentBgColor,
         child: TextField(
-
           controller: _contentTextController,
           keyboardType: TextInputType.multiline,
           style: GoogleFonts.robotoMono(
             fontSize: 16,
             fontWeight: FontWeight.normal,
-            color: _currentParams.contentColor,
+            color: _tempParams.contentColor,
           ),
           minLines: 1,
           maxLines: 8,
+        ),
+      );
 
+  Widget _buildTelegramChannelName() => Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(
+          '@dailycodefreestyle',
+          style: GoogleFonts.robotoMono(
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            color: _tempParams.contentColor,
+          ),
         ),
       );
 
@@ -396,37 +382,108 @@ class _TerminalEditorState extends State<TerminalEditor> {
           shape: BoxShape.circle,
         ),
       );
+}
 
-  Widget _buildIndex(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
-        child: Text(
-          "${_currentParams.id}",
-          style: GoogleFonts.robotoMono(
-            fontSize: 12,
-            color: Colors.white,
-            fontWeight: FontWeight.w900,
+class TerminalRenderer extends StatefulWidget {
+  final WhatIsItModel item;
+  final ScreenshotController screenshotController;
+  final Function(WhatIsItModel) onUpdate;
+
+  const TerminalRenderer({
+    Key? key,
+    required this.item,
+    required this.screenshotController,
+    required this.onUpdate,
+  }) : super(key: key);
+
+  @override
+  _TerminalRendererState createState() => _TerminalRendererState();
+}
+
+class _TerminalRendererState extends State<TerminalRenderer> {
+  bool _isEditing = false;
+
+  @override
+  void didUpdateWidget(TerminalRenderer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.item != widget.item) {
+      setState(() {
+        _isEditing = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _toggleEditingMode() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
+  }
+
+  void _updateItem(WhatIsItModel updatedItem) {
+    widget.onUpdate(updatedItem);
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          GestureDetector(
+            onDoubleTap: _toggleEditingMode,
+            child: _isEditing
+                ? TerminalEditor(
+                    params: widget.item,
+                    onUpdate: (updatedItem) {
+                      _updateItem(updatedItem);
+                      _toggleEditingMode();
+                    },
+                    onCancel: () {
+                      _toggleEditingMode();
+                    },
+                  )
+                : Column(
+                  children: [
+                    TerminalView(params: widget.item),
+                    SizedBox(height: 8,),
+                    if (!_isEditing) _buildScreenshotButton(context),
+                  ],
+                ),
           ),
-        ),
+        ],
       );
 
-  Widget _buildScreenshotButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
-        child: HoverButton(
-          onTap: () {
-            _doScreenshot(context);
-          },
-          onDoubleTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              "download",
-              style: GoogleFonts.robotoMono(
-                fontSize: 12,
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-              ),
+  Widget _buildScreenshotButton(BuildContext context) => HoverButton(
+        onTap: () {
+          _doScreenshot(context);
+        },
+        onDoubleTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            "download screenshot",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 16,
             ),
           ),
         ),
       );
+
+  Future<void> _doScreenshot(BuildContext context) async {
+    try {
+      final capturedImage = await widget.screenshotController
+          .capture(delay: const Duration(milliseconds: 10));
+      final name = "telegram_post_${widget.item.id}.png";
+      if (capturedImage != null) {
+        await ImageSaver.saveImage(capturedImage, name);
+        await ImageSaver.showCapturedWidget(context, capturedImage);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }
