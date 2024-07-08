@@ -7,6 +7,7 @@ import "package:onelenykco/app/data/services/firestore_service.dart";
 import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
 import "package:onelenykco/app/features/main/data/resume/resume_cubit.dart";
 import "package:onelenykco/app/features/main/data/state/main_cubit.dart";
+import "package:onelenykco/app/features/main/screen/tgchannel/tg_channel.dart";
 import "package:onelenykco/app/root/app_router.dart";
 import "package:onelenykco/main.dart";
 
@@ -14,6 +15,8 @@ import "../data/repository/user_payload_repository.dart";
 import "../data/repository/user_repository.dart";
 import "../features/main/screen/munera/personal_cubit.dart";
 import "../features/main/screen/projects/timeline_cubit.dart";
+import "../features/main/screen/tgchannel/tg_cubit.dart";
+import "../features/main/screen/tgchannel/tg_state.dart";
 
 class RootComponent extends StatelessWidget {
   RootComponent({super.key}) {
@@ -22,6 +25,7 @@ class RootComponent extends StatelessWidget {
       ..registerSingleton<TopicsRepository>(TopicsRepository())
       ..registerSingleton<FirestoreService>(FirestoreService())
       ..registerSingleton<MainCubit>(MainCubit())
+      ..registerSingleton<TgCubit>(TgCubit())
       ..registerSingleton<AdminCubit>(AdminCubit())
       ..registerSingleton<TimelineCubit>(TimelineCubit())
       ..registerSingleton<ResumeCubit>(ResumeCubit())

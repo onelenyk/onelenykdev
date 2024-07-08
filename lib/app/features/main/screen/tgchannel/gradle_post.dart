@@ -2,82 +2,9 @@ import "dart:ui";
 
 import "package:flutter/material.dart";
 import "package:onelenykco/app/features/main/screen/tgchannel/tg_channel.dart";
+import "package:onelenykco/app/features/main/screen/tgchannel/what_is_it.dart";
 
 
-class WhatIsItModel {
-  final String id;
-  final Color backgroundColor;
-  final EdgeInsets backgroundPadding;
-  final Color terminalBgColor;
-  final Color titleColor;
-  final Color titleBgColor;
-  final Color contentColor;
-  final Color contentBgColor;
-  final Color separatorColor;
-  final Color buttonRed;
-  final Color buttonYellow;
-  final Color buttonGreen;
-  final Color brandColor;
-  final String topicIcon;
-  final String topicName;
-  final String contentText;
-
-  WhatIsItModel({
-    required this.id,
-    required this.backgroundColor,
-    required this.backgroundPadding,
-    required this.terminalBgColor,
-    required this.titleColor,
-    required this.titleBgColor,
-    required this.contentBgColor,
-    required this.contentColor,
-    required this.separatorColor,
-    required this.buttonRed,
-    required this.buttonYellow,
-    required this.buttonGreen,
-    required this.brandColor,
-    required this.topicIcon,
-    required this.topicName,
-    required this.contentText,
-  });
-
-  WhatIsItModel copyWith({
-    String? id,
-    Color? backgroundColor,
-    EdgeInsets? backgroundPadding,
-    Color? terminalBgColor,
-    Color? titleColor,
-    Color? titleBgColor,
-    Color? contentColor,
-    Color? contentBgColor,
-    Color? separatorColor,
-    Color? buttonRed,
-    Color? buttonYellow,
-    Color? buttonGreen,
-    Color? brandColor,
-    String? topicIcon,
-    String? topicName,
-    String? contentText,
-  }) =>
-      WhatIsItModel(
-        id: id ?? this.id,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        backgroundPadding: backgroundPadding ?? this.backgroundPadding,
-        terminalBgColor: terminalBgColor ?? this.terminalBgColor,
-        titleColor: titleColor ?? this.titleColor,
-        titleBgColor: titleBgColor ?? this.titleBgColor,
-        contentColor: contentColor ?? this.contentColor,
-        contentBgColor: contentBgColor ?? this.contentBgColor,
-        separatorColor: separatorColor ?? this.separatorColor,
-        buttonRed: buttonRed ?? this.buttonRed,
-        buttonYellow: buttonYellow ?? this.buttonYellow,
-        buttonGreen: buttonGreen ?? this.buttonGreen,
-        brandColor: brandColor ?? this.brandColor,
-        topicIcon: topicIcon ?? this.topicIcon,
-        topicName: topicName ?? this.topicName,
-        contentText: contentText ?? this.contentText,
-      );
-}
 final WhatIsItModel gradlepost1 = WhatIsItModel(
   id: "1",
   backgroundColor: Colors.transparent,
@@ -137,7 +64,6 @@ final WhatIsItModel gradlepost2 = WhatIsItModel(
 - **gradle.properties**: Sets project properties like Java version.
 
 These files help manage your project's build process efficiently.""");
-
 
 final WhatIsItModel gradlepost3 = WhatIsItModel(
     id: "3",

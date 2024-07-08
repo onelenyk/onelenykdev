@@ -11,6 +11,9 @@ import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:onelenykco/app/common/info_block.dart";
 import "package:onelenykco/app/features/main/screen/tgchannel/terminal.dart";
+import "package:onelenykco/app/features/main/screen/tgchannel/tg_cubit.dart";
+import "package:onelenykco/app/features/main/screen/tgchannel/tg_state.dart";
+import "package:onelenykco/app/features/main/screen/tgchannel/what_is_it.dart";
 import "package:screenshot/screenshot.dart";
 import "dart:html" as html;
 
@@ -23,6 +26,7 @@ import 'package:image/image.dart' as img;
 
 import "gradle_post.dart";
 import "image_saver.dart";
+import "kotlincli_post.dart";
 import "markdown_renderer.dart";
 
 @RoutePage()
@@ -30,101 +34,103 @@ class TgChannelScreen extends StatefulWidget {
   TgChannelScreen({super.key});
 
   final getIt = GetIt.instance;
-
-  final cubit = NullCubit();
+  late final TgCubit cubit = getIt.get<TgCubit>();
 
   @override
   _TgChannelScreenState createState() => _TgChannelScreenState(cubit);
 }
 
 class _TgChannelScreenState
-    extends ResponsiveState<TgChannelScreen, NullState, NullCubit> {
+    extends ResponsiveState<TgChannelScreen, TgState, TgCubit> {
   _TgChannelScreenState(super.cubit);
 
-  final List<WhatIsItModel> items = [
-    gradlepost1,
-    gradlepost2,
-    gradlepost3,
-  ];
-
-  final List<ScreenshotController> screenshotControllers = List.generate(
-    3,
-    (_) => ScreenshotController(),
-  );
+  final ScreenshotController _screenshotController = ScreenshotController();
 
   @override
-  Widget buildDesktopLayout(
-          final BuildContext context, final NullState state) =>
+  void onStateChange(
+    final BuildContext context,
+    final TgState state,
+  ) {
+    print("TG state onStateChange ${state.selectedItem?.id}");
+  }
+
+  @override
+  Widget buildDesktopLayout(final BuildContext context, final TgState state) =>
       buildBody(state: state);
 
   @override
-  Widget buildMobileLayout(final BuildContext context, final NullState state) =>
+  Widget buildMobileLayout(final BuildContext context, final TgState state) =>
       buildBody(state: state);
 
-  Widget buildBody({required final NullState state}) => BaseScreen(
-          child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List.generate(items.length, (index) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InfoBlock(
-                  child: TerminalView(
-                    params: items[index],
-                    screenshotController: screenshotControllers[index],
-                    onUpdate: (updatedModel) {
-                      setState(() {
-                        items[index] = updatedModel;
-                      });
-                    },
+  Widget buildMenu({required final TgState state}) => InfoBlock(
+        width: 250,
+        color: Colors.grey.shade900,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListView.separated(
+              shrinkWrap: true,
+              itemCount: state.items.length,
+              separatorBuilder: (final context, final index) => const SizedBox(height: 8),
+              itemBuilder: (final context, index) {
+                final item = state.items[index];
+                final isSelected = item == state.selectedItem;
+                final Color textColor;
+
+                if (isSelected) {
+                  textColor = Colors.amber;
+                } else {
+                  textColor = Colors.white;
+                }
+
+                return HoverButton(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "${item.id} ${item.topicName}",
+                      style: TextStyle(color: textColor),
+                    ),
                   ),
-                ),
-                SizedBox(width: 16),
-              ],
-            );
-          }),
+                  onTap: () {
+                    cubit.selectItem(item);
+                  },
+                  onDoubleTap: () {},
+                );
+              },
+            ),
+          ],
         ),
-      ));
-}
-
-class CustomGrid extends StatelessWidget {
-  final List<Widget> children;
-  final Size cellSize;
-  final int rows;
-  final int columns;
-
-  CustomGrid({
-    required this.children,
-    required this.rows,
-    required this.columns,
-    required this.cellSize,
-  });
-
-  Widget cell(final Widget content) => Container(
-        width: cellSize.width,
-        height: cellSize.height,
-        child: content,
       );
 
-  @override
-  Widget build(final BuildContext context) {
-    // Calculate the number of items to display
-    final itemCount = rows * columns;
-    // Ensure we don't exceed the number of children provided
-    final gridItems = children.take(itemCount).toList();
+  Widget buildContent({required final TgState state}) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InfoBlock(
+            child: TerminalRenderer(
+              onUpdate: (updatedModel) {
+                cubit.updateItem(updatedModel);
+              },
+              item: state.selectedItem!,
+              screenshotController: _screenshotController,
+            ),
+          ),
+        ],
+      );
 
-    return GridView.extent(
-      maxCrossAxisExtent: cellSize.width,
-      childAspectRatio: cellSize.width / cellSize.height,
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 4.0,
-      children: List.generate(
-        itemCount,
-        (index) => cell(
-          gridItems.elementAtOrNull(index) ?? const Placeholder(),
+  Widget buildBody({required final TgState state}) => BaseScreen(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Sidebar for list of items
+            buildMenu(state: state),
+            SizedBox(
+              width: 32,
+            ),
+            // Main content area
+            buildContent(state: state)
+          ],
         ),
-      ),
-    );
-  }
+      );
 }

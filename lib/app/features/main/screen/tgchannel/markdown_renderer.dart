@@ -22,8 +22,8 @@ class MarkdownRenderer extends StatelessWidget {
         h2: baseTextStyle.copyWith(fontSize: 22, fontWeight: FontWeight.normal),
         h3: baseTextStyle.copyWith(fontSize: 20, fontWeight: FontWeight.normal),
         h4: baseTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.normal),
-        h5: baseTextStyle.copyWith(fontSize: 16, fontWeight: FontWeight.normal),
-        h6: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.normal),
+        h5: baseTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.normal),
+        h6: baseTextStyle.copyWith(fontSize: 12, fontWeight: FontWeight.normal),
         em: baseTextStyle.copyWith(fontStyle: FontStyle.italic),
         strong: baseTextStyle.copyWith(fontWeight: FontWeight.bold),
         del: baseTextStyle,
@@ -39,8 +39,7 @@ class MarkdownRenderer extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
-    return Markdown(
+  Widget build(BuildContext context) => Markdown(
       data: data,
       styleSheet: getMyMarkdownStyleSheet(baseTextStyle),
       onTapLink: (text, href, title) {
@@ -49,6 +48,10 @@ class MarkdownRenderer extends StatelessWidget {
       selectable: true,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
+
+      extensionSet: ExtensionSet(
+          ExtensionSet.gitHubFlavored.blockSyntaxes,
+          ExtensionSet.gitHubFlavored.inlineSyntaxes
+      ),
     );
-  }
 }
