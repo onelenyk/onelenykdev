@@ -203,8 +203,8 @@ class _TerminalEditorState extends State<TerminalEditor> {
 
   @override
   Widget build(BuildContext context) => Column(
-    children: [
-      Container(
+        children: [
+          Container(
             decoration: BoxDecoration(
               color: _tempParams.backgroundColor,
               border: Border.all(color: _tempParams.backgroundColor),
@@ -243,49 +243,48 @@ class _TerminalEditorState extends State<TerminalEditor> {
               ),
             ),
           ),
-
-      SizedBox(
-        height: 8,
-      ),
-      Row(
-        children: [
-          HoverButton(
-            onTap: widget.onCancel,
-            onDoubleTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                "cancel",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.redAccent.shade200,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
           SizedBox(
-            width: 8,
+            height: 8,
           ),
-          HoverButton(
-            onTap: _saveChanges,
-            onDoubleTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                "save",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.redAccent.shade200,
-                  fontSize: 16,
+          Row(
+            children: [
+              HoverButton(
+                onTap: widget.onCancel,
+                onDoubleTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    "cancel",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent.shade200,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              SizedBox(
+                width: 8,
+              ),
+              HoverButton(
+                onTap: _saveChanges,
+                onDoubleTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    "save",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent.shade200,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
-      ),
-    ],
-  );
+      );
 
   Widget _buildTerminalHeader() => Container(
         padding: const EdgeInsets.all(0),
@@ -445,12 +444,17 @@ class _TerminalRendererState extends State<TerminalRenderer> {
                     },
                   )
                 : Column(
-                  children: [
-                    TerminalView(params: widget.item),
-                    SizedBox(height: 8,),
-                    if (!_isEditing) _buildScreenshotButton(context),
-                  ],
-                ),
+                    children: [
+                      Screenshot(
+                        child: TerminalView(params: widget.item),
+                        controller: widget.screenshotController,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      if (!_isEditing) _buildScreenshotButton(context),
+                    ],
+                  ),
           ),
         ],
       );

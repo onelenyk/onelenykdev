@@ -1,4 +1,5 @@
 import "dart:convert";
+import "dart:ui";
 
 import "package:auto_route/auto_route.dart";
 import "package:flutter/foundation.dart";
@@ -63,7 +64,7 @@ class _TgChannelScreenState
       buildBody(state: state);
 
   Widget buildMenu({required final TgState state}) => InfoBlock(
-        width: 250,
+        width: 300,
         color: Colors.grey.shade900,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -72,7 +73,8 @@ class _TgChannelScreenState
             ListView.separated(
               shrinkWrap: true,
               itemCount: state.items.length,
-              separatorBuilder: (final context, final index) => const SizedBox(height: 8),
+              separatorBuilder: (final context, final index) =>
+                  const SizedBox(height: 8),
               itemBuilder: (final context, index) {
                 final item = state.items[index];
                 final isSelected = item == state.selectedItem;
@@ -84,18 +86,90 @@ class _TgChannelScreenState
                   textColor = Colors.white;
                 }
 
-                return HoverButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "${item.id} ${item.topicName}",
-                      style: TextStyle(color: textColor),
+                return Stack(
+                  fit: StackFit.loose,
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    HoverButton(
+                      onTap: () {
+                        cubit.selectItem(item);
+                      },
+                      onDoubleTap: () {},
+                      color: item.brandColor.withAlpha(100),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${item.id}. ${item.topicName}",
+                              style: TextStyle(color: textColor),
+                            ),
+                            const Spacer(),
+                            InfoBlock(
+                              width: 24,
+                              color: Colors.grey.shade300,
+                              padding: EdgeInsets.all(4),
+                              child: Icon(
+                                item.posted
+                                    ? Icons.check_circle
+                                    : Icons.access_time_filled,
+                                color: item.posted
+                                    ? Colors.green
+                                    : Colors.redAccent,
+                                size: 16,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            InfoBlock(
+                              width: 24,
+                              color: Colors.white,
+                              padding: const EdgeInsets.all(4),
+                              child: SvgPicture.network(
+                                item.topicIcon,
+                                width: 16,
+                                height: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  onTap: () {
-                    cubit.selectItem(item);
-                  },
-                  onDoubleTap: () {},
+                    /*      IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12)),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: item.brandColor.withOpacity(0.3),
+                            borderRadius: const BorderRadius.only(
+                                bottomRight: Radius.circular(12),
+                                bottomLeft: Radius.circular(12)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  item.posted ? "posted" : "upcoming",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color:  item.posted ? Colors.red :  Colors.yellow,),
+                                ),
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),*/
+                  ],
                 );
               },
             ),
@@ -106,30 +180,51 @@ class _TgChannelScreenState
   Widget buildContent({required final TgState state}) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          InfoBlock(
-            child: TerminalRenderer(
-              onUpdate: (updatedModel) {
-                cubit.updateItem(updatedModel);
-              },
-              item: state.selectedItem!,
-              screenshotController: _screenshotController,
+          Container(
+            child: InfoBlock(
+              child: TerminalRenderer(
+                onUpdate: (updatedModel) {
+                  cubit.updateItem(updatedModel);
+                },
+                item: state.selectedItem!,
+                screenshotController: _screenshotController,
+              ),
             ),
           ),
         ],
       );
 
   Widget buildBody({required final TgState state}) => BaseScreen(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            // Sidebar for list of items
-            buildMenu(state: state),
-            SizedBox(
-              width: 32,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Sidebar for list of items
+                buildMenu(state: state),
+                const SizedBox(
+                  width: 32,
+                ),
+                // Main content area
+                //     buildContent(state: state),
+
+                buildContent(state: state)
+              ],
             ),
-            // Main content area
-            buildContent(state: state)
+    /*        ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: Container(
+                  width: 800,
+                  height: 600,
+                  color: Colors.grey.withOpacity(0.05),
+                  alignment: Alignment.center,
+                ),
+              ),
+            ),*/
           ],
         ),
       );

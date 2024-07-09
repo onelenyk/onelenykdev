@@ -53,6 +53,7 @@ class WhatIsItModel with _$WhatIsItModel {
     required String topicIcon,
     required String topicName,
     required String contentText,
+    required bool posted,
   }) = _WhatIsItModel;
 
   factory WhatIsItModel.defaultValues({
@@ -75,9 +76,14 @@ class WhatIsItModel with _$WhatIsItModel {
       topicIcon: '',
       topicName: '',
       contentText: '',
+      posted: false,
     );
   }
 
   factory WhatIsItModel.fromJson(Map<String, dynamic> json) =>
       _$WhatIsItModelFromJson(json);
+}
+
+extension WhatIsItModelExtension on WhatIsItModel {
+  String get sanitizedTopicName => topicName.replaceAll(RegExp(r'[\s.,]'), '').toLowerCase();
 }

@@ -36,6 +36,7 @@ _$WhatIsItModelImpl _$$WhatIsItModelImplFromJson(Map<String, dynamic> json) =>
       topicIcon: json['topicIcon'] as String,
       topicName: json['topicName'] as String,
       contentText: json['contentText'] as String,
+      posted: json['posted'] as bool,
     );
 
 Map<String, dynamic> _$$WhatIsItModelImplToJson(_$WhatIsItModelImpl instance) =>
@@ -59,4 +60,5 @@ Map<String, dynamic> _$$WhatIsItModelImplToJson(_$WhatIsItModelImpl instance) =>
       'topicIcon': instance.topicIcon,
       'topicName': instance.topicName,
       'contentText': instance.contentText,
+      'posted': instance.posted,
     };

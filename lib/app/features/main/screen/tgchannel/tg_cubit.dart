@@ -18,6 +18,7 @@ class TgCubit extends Cubit<TgState> {
             kotlinclipost1,
             kotlinclipost2,
             kotlinclipost3,
+            kotlinclipost4,
           ],
           selectedItem: gradlepost1,
         ));

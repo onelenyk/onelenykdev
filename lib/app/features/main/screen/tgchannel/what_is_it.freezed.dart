@@ -48,6 +48,7 @@ mixin _$WhatIsItModel {
   String get topicIcon => throw _privateConstructorUsedError;
   String get topicName => throw _privateConstructorUsedError;
   String get contentText => throw _privateConstructorUsedError;
+  bool get posted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +78,8 @@ abstract class $WhatIsItModelCopyWith<$Res> {
       @ColorConverter() Color brandColor,
       String topicIcon,
       String topicName,
-      String contentText});
+      String contentText,
+      bool posted});
 }
 
 /// @nodoc
@@ -109,6 +111,7 @@ class _$WhatIsItModelCopyWithImpl<$Res, $Val extends WhatIsItModel>
     Object? topicIcon = null,
     Object? topicName = null,
     Object? contentText = null,
+    Object? posted = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -175,6 +178,10 @@ class _$WhatIsItModelCopyWithImpl<$Res, $Val extends WhatIsItModel>
           ? _value.contentText
           : contentText // ignore: cast_nullable_to_non_nullable
               as String,
+      posted: null == posted
+          ? _value.posted
+          : posted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -203,7 +210,8 @@ abstract class _$$WhatIsItModelImplCopyWith<$Res>
       @ColorConverter() Color brandColor,
       String topicIcon,
       String topicName,
-      String contentText});
+      String contentText,
+      bool posted});
 }
 
 /// @nodoc
@@ -233,6 +241,7 @@ class __$$WhatIsItModelImplCopyWithImpl<$Res>
     Object? topicIcon = null,
     Object? topicName = null,
     Object? contentText = null,
+    Object? posted = null,
   }) {
     return _then(_$WhatIsItModelImpl(
       id: null == id
@@ -299,6 +308,10 @@ class __$$WhatIsItModelImplCopyWithImpl<$Res>
           ? _value.contentText
           : contentText // ignore: cast_nullable_to_non_nullable
               as String,
+      posted: null == posted
+          ? _value.posted
+          : posted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -322,7 +335,8 @@ class _$WhatIsItModelImpl implements _WhatIsItModel {
       @ColorConverter() required this.brandColor,
       required this.topicIcon,
       required this.topicName,
-      required this.contentText});
+      required this.contentText,
+      required this.posted});
 
   factory _$WhatIsItModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WhatIsItModelImplFromJson(json);
@@ -371,10 +385,12 @@ class _$WhatIsItModelImpl implements _WhatIsItModel {
   final String topicName;
   @override
   final String contentText;
+  @override
+  final bool posted;
 
   @override
   String toString() {
-    return 'WhatIsItModel(id: $id, backgroundColor: $backgroundColor, backgroundPadding: $backgroundPadding, terminalBgColor: $terminalBgColor, titleColor: $titleColor, titleBgColor: $titleBgColor, contentColor: $contentColor, contentBgColor: $contentBgColor, separatorColor: $separatorColor, buttonRed: $buttonRed, buttonYellow: $buttonYellow, buttonGreen: $buttonGreen, brandColor: $brandColor, topicIcon: $topicIcon, topicName: $topicName, contentText: $contentText)';
+    return 'WhatIsItModel(id: $id, backgroundColor: $backgroundColor, backgroundPadding: $backgroundPadding, terminalBgColor: $terminalBgColor, titleColor: $titleColor, titleBgColor: $titleBgColor, contentColor: $contentColor, contentBgColor: $contentBgColor, separatorColor: $separatorColor, buttonRed: $buttonRed, buttonYellow: $buttonYellow, buttonGreen: $buttonGreen, brandColor: $brandColor, topicIcon: $topicIcon, topicName: $topicName, contentText: $contentText, posted: $posted)';
   }
 
   @override
@@ -412,7 +428,8 @@ class _$WhatIsItModelImpl implements _WhatIsItModel {
             (identical(other.topicName, topicName) ||
                 other.topicName == topicName) &&
             (identical(other.contentText, contentText) ||
-                other.contentText == contentText));
+                other.contentText == contentText) &&
+            (identical(other.posted, posted) || other.posted == posted));
   }
 
   @JsonKey(ignore: true)
@@ -434,7 +451,8 @@ class _$WhatIsItModelImpl implements _WhatIsItModel {
       brandColor,
       topicIcon,
       topicName,
-      contentText);
+      contentText,
+      posted);
 
   @JsonKey(ignore: true)
   @override
@@ -467,7 +485,8 @@ abstract class _WhatIsItModel implements WhatIsItModel {
       @ColorConverter() required final Color brandColor,
       required final String topicIcon,
       required final String topicName,
-      required final String contentText}) = _$WhatIsItModelImpl;
+      required final String contentText,
+      required final bool posted}) = _$WhatIsItModelImpl;
 
   factory _WhatIsItModel.fromJson(Map<String, dynamic> json) =
       _$WhatIsItModelImpl.fromJson;
@@ -516,6 +535,8 @@ abstract class _WhatIsItModel implements WhatIsItModel {
   String get topicName;
   @override
   String get contentText;
+  @override
+  bool get posted;
   @override
   @JsonKey(ignore: true)
   _$$WhatIsItModelImplCopyWith<_$WhatIsItModelImpl> get copyWith =>
