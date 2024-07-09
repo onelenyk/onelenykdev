@@ -481,7 +481,7 @@ class _TerminalRendererState extends State<TerminalRenderer> {
     try {
       final capturedImage = await widget.screenshotController
           .capture(delay: const Duration(milliseconds: 10));
-      final name = "telegram_post_${widget.item.id}.png";
+      final name = "telegram_post_${widget.item.id}_${widget.item.sanitizedTopicName}.png";
       if (capturedImage != null) {
         await ImageSaver.saveImage(capturedImage, name);
         await ImageSaver.showCapturedWidget(context, capturedImage);
