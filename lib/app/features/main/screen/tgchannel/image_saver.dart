@@ -38,7 +38,7 @@ class ImageSaver {
   static Future<dynamic> showCapturedWidget(
           final BuildContext context, final Uint8List capturedImage) =>
       showDialog(
-        useSafeArea: false,
+        useSafeArea: true,
         context: context,
         barrierColor: Colors.white.withAlpha(40),
         builder: (final context) => Container(
