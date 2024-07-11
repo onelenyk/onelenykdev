@@ -1,8 +1,8 @@
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:get_it/get_it.dart";
-import "package:onelenykco/app/data/repository/topics_repository.dart";
-import "package:onelenykco/app/features/main/data/admin/admin_state.dart";
-import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
+import "package:onelenykdev/app/data/repository/topics_repository.dart";
+import "package:onelenykdev/app/features/main/data/admin/admin_state.dart";
+import "package:onelenykdev/app/features/main/data/topic/topic_item.dart";
 
 class AdminCubit extends Cubit<AdminState> {
 

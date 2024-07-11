@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/common/hover_button.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/common/link_utils.dart";
-import "package:onelenykco/app/common/ui/rounded_container.dart";
+import "package:onelenykdev/app/common/hover_button.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/common/link_utils.dart";
+import "package:onelenykdev/app/common/ui/rounded_container.dart";
 
 class DesignPart extends StatefulWidget {
   const DesignPart({super.key});

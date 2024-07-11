@@ -1,8 +1,8 @@
 import "dart:convert";
 
 import "package:http/http.dart";
-import "package:onelenykco/app/env/environment.dart";
-import "package:onelenykco/app/features/github/commit_model.dart";
+import "package:onelenykdev/app/env/environment.dart";
+import "package:onelenykdev/app/features/github/commit_model.dart";
 
 class GithubService {
   Future<List<Commit>> loadCommits() async {

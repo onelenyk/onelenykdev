@@ -4,9 +4,9 @@ import "dart:math";
 import "package:flutter/material.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/common/hover_button.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/common/text_cloud.dart";
+import "package:onelenykdev/app/common/hover_button.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/common/text_cloud.dart";
 
 class ProfilePart extends StatelessWidget {
 

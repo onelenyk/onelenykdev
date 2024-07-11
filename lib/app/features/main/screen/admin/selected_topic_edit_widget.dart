@@ -5,11 +5,11 @@ import "package:flutter_quill/flutter_quill.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import "package:onelenykco/app/common/hover_button.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
-import "package:onelenykco/app/features/main/data/topic/topic_content.dart";
-import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
+import "package:onelenykdev/app/common/hover_button.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/features/main/data/admin/admin_cubit.dart";
+import "package:onelenykdev/app/features/main/data/topic/topic_content.dart";
+import "package:onelenykdev/app/features/main/data/topic/topic_item.dart";
 
 // Define the StatefulWidget
 class SelectedTopicEditWidget extends StatefulWidget {

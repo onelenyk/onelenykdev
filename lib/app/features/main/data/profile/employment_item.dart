@@ -1,6 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
-import "package:onelenykco/app/common/timestamp_serializer.dart";
+import "package:onelenykdev/app/common/timestamp_serializer.dart";
 
 part "employment_item.freezed.dart";
 part "employment_item.g.dart";

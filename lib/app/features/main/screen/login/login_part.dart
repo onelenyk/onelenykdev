@@ -8,13 +8,13 @@ import "package:flutter_hooks/flutter_hooks.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/common/hover_button.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/data/firebase/auth_cubit.dart";
-import "package:onelenykco/app/data/firebase/authentication_state.dart";
-import "package:onelenykco/app/root/app_router.dart";
+import "package:onelenykdev/app/common/hover_button.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/data/firebase/auth_cubit.dart";
+import "package:onelenykdev/app/data/firebase/authentication_state.dart";
+import "package:onelenykdev/app/root/app_router.dart";
 
-import 'package:onelenykco/app/data/firebase/auth/auth_state.dart';
+import 'package:onelenykdev/app/data/firebase/auth/auth_state.dart';
 
 class LoginPart extends StatelessWidget {
   LoginPart({super.key});

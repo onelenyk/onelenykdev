@@ -1,7 +1,7 @@
 import "package:flutter/widgets.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:onelenykco/app/common/responsive_util.dart";
-import "package:onelenykco/app/common/util/unit.dart";
+import "package:onelenykdev/app/common/responsive_util.dart";
+import "package:onelenykdev/app/common/util/unit.dart";
 
 abstract class ResponsiveState<T extends StatefulWidget, S, C extends Cubit<S>>
     extends State<T> {

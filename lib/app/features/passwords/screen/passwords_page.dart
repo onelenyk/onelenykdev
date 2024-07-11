@@ -5,9 +5,9 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:get_it/get_it.dart";
 
-import "package:onelenykco/app/features/passwords/password.dart";
-import "package:onelenykco/app/features/passwords/state/password_state.dart";
-import "package:onelenykco/app/features/passwords/state/passwords_cubit.dart";
+import "package:onelenykdev/app/features/passwords/password.dart";
+import "package:onelenykdev/app/features/passwords/state/password_state.dart";
+import "package:onelenykdev/app/features/passwords/state/passwords_cubit.dart";
 
 class _MyPasswordsScreenState extends State<MyPasswordsScreen> {
   final getIt = GetIt.instance;

@@ -1,5 +1,5 @@
 import "package:freezed_annotation/freezed_annotation.dart";
-import "package:onelenykco/app/features/main/data/profile/profile_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/profile_item.dart";
 
 
 part "resume_state.freezed.dart";

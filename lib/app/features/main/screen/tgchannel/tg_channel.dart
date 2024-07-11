@@ -10,11 +10,11 @@ import "package:flutter_svg/svg.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/terminal.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/tg_cubit.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/tg_state.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/what_is_it.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/terminal.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/tg_cubit.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/tg_state.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/what_is_it.dart";
 import "package:screenshot/screenshot.dart";
 import "dart:html" as html;
 

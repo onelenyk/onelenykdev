@@ -1,8 +1,8 @@
 import "dart:ui";
 
 import "package:flutter/material.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/tg_channel.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/what_is_it.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/tg_channel.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/what_is_it.dart";
 
 final WhatIsItModel gradlepost1 = WhatIsItModel(
   id: "1",

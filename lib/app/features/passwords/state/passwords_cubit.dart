@@ -2,8 +2,8 @@ import "dart:convert";
 
 import "package:bloc/bloc.dart";
 import "package:http/http.dart" as http;
-import "package:onelenykco/app/features/passwords/password.dart";
-import "package:onelenykco/app/features/passwords/state/password_state.dart";
+import "package:onelenykdev/app/features/passwords/password.dart";
+import "package:onelenykdev/app/features/passwords/state/password_state.dart";
 
 
 class PasswordsCubit extends Cubit<MyPasswordsState> {

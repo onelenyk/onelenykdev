@@ -1,8 +1,8 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:intl/intl.dart";
-import "package:onelenykco/app/features/main/data/profile/education_item.dart";
-import "package:onelenykco/app/features/main/data/profile/employment_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/education_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/employment_item.dart";
 
 import "../../common/timestamp_serializer.dart";
 

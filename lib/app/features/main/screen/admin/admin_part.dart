@@ -2,11 +2,11 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/common/hover_button.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
-import "package:onelenykco/app/features/main/data/admin/admin_state.dart";
-import "package:onelenykco/app/features/main/screen/admin/selected_topic_edit_widget.dart";
+import "package:onelenykdev/app/common/hover_button.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/features/main/data/admin/admin_cubit.dart";
+import "package:onelenykdev/app/features/main/data/admin/admin_state.dart";
+import "package:onelenykdev/app/features/main/screen/admin/selected_topic_edit_widget.dart";
 import "package:timeago/timeago.dart" as timeago;
 
 class AdminPart extends StatelessWidget {

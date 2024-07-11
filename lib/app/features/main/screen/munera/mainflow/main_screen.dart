@@ -2,7 +2,7 @@ import "package:auto_route/annotations.dart";
 import 'package:flutter/material.dart';
 import "package:get_it/get_it.dart";
 import 'package:google_fonts/google_fonts.dart';
-import "package:onelenykco/app/features/main/screen/base/base_screen.dart";
+import "package:onelenykdev/app/features/main/screen/base/base_screen.dart";
 
 import "../../../../../common/hover_button.dart";
 import "../../../../../common/info_block.dart";

@@ -6,7 +6,7 @@ import "dart:html" as html;
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import 'package:image/image.dart' as img;
-import "package:onelenykco/app/features/main/screen/base/mobile_frame.dart";
+import "package:onelenykdev/app/features/main/screen/base/mobile_frame.dart";
 
 class ImageSaver {
   static Future<void> saveImage(

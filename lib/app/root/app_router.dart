@@ -1,19 +1,19 @@
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
-import "package:onelenykco/app/features/main/screen/blog/blog_page.dart";
-import "package:onelenykco/app/features/main/screen/composition_screen.dart";
-import "package:onelenykco/app/features/main/screen/munera/loginflow/login_container.dart";
-import "package:onelenykco/app/features/main/screen/munera/loginflow/login_screen.dart";
-import "package:onelenykco/app/features/main/screen/munera/loginflow/splash/splash_screen.dart";
-import "package:onelenykco/app/features/main/screen/munera/mainflow/main_container.dart";
-import "package:onelenykco/app/features/main/screen/munera/mainflow/main_screen.dart";
-import "package:onelenykco/app/features/main/screen/munera/mainflow/profile/profile_screen.dart";
-import "package:onelenykco/app/features/main/screen/munera/munera_screen.dart";
-import "package:onelenykco/app/features/main/screen/notfound/not_found.dart";
-import "package:onelenykco/app/features/main/screen/posydy/posydy_page.dart";
-import "package:onelenykco/app/features/main/screen/projects/projects_screen.dart";
-import "package:onelenykco/app/features/main/screen/thebandanaco/bandana_screen.dart";
-import "package:onelenykco/app/features/passwords/screen/passwords_page.dart";
+import "package:onelenykdev/app/features/main/screen/blog/blog_page.dart";
+import "package:onelenykdev/app/features/main/screen/composition_screen.dart";
+import "package:onelenykdev/app/features/main/screen/munera/loginflow/login_container.dart";
+import "package:onelenykdev/app/features/main/screen/munera/loginflow/login_screen.dart";
+import "package:onelenykdev/app/features/main/screen/munera/loginflow/splash/splash_screen.dart";
+import "package:onelenykdev/app/features/main/screen/munera/mainflow/main_container.dart";
+import "package:onelenykdev/app/features/main/screen/munera/mainflow/main_screen.dart";
+import "package:onelenykdev/app/features/main/screen/munera/mainflow/profile/profile_screen.dart";
+import "package:onelenykdev/app/features/main/screen/munera/munera_screen.dart";
+import "package:onelenykdev/app/features/main/screen/notfound/not_found.dart";
+import "package:onelenykdev/app/features/main/screen/posydy/posydy_page.dart";
+import "package:onelenykdev/app/features/main/screen/projects/projects_screen.dart";
+import "package:onelenykdev/app/features/main/screen/thebandanaco/bandana_screen.dart";
+import "package:onelenykdev/app/features/passwords/screen/passwords_page.dart";
 
 import "../features/main/screen/tgchannel/tg_channel.dart";
 

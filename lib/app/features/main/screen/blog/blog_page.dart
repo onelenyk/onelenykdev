@@ -5,11 +5,11 @@ import "package:flutter_svg/svg.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:markdown/markdown.dart" as md;
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/common/link_utils.dart";
-import "package:onelenykco/app/features/main/data/blog/note.dart";
-import "package:onelenykco/app/features/main/screen/blog/post_site.dart";
-import "package:onelenykco/app/features/main/screen/blog/post_template.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/common/link_utils.dart";
+import "package:onelenykdev/app/features/main/data/blog/note.dart";
+import "package:onelenykdev/app/features/main/screen/blog/post_site.dart";
+import "package:onelenykdev/app/features/main/screen/blog/post_template.dart";
 
 import "markdown/hex_color_builder.dart";
 import "markdown/hex_color_syntax.dart";

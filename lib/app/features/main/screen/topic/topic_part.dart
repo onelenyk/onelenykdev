@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/features/main/data/topic/topic_content.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/features/main/data/topic/topic_content.dart";
 
 class TopicPart extends StatelessWidget {
 

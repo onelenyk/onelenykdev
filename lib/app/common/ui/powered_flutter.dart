@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/common/util/svg_manager.dart";
+import "package:onelenykdev/app/common/util/svg_manager.dart";
 
 class PoweredByFlutterWidget extends StatelessWidget {
   @override

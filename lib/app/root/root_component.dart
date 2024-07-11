@@ -1,15 +1,15 @@
 import "package:flutter/material.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/data/firebase/auth_cubit.dart";
-import "package:onelenykco/app/data/repository/topics_repository.dart";
-import "package:onelenykco/app/data/services/firestore_service.dart";
-import "package:onelenykco/app/features/main/data/admin/admin_cubit.dart";
-import "package:onelenykco/app/features/main/data/resume/resume_cubit.dart";
-import "package:onelenykco/app/features/main/data/state/main_cubit.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/tg_channel.dart";
-import "package:onelenykco/app/root/app_router.dart";
-import "package:onelenykco/main.dart";
+import "package:onelenykdev/app/data/firebase/auth_cubit.dart";
+import "package:onelenykdev/app/data/repository/topics_repository.dart";
+import "package:onelenykdev/app/data/services/firestore_service.dart";
+import "package:onelenykdev/app/features/main/data/admin/admin_cubit.dart";
+import "package:onelenykdev/app/features/main/data/resume/resume_cubit.dart";
+import "package:onelenykdev/app/features/main/data/state/main_cubit.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/tg_channel.dart";
+import "package:onelenykdev/app/root/app_router.dart";
+import "package:onelenykdev/main.dart";
 
 import "../data/repository/user_payload_repository.dart";
 import "../data/repository/user_repository.dart";

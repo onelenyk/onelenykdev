@@ -3,7 +3,7 @@ import "dart:async";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:get_it/get_it.dart";
-import "package:onelenykco/app/data/firebase/authentication_state.dart";
+import "package:onelenykdev/app/data/firebase/authentication_state.dart";
 
 import "../repository/user_payload_repository.dart";
 import "../repository/user_repository.dart";

@@ -1,6 +1,6 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
-import "package:onelenykco/app/data/user/user_payload.dart";
+import "package:onelenykdev/app/data/user/user_payload.dart";
 
 part "scenario_state.freezed.dart";
 

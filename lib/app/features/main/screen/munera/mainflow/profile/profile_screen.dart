@@ -3,13 +3,13 @@ import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:onelenykco/app/common/info_block.dart";
-import "package:onelenykco/app/data/firebase/auth/auth_state.dart";
-import "package:onelenykco/app/data/firebase/auth_cubit.dart";
-import "package:onelenykco/app/features/main/screen/base/base_screen.dart";
-import "package:onelenykco/app/features/main/screen/base/responsive_state.dart";
-import "package:onelenykco/app/features/main/screen/login/login_part.dart";
-import "package:onelenykco/app/features/main/screen/munera/personal_cubit.dart";
+import "package:onelenykdev/app/common/info_block.dart";
+import "package:onelenykdev/app/data/firebase/auth/auth_state.dart";
+import "package:onelenykdev/app/data/firebase/auth_cubit.dart";
+import "package:onelenykdev/app/features/main/screen/base/base_screen.dart";
+import "package:onelenykdev/app/features/main/screen/base/responsive_state.dart";
+import "package:onelenykdev/app/features/main/screen/login/login_part.dart";
+import "package:onelenykdev/app/features/main/screen/munera/personal_cubit.dart";
 
 import "../../utils/badge_container.dart";
 

@@ -1,6 +1,6 @@
 import "package:freezed_annotation/freezed_annotation.dart";
-import "package:onelenykco/app/features/main/data/profile/education_item.dart";
-import "package:onelenykco/app/features/main/data/profile/employment_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/education_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/employment_item.dart";
 
 part "profile_item.freezed.dart";
 part "profile_item.g.dart";

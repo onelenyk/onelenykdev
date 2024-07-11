@@ -1,4 +1,4 @@
-import "package:onelenykco/app/features/main/data/blog/note.dart";
+import "package:onelenykdev/app/features/main/data/blog/note.dart";
 
 final Note resumeabout = Note(
   note: """

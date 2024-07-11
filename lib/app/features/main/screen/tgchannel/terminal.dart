@@ -2,8 +2,8 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/image_saver.dart";
-import "package:onelenykco/app/features/main/screen/tgchannel/what_is_it.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/image_saver.dart";
+import "package:onelenykdev/app/features/main/screen/tgchannel/what_is_it.dart";
 import "package:screenshot/screenshot.dart";
 
 import "../../../../common/hover_button.dart";

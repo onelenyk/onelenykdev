@@ -4,9 +4,9 @@ import "package:bloc/bloc.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/services.dart";
 import "package:get_it/get_it.dart";
-import "package:onelenykco/app/features/main/data/profile/education_item.dart";
-import "package:onelenykco/app/features/main/data/profile/profile_item.dart";
-import "package:onelenykco/app/features/main/data/resume/resume_state.dart";
+import "package:onelenykdev/app/features/main/data/profile/education_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/profile_item.dart";
+import "package:onelenykdev/app/features/main/data/resume/resume_state.dart";
 
 class ResumeCubit extends Cubit<ResumeState> {
   ResumeCubit()

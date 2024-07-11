@@ -3,8 +3,8 @@ import "dart:math";
 import "package:bloc/bloc.dart";
 import "package:get_it/get_it.dart";
 import "package:markdown/markdown.dart" as mark;
-import "package:onelenykco/app/features/main/data/state/main_state.dart";
-import "package:onelenykco/app/features/main/data/state/routes.dart";
+import "package:onelenykdev/app/features/main/data/state/main_state.dart";
+import "package:onelenykdev/app/features/main/data/state/routes.dart";
 import "package:package_info_plus/package_info_plus.dart";
 
 class MainCubit extends Cubit<MainState> {

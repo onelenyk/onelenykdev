@@ -1,7 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import "package:onelenykco/app/features/main/data/profile/profile_item.dart";
+import "package:onelenykdev/app/features/main/data/profile/profile_item.dart";
 
-import "package:onelenykco/app/features/main/data/topic/topic_item.dart";
+import "package:onelenykdev/app/features/main/data/topic/topic_item.dart";
 
 import "../user/user_payload.dart";
 

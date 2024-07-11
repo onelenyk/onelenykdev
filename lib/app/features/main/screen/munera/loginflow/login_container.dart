@@ -1,8 +1,8 @@
 import "package:auto_route/annotations.dart";
 import "package:auto_route/auto_route.dart";
 import "package:flutter/cupertino.dart";
-import "package:onelenykco/app/features/main/screen/base/base_screen.dart";
-import "package:onelenykco/app/root/app_router.dart";
+import "package:onelenykdev/app/features/main/screen/base/base_screen.dart";
+import "package:onelenykdev/app/root/app_router.dart";
 
 @RoutePage()
 class LoginContainerScreen extends StatefulWidget {
