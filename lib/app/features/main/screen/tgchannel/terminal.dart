@@ -25,6 +25,7 @@ class TerminalView extends StatelessWidget {
           border: Border.all(color: params.backgroundColor),
           borderRadius: BorderRadius.circular(8),
         ),
+        clipBehavior: Clip.hardEdge,
         padding: params.backgroundPadding,
         child: Container(
           width: 430,
@@ -481,7 +482,8 @@ class _TerminalRendererState extends State<TerminalRenderer> {
     try {
       final capturedImage = await widget.screenshotController
           .capture(delay: const Duration(milliseconds: 10));
-      final name = "telegram_post_${widget.item.id}_${widget.item.sanitizedTopicName}.png";
+      final name =
+          "telegram_post_${widget.item.id}_${widget.item.sanitizedTopicName}.png";
       if (capturedImage != null) {
         await ImageSaver.saveImage(capturedImage, name);
         await ImageSaver.showCapturedWidget(context, capturedImage);
