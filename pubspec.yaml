@@ -52,6 +52,7 @@ dependencies:
   markdown: ^7.1.1
   popover: ^0.3.0
   flutter_hooks: ^0.20.5
+  uuid: ^4.4.2
 
 dev_dependencies:
   flutter_test:
