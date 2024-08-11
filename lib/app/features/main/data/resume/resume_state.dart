@@ -11,6 +11,5 @@ class ResumeState with _$ResumeState {
     required final bool isScreenshotMode,
     required final bool doScreenShot,
   }) = _ResumeState;
-
   ResumeState._(); // Private constructor for freezed
 }

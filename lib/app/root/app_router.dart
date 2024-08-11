@@ -30,11 +30,31 @@ part "app_router.gr.dart";
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: CompositionRoute.page, path: "/", initial: true),
-        AutoRoute(page: BlogRoute.page, path: "/blog"),
-        AutoRoute(page: ProjectsRoute.page, path: "/timeline"),
-    AutoRoute(page: BandanaRoute.page, path: "/thebandana.co"),
-    AutoRoute(page: TgChannelRoute.page, path: "/tg"),
+        // AutoRoute(page: CompositionRoute.page, path: "/", initial: true),
+        AutoRoute(
+          page: MobileEraRoute.page,
+          path: "/",
+          children: [
+            AutoRoute(page: MainNavigationRoute.page, path: "", children: [
+              AutoRoute(page: ResumeRoute.page, path: "resume"),
+              AutoRoute(page: ProjectsRoute.page, path: "projects"),
+              AutoRoute(
+                page: ContactsRoute.page,
+                path: "contacts",
+                initial: true,
+              ),
+
+              AutoRoute(page: SiteStoryRoute.page, path: "story"),
+              AutoRoute(page: CollaborationRoute.page, path: "collab"),
+              AutoRoute(page: HireMeRoute.page, path: "hire"),
+              AutoRoute(page: BlogRoute.page, path: "blog"),
+
+            ]),
+
+          ],
+        ),
+        AutoRoute(page: BandanaRoute.page, path: "/thebandana.co"),
+        AutoRoute(page: TgChannelRoute.page, path: "/tg"),
         AutoRoute(page: PosydyRoute.page, path: "/posydy"),
         CustomRoute(
           page: MuneraRoute.page,

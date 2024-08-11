@@ -10,11 +10,7 @@ import "package:onelenykdev/app/common/responsive_util.dart";
 import "package:onelenykdev/app/features/main/data/state/main_cubit.dart";
 import "package:onelenykdev/app/features/main/data/state/main_state.dart";
 import "package:onelenykdev/app/features/main/data/state/routes.dart";
-import "package:onelenykdev/app/features/main/screen/collaboration/collaboration.dart";
 import "package:onelenykdev/app/features/main/screen/design/design.dart";
-import "package:onelenykdev/app/features/main/screen/hireme/hire_me.dart";
-import "package:onelenykdev/app/features/main/screen/resume/resume_part.dart";
-import "package:onelenykdev/app/features/main/screen/site/site_part.dart";
 import "package:onelenykdev/app/root/app_router.dart";
 
 import "../../../common/ui/powered_flutter.dart";
@@ -113,7 +109,6 @@ class _CompositionScreenState
             ),
           ),
           const SizedBox(height: 8),
-
           HoverButton(
             onTap: () {
               cubit.selectTopic(route: Routes.Collab);
@@ -134,7 +129,6 @@ class _CompositionScreenState
             ),
           ),
           const SizedBox(height: 8),
-
           HoverButton(
             onTap: () {
               final router = AutoRouter.of(context);
@@ -155,71 +149,69 @@ class _CompositionScreenState
               ),
             ),
           ),
-
           const SizedBox(height: 8),
-
         ],
       );
 
   Widget projects({required final MainState state}) => Column(
-    mainAxisSize: MainAxisSize.min,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        padding:
-        const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
-        child: Text(
-          "projects 🛠️",
-          style: GoogleFonts.robotoMono(
-            fontSize: 18,
-            color: Colors.white,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-      ),
-      HoverButton(
-        onTap: () {
-          final router = AutoRouter.of(context);
-          router.navigate(ProjectsRoute());
-        },
-        onDoubleTap: () {},
-        color: Colors.yellow.shade600,
-        hoverColor: Colors.yellow.shade400,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Text(
-            "timeline",
-            style: GoogleFonts.robotoMono(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding:
+                const EdgeInsets.only(left: 12, right: 12, bottom: 12, top: 8),
+            child: Text(
+              "projects 🛠️",
+              style: GoogleFonts.robotoMono(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
-        ),
-      ),
-      const SizedBox(height: 8),
-      HoverButton(
-        onTap: () {
-          final router = AutoRouter.of(context);
-          router.navigate(MuneraRoute());
-        },
-        onDoubleTap: () {},
-        color: Colors.redAccent,
-        hoverColor: Colors.redAccent.shade100,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Text(
-            "munera",
-            style: GoogleFonts.robotoMono(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          HoverButton(
+            onTap: () {
+              final router = AutoRouter.of(context);
+              router.navigate(ProjectsRoute());
+            },
+            onDoubleTap: () {},
+            color: Colors.yellow.shade600,
+            hoverColor: Colors.yellow.shade400,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text(
+                "timeline",
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    ],
-  );
+          const SizedBox(height: 8),
+          HoverButton(
+            onTap: () {
+              final router = AutoRouter.of(context);
+              router.navigate(MuneraRoute());
+            },
+            onDoubleTap: () {},
+            color: Colors.redAccent,
+            hoverColor: Colors.redAccent.shade100,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Text(
+                "munera",
+                style: GoogleFonts.robotoMono(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
 
   Widget munera({required final MainState state}) => Column(
         mainAxisSize: MainAxisSize.min,
@@ -305,19 +297,16 @@ class _CompositionScreenState
 
     switch (state.activeRoute) {
       case Routes.Collab:
-        content = CollaborationPart();
         break;
       case Routes.Resume:
-        content = ResumePart();
+      //  content = ResumeScr();
         break;
       case Routes.HireMe:
-        content = const HireMePart();
         break;
       case Routes.Blog:
         content = const Placeholder();
         break;
       case Routes.AboutSite:
-        content = const SiteStoryPart();
         break;
       case Routes.Design:
         content = const DesignPart();
@@ -411,13 +400,15 @@ class _CompositionScreenState
       );
 
   Widget layout(final MainState state) => Scaffold(
+        backgroundColor: Colors.black,
         body: SelectionArea(
           child: Stack(
             children: [
-              buildBody(state: state),
-              buildMenu(state),
+                buildBody(state: state),
+                 buildMenu(state),
             ],
           ),
         ),
       );
 }
+
