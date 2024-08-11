@@ -1,3 +1,4 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:onelenykdev/app/common/info_block.dart";
@@ -9,14 +10,15 @@ import "package:package_info_plus/package_info_plus.dart";
 import "../../data/blog/note.dart";
 import "../blog/blog_page.dart";
 
-class SiteStoryPart extends StatefulWidget {
-  const SiteStoryPart({super.key});
+@RoutePage()
+class SiteStoryScreen extends StatefulWidget {
+  const SiteStoryScreen({super.key});
 
   @override
-  _SiteStoryPartState createState() => _SiteStoryPartState();
+  _SiteStoryScreenState createState() => _SiteStoryScreenState();
 }
 
-class _SiteStoryPartState extends State<SiteStoryPart> {
+class _SiteStoryScreenState extends State<SiteStoryScreen> {
   String appVersion = "Unknown";
 
   List<Commit> commits = [];

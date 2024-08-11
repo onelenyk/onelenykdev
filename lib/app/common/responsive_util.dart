@@ -9,10 +9,16 @@ class ResponsiveUtil {
     return width >= 600 && width < 1024;
   }
 
+  static bool alwaysBehaveLikeMobile = true;
+
   static bool isDesktop(final BuildContext context) =>
       MediaQuery.of(context).size.width >= 1024;
 
   static bool isDesktopFull(final BuildContext context) {
+    var alwaysReturnMobile = alwaysBehaveLikeMobile;
+    if(alwaysReturnMobile){
+      return false;
+    }
     final desktopWidth = MediaQuery.of(context).size.width >= 1024;
     final desktopHeight = MediaQuery.of(context).size.height >= 720;
     return desktopWidth && desktopHeight;

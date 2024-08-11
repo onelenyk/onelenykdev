@@ -1,5 +1,6 @@
 import "dart:math";
 
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:get_it/get_it.dart";
@@ -21,19 +22,20 @@ import "../../../../common/ui/powered_flutter.dart";
 import "../base/responsive_state.dart";
 import "../blog/blog_page.dart";
 
-class ResumePart extends StatefulWidget {
-  ResumePart({super.key});
+@RoutePage()
+class ResumeScreen extends StatefulWidget {
+  ResumeScreen({super.key});
 
   final getIt = GetIt.instance;
   late final ResumeCubit cubit = getIt.get<ResumeCubit>();
 
   @override
-  _ResumePartState createState() => _ResumePartState(cubit);
+  _ResumeScreenState createState() => _ResumeScreenState(cubit);
 }
 
-class _ResumePartState
-    extends ResponsiveState<ResumePart, ResumeState, ResumeCubit> {
-  _ResumePartState(super.cubit);
+class _ResumeScreenState
+    extends ResponsiveState<ResumeScreen, ResumeState, ResumeCubit> {
+  _ResumeScreenState(super.cubit);
 
   ScreenshotController screenshotController = ScreenshotController();
 
@@ -89,7 +91,7 @@ class _ResumePartState
         radius: 0,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 48),
+            padding: const EdgeInsets.symmetric(vertical: 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

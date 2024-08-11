@@ -14,26 +14,6 @@ class MainContainerScreen extends StatefulWidget {
 }
 
 class _MainContainerScreenState extends State<MainContainerScreen> {
-  int _navigationIndex = 0;
-
-  void _onItemTapped(final int index) {
-    setState(() {
-      _navigationIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        {
-          context.router.push(MainRoute());
-          return;
-        }
-      case 1:
-        {
-          context.router.push(ProfileRoute());
-          return;
-        }
-    }
-  }
 
   @override
   Widget build(final BuildContext context) {

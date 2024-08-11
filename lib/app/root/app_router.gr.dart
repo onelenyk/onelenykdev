@@ -29,12 +29,34 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BlogScreen(),
       );
     },
+    CollaborationRoute.name: (routeData) {
+      final args = routeData.argsAs<CollaborationRouteArgs>(
+          orElse: () => const CollaborationRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CollaborationScreen(key: args.key),
+      );
+    },
     CompositionRoute.name: (routeData) {
       final args = routeData.argsAs<CompositionRouteArgs>(
           orElse: () => const CompositionRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: CompositionScreen(key: args.key),
+      );
+    },
+    ContactsRoute.name: (routeData) {
+      final args = routeData.argsAs<ContactsRouteArgs>(
+          orElse: () => const ContactsRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ContactsScreen(key: args.key),
+      );
+    },
+    HireMeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HireMeScreen(),
       );
     },
     LoginContainerRoute.name: (routeData) {
@@ -57,12 +79,26 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainContainerScreen(),
       );
     },
+    MainNavigationRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MainNavigationScreen(),
+      );
+    },
     MainRoute.name: (routeData) {
       final args =
           routeData.argsAs<MainRouteArgs>(orElse: () => const MainRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: MainScreen(key: args.key),
+      );
+    },
+    MobileEraRoute.name: (routeData) {
+      final args = routeData.argsAs<MobileEraRouteArgs>(
+          orElse: () => const MobileEraRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MobileEraScreen(key: args.key),
       );
     },
     MuneraRoute.name: (routeData) {
@@ -107,6 +143,20 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: ProjectsScreen(key: args.key),
+      );
+    },
+    ResumeRoute.name: (routeData) {
+      final args = routeData.argsAs<ResumeRouteArgs>(
+          orElse: () => const ResumeRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResumeScreen(key: args.key),
+      );
+    },
+    SiteStoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SiteStoryScreen(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -172,6 +222,35 @@ class BlogRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CollaborationScreen]
+class CollaborationRoute extends PageRouteInfo<CollaborationRouteArgs> {
+  CollaborationRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CollaborationRoute.name,
+          args: CollaborationRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'CollaborationRoute';
+
+  static const PageInfo<CollaborationRouteArgs> page =
+      PageInfo<CollaborationRouteArgs>(name);
+}
+
+class CollaborationRouteArgs {
+  const CollaborationRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CollaborationRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
 /// [CompositionScreen]
 class CompositionRoute extends PageRouteInfo<CompositionRouteArgs> {
   CompositionRoute({
@@ -198,6 +277,49 @@ class CompositionRouteArgs {
   String toString() {
     return 'CompositionRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [ContactsScreen]
+class ContactsRoute extends PageRouteInfo<ContactsRouteArgs> {
+  ContactsRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ContactsRoute.name,
+          args: ContactsRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'ContactsRoute';
+
+  static const PageInfo<ContactsRouteArgs> page =
+      PageInfo<ContactsRouteArgs>(name);
+}
+
+class ContactsRouteArgs {
+  const ContactsRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ContactsRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [HireMeScreen]
+class HireMeRoute extends PageRouteInfo<void> {
+  const HireMeRoute({List<PageRouteInfo>? children})
+      : super(
+          HireMeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HireMeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -257,6 +379,20 @@ class MainContainerRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MainNavigationScreen]
+class MainNavigationRoute extends PageRouteInfo<void> {
+  const MainNavigationRoute({List<PageRouteInfo>? children})
+      : super(
+          MainNavigationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainNavigationRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [MainScreen]
 class MainRoute extends PageRouteInfo<MainRouteArgs> {
   MainRoute({
@@ -281,6 +417,35 @@ class MainRouteArgs {
   @override
   String toString() {
     return 'MainRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [MobileEraScreen]
+class MobileEraRoute extends PageRouteInfo<MobileEraRouteArgs> {
+  MobileEraRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MobileEraRoute.name,
+          args: MobileEraRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'MobileEraRoute';
+
+  static const PageInfo<MobileEraRouteArgs> page =
+      PageInfo<MobileEraRouteArgs>(name);
+}
+
+class MobileEraRouteArgs {
+  const MobileEraRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MobileEraRouteArgs{key: $key}';
   }
 }
 
@@ -425,6 +590,48 @@ class ProjectsRouteArgs {
   String toString() {
     return 'ProjectsRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [ResumeScreen]
+class ResumeRoute extends PageRouteInfo<ResumeRouteArgs> {
+  ResumeRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResumeRoute.name,
+          args: ResumeRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'ResumeRoute';
+
+  static const PageInfo<ResumeRouteArgs> page = PageInfo<ResumeRouteArgs>(name);
+}
+
+class ResumeRouteArgs {
+  const ResumeRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ResumeRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [SiteStoryScreen]
+class SiteStoryRoute extends PageRouteInfo<void> {
+  const SiteStoryRoute({List<PageRouteInfo>? children})
+      : super(
+          SiteStoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SiteStoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -1,3 +1,4 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
@@ -14,19 +15,20 @@ import "../base/responsive_state.dart";
 import "../blog/blog_page.dart";
 import "../design/design.dart";
 
-class CollaborationPart extends StatefulWidget {
-  CollaborationPart({super.key});
+@RoutePage()
+class CollaborationScreen extends StatefulWidget {
+  CollaborationScreen({super.key});
 
   final getIt = GetIt.instance;
   late final ResumeCubit cubit = getIt.get<ResumeCubit>();
 
   @override
-  _CollaborationPartState createState() => _CollaborationPartState(cubit);
+  _CollaborationScreenState createState() => _CollaborationScreenState(cubit);
 }
 
-class _CollaborationPartState
-    extends ResponsiveState<CollaborationPart, ResumeState, ResumeCubit> {
-  _CollaborationPartState(super.cubit);
+class _CollaborationScreenState
+    extends ResponsiveState<CollaborationScreen, ResumeState, ResumeCubit> {
+  _CollaborationScreenState(super.cubit);
 
   Widget buildNewContactMe({
     required Function() telegram,
@@ -189,33 +191,6 @@ Here are some ways we can work together:
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              InfoBlock(
-                color: Colors.grey.shade800,
-                width: 350,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: SelectableText.rich(
-                    TextSpan(
-                      style: GoogleFonts.robotoMono(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: "let's collaborate 🌍",
-                          style: GoogleFonts.robotoMono(
-                            fontSize: 24,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
               InfoBlock(
                 width: 350,
                 child: Column(

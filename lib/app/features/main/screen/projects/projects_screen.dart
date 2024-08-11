@@ -37,80 +37,62 @@ class _ProjectsScreenState
 
   Widget layout(final TimelineState state) => buildBody(state: state);
 
-  Widget buildBody({required final TimelineState state}) => BaseScreen(
-          child: MobileFrame(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              InfoBlock(
-                  child: Row(
-                children: [
-                  Text(
-                    "the timeline",
-                    style: GoogleFonts.robotoMono(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
+  Widget buildBody({required final TimelineState state}) => MobileFrame(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                VerticalTimeline(
+                  reverse: state.reversed,
+                  events: [
+                    TimelineEvent(
+                      title: "YT cover",
+                      date: "2021",
+                      description:
+                          "A YouTube Music app feature that generates a cover image for a shared song by sending the URL to a Node.js server, which extracts the necessary data and returns it. The Android app converts this data into an image and shares it to Instagram via intent.",
                     ),
-                  ),
-                ],
-              )),
-              SizedBox(
-                height: 16,
-              ),
-              Stack(
-                children: [
-                  VerticalTimeline(
-                    reverse: state.reversed,
-                    events: [
-                      TimelineEvent(
-                        title: "YT cover",
-                        date: "2021",
-                        description:
-                            "A YouTube Music app feature that generates a cover image for a shared song by sending the URL to a Node.js server, which extracts the necessary data and returns it. The Android app converts this data into an image and shares it to Instagram via intent.",
-                      ),
-                      TimelineEvent(
-                        title: "audio effect telegram bot",
-                        date: "2023",
-                        description:
-                            "A Telegram bot and server that allows users to upload MP3 files and apply various sound effects to them, then returns the processed files to the users..",
-                      ),
-                      TimelineEvent(
-                        title: "posydy",
-                        date: "00.06.2024 - in progress",
-                        description: "no description",
-                      ),
-                      TimelineEvent(
-                        title: "Munera",
-                        date: "00.06.2024 - in progress",
-                        description:
-                            "Track your life through tasks completing and imrpove yourself",
-                      ),
-                      TimelineEvent(
-                        title: "timeline",
-                        date: "07.06.2024 - in progress",
-                        description: "the timeline of project ideas",
-                      ),
-                      // Add more events here
-                    ],
-                  ),
-                  Align(
-                    child: IconButton(
-                      color: Colors.white,
-                      icon: Icon(state.reversed
-                          ? Icons.arrow_upward
-                          : Icons.arrow_downward),
-                      onPressed: cubit.tapButton,
+                    TimelineEvent(
+                      title: "audio effect telegram bot",
+                      date: "2023",
+                      description:
+                          "A Telegram bot and server that allows users to upload MP3 files and apply various sound effects to them, then returns the processed files to the users..",
                     ),
-                    alignment: Alignment.topRight,
+                    TimelineEvent(
+                      title: "posydy",
+                      date: "00.06.2024 - in progress",
+                      description: "no description",
+                    ),
+                    TimelineEvent(
+                      title: "Munera",
+                      date: "00.06.2024 - in progress",
+                      description:
+                          "Track your life through tasks completing and imrpove yourself",
+                    ),
+                    TimelineEvent(
+                      title: "timeline",
+                      date: "07.06.2024 - in progress",
+                      description: "the timeline of project ideas",
+                    ),
+                    // Add more events here
+                  ],
+                ),
+                Align(
+                  child: IconButton(
+                    color: Colors.white,
+                    icon: Icon(state.reversed
+                        ? Icons.arrow_upward
+                        : Icons.arrow_downward),
+                    onPressed: cubit.tapButton,
                   ),
-                ],
-              ),
-            ],
+                  alignment: Alignment.topRight,
+                ),
+              ],
+            ),
           ),
         ),
-      ));
+      );
 }
 
 class VerticalTimeline extends StatelessWidget {
