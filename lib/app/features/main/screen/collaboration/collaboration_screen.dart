@@ -14,6 +14,7 @@ import "../../data/resume/resume_state.dart";
 import "../base/responsive_state.dart";
 import "../blog/blog_page.dart";
 import "../design/design.dart";
+import "../hireme/hire_me_screen.dart";
 
 @RoutePage()
 class CollaborationScreen extends StatefulWidget {
@@ -30,147 +31,6 @@ class _CollaborationScreenState
     extends ResponsiveState<CollaborationScreen, ResumeState, ResumeCubit> {
   _CollaborationScreenState(super.cubit);
 
-  Widget buildNewContactMe({
-    required Function() telegram,
-    required Function() linkedin,
-    required Function() instagram,
-    required Function() github,
-    required Function() resume,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Row(
-            children: [
-              Text(
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                ),
-                "tg",
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              CircleButton(
-                size: 30,
-                hoverColor: Colors.grey,
-                rippleColor: Colors.grey,
-                backgroundColor: Colors.transparent,
-                onTap: telegram,
-                child: const Icon(
-                  Icons.telegram_rounded,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 8,
-            height: 8,
-          ),
-          Row(
-            children: [
-              Text(
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                ),
-                "link",
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              CircleButton(
-                size: 30,
-                hoverColor: Colors.grey,
-                rippleColor: Colors.grey,
-                backgroundColor: Colors.transparent,
-                onTap: () {
-                  print('Circle Button Clicked!');
-                },
-                child: const Icon(
-                  FontAwesomeIcons.linkedinIn,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 8,
-            height: 8,
-          ),
-          Row(
-            children: [
-              Text(
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                ),
-                "inst",
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              CircleButton(
-                size: 30,
-                hoverColor: Colors.grey,
-                rippleColor: Colors.grey,
-                backgroundColor: Colors.transparent,
-                onTap: () {
-                  print('Circle Button Clicked!');
-                },
-                child: const Icon(
-                  FontAwesomeIcons.instagram,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 8,
-            height: 8,
-          ),
-          Row(
-            children: [
-              Text(
-                style: GoogleFonts.robotoMono(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                ),
-                "git",
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              CircleButton(
-                size: 30,
-                hoverColor: Colors.grey,
-                rippleColor: Colors.grey,
-                backgroundColor: Colors.transparent,
-                onTap: () {
-                  print('Circle Button Clicked!');
-                },
-                child: const Icon(
-                  FontAwesomeIcons.githubAlt,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget buildLayout(final BuildContext context, ResumeState state) {
     final Note resumeabout = Note(
@@ -192,7 +52,8 @@ Here are some ways we can work together:
             mainAxisSize: MainAxisSize.min,
             children: [
               InfoBlock(
-                width: 350,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+
                 child: Column(
                   children: [
                     MyPostWidget(
@@ -206,32 +67,26 @@ Here are some ways we can work together:
                 height: 8,
               ),
               InfoBlock(
-                width: 350,
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildNewContactMe(
-                      telegram: () {
-                        openLink("https://onelenyk.t.me/");
-                      },
-                      linkedin: () {
-                        openLink("https://www.linkedin.com/in/onelenyk/");
-                      },
-                      instagram: () => {
-                        openLink(
-                            "https://www.instagram.com/makemegreatagain.pleasure/"),
-                      },
-                      github: () {
-                        openLink("https://github.com/onelenyk/");
-                      },
-                      resume: () {
-                        downloadPdfFromAssets(
-                          "assets/resume.pdf",
-                        );
-                      },
-                    ),
-                  ],
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: buildContacts(
+                  telegram: () {
+                    openLink("https://onelenyk.t.me/");
+                  },
+                  linkedin: () {
+                    openLink("https://www.linkedin.com/in/onelenyk/");
+                  },
+                  instagram: () => {
+                    openLink(
+                        "https://www.instagram.com/makemegreatagain.pleasure/"),
+                  },
+                  github: () {
+                    openLink("https://github.com/onelenyk/");
+                  },
+                  resume: () {
+                    downloadPdfFromAssets(
+                      "assets/resume.pdf",
+                    );
+                  },
                 ),
               ),
             ],
