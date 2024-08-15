@@ -90,70 +90,66 @@ class _ResumeScreenState
   Widget mobileLayout(final ResumeState state) => InfoBlock(
         radius: 0,
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.white24,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: [
-                      Padding(
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "last updated: ",
-                              style: GoogleFonts.robotoMono(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            Text(
-                              "18.03.2024",
-                              style: GoogleFonts.robotoMono(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Part1Widget(
-                        state: state,
-                      ),
-                      const SizedBox(
-                        width: 32,
-                        height: 32,
-                      ),
-                      Part2Widget(state: state),
-                      const SizedBox(
-                        width: 32,
-                        height: 32,
-                      ),
-                      Part3Widget(state: state),
-                    ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.white24,
                   ),
                 ),
-              ],
-            ),
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "last updated: ",
+                            style: GoogleFonts.robotoMono(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          Text(
+                            "18.03.2024",
+                            style: GoogleFonts.robotoMono(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Part1Widget(
+                      state: state,
+                    ),
+                    const SizedBox(
+                      width: 32,
+                      height: 32,
+                    ),
+                    Part2Widget(state: state),
+                    const SizedBox(
+                      width: 32,
+                      height: 32,
+                    ),
+                    Part3Widget(state: state),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -419,7 +415,6 @@ class _Part1WidgetState extends State<Part1Widget>
   Widget buildPart1(final ResumeState state) => Column(
         children: [
           InfoBlock(
-            width: 350,
             color: Colors.transparent,
             padding: const EdgeInsets.only(
               right: 16,
@@ -449,7 +444,6 @@ class _Part1WidgetState extends State<Part1Widget>
             ),
           ),
           InfoBlock(
-            width: 350,
             padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -678,7 +672,7 @@ class _Part2WidgetState extends State<Part2Widget> {
   Widget buildPartWorkExperience({required final ExperienceItem item}) {
     if (item.endDate == null) {
       return Padding(
-        padding: const EdgeInsets.all(2),
+        padding: EdgeInsets.zero,
         child: AnimatedGradientBorder(
           borderSize: 2,
           glowSize: 1,
@@ -723,10 +717,11 @@ class _Part2WidgetState extends State<Part2Widget> {
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(
-                      width: 16,
-                      height: 16,
+                      width: 4,
+                      height: 4,
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -736,9 +731,11 @@ class _Part2WidgetState extends State<Part2Widget> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 2),
+                          horizontal: 6, vertical: 2),
                       child: Text(
                         item.role,
+                        overflow: TextOverflow.ellipsis,
+
                         style: GoogleFonts.roboto(
                           fontSize: 14,
                           color: Colors.white,
@@ -845,7 +842,6 @@ class _Part2WidgetState extends State<Part2Widget> {
 
     return SelectionArea(
       child: Container(
-        width: 350,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -915,7 +911,7 @@ class _Part2WidgetState extends State<Part2Widget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: experiences
             .map((final experience) => Container(
-                width: 350, child: buildPartWorkExperience(item: experience)))
+            child: buildPartWorkExperience(item: experience)))
             .toList(),
       );
 
@@ -1035,11 +1031,9 @@ class _Part2WidgetState extends State<Part2Widget> {
           ),
           const SizedBox(
             height: 16,
-            width: 350,
           ),
           InfoBlock(
             padding: EdgeInsets.zero,
-            width: 350,
             child: _buildEducationExperience(state),
           ),
         ],
@@ -1068,7 +1062,6 @@ class Part3Widget extends StatelessWidget {
     return Column(
       children: [
         InfoBlock(
-          width: 350,
           padding: const EdgeInsets.all(16),
           child: Center(
             child: SingleChildScrollView(
@@ -1108,7 +1101,6 @@ class Part3Widget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 16),
           child: InfoBlock(
-            width: 350,
             padding: const EdgeInsets.all(16),
             // color: Colors.deepOrange,
             child: Column(

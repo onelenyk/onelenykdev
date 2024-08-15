@@ -1,5 +1,6 @@
 import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:get_it/get_it.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:onelenykdev/app/common/info_block.dart";
@@ -7,8 +8,11 @@ import "package:onelenykdev/app/features/main/screen/base/mobile_frame.dart";
 import "package:onelenykdev/app/features/main/screen/projects/timeline_cubit.dart";
 import "package:onelenykdev/app/features/main/screen/projects/timeline_state.dart";
 
+import "../../../../common/hover_button.dart";
+import "../../../../common/link_utils.dart";
 import "../base/base_screen.dart";
 import "../base/responsive_state.dart";
+import "../design/design.dart";
 
 @RoutePage()
 class ProjectsScreen extends StatefulWidget {
@@ -39,7 +43,7 @@ class _ProjectsScreenState
 
   Widget buildBody({required final TimelineState state}) => MobileFrame(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -65,6 +69,8 @@ class _ProjectsScreenState
                       description: "no description",
                     ),
                     TimelineEvent(
+                      route: "/munera",
+                      buttonIcon: Icons.link,
                       title: "Munera",
                       date: "00.06.2024 - in progress",
                       description:
@@ -74,6 +80,32 @@ class _ProjectsScreenState
                       title: "timeline",
                       date: "07.06.2024 - in progress",
                       description: "the timeline of project ideas",
+                    ),
+                    TimelineEvent(
+                      title: "gitignore-parser",
+                      buttonIcon: FontAwesomeIcons.github,
+                      github: "https://github.com/onelenyk/gitignore-parser",
+                      date: "01.28.2024 - in progress",
+                      description:
+                          "GitIgnoreParser is an advanced Kotlin library designed to parse .gitignore files and determine file exclusions based on gitignore specifications with efficiency and precision",
+                    ),
+
+                    TimelineEvent(
+                      title: "crudfather",
+                      buttonIcon: FontAwesomeIcons.github,
+                      github: "https://github.com/onelenyk/crudfather",
+                      date: "2024",
+                      description:
+                          "Crudfather is a Kotlin-based project utilizing Ktor for server-side development. It focuses on creating dynamic CRUD endpoints for dynamically generated models. ",
+                    ),
+
+                    TimelineEvent(
+                      title: "pdf-project",
+                      buttonIcon: FontAwesomeIcons.github,
+                      github: "https://github.com/onelenyk/pdf-project",
+                      date: "2024",
+                      description:
+                          "pdf-project is a Kotlin-based command-line tool designed to convert project files into a comprehensive PDF document.",
                     ),
                     // Add more events here
                   ],
@@ -117,13 +149,17 @@ class TimelineEvent {
     required this.title,
     required this.date,
     required this.description,
-    this.buttonText,
+    this.route,
+    this.github,
+    this.buttonIcon,
   });
 
   final String title;
   final String date;
   final String description;
-  final String? buttonText;
+  final IconData? buttonIcon;
+  final String? route;
+  final String? github;
 }
 
 class TimelineItem extends StatelessWidget {
@@ -180,16 +216,40 @@ class TimelineItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.0),
                 child: InfoBlock(
-                  color: Colors.white38,
+                  color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        event.title,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      Row(
+                        children: [
+                          Text(
+                            event.title,
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                          ),
+                          Spacer(),
+                          if (event.route != null || event.github != null)
+                            CircleButton(
+                                size: 36,
+                                hoverColor: Colors.grey,
+                                rippleColor: Colors.grey,
+                                backgroundColor: Colors.black12,
+                                onTap: () {
+                                  if (event.route != null) {
+                                    final router = AutoRouter.of(context);
+                                    router.navigateNamed(event.route!);
+                                  } else if (event.github != null) {
+                                    openLink(event.github!);
+                                  }
+                                },
+                                child: Icon(
+                                  event.buttonIcon,
+                                  color: Colors.black,
+                                  size: 24,
+                                )),
+                        ],
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -201,15 +261,6 @@ class TimelineItem extends StatelessWidget {
                         event.description,
                         style: TextStyle(fontSize: 16, color: Colors.grey[800]),
                       ),
-                      const SizedBox(height: 12),
-                      if (event.buttonText != null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text(event.buttonText!),
-                          ),
-                        ),
                     ],
                   ),
                 ),
